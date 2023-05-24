@@ -4,7 +4,7 @@ module.exports = function (app) {
 	app.use(
 		'/api',
 		createProxyMiddleware({
-			target: 'https://chat-django-nodejs-react.onrender.com',
+			target: process.env.REACT_APP_API_URL || 'https://chat-django-nodejs-react.onrender.com',
 			changeOrigin: true,
 		})
 	);
