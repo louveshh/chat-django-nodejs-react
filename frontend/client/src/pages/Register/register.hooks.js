@@ -28,7 +28,7 @@ export const useRegister = () => {
   };
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (isAuthenticated) {
       navigate("/dashboard");
     }
   }, [isAuthenticated, navigate]);
