@@ -6,6 +6,7 @@ const LoginPage = () => {
 	const { onSubmit, onChange, email, password, loading } = useLogin();
 	return (
 		<Layout title='Auth Site | Login' content='Login page'>
+			{process.env.REACT_APP_API_KEY}
 			<h1>Log into your Account</h1>
 			<form onSubmit={onSubmit}>
 				<div >
