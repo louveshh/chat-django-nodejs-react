@@ -1,0 +1,28 @@
+.grid-container {
+  margin: 10% auto;
+}
+*{
+  box-sizing:content-box;
+}
+
+table{
+  border-spacing: 0;
+  border-collapse: collapse;
+
+}
+
+.grid {
+  white-space: pre;
+}
+
+button {
+  margin: 2px;
+}
+
+
+.node {
+  width: 25px;
+  height: 25px;
+  outline: 1px solid rgb(175, 216, 248);
+  display: inline-block;
+}

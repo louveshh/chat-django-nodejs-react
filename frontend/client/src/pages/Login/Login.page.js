@@ -1,5 +1,5 @@
 
-import Layout from 'components/base/Layout/Layout';
+import Layout from 'components/Layout/Layout';
 import { useLogin } from './login.hooks';
 
 const LoginPage = () => {

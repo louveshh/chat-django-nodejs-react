@@ -12,6 +12,11 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li >
+        <NavLink className="nav-link" to="/algorithms">
+          Algorithms
+        </NavLink>
+      </li>
+      <li >
       <div onClick={onClick}>
 					Logout
 				</div>
