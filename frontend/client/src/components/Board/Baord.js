@@ -217,7 +217,7 @@ const Baord = () => {
   const handleMouseDown = useCallback(
     (row, col) => {
       if (!isRunning) {
-        console.log('down')
+  
         if (isGridClear()) {
           if (
             document.getElementById(`node-${row}-${col}`).className ===
@@ -255,7 +255,7 @@ const Baord = () => {
 
 
   const animateShortestPath = (nodesInShortestPathOrder) => {
-    console.log(nodesInShortestPathOrder)
+
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       if (nodesInShortestPathOrder[i] === "end") {
         setTimeout(() => {
@@ -322,7 +322,7 @@ const Baord = () => {
       switch (algo) {
         case "Dijkstra":
           visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-          console.log(visitedNodesInOrder)
+  
           break;
         case "AStar":
           visitedNodesInOrder = AStar(grid, startNode, finishNode);

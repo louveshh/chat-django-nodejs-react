@@ -1,4 +1,3 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import "./algorithms.css"
 import Map from './../../components/Map/Map';
 
