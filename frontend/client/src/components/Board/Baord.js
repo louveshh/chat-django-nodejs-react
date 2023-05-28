@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useMemo } from "react";
+import Select from "react-select";
 import Node from "./../Node/Node";
 import { dijkstra } from "./../../utils/algorithms/dijkstra";
 import { AStar } from "./../../utils/algorithms/aStar";
@@ -12,22 +13,31 @@ import "./Board.css";
 
 const Baord = () => {
   const [grid, setGrid] = useState([]);
+
+  const config = {
+    ROW_COUNT: 25,
+    COLUMN_COUNT: 35,
+  };
+
+  const { ROW_COUNT, COLUMN_COUNT } = config;
+
+  const [isRunning, setIsRunning] = useState(false);
   const [startNodeRow, setStartNodeRow] = useState(5);
   const [finishNodeRow, setFinishNodeRow] = useState(5);
   const [startNodeCol, setStartNodeCol] = useState(5);
   const [finishNodeCol, setFinishNodeCol] = useState(15);
-  const [mouseIsPressed, setMouseIsPressed] = useState(false);
-  const [ROW_COUNT, setRowCount] = useState(25);
-  const [COLUMN_COUNT, setColumnCount] = useState(35);
-  const [MOBILE_ROW_COUNT, setMobileRowCount] = useState(10);
-  const [MOBILE_COLUMN_COUNT, setMobileColumnCount] = useState(20);
-  const [isRunning, setIsRunning] = useState(false);
-  const [isStartNode, setIsStartNode] = useState(false);
-  const [isFinishNode, setIsFinishNode] = useState(false);
-  const [isWallNode, setIsWallNode] = useState(false); // xxxxxxx
-  const [currRow, setCurrRow] = useState(0);
-  const [currCol, setCurrCol] = useState(0);
-  const [isDesktopView, setIsDesktopView] = useState(true);
+
+  const options = [
+    { value: "wall", label: "Wall" },
+    { value: "start", label: "Start" },
+    { value: "finish", label: "Finish" },
+  ];
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const handleChange = (selectedOption) => {
+    setSelectedOption(selectedOption);
+    console.log(options[0]);
+    console.log(`Option selected:`, selectedOption);
+  };
 
   const createNode = useCallback(
     (row, col) => {
@@ -68,8 +78,9 @@ const Baord = () => {
   }, []);
 
   useEffect(() => {
+    console.log("xd?12312312");
     setGrid(getInitialGrid());
-  }, [getInitialGrid]);
+  }, []);
 
   const clearGrid = useCallback(() => {
     if (!isRunning) {
@@ -131,131 +142,89 @@ const Baord = () => {
     }
   }, [grid, isRunning]);
 
-  const toggleView = useCallback(() => {
-    if (!isRunning) {
-      clearGrid();
-      clearWalls();
-      const newIsDesktopView = !isDesktopView;
-      let grid;
-      if (newIsDesktopView) {
-        grid = getInitialGrid(ROW_COUNT, COLUMN_COUNT);
-        setIsDesktopView(newIsDesktopView);
-        setGrid(grid);
-      } else {
-        if (
-          startNodeRow > MOBILE_ROW_COUNT ||
-          finishNodeRow > MOBILE_ROW_COUNT ||
-          startNodeCol > MOBILE_COLUMN_COUNT ||
-          finishNodeCol > MOBILE_COLUMN_COUNT
-        ) {
-          alert("Start & Finish Nodes Must Be within 10 Rows x 20 Columns");
-        } else {
-          grid = getInitialGrid(MOBILE_ROW_COUNT, MOBILE_COLUMN_COUNT);
-          setIsDesktopView(newIsDesktopView);
-          setGrid(grid);
-        }
-      }
-    }
-  }, [
-    COLUMN_COUNT,
-    finishNodeCol,
-    finishNodeRow,
-    MOBILE_COLUMN_COUNT,
-    MOBILE_ROW_COUNT,
-    ROW_COUNT,
-    startNodeCol,
-    startNodeRow,
-    clearGrid,
-    clearWalls,
-    getInitialGrid,
-    isDesktopView,
-    isRunning,
-  ]);
-
   const getNewGridWithWallToggled = useCallback(
     (row, col) => {
+      console.log(row, col);
       if (grid === undefined) {
         return;
       }
       if (grid.length === 0) {
         return;
       }
-      if (!row || !col) {
-        return;
-      }
       const newGrid = grid.slice();
-      const node = newGrid[row][col];
-      if (!node.isStart && !node.isFinish && node.isNode) {
+      const node = grid[row][col];
+      if (
+        !node.isStart &&
+        !node.isFinish &&
+        node.isNode &&
+        selectedOption.value === "wall"
+      ) {
         const newNode = {
           ...node,
           isWall: !node.isWall,
         };
         newGrid[row][col] = newNode;
-      }
-      return newGrid;
-    },
-    [grid]
-  );
+      } else if (
+        node.isNode &&
+        !node.isFinish &&
+        selectedOption.value === "start"
+      ) {
+        const prevStart = grid[startNodeRow][startNodeCol];
+        const resetStartNode = {
+          ...prevStart,
+          isStart: false,
+        };
+        newGrid[startNodeRow][startNodeCol] = resetStartNode;
+        const newNode = {
+          ...node,
+          isWall: false,
+          isStart: !node.isStart,
+        };
+        newGrid[row][col] = newNode;
+        setStartNodeRow(row);
+        setStartNodeCol(col);
+      } else if (
+        node.isNode &&
+        !node.isStart &&
+        selectedOption.value === "finish"
+      ) {
+        const prevEnd = grid[finishNodeRow][finishNodeCol];
+        const resetFinishNode = {
+          ...prevEnd,
+          isFinish: false,
+        };
+        newGrid[finishNodeRow][finishNodeCol] = resetFinishNode;
+        const newNode = {
+          ...node,
+          isWall: false,
+          isFinish: !node.isFinish,
+        };
 
-  const isGridClear = useCallback(() => {
-    for (const row of grid) {
-      for (const node of row) {
-        const nodeClassName = document.getElementById(
-          `node-${node.row}-${node.col}`
-        ).className;
-        if (
-          nodeClassName === "node node-visited" ||
-          nodeClassName === "node node-shortest-path"
-        ) {
-          return false;
-        }
+        newGrid[row][col] = newNode;
+        setFinishNodeRow(row);
+        setFinishNodeCol(col);
       }
-    }
-    return true;
-  }, [grid]);
+      setGrid(newGrid);
+    },
+    [
+      grid,
+      selectedOption,
+      startNodeCol,
+      startNodeRow,
+      finishNodeCol,
+      finishNodeRow,
+    ]
+  );
 
   const handleMouseDown = useCallback(
     (row, col) => {
-      if (!isRunning) {
-  
-        if (isGridClear()) {
-          if (
-            document.getElementById(`node-${row}-${col}`).className ===
-            "node node-start"
-          ) {
-            setMouseIsPressed(true);
-            setIsStartNode(true);
-            setCurrRow(row);
-            setCurrCol(col);
-          } else if (
-            document.getElementById(`node-${row}-${col}`).className ===
-            "node node-finish"
-          ) {
-            setMouseIsPressed(true);
-            setIsFinishNode(true);
-            setCurrRow(row);
-            setCurrCol(col);
-            setIsFinishNode(true);
-          } else {
-            const newGrid = getNewGridWithWallToggled(row, col);
-            setGrid(newGrid);
-            setMouseIsPressed(true);
-            setIsWallNode(true);
-            setCurrRow(row);
-            setCurrCol(col);
-          }
-        } else {
-          clearGrid();
-        }
-      }
+      getNewGridWithWallToggled(row, col);
     },
-    [clearGrid, getNewGridWithWallToggled, isGridClear, isRunning]
+
+    [getNewGridWithWallToggled]
   );
 
-
-
   const animateShortestPath = (nodesInShortestPathOrder) => {
-
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       if (nodesInShortestPathOrder[i] === "end") {
         setTimeout(() => {
@@ -322,7 +291,7 @@ const Baord = () => {
       switch (algo) {
         case "Dijkstra":
           visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-  
+
           break;
         case "AStar":
           visitedNodesInOrder = AStar(grid, startNode, finishNode);
@@ -345,9 +314,9 @@ const Baord = () => {
 
   return (
     <div>
-      <table className="grid-container" >
+      <table className="grid-container">
         <tbody className="grid">
-          {grid.map((row, rowIdx) => {
+          {grid?.map((row, rowIdx) => {
             return (
               <tr key={rowIdx}>
                 {row.map((node, nodeIdx) => {
@@ -359,9 +328,7 @@ const Baord = () => {
                       isFinish={isFinish}
                       isStart={isStart}
                       isWall={isWall}
-     
                       onMouseDown={(row, col) => handleMouseDown(row, col)}
- 
                       row={row}
                     ></Node>
                   );
@@ -371,65 +338,56 @@ const Baord = () => {
           })}
         </tbody>
       </table>
-      <button
-        type="button"
-        className="btn btn-danger"
-        onClick={() => clearGrid()}
-      >
-        Clear Grid
-      </button>
-      <button
-        type="button"
-        className="btn btn-warning"
-        onClick={() => clearWalls()}
-      >
-        Clear Walls
-      </button>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => visualize("Dijkstra")}
-      >
-        Dijkstra's
-      </button>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => visualize("AStar")}
-      >
-        A*
-      </button>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => visualize("BFS")}
-      >
-        Bread First Search
-      </button>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={() => visualize("DFS")}
-      >
-        Depth First Search
-      </button>
-      {isDesktopView ? (
+      <div className="temp-space">
         <button
           type="button"
-          className="btn btn-light"
-          onClick={() => toggleView()}
+          className="btn btn-danger"
+          onClick={() => clearGrid()}
         >
-          Mobile View
+          Clear Grid
         </button>
-      ) : (
         <button
           type="button"
-          className="btn btn-dark"
-          onClick={() => toggleView()}
+          className="btn btn-warning"
+          onClick={() => clearWalls()}
         >
-          Desktop View
+          Clear Walls
         </button>
-      )}
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => visualize("Dijkstra")}
+        >
+          Dijkstra's
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => visualize("AStar")}
+        >
+          A*
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => visualize("BFS")}
+        >
+          Bread First Search
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => visualize("DFS")}
+        >
+          Depth First Search
+        </button>
+        <Select
+          value={selectedOption}
+          onChange={handleChange}
+          options={options}
+          className="select"
+        />
+      </div>
     </div>
   );
 };

@@ -4,15 +4,17 @@ import { useMap } from "./map.hooks";
 const Map = () => {
   const {
     canvasRef,
+    clear,
+    pathingInProgres,
     handleCanvasClick,
     handleTSGClick,
     handleSortClick,
     handleDateClick,
     handleRandomClick,
     handleClear,
-    clear,
-    pathingInProgres,
+    handleMouseMove
   } = useMap();
+
   return (
     <div>
       <div>
@@ -24,6 +26,7 @@ const Map = () => {
             height={640}
             className="canvas1"
             onClick={handleCanvasClick}
+            onMouseMove={handleMouseMove}
           />
           {!clear ? (
             <>

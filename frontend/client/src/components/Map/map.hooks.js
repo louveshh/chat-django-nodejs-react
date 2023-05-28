@@ -78,6 +78,24 @@ export const useMap = () => {
     }
     selectCity(canvasRef, event, updateCirclePoint);
   };
+  const handleMouseMove = (event) => {
+    const canvas = event.target;
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+    const selectedSize = 5;
+
+    // Find the matching coordinate
+    const selectedCoordinate = randomPoints.find(({ x, y }) => {
+      const distance = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
+      return distance <= selectedSize;
+    });
+
+    if (selectedCoordinate) {
+      // Object found
+      console.log('Object detected:', selectedCoordinate);
+    }
+  };
 
   const handleClear = useCallback(() => {
     const { canvas, context } = getCanvasContext(canvasRef);
@@ -113,10 +131,11 @@ export const useMap = () => {
     if (clear || pathingInProgres) {
       return;
     }
+    const { canvas, context } = getCanvasContext(canvasRef);
     calculateSortedPath(
       randomPoints,
       circlePoint,
-      canvasRef,
+      canvas, context,
       updateClear,
       updatePathingInProgres
     );
@@ -186,13 +205,14 @@ export const useMap = () => {
 
   return {
     canvasRef,
+    clear,
+    pathingInProgres,
     handleCanvasClick,
     handleTSGClick,
     handleSortClick,
     handleDateClick,
     handleRandomClick,
     handleClear,
-    clear,
-    pathingInProgres,
+    handleMouseMove
   };
 };

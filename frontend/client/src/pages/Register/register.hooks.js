@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "store/slices/user";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,12 @@ export const useRegister = () => {
     email: "",
     password: "",
   });
+  const sendRegister = useCallback(
+    (first_name, last_name, email, password) => {
+      dispatch(register({ first_name, last_name, email, password }));
+    },
+    [dispatch]
+  );
 
   const { first_name, last_name, email, password } = formData;
 
@@ -24,7 +30,7 @@ export const useRegister = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(register({ first_name, last_name, email, password }));
+    sendRegister(first_name, last_name, email, password);
   };
 
   useEffect(() => {

@@ -223,12 +223,11 @@ export const calculateShortestPath = (
 export const calculateSortedPath = async (
   randomPoints,
   circlePoint,
-  canvasRef,
+  canvas, context,
   setClear,
   setPathingInProgres
 ) => {
   const points = [...randomPoints, circlePoint];
-  const { canvas, context } = getCanvasContext(canvasRef);
   clearRectangle(canvas, context);
   drawSelectedCity(context, circlePoint, "red");
   drawCities(context, randomPoints, "black", true);

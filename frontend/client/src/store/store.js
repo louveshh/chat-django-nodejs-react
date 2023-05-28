@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers,getDefaultMiddleware } from '@reduxjs/toolkit';
 import userReducer from 'store/slices/user';
 import boardReducer from 'store/slices/board'
 import mapReducer from 'store/slices/map'
@@ -8,12 +8,11 @@ import { persistStore, persistReducer } from 'redux-persist'
 const persistConfig = {
   key: 'root',
   storage,
-	whitelist: ['user', 'map'],
+	whitelist: ['user'],
 }
 
 const rootReducer = combineReducers({ 
   user: userReducer,
-  board: boardReducer,
   map: mapReducer
   // notes: NotesReducer
 })
@@ -22,6 +21,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
 	reducer: persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 	devTools: process.env.NODE_ENV !== 'production',
 });
 
