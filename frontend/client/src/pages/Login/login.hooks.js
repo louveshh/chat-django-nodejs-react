@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { resetRegistered, login } from "store/slices/user/user";
+import { resetRegistered, login } from "store/slices/user";
 import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { checkAuth } from 'store/slices/user/user';
+import { checkAuth } from 'store/slices/user';
 
 import HomePage from 'pages/Home/Home.page';
 import DashboardPage from 'pages/Dashboard/Dashboard.page';

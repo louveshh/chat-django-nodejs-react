@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "store/slices/user/user";
+import { register } from "store/slices/user";
 import { useNavigate } from "react-router-dom";
 
 export const useRegister = () => {

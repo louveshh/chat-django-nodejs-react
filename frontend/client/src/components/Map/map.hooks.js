@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   drawCities,
-  drawPath,
   drawSelectedCity,
   selectCity,
   tempRandom,
@@ -10,35 +10,56 @@ import {
   clearRectangle,
   finishDrawing,
   calculateSortedPath,
+  drawSimplePath,
 } from "./map.utils";
+import {
+  setCirclePoint,
+  setRandomPoints,
+  setPathingInProgress,
+  setClear,
+} from "store/slices/map";
 
 export const useMap = () => {
-  const [circlePoint, setCirclePoint] = useState({ x: 30, y: 30, weight: 0 });
-  const [randomPoints, setRandomPoints] = useState([]);
-  const [pathingInProgres, setPathingInProgres] = useState(false);
-  const [clear, setClear] = useState(false);
+  const dispatch = useDispatch();
   const canvasRef = useRef(null);
 
-  const handleCanvasClick = (event) => {
-    if ( clear || pathingInProgres) {
-      return;
-    }
-    selectCity(canvasRef, event, setCirclePoint);
+  const circlePoint = useSelector((state) => state.map.circlePoint);
+  const randomPoints = useSelector((state) => state.map.randomPoints);
+  const pathingInProgres = useSelector((state) => state.map.pathingInProgress);
+  const clear = useSelector((state) => state.map.clear);
+
+  const updateCirclePoint = (newPoint) => {
+    dispatch(setCirclePoint(newPoint));
   };
 
-  const handleClear = () => {
-    const { canvas, context } = getCanvasContext(canvasRef);
-    clearRectangle(canvas, context);
-    setClear(false);
-  };
+  // Example usage of dispatch to update state
+  const updateRandomPoints = useCallback(
+    (newPoints) => {
+      dispatch(setRandomPoints(newPoints));
+    },
+    [dispatch]
+  );
+
+  // Example usage of dispatch to update state
+  const updatePathingInProgres = useCallback((inProgress) => {
+    dispatch(setPathingInProgress(inProgress));
+  },[dispatch]);
+
+  // Example usage of dispatch to update state
+  const updateClear = useCallback(
+    (shouldClear) => {
+      dispatch(setClear(shouldClear));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
-    tempRandom(setRandomPoints);
-  }, []);
+    tempRandom(updateRandomPoints);
+  }, [updateRandomPoints]);
 
   //base setup
   useEffect(() => {
-    if ( clear || pathingInProgres) {
+    if (clear || pathingInProgres) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
@@ -51,95 +72,117 @@ export const useMap = () => {
     finishDrawing(context);
   }, [circlePoint, randomPoints, clear, pathingInProgres]);
 
-  // useEffect(() => {
-  //   if (pathingInProgres) {
-  //     const { canvas, context } = getCanvasContext(canvasRef);
-  //     clearRectangle(canvas, context);
-  //     drawSelectedCity(context, circlePoint, "red");
-  //     drawCities(context, randomPoints, "black");
-  //     drawPath(context, shortestPath, "black");
-  //     drawTestingPathTSG(
-  //       context,
-  //       shortestPath,
-  //       animationIndex,
-  //       randomPoints,
-  //       "yellow"
-  //     );
+  const handleCanvasClick = (event) => {
+    if (clear || pathingInProgres) {
+      return;
+    }
+    selectCity(canvasRef, event, updateCirclePoint);
+  };
 
-  //     finishDrawing(context);
-  //   }
-  //   console.log(    animationIndex,
-  //     randomPoints,
-  //     shortestPath,
-  //     pathingInProgres,
-  //     circlePoint,)
-  // }, [
-  //   animationIndex,
-  //   randomPoints,
-  //   shortestPath,
-  //   pathingInProgres,
-  //   circlePoint,
-  // ]);
+  const handleClear = useCallback(() => {
+    const { canvas, context } = getCanvasContext(canvasRef);
+    clearRectangle(canvas, context);
+    updateClear(false);
+  }, [updateClear]);
 
-  const handleTSGClick = () => {
-    if ( clear || pathingInProgres) {
+  const handleTSGClick = useCallback(() => {
+    if (clear || pathingInProgres) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
     calculateShortestPath(
       circlePoint,
       randomPoints,
-      setPathingInProgres,
-      setClear,canvas, context
+      updatePathingInProgres,
+      updateClear,
+      canvas,
+      context
     );
-  };
+  }, [
+    circlePoint,
+    clear,
+    pathingInProgres,
+    randomPoints,
+    updateClear,
+    updatePathingInProgres,
+  ]);
 
   ///
 
-  const handleSortClick = () => {
-    if ( clear || pathingInProgres) {
+  const handleSortClick = useCallback(() => {
+    if (clear || pathingInProgres) {
       return;
     }
     calculateSortedPath(
       randomPoints,
       circlePoint,
       canvasRef,
-      setClear,
-      setPathingInProgres
+      updateClear,
+      updatePathingInProgres
     );
-  };
-  const handleDateClick = () => {
-    if ( clear || pathingInProgres) {
+  }, [
+    circlePoint,
+    clear,
+    pathingInProgres,
+    randomPoints,
+    updateClear,
+    updatePathingInProgres,
+  ]);
+
+  const handleDateClick = useCallback(() => {
+    if (clear || pathingInProgres) {
       return;
     }
-    const points = [...randomPoints, circlePoint];
-    setClear(false)
-    setPathingInProgres(true);
     const { canvas, context } = getCanvasContext(canvasRef);
+    updatePathingInProgres(true);
     clearRectangle(canvas, context);
     drawSelectedCity(context, circlePoint, "red");
     drawCities(context, randomPoints, "black");
-    drawPath(context, points, "black",true);
+    drawSimplePath(
+      context,
+      randomPoints,
+      circlePoint,
+      "black",
+      updatePathingInProgres
+    );
     finishDrawing(context);
-    setClear(true)
-    setPathingInProgres(false);
-  };
-  const handleRandomClick = () => {
-    if ( clear || pathingInProgres) {
+    updateClear(true);
+  }, [
+    circlePoint,
+    clear,
+    pathingInProgres,
+    randomPoints,
+    updateClear,
+    updatePathingInProgres,
+  ]);
+
+  const handleRandomClick = useCallback(() => {
+    if (clear || pathingInProgres) {
       return;
     }
-    const points = [...randomPoints, circlePoint];
-    setClear(false)
-    setPathingInProgres(true);
     const { canvas, context } = getCanvasContext(canvasRef);
+    updatePathingInProgres(true);
     clearRectangle(canvas, context);
     drawSelectedCity(context, circlePoint, "red");
     drawCities(context, randomPoints, "black");
-    drawPath(context, points.sort(() => Math.random() - 0.5), "black",true);
+    drawSimplePath(
+      context,
+      randomPoints,
+      circlePoint,
+      "black",
+      updatePathingInProgres,
+      true
+    );
     finishDrawing(context);
-    setClear(true)
-    setPathingInProgres(false);
-  };
+    updateClear(true);
+  }, [
+    circlePoint,
+    clear,
+    pathingInProgres,
+    randomPoints,
+    updateClear,
+    updatePathingInProgres,
+  ]);
 
   return {
     canvasRef,

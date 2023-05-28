@@ -72,26 +72,56 @@ export const drawCities = (context, cities, color, weights = false) => {
     context.closePath();
   });
 };
-
-export const drawPath = (context, shortestPath, color, timeout) => {
+export const drawPath = (context, shortestPath, color) => {
   context.strokeStyle = color;
   context.beginPath();
 
-  const drawLine = (index, point) => {
+  shortestPath.forEach((point, index) => {
     if (index === 0) {
       context.moveTo(point.x, point.y);
     } else {
       context.lineTo(point.x, point.y);
     }
     context.stroke();
-  };
+  });
+  context.closePath();
+};
 
-  shortestPath.forEach((point, index) => {
-    if (timeout) {
-      setTimeout(() => drawLine(index, point), 300 * index);
-    } else {
-      drawLine(index, point);
-    }
+export const drawSimplePath = (
+  context,
+  points,
+  circlePoint,
+  color,
+  setPathingInProgres,
+  random = false
+) => {
+  context.strokeStyle = color;
+  context.beginPath();
+
+  const fullPoints = [circlePoint, ...points];
+  if (random) {
+    console.log(fullPoints);
+    fullPoints.sort(() => Math.random() - 0.5);
+  }
+
+  let timeoutCounter = 0;
+  const totalTimeouts = fullPoints.length;
+
+  fullPoints.forEach((point, index) => {
+    setTimeout(() => {
+      if (index === 0) {
+        context.moveTo(point.x, point.y);
+      } else {
+        context.lineTo(point.x, point.y);
+      }
+      context.stroke();
+
+      timeoutCounter++;
+
+      if (timeoutCounter === totalTimeouts) {
+        setPathingInProgres(false);
+      }
+    }, 300 * index);
   });
   context.closePath();
 };
@@ -131,7 +161,7 @@ export const drawTestingPathSort = (context, arr, j, end, color) => {
 export const calculateShortestPath = (
   circlePoint,
   randomPoints,
-  setPathingInProgress,
+  setPathingInProgres,
   setClear,
   canvas,
   context
@@ -144,49 +174,53 @@ export const calculateShortestPath = (
 
   const animatePath = () => {
     let index = 0;
-    const intervalId = setInterval(() => {
+
+    const animateStep = () => {
       if (remainingPoints.length === 0) {
-        clearInterval(intervalId);
-        setPathingInProgress(false);
-      } else {
-        let shortestDistance = Infinity;
-        let closestPoint = null;
-
-        remainingPoints.forEach((point) => {
-          const distance = calculateDistance(
-            shortestPath[shortestPath.length - 1],
-            point
-          );
-
-          if (distance < shortestDistance) {
-            shortestDistance = distance;
-            closestPoint = point;
-          }
-        });
-
-        shortestPath.push(closestPoint);
-        remainingPoints.splice(remainingPoints.indexOf(closestPoint), 1);
-        index++;
+        setPathingInProgres(false);
+        return;
       }
+
+      let shortestDistance = Infinity;
+      let closestPoint = null;
+
+      remainingPoints.forEach((point) => {
+        const distance = calculateDistance(
+          shortestPath[shortestPath.length - 1],
+          point
+        );
+
+        if (distance < shortestDistance) {
+          shortestDistance = distance;
+          closestPoint = point;
+        }
+      });
+
+      shortestPath.push(closestPoint);
+      remainingPoints.splice(remainingPoints.indexOf(closestPoint), 1);
+      index++;
+
       clearRectangle(canvas, context);
       drawSelectedCity(context, circlePoint, "red");
       drawCities(context, randomPoints, "black");
       drawPath(context, shortestPath, "black");
       drawTestingPathTSG(context, shortestPath, index, randomPoints, "yellow");
-
       finishDrawing(context);
-    }, 500);
+
+      setTimeout(animateStep, 500);
+    };
+
+    animateStep();
   };
+
   const points = [circlePoint, ...randomPoints];
   const remainingPoints = [...points];
   const shortestPath = [remainingPoints.shift()];
-  setClear(false);
-  setPathingInProgress(true);
+  setPathingInProgres(true);
   animatePath();
   setClear(true);
 };
-
-export const calculateSortedPath = (
+export const calculateSortedPath = async (
   randomPoints,
   circlePoint,
   canvasRef,
@@ -216,7 +250,7 @@ export const calculateSortedPath = (
 
     for (let j = start; j < end; j++) {
       drawTestingPathSort(context, arr, j, end, "yellow");
-      await delay(100);
+      await new Promise((resolve) => setTimeout(resolve, 100));
       if (arr[j].weight < pivot) {
         i++;
         const temp = arr[i];
@@ -233,12 +267,10 @@ export const calculateSortedPath = (
     return i + 1;
   };
 
-  const delay = (ms) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  };
-  setClear(false);
-  setPathingInProgres(true);
-  customSort(points, 0, points.length - 1);
-  setPathingInProgres(false);
   setClear(true);
+  setPathingInProgres(true);
+  await customSort(points, 0, points.length - 1);
+  setPathingInProgres(false);
 };
+
+
