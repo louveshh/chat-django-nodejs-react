@@ -1,7 +1,15 @@
+.maps-temp{
+  margin-top: 20px;
+  position: absolute;
+}
 .image{
   background-image: url('../../../public/assets/canvas2.jpg');
   width: 640px;
   height: 640px;
   background-size: cover;
   background-position: center;
+}
+
+.toggle{
+  position: relative;
 }

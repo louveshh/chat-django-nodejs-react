@@ -1,18 +1,26 @@
+.temp-top{
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-height: 650px;
+}
+
+
 .grid-container {
-  margin: 10% auto;
-}
-*{
-  box-sizing:content-box;
+  width: 640px;
+  height: 640px;
+  display: grid;
+  grid-template-columns: repeat(40, 16px);
+  grid-template-rows: repeat(40, 16px);
+  gap: 0;
+  margin-left: -2px;
+  margin-top: -1px;
+  border: 1px solid black;
 }
 
-table{
-  border-spacing: 0;
-  border-collapse: collapse;
-
-}
 
 .grid {
-  white-space: pre;
+  background: 'rgba(255, 255, 255, 0.5)',
 }
 
 button {
@@ -21,15 +29,15 @@ button {
 
 
 .node {
-  width: 25px;
-  height: 25px;
-  outline: 1px solid rgb(175, 216, 248);
-  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #000;
 }
 .select{
   display: inline-block;
   width: 200px;
 }
 .temp-space{
+  margin-top: 100px;
   height: 300px;
 }

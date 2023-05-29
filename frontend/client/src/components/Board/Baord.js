@@ -15,8 +15,8 @@ const Baord = () => {
   const [grid, setGrid] = useState([]);
 
   const config = {
-    ROW_COUNT: 25,
-    COLUMN_COUNT: 35,
+    ROW_COUNT: 40,
+    COLUMN_COUNT: 40,
   };
 
   const { ROW_COUNT, COLUMN_COUNT } = config;
@@ -88,27 +88,27 @@ const Baord = () => {
       for (const row of newGrid) {
         for (const node of row) {
           let nodeClassName = document.getElementById(
-            `node-${node.row}-${node.col}`
+            `grid-cell-${node.row}-${node.col}`
           ).className;
           if (
-            nodeClassName !== "node node-start" &&
-            nodeClassName !== "node node-finish" &&
-            nodeClassName !== "node node-wall"
+            nodeClassName !== "grid-cell node-start" &&
+            nodeClassName !== "grid-cell node-finish" &&
+            nodeClassName !== "grid-cell node-wall"
           ) {
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-              "node";
+            document.getElementById(`grid-cell-${node.row}-${node.col}`).className =
+              "grid-cell";
             node.isVisited = false;
             node.distance = Infinity;
             node.distanceToFinishNode =
               Math.abs(finishNodeRow - node.row) +
               Math.abs(finishNodeCol - node.col);
           }
-          if (nodeClassName === "node node-finish") {
+          if (nodeClassName === "grid-cell node-finish") {
             node.isVisited = false;
             node.distance = Infinity;
             node.distanceToFinishNode = 0;
           }
-          if (nodeClassName === "node node-start") {
+          if (nodeClassName === "grid-cell node-start") {
             node.isVisited = false;
             node.distance = Infinity;
             node.distanceToFinishNode =
@@ -130,11 +130,11 @@ const Baord = () => {
       for (const row of newGrid) {
         for (const node of row) {
           let nodeClassName = document.getElementById(
-            `node-${node.row}-${node.col}`
+            `grid-cell-${node.row}-${node.col}`
           ).className;
-          if (nodeClassName === "node node-wall") {
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-              "node";
+          if (nodeClassName === "grid-cell node-wall") {
+            document.getElementById(`grid-cell-${node.row}-${node.col}`).className =
+              "grid-cell";
             node.isWall = false;
           }
         }
@@ -234,14 +234,14 @@ const Baord = () => {
         setTimeout(() => {
           const node = nodesInShortestPathOrder[i];
           const nodeClassName = document.getElementById(
-            `node-${node.row}-${node.col}`
+            `grid-cell-${node.row}-${node.col}`
           ).className;
           if (
-            nodeClassName !== "node node-start" &&
-            nodeClassName !== "node node-finish"
+            nodeClassName !== "grid-cell node-start" &&
+            nodeClassName !== "grid-cell node-finish"
           ) {
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-              "node node-shortest-path";
+            document.getElementById(`grid-cell-${node.row}-${node.col}`).className =
+              "grid-cell node-shortest-path";
           }
         }, i * 40);
       }
@@ -268,14 +268,14 @@ const Baord = () => {
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         const nodeClassName = document.getElementById(
-          `node-${node.row}-${node.col}`
+          `grid-cell-${node.row}-${node.col}`
         ).className;
         if (
-          nodeClassName !== "node node-start" &&
-          nodeClassName !== "node node-finish"
+          nodeClassName !== "grid-cell node-start" &&
+          nodeClassName !== "grid-cell node-finish"
         ) {
-          document.getElementById(`node-${node.row}-${node.col}`).className =
-            "node node-visited";
+          document.getElementById(`grid-cell-${node.row}-${node.col}`).className =
+            "grid-cell node-visited";
         }
       }, 10 * i);
     }
@@ -313,31 +313,23 @@ const Baord = () => {
   };
 
   return (
-    <div>
-      <table className="grid-container">
-        <tbody className="grid">
-          {grid?.map((row, rowIdx) => {
+    <div className="temp-top">
+      <div className="grid-container">
+        {[].concat(...grid).map((node, nodeIdx) => {
+            const { row, col, isFinish, isStart, isWall } = node;
             return (
-              <tr key={rowIdx}>
-                {row.map((node, nodeIdx) => {
-                  const { row, col, isFinish, isStart, isWall } = node;
-                  return (
-                    <Node
-                      key={nodeIdx}
-                      col={col}
-                      isFinish={isFinish}
-                      isStart={isStart}
-                      isWall={isWall}
-                      onMouseDown={(row, col) => handleMouseDown(row, col)}
-                      row={row}
-                    ></Node>
-                  );
-                })}
-              </tr>
+              <Node
+                key={nodeIdx}
+                col={col}
+                isFinish={isFinish}
+                isStart={isStart}
+                isWall={isWall}
+                onMouseDown={(row, col) => handleMouseDown(row, col)}
+                row={row}
+              ></Node>
             );
-          })}
-        </tbody>
-      </table>
+        })}
+      </div>
       <div className="temp-space">
         <button
           type="button"

@@ -11,6 +11,7 @@ export const clearRectangle = (canvas, context) => {
 export const finishDrawing = (context) => {
   context.stroke();
   context.closePath();
+  context.strokeStyle = "black";
 };
 
 export const tempRandom = (setRandomPoints) => {

@@ -24,11 +24,11 @@ export default class Node extends Component {
       : '';
 
     return (
-      <td
-        id={`node-${row}-${col}`}
-        className={`node ${extraClassName}`}
+      <div
+        id={`grid-cell-${row}-${col}`}
+        className={`grid-cell ${extraClassName}`}
         onMouseDown={() => onMouseDown(row, col)}
-        ></td>
+        ></div>
     );
   }
 }
