@@ -41,9 +41,12 @@ export const useMap = () => {
   );
 
   // Example usage of dispatch to update state
-  const updatePathingInProgres = useCallback((inProgress) => {
-    dispatch(setPathingInProgress(inProgress));
-  },[dispatch]);
+  const updatePathingInProgres = useCallback(
+    (inProgress) => {
+      dispatch(setPathingInProgress(inProgress));
+    },
+    [dispatch]
+  );
 
   // Example usage of dispatch to update state
   const updateClear = useCallback(
@@ -65,6 +68,7 @@ export const useMap = () => {
     const { canvas, context } = getCanvasContext(canvasRef);
     context.lineJoin = "round";
     context.lineCap = "round";
+    context.lineWidth = 3;
     context.imageSmoothingEnabled = true;
     clearRectangle(canvas, context);
     drawSelectedCity(context, circlePoint, "red");
@@ -93,7 +97,7 @@ export const useMap = () => {
 
     if (selectedCoordinate) {
       // Object found
-      console.log('Object detected:', selectedCoordinate);
+      console.log("Object detected:", selectedCoordinate);
     }
   };
 
@@ -135,7 +139,8 @@ export const useMap = () => {
     calculateSortedPath(
       randomPoints,
       circlePoint,
-      canvas, context,
+      canvas,
+      context,
       updateClear,
       updatePathingInProgres
     );
@@ -213,6 +218,6 @@ export const useMap = () => {
     handleDateClick,
     handleRandomClick,
     handleClear,
-    handleMouseMove
+    handleMouseMove,
   };
 };

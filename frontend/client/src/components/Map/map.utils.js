@@ -1,3 +1,18 @@
+const drawPath = (context, shortestPath, color) => {
+  context.strokeStyle = color;
+  context.beginPath();
+
+  shortestPath.forEach((point, index) => {
+    if (index === 0) {
+      context.moveTo(point.x, point.y);
+    } else {
+      context.lineTo(point.x, point.y);
+    }
+    context.stroke();
+  });
+  context.closePath();
+};
+
 export const getCanvasContext = (canvasRef) => {
   const canvas = canvasRef.current;
   const context = canvas.getContext("2d");
@@ -73,20 +88,6 @@ export const drawCities = (context, cities, color, weights = false) => {
     context.closePath();
   });
 };
-export const drawPath = (context, shortestPath, color) => {
-  context.strokeStyle = color;
-  context.beginPath();
-
-  shortestPath.forEach((point, index) => {
-    if (index === 0) {
-      context.moveTo(point.x, point.y);
-    } else {
-      context.lineTo(point.x, point.y);
-    }
-    context.stroke();
-  });
-  context.closePath();
-};
 
 export const drawSimplePath = (
   context,
@@ -101,7 +102,6 @@ export const drawSimplePath = (
 
   const fullPoints = [circlePoint, ...points];
   if (random) {
-    console.log(fullPoints);
     fullPoints.sort(() => Math.random() - 0.5);
   }
 
@@ -127,38 +127,6 @@ export const drawSimplePath = (
   context.closePath();
 };
 
-export const drawTestingPathTSG = (
-  context,
-  shortestPath,
-  animationIndex,
-  cities,
-  color
-) => {
-  context.strokeStyle = color;
-  context.beginPath();
-  shortestPath.forEach((point, index) => {
-    if (index >= animationIndex) {
-      cities.forEach((randomPoint) => {
-        if (!shortestPath.includes(randomPoint)) {
-          context.moveTo(point.x, point.y);
-          context.lineTo(randomPoint.x, randomPoint.y);
-        }
-      });
-    }
-  });
-  context.stroke();
-  context.closePath();
-};
-
-export const drawTestingPathSort = (context, arr, j, end, color) => {
-  context.strokeStyle = color;
-  context.lineWidth = 2;
-  context.beginPath();
-  context.moveTo(arr[j].x, arr[j].y);
-  context.lineTo(arr[end].x, arr[end].y);
-  context.stroke();
-};
-
 export const calculateShortestPath = (
   circlePoint,
   randomPoints,
@@ -171,6 +139,29 @@ export const calculateShortestPath = (
     const dx = point2.x - point1.x;
     const dy = point2.y - point1.y;
     return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  const drawTestingPathTSG = (
+    context,
+    shortestPath,
+    animationIndex,
+    cities,
+    color
+  ) => {
+    context.strokeStyle = color;
+    context.beginPath();
+    shortestPath.forEach((point, index) => {
+      if (index >= animationIndex) {
+        cities.forEach((randomPoint) => {
+          if (!shortestPath.includes(randomPoint)) {
+            context.moveTo(point.x, point.y);
+            context.lineTo(randomPoint.x, randomPoint.y);
+          }
+        });
+      }
+    });
+    context.stroke();
+    context.closePath();
   };
 
   const animatePath = () => {
@@ -210,8 +201,8 @@ export const calculateShortestPath = (
 
       setTimeout(animateStep, 500);
     };
-
-    animateStep();
+    setTimeout(drawTestingPathTSG(context, shortestPath, index, randomPoints, "yellow"), 500);
+    setTimeout(animateStep, 1000);
   };
 
   const points = [circlePoint, ...randomPoints];
@@ -224,7 +215,8 @@ export const calculateShortestPath = (
 export const calculateSortedPath = async (
   randomPoints,
   circlePoint,
-  canvas, context,
+  canvas,
+  context,
   setClear,
   setPathingInProgres
 ) => {
@@ -242,6 +234,14 @@ export const calculateSortedPath = async (
     drawPath(context, arr, "black");
     await customSort(arr, start, pivotIndex - 1);
     await customSort(arr, pivotIndex + 1, end);
+  };
+
+  const drawTestingPathSort = (context, arr, j, end, color) => {
+    context.strokeStyle = color;
+    context.beginPath();
+    context.moveTo(arr[j].x, arr[j].y);
+    context.lineTo(arr[end].x, arr[end].y);
+    context.stroke();
   };
 
   const partition = async (arr, start, end) => {
@@ -272,5 +272,3 @@ export const calculateSortedPath = async (
   await customSort(points, 0, points.length - 1);
   setPathingInProgres(false);
 };
-
-

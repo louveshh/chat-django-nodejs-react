@@ -3,6 +3,9 @@
   max-width: 100%;
   overflow-wrap: break-word;
 }
+
+
+
 @media (max-width: 660px) {
   .all {
     transform: scale(0.8);

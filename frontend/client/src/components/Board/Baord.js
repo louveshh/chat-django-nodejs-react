@@ -9,7 +9,7 @@ const Baord = () => {
     grid,
     handleMouseDown,
     clearGrid,
-    visualize,
+    handleAlgorithm,
     selectedOption,
     handleChange,
     options,
@@ -24,12 +24,12 @@ const Baord = () => {
             <Node
               key={nodeIdx}
               col={col}
+              row={row}
               isFinish={isFinish}
               isStart={isStart}
               isWall={isWall}
               onMouseDown={(row, col) => handleMouseDown(row, col)}
-              row={row}
-            ></Node>
+            >{nodeIdx}</Node>
           );
         })}
       </div>
@@ -44,28 +44,28 @@ const Baord = () => {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => visualize("Dijkstra")}
+          onClick={() => handleAlgorithm("Dijkstra")}
         >
           Dijkstra's
         </button>
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => visualize("AStar")}
+          onClick={() => handleAlgorithm("AStar")}
         >
           A*
         </button>
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => visualize("BFS")}
+          onClick={() => handleAlgorithm("BFS")}
         >
           Bread First Search
         </button>
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => visualize("DFS")}
+          onClick={() => handleAlgorithm("DFS")}
         >
           Depth First Search
         </button>

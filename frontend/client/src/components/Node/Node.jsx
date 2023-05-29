@@ -1,34 +1,22 @@
-import React, {Component} from 'react';
+import "./Node.css";
 
-import './Node.css';
+const Node = ({col, row, isFinish, isStart, isWall, onMouseDown, children}) => {
+  const extraClassName = isFinish
+    ? "node-finish"
+    : isStart
+    ? "node-start"
+    : isWall
+    ? "node-wall"
+    : "";
+  return (
+    <div
+      id={`grid-cell-${row}-${col}`}
+      className={`grid-cell ${extraClassName}`}
+      onMouseDown={() => onMouseDown(row, col)}
+    >
+      {/* <span className="grid-cell-span ">{children}</span> */}
+    </div>
+  );
+};
 
-export default class Node extends Component {
-  render() {
-    const {
-      col,
-      isFinish,
-      isStart,
-      isWall,
-      onMouseDown,
-      onMouseEnter,
-      onMouseUp,
-      row,
-    } = this.props;
-    
-    const extraClassName = isFinish
-      ? 'node-finish'
-      : isStart
-      ? 'node-start'
-      : isWall
-      ? 'node-wall'
-      : '';
-
-    return (
-      <div
-        id={`grid-cell-${row}-${col}`}
-        className={`grid-cell ${extraClassName}`}
-        onMouseDown={() => onMouseDown(row, col)}
-        ></div>
-    );
-  }
-}
+export default Node;

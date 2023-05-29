@@ -1,63 +1,48 @@
-// import { createSlice } from '@reduxjs/toolkit';
-// const initialState = {
-//   grid: [], // Array representing the grid of nodes
-//   startNode: null, // Object representing the start node
-//   finishNode: null, // Object representing the finish node
-//   isRunning: false, // Flag indicating if the algorithm is running
-//   isWallNode: false,
-//   // Other relevant state properties
-// };
+import { createSlice } from '@reduxjs/toolkit';
 
-// const pathfindingSlice = createSlice({
-//   name: 'pathfinding',
-//   initialState,
-//   reducers: {
-//     setGrid: (state, action) => {
-//       state.grid = action.payload;
-//     },
-//     setStartNode: (state, action) => {
-//       const { row, col, isStart, prevRow, prevCol } = action.payload;
-//       if (isStart) {
-//         state.startNode = { row, col };
-//       } else {
-//         // Reset the previous start node if it's different from the current one
-//         if (state.startNode && (prevRow !== row || prevCol !== col)) {
-//           state.grid[prevRow][prevCol].isStart = false;
-//         }
-//         state.startNode = null;
-//       }
-//       state.grid[row][col].isStart = isStart;
-//     },
-//     setFinishNode: (state, action) => {
-//       const { row, col, isFinish, prevRow, prevCol } = action.payload;
-//       if (isFinish) {
-//         state.finishNode = { row, col };
-//       } else {
-//         // Reset the previous finish node if it's different from the current one
-//         if (state.finishNode && (prevRow !== row || prevCol !== col)) {
-//           state.grid[prevRow][prevCol].isFinish = false;
-//         }
-//         state.finishNode = null;
-//       }
-//       state.grid[row][col].isFinish = isFinish;
-//     },
-//     toggleWallNode: (state, action) => {
-//       const { row, col } = action.payload;
-//       state.grid[row][col].isWall = !state.grid[row][col].isWall;
-//     },
-//     toggleIsRunning: (state) => {
-//       state.isRunning = !state.isRunning;
-//     },
-//     // Other relevant reducer functions
-//   },
-// });
+const initialState = {
+  points: {
+    startRow: 5,
+    finishRow: 5,
+    startCol: 5,
+    finishCol: 15,
+  },
+  grid: [],
+  isRunning: false,
+};
 
-// export const {
-//   setGrid,
-//   setStartNode,
-//   setFinishNode,
-//   toggleWallNode,
-//   toggleIsRunning,
-// } = pathfindingSlice.actions;
+const boardSlice = createSlice({
+  name: 'board',
+  initialState,
+  reducers: {
+    setStartRow: (state, action) => {
+      state.points.startRow = action.payload;
+    },
+    setFinishRow: (state, action) => {
+      state.points.finishRow = action.payload;
+    },
+    setStartCol: (state, action) => {
+      state.points.startCol = action.payload;
+    },
+    setFinishCol: (state, action) => {
+      state.points.finishCol = action.payload;
+    },
+    setGrid: (state, action) => {
+      state.grid = action.payload;
+    },
+    toggleRunning: (state, action) => {
+      state.isRunning = !state.isRunning;
+    },
+  },
+});
 
-// export default pathfindingSlice.reducer;
+export const {
+  setStartRow,
+  setFinishRow,
+  setStartCol,
+  setFinishCol,
+  setGrid,
+  toggleRunning,
+} = boardSlice.actions;
+
+export default boardSlice.reducer;

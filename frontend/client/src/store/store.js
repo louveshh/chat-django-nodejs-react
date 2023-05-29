@@ -13,7 +13,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({ 
   user: userReducer,
-  map: mapReducer
+  map: mapReducer,
+  board: boardReducer
   // notes: NotesReducer
 })
 

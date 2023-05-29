@@ -16,11 +16,12 @@
   margin-left: -2px;
   margin-top: -1px;
   border: 1px solid black;
+  
 }
 
 
 .grid {
-  background: 'rgba(255, 255, 255, 0.5)',
+  background: 'rgba(255, 255, 255, 0.2)',
 }
 
 button {
