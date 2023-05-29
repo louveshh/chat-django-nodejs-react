@@ -13,7 +13,7 @@ const CanvasWithCircle = () => {
     setMap((prev) => !prev);
   };
   return (
-    <div>
+    <div className="all">
       <button className="toggle" onClick={handleBoard}>
         BOARD
       </button>
