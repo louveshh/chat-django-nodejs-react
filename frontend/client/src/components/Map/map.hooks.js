@@ -26,10 +26,14 @@ export const useMap = () => {
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
 
-  const { circlePoint, randomPoints, pathingInProgress, toClear } = useSelector(
-    (state) => state.map
-  );
-  const { activeMode, clickPossible } = useSelector((state) => state.toggle);
+  const {
+    circlePoint,
+    randomPoints,
+    pathingInProgress,
+    toClear,
+    clickPossible,
+  } = useSelector((state) => state.map);
+  const { activeMode } = useSelector((state) => state.toggle);
 
   const updateCirclePoint = (newPoint) => {
     dispatch(setCirclePoint(newPoint));

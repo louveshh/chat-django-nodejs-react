@@ -12,10 +12,8 @@ const View = () => {
     <div className="all">
       <ToggleMode />
       <div className="maps-temp">
-        <div>
           {configView.mapModes.includes(activeMode) && <Map />}
           {configView.boardModes.includes(activeMode)  && <Board />}
-        </div>
       </div>
     </div>
   );

@@ -4,14 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import cloneDeep from "lodash/cloneDeep";
-import { configBoard } from './../../config/config';
 
-import {
-  createInitialGrid,
-  clearGridUtil,
-  updateGridClick,
-  runAlgorithm,
-} from "./board.utils";
 import {
   setStartRow,
   setFinishRow,
@@ -20,10 +13,17 @@ import {
   setGrid,
   toggleRunning,
 } from "store/slices/board";
+import { createInitialGrid } from "./utils/createInitalGrid.utils";
+import { clearGrid } from "./utils/common/clearGrid.utils";
+import { clickGrid } from "./utils/clickGrid.utils";
+import { runAlgorithm } from "./utils/runAlgorithm.utils";
+import { configBoard } from "./../../config/config";
 
 export const useBoard = () => {
   const dispatch = useDispatch();
-
+  const [selectedOption, setSelectedOption] = useState(
+    configBoard.defaultDrawOption
+  );
   const { points, grid, isRunning } = useSelector((state) => state.board);
   const { activeMode } = useSelector((state) => state.toggle);
 
@@ -59,29 +59,24 @@ export const useBoard = () => {
     [dispatch]
   );
 
-  const updateIsRunning = useCallback(
-    (isRunning) => {
-      dispatch(toggleRunning());
-    },
-    [dispatch]
-  );
-
-  const [selectedOption, setSelectedOption] = useState(configBoard.defaultDrawOption);
+  const updateIsRunning = useCallback(() => {
+    dispatch(toggleRunning());
+  }, [dispatch]);
 
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     updateGrid(createInitialGrid(cloneDeep(points), activeMode));
-    if (activeMode === 'combo'){
+    if (activeMode === "combo") {
       handleChange(configBoard.defaultDrawOption);
     }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[activeMode])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeMode]);
 
-  const clearGrid = useCallback(() => {
-    clearGridUtil(
+  const handleClearGrid = useCallback(() => {
+    clearGrid(
       isRunning,
       cloneDeep(grid),
       cloneDeep(points.finishRow),
@@ -92,7 +87,7 @@ export const useBoard = () => {
 
   const handleMouseDown = useCallback(
     (row, col) => {
-      updateGridClick(
+      clickGrid(
         row,
         col,
         cloneDeep(grid),
@@ -134,10 +129,10 @@ export const useBoard = () => {
   return {
     grid,
     handleMouseDown,
-    clearGrid,
+    handleClearGrid,
     handleAlgorithm,
     selectedOption,
     handleChange,
-    activeMode
+    activeMode,
   };
 };

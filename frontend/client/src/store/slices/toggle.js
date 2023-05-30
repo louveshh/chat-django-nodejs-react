@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeMode: 'display',
-  clickPossible: false
+  activeMode: "display",
 };
 
 const toogleSlice = createSlice({
@@ -11,13 +10,10 @@ const toogleSlice = createSlice({
   reducers: {
     toggleActiveMode: (state, action) => {
       state.activeMode = action.payload;
-    },
-    toggleClickPossible: (state, action) => {
-      state.clickPossible = action.payload;
-    },
+    }
   },
 });
 
-export const { toggleActiveMode, toggleClickPossible } = toogleSlice.actions;
+export const { toggleActiveMode } = toogleSlice.actions;
 
 export default toogleSlice.reducer;

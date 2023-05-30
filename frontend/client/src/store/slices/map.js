@@ -5,6 +5,7 @@ const initialState = {
   randomPoints: [],
   pathingInProgress: false,
   toClear: false,
+  clickPossible: false
 };
 
 const mapSlice = createSlice({
@@ -65,6 +66,9 @@ const mapSlice = createSlice({
         circlePoint: updatedCirclePoint,
       };
     },
+    setClickPossible: (state, action) => {
+      state.clickPossible = !state.clickPossible;
+    },
   },
 });
 
@@ -77,6 +81,7 @@ export const {
   setCirclePointZero,
   setRandomPointsZero,
   setZeroStartCity,
+  setClickPossible
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

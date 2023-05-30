@@ -9,7 +9,7 @@ const Baord = () => {
   const {
     grid,
     handleMouseDown,
-    clearGrid,
+    handleClearGrid,
     handleAlgorithm,
     selectedOption,
     handleChange,
@@ -41,7 +41,7 @@ const Baord = () => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => clearGrid()}
+          onClick={handleClearGrid}
         >
           Clear Grid
         </button>

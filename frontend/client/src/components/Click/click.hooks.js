@@ -1,12 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
-import { toggleClickPossible } from "store/slices/toggle";
-import { setCirclePointZero, setRandomPointsZero } from "store/slices/map";
+import { setCirclePointZero, setRandomPointsZero,setClickPossible } from "store/slices/map";
 
 export const useCLick = () => {
-  const isClickable = useSelector((state) => state.toggle.clickPossible);
+  const isClickable = useSelector((state) => state.map.clickPossible);
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch(toggleClickPossible(!isClickable));
+    dispatch(setClickPossible());
     dispatch(setCirclePointZero());
     dispatch(setRandomPointsZero());
   };
