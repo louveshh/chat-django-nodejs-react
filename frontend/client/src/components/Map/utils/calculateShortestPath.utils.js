@@ -5,13 +5,13 @@ import { drawPath } from "./common/drawPath.utils";
 import { finishDrawing } from "./common/finishDrawing.utils";
 import { configMap } from "../../../config/config";
 export const calculateShortestPath = (
+  canvas,
+  context,
   circlePoint,
   randomPoints,
   clickPossible,
   setPathingInProgres,
-  setClear,
-  canvas,
-  context
+  setClear
 ) => {
   const calculateDistance = (point1, point2) => {
     const dx = point2.x - point1.x;
