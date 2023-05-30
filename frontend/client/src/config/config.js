@@ -10,13 +10,20 @@ export const configBoard = {
 };
 
 export const configMap = {
-  useEffect: ["display", "map", "add"],
-  clearButton: ["display", "map", "add"]
+  clickPossibleTargets: ["map"],
+  mouseMoveCities: ["display", "map", "add"],
+  colors: {
+    clickedCity: "red",
+    highlightedCity: "yellow",
+    city: "black",
+    testingLine: "yellow",
+    line: "black",
+  },
 };
 
 export const configView = {
   mapModes: ["map", "display", "combo", "add"],
   boardModes: ["board", "combo"],
-}
+};
 
-export const toogle = ['display', 'board', 'map', 'combo', 'add']
+export const toogle = ["display", "board", "map", "combo", "add"];

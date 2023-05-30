@@ -7,7 +7,7 @@ import {configMap} from '../../config/config'
 const Map = () => {
   const {
     canvasRef,
-    clear,
+    toClear,
     pathingInProgress,
     activeMode,
     handleCanvasClick,
@@ -32,7 +32,7 @@ const Map = () => {
             onClick={handleCanvasClick}
             onMouseMove={handleMouseMove}
           />
-          {!clear && activeMode !== "display" && activeMode !== "add" ? (
+          {!toClear && activeMode === 'map' &&
             <>
               <button className="button" onClick={handleTSGClick}>
                 TSG alg
@@ -49,16 +49,16 @@ const Map = () => {
               {activeMode !== "combo" && <Click />}
               {activeMode !== "combo" &&<SelectCity/> }
             </>
-          ) : (
+          } 
             <>
-              {!pathingInProgress &&
+              {!pathingInProgress && toClear &&
                 configMap.clearButton.includes(activeMode) && (
                 <button className="button" onClick={handleClear}>
                   CLEAR
                 </button>
               )}
             </>
-          )}
+          
           <div></div>
         </div>
       </div>

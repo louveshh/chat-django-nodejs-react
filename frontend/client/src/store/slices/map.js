@@ -4,7 +4,7 @@ const initialState = {
   circlePoint: { x: 320, y: 320, weight: 0, selectedStart: false, name: "click" },
   randomPoints: [],
   pathingInProgress: false,
-  clear: true,
+  toClear: false,
 };
 
 const mapSlice = createSlice({
@@ -21,7 +21,7 @@ const mapSlice = createSlice({
       state.pathingInProgress = action.payload;
     },
     setClear: (state, action) => {
-      state.clear = action.payload;
+      state.toClear = action.payload;
     },
     setSelectStartCity: (state, action) => {
       const { x, y } = action.payload;

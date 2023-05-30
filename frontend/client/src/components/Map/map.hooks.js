@@ -7,7 +7,6 @@ import {
   setRandomPoints,
   setPathingInProgress,
   setClear,
-  setCirclePointZero, setRandomPointsZero
 } from "store/slices/map";
 import { tempRandom } from './utils/tempRandom.utils';
 import { getCanvasContext } from './utils/getCanvasContext.utils';
@@ -25,7 +24,7 @@ export const useMap = () => {
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
 
-  const { circlePoint, randomPoints, pathingInProgress, clear } = useSelector(
+  const { circlePoint, randomPoints, pathingInProgress, toClear } = useSelector(
     (state) => state.map
   );
   const { activeMode, clickPossible } = useSelector((state) => state.toggle);
@@ -48,7 +47,7 @@ export const useMap = () => {
     [dispatch]
   );
 
-  const updateClear = useCallback(
+  const updateClearState = useCallback(
     (shouldClear) => {
       dispatch(setClear(shouldClear));
     },
@@ -61,7 +60,7 @@ export const useMap = () => {
 
   //base setup
   useEffect(() => {
-    if (clear || pathingInProgress) {
+    if (toClear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
@@ -70,36 +69,30 @@ export const useMap = () => {
     context.lineWidth = 2;
     context.imageSmoothingEnabled = true;
     clearMap(canvas, context);
-    updateClear(false);
-    if ((configMap.useEffect.includes(activeMode)  && clickPossible) ||activeMode === "add") {
-      drawSelectedCity(context, circlePoint, "red");
-    }
+    updateClearState(false);
+    drawSelectedCity(context, circlePoint, "red");
     drawCities(context, randomPoints, "black",false);
     finishDrawing(context);
   }, [
     circlePoint,
     randomPoints,
-    clear,
+    toClear,
     pathingInProgress,
     activeMode,
     clickPossible,
-    updateClear
+    updateClearState
   ]);
 
   const handleCanvasClick = (event) => {
-    if (
-      (clear ||
-      pathingInProgress ||
-      activeMode === "display" ||
-      activeMode === "combo" ||
-      !clickPossible)  && activeMode !== "add"
-    ) {
+    if ((!clickPossible && configMap.clickPossibleTargets.includes(activeMode))) {
+      console.log('click')
       return;
     }
+    console.log('udany click')
     selectClickCity(canvasRef, event, updateCirclePoint, circlePoint);
   };
   const handleMouseMove = (event) => {
-    if (activeMode === "combo") {
+    if (!configMap.mouseMoveCities.includes(activeMode)) {
       return;
     }
     const canvas = event.target;
@@ -121,11 +114,11 @@ export const useMap = () => {
   const handleClear = useCallback(() => {
     const { canvas, context } = getCanvasContext(canvasRef);
     clearMap(canvas, context);
-    updateClear(false);
-  }, [updateClear]);
+    updateClearState(false);
+  }, [updateClearState]);
 
   const handleTSGClick = useCallback(() => {
-    if (clear || pathingInProgress) {
+    if (toClear|| pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
@@ -134,22 +127,22 @@ export const useMap = () => {
       randomPoints,
       clickPossible,
       updatePathingInProgres,
-      updateClear,
+      updateClearState,
       canvas,
       context
     );
   }, [
     circlePoint,
-    clear,
+    toClear,
     pathingInProgress,
     randomPoints,
     clickPossible,
-    updateClear,
+    updateClearState,
     updatePathingInProgres,
   ]);
 
   const handleSortClick = useCallback(() => {
-    if (clear || pathingInProgress) {
+    if (toClear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
@@ -159,21 +152,21 @@ export const useMap = () => {
       clickPossible,
       canvas,
       context,
-      updateClear,
+      updateClearState,
       updatePathingInProgres
     );
   }, [
     circlePoint,
-    clear,
+    toClear,
     pathingInProgress,
     randomPoints,
     clickPossible,
-    updateClear,
+    updateClearState,
     updatePathingInProgres,
   ]);
 
   const handleDateClick = useCallback(() => {
-    if (clear || pathingInProgress) {
+    if (toClear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
@@ -192,24 +185,22 @@ export const useMap = () => {
       updatePathingInProgres
     );
     finishDrawing(context);
-    updateClear(true);
+    updateClearState(true);
   }, [
     circlePoint,
-    clear,
+    toClear,
     pathingInProgress,
     randomPoints,
     clickPossible,
-    updateClear,
+    updateClearState,
     updatePathingInProgres,
   ]);
 
   const handleRandomClick = useCallback(() => {
-    if (clear || pathingInProgress) {
+    if (toClear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
-    dispatch(setCirclePointZero());
-    dispatch(setRandomPointsZero());
     updatePathingInProgres(true);
     clearMap(canvas, context);
     if (clickPossible) {
@@ -226,21 +217,20 @@ export const useMap = () => {
       true
     );
     finishDrawing(context);
-    updateClear(true);
+    updateClearState(true);
   }, [
     circlePoint,
-    clear,
+    toClear,
     pathingInProgress,
     randomPoints,
     clickPossible,
-    updateClear,
+    updateClearState,
     updatePathingInProgres,
-    dispatch
   ]);
 
   return {
     canvasRef,
-    clear,
+    toClear,
     pathingInProgress,
     activeMode,
     handleCanvasClick,
