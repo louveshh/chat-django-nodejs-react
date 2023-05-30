@@ -1,5 +1,6 @@
+import { configMap } from "../../../../config/config";
 export const finishDrawing = (context) => {
   context.stroke();
   context.closePath();
-  context.strokeStyle = "black";
+  context.strokeStyle = configMap.colors.line;
 };

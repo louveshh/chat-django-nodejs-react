@@ -1,11 +1,11 @@
 import { clearMap } from "./common/clearMap.utils";
-import { drawSelectedCity } from "./common/drawSelectedCity.utils";
+import { drawClickedCity } from "./common/drawClickedCity.utils";
 import { drawCities } from "./common/drawCities.utils";
 import { drawPath } from "./common/drawPath.utils";
 import { finishDrawing } from "./common/finishDrawing.utils";
-
-const drawTestingPathSort = (context, arr, startIndex, lastIndex, color) => {
-  context.strokeStyle = color;
+import { configMap } from "../../../config/config";
+const drawTestingPathSort = (context, arr, startIndex, lastIndex) => {
+  context.strokeStyle = configMap.colors.testingLine;
   context.beginPath();
   context.moveTo(arr[startIndex].x, arr[startIndex].y);
   context.lineTo(arr[lastIndex].x, arr[lastIndex].y);
@@ -27,7 +27,7 @@ export const calculateSortedPath = async (
     let smallerElementIndex = startIndex - 1;
 
     for (let i = startIndex; i < endIndex; i++) {
-      drawTestingPathSort(context, array, i, endIndex, "yellow");
+      drawTestingPathSort(context, array, i, endIndex);
       await new Promise((resolve) => setTimeout(resolve, 100));
 
       if (array[i].weight < pivot) {
@@ -45,9 +45,9 @@ export const calculateSortedPath = async (
 
     clearMap(canvas, context);
     if (clickPossible) {
-      drawSelectedCity(context, circlePoint, "red");
+      drawClickedCity(context, circlePoint);
     }
-    drawCities(context, randomPoints, "black", true);
+    drawCities(context, randomPoints, true);
 
     return pivotIndex;
   };
@@ -58,7 +58,7 @@ export const calculateSortedPath = async (
     }
 
     const pivotIndex = await partition(array, startIndex, endIndex);
-    drawPath(context, array, "black");
+    drawPath(context, array);
 
     await customSort(array, startIndex, pivotIndex - 1);
     await customSort(array, pivotIndex + 1, endIndex);
@@ -69,11 +69,11 @@ export const calculateSortedPath = async (
   clearMap(canvas, context);
 
   if (clickPossible) {
-    drawSelectedCity(context, circlePoint, "red");
+    drawClickedCity(context, circlePoint);
     points.unshift(circlePoint);
   }
 
-  drawCities(context, randomPoints, "black", true);
+  drawCities(context, randomPoints, true);
   setClear(true);
   setPathingInProgress(true);
 

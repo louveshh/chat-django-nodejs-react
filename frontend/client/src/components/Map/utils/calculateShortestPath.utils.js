@@ -1,9 +1,9 @@
-import { clearMap } from './common/clearMap.utils';
-import { drawSelectedCity } from './common/drawSelectedCity.utils';
-import { drawCities } from './common/drawCities.utils';
-import { drawPath } from './common/drawPath.utils';
-import { finishDrawing } from './common/finishDrawing.utils';
-
+import { clearMap } from "./common/clearMap.utils";
+import { drawClickedCity } from "./common/drawClickedCity.utils";
+import { drawCities } from "./common/drawCities.utils";
+import { drawPath } from "./common/drawPath.utils";
+import { finishDrawing } from "./common/finishDrawing.utils";
+import { configMap } from "../../../config/config";
 export const calculateShortestPath = (
   circlePoint,
   randomPoints,
@@ -19,13 +19,8 @@ export const calculateShortestPath = (
     return Math.sqrt(dx * dx + dy * dy);
   };
 
-  const drawTestingPathTSG = (
-    shortestPath,
-    animationIndex,
-    cities,
-    color
-  ) => {
-    context.strokeStyle = color;
+  const drawTestingPathTSG = (shortestPath, animationIndex, cities) => {
+    context.strokeStyle = configMap.colors.testingLine;
     context.beginPath();
     shortestPath.forEach((point, index) => {
       if (index >= animationIndex) {
@@ -71,21 +66,26 @@ export const calculateShortestPath = (
 
       clearMap(canvas, context);
       if (clickPossible) {
-        drawSelectedCity(context, circlePoint, "red");
+        drawClickedCity(context, circlePoint);
       }
-      drawCities(context, randomPoints, "black", false);
-      drawPath(context, shortestPath, "black");
-      drawTestingPathTSG(shortestPath, index, randomPoints, "yellow");
+      drawCities(context, randomPoints);
+      drawPath(context, shortestPath);
+      drawTestingPathTSG(shortestPath, index, randomPoints);
       finishDrawing(context);
 
       setTimeout(animateStep, 500);
     };
-    setTimeout(() => drawTestingPathTSG(shortestPath, index, randomPoints, "yellow"), 500);
+    setTimeout(
+      () => drawTestingPathTSG(shortestPath, index, randomPoints),
+      500
+    );
     setTimeout(animateStep, 1000);
   };
 
- const moveStartObjectToStart = (array) => {
-    const startObjectIndex = array.findIndex(obj => obj.selectedStart === true);
+  const moveStartObjectToStart = (array) => {
+    const startObjectIndex = array.findIndex(
+      (obj) => obj.selectedStart === true
+    );
     if (startObjectIndex !== -1) {
       const startObject = array.splice(startObjectIndex, 1)[0];
       array.unshift(startObject);

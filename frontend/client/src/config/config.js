@@ -10,6 +10,7 @@ export const configBoard = {
 };
 
 export const configMap = {
+  clearButton: ["display", "map", "add"],
   clickPossibleTargets: ["map"],
   mouseMoveCities: ["display", "map", "add"],
   colors: {
@@ -18,6 +19,12 @@ export const configMap = {
     city: "black",
     testingLine: "yellow",
     line: "black",
+  },
+  context: {
+    imageSmoothingEnabled: true,
+    lineJoin:"round",
+    lineCap:"round",
+    lineWidth: 2,
   },
 };
 

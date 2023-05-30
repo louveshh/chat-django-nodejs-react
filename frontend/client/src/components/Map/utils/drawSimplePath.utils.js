@@ -1,13 +1,13 @@
+import { configMap } from "../../../config/config";
 export const drawSimplePath = (
   context,
   points,
   circlePoint,
   clickPossible,
-  color,
   setPathingInProgres,
   random = false
 ) => {
-  context.strokeStyle = color;
+  context.strokeStyle = configMap.colors.line;
   context.beginPath();
 
   const fullPoints = [...points];

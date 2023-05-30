@@ -49,6 +49,22 @@ const mapSlice = createSlice({
         selectedStart: action.payload,
       }));
     },
+    setZeroStartCity: (state, action) => {
+      const updatedPoints = state.randomPoints.map((point) => ({
+        ...point,
+        selectedStart: false
+      }));
+      const updatedCirclePoint = {
+        ...state.circlePoint,
+        selectedStart: false,
+      };
+
+      return {
+        ...state,
+        randomPoints: updatedPoints,
+        circlePoint: updatedCirclePoint,
+      };
+    },
   },
 });
 
@@ -60,6 +76,7 @@ export const {
   setSelectStartCity,
   setCirclePointZero,
   setRandomPointsZero,
+  setZeroStartCity,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

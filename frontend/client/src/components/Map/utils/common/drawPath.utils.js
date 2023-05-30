@@ -1,5 +1,6 @@
-export const drawPath = (context, shortestPath, color) => {
-  context.strokeStyle = color;
+import { configMap } from "../../../../config/config";
+export const drawPath = (context, shortestPath) => {
+  context.strokeStyle = configMap.colors.line;
   context.beginPath();
 
   shortestPath.forEach((point, index) => {
