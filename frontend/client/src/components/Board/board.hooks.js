@@ -4,13 +4,13 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import cloneDeep from "lodash/cloneDeep";
+import { configBoard } from './../../config/config';
 
 import {
   createInitialGrid,
   clearGridUtil,
   updateGridClick,
   runAlgorithm,
-  options,
 } from "./board.utils";
 import {
   setStartRow,
@@ -66,7 +66,7 @@ export const useBoard = () => {
     [dispatch]
   );
 
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(configBoard.defaultDrawOption);
 
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
@@ -75,7 +75,7 @@ export const useBoard = () => {
   useEffect(()=>{
     updateGrid(createInitialGrid(cloneDeep(points), activeMode));
     if (activeMode === 'combo'){
-      handleChange(options[0]);
+      handleChange(configBoard.defaultDrawOption);
     }
         // eslint-disable-next-line react-hooks/exhaustive-deps
   },[activeMode])
@@ -138,7 +138,6 @@ export const useBoard = () => {
     handleAlgorithm,
     selectedOption,
     handleChange,
-    options,
     activeMode
   };
 };

@@ -35,6 +35,7 @@ button {
   border: 1px solid #000;
 }
 .select{
+  margin-top: 10px;
   display: inline-block;
   width: 200px;
 }

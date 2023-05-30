@@ -2,7 +2,7 @@ import "./map.css";
 import { useMap } from "./map.hooks";
 import Click from "./../Click/Click";
 import SelectCity from './../SelectCity/SelectCity';
-
+import {configMap} from '../../config/config'
 
 const Map = () => {
   const {
@@ -51,8 +51,8 @@ const Map = () => {
             </>
           ) : (
             <>
-              {(!pathingInProgress &&
-                (activeMode !== "display" && activeMode !== "add")) && (
+              {!pathingInProgress &&
+                configMap.clearButton.includes(activeMode) && (
                 <button className="button" onClick={handleClear}>
                   CLEAR
                 </button>

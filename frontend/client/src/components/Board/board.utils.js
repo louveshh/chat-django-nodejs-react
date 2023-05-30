@@ -1,14 +1,8 @@
-import { config } from "./../../config/config";
+import { configBoard } from "./../../config/config";
 import { dijkstra } from "./algorithms/dijkstra";
 import { AStar } from "./algorithms/aStar";
 import { bfs } from "./algorithms/bfs";
 import { dfs } from "./algorithms/dfs";
-
-export const options = [
-  { value: "wall", label: "Wall" },
-  { value: "start", label: "Start" },
-  { value: "finish", label: "Finish" },
-];
 
 export const createInitialGrid = (points, mode) => {
   const node = (row, col, startRow, finishRow, startCol, finishCol) => {
@@ -28,7 +22,7 @@ export const createInitialGrid = (points, mode) => {
   };
   const grid = [];
   const { startRow, finishRow, startCol, finishCol } = points;
-  const { ROW_COUNT, COLUMN_COUNT } = config;
+  const { ROW_COUNT, COLUMN_COUNT } = configBoard;
   for (let row = 0; row < ROW_COUNT; row++) {
     const currentRow = [];
     for (let col = 0; col < COLUMN_COUNT; col++) {

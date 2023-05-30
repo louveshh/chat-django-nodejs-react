@@ -51,6 +51,4 @@ export const bfs = (grid, startNode, finishNode) => {
       }
     }
   }
-
-  // return visitedNodesInOrder;
 };

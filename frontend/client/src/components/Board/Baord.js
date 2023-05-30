@@ -3,6 +3,7 @@ import Node from "./../Node/Node";
 import { useBoard } from "./board.hooks";
 
 import "./Board.css";
+import { configBoard } from "config/config";
 
 const Baord = () => {
   const {
@@ -12,7 +13,6 @@ const Baord = () => {
     handleAlgorithm,
     selectedOption,
     handleChange,
-    options,
     activeMode,
   } = useBoard();
 
@@ -73,7 +73,14 @@ const Baord = () => {
         >
           Depth First Search
         </button>
-      
+        {activeMode === "board" && (
+          <Select
+            className="select"
+            onChange={handleChange}
+            value={selectedOption}
+            options={configBoard.drawOptions}
+          />
+        )}
       </div>
     </div>
   );
