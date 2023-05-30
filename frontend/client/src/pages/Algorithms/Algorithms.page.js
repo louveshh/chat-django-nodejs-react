@@ -1,33 +1,23 @@
 import "./algorithms.css";
 import Map from "./../../components/Map/Map";
 import Board from "./../../components/Board/Baord";
-import { useState } from "react";
+import "react-toggle/style.css";
+import ToggleMode from "components/ToggleMode/ToggleMode";
+import { useAlgorithms } from "./algorithms.hooks";
 
-const CanvasWithCircle = () => {
-  const [board, setBoard] = useState(true);
-  const [map, setMap] = useState(true);
-  const handleBoard = () => {
-    setBoard((prev) => !prev);
-  };
-  const handleMap = () => {
-    setMap((prev) => !prev);
-  };
+const Algorithms = () => {
+  const {  activeMode  } = useAlgorithms();
   return (
     <div className="all">
-      <button className="toggle" onClick={handleBoard}>
-        BOARD
-      </button>
-      <button className="toggle" onClick={handleMap}>
-        MAP
-      </button>
+      <ToggleMode />
       <div className="maps-temp">
         <div>
-          {map && <Map />}
-          {board && <Board />}
+          {( activeMode  === "map" ||  activeMode  === "display" ||  activeMode  === "combo" ||  activeMode  === "add") && <Map />}
+          {( activeMode  === "board" ||  activeMode  === "combo") && <Board />}
         </div>
       </div>
     </div>
   );
 };
 
-export default CanvasWithCircle;
+export default Algorithms;

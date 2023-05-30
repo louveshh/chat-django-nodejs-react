@@ -1,9 +1,10 @@
 import { useRef, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   drawCities,
   drawSelectedCity,
-  selectCity,
+  selectClickCity,
   tempRandom,
   calculateShortestPath,
   getCanvasContext,
@@ -17,16 +18,17 @@ import {
   setRandomPoints,
   setPathingInProgress,
   setClear,
+  setCirclePointZero, setRandomPointsZero
 } from "store/slices/map";
 
 export const useMap = () => {
   const dispatch = useDispatch();
   const canvasRef = useRef(null);
 
-  const circlePoint = useSelector((state) => state.map.circlePoint);
-  const randomPoints = useSelector((state) => state.map.randomPoints);
-  const pathingInProgres = useSelector((state) => state.map.pathingInProgress);
-  const clear = useSelector((state) => state.map.clear);
+  const { circlePoint, randomPoints, pathingInProgress, clear } = useSelector(
+    (state) => state.map
+  );
+  const { activeMode, clickPossible } = useSelector((state) => state.toggle);
 
   const updateCirclePoint = (newPoint) => {
     dispatch(setCirclePoint(newPoint));
@@ -62,27 +64,46 @@ export const useMap = () => {
 
   //base setup
   useEffect(() => {
-    if (clear || pathingInProgres) {
+    if (clear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
     context.lineJoin = "round";
     context.lineCap = "round";
-    context.lineWidth = 3;
     context.imageSmoothingEnabled = true;
     clearRectangle(canvas, context);
-    drawSelectedCity(context, circlePoint, "red");
-    drawCities(context, randomPoints, "black");
+    if ((activeMode == "map"  && clickPossible) ||activeMode === "add") {
+      drawSelectedCity(context, circlePoint, "red");
+    }
+    context.lineWidth = 2;
+    drawCities(context, randomPoints, "black",false);
     finishDrawing(context);
-  }, [circlePoint, randomPoints, clear, pathingInProgres]);
+  }, [
+    circlePoint,
+    randomPoints,
+    clear,
+    pathingInProgress,
+    activeMode,
+    clickPossible,
+  ]);
 
   const handleCanvasClick = (event) => {
-    if (clear || pathingInProgres) {
+    if (
+      (clear ||
+      pathingInProgress ||
+      activeMode === "display" ||
+      activeMode === "combo" ||
+      !clickPossible)  && activeMode !== "add"
+    ) {
+      console.log('xdddd')
       return;
     }
-    selectCity(canvasRef, event, updateCirclePoint);
+    selectClickCity(canvasRef, event, updateCirclePoint, circlePoint);
   };
   const handleMouseMove = (event) => {
+    if (activeMode === "combo") {
+      return;
+    }
     const canvas = event.target;
     const rect = canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
@@ -108,13 +129,14 @@ export const useMap = () => {
   }, [updateClear]);
 
   const handleTSGClick = useCallback(() => {
-    if (clear || pathingInProgres) {
+    if (clear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
     calculateShortestPath(
       circlePoint,
       randomPoints,
+      clickPossible,
       updatePathingInProgres,
       updateClear,
       canvas,
@@ -123,8 +145,9 @@ export const useMap = () => {
   }, [
     circlePoint,
     clear,
-    pathingInProgres,
+    pathingInProgress,
     randomPoints,
+    clickPossible,
     updateClear,
     updatePathingInProgres,
   ]);
@@ -132,13 +155,16 @@ export const useMap = () => {
   ///
 
   const handleSortClick = useCallback(() => {
-    if (clear || pathingInProgres) {
+    if (clear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
+    dispatch(setCirclePointZero(false));
+    dispatch(setRandomPointsZero(false));
     calculateSortedPath(
       randomPoints,
       circlePoint,
+      clickPossible,
       canvas,
       context,
       updateClear,
@@ -147,25 +173,32 @@ export const useMap = () => {
   }, [
     circlePoint,
     clear,
-    pathingInProgres,
+    pathingInProgress,
     randomPoints,
+    clickPossible,
     updateClear,
     updatePathingInProgres,
+    dispatch,
   ]);
 
   const handleDateClick = useCallback(() => {
-    if (clear || pathingInProgres) {
+    if (clear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
+    dispatch(setCirclePointZero(false));
+    dispatch(setRandomPointsZero(false));
     updatePathingInProgres(true);
     clearRectangle(canvas, context);
-    drawSelectedCity(context, circlePoint, "red");
-    drawCities(context, randomPoints, "black");
+    if (clickPossible) {
+      drawSelectedCity(context, circlePoint, "red");
+    }
+    drawCities(context, randomPoints, "black", true);
     drawSimplePath(
       context,
       randomPoints,
       circlePoint,
+      clickPossible,
       "black",
       updatePathingInProgres
     );
@@ -174,25 +207,32 @@ export const useMap = () => {
   }, [
     circlePoint,
     clear,
-    pathingInProgres,
+    pathingInProgress,
     randomPoints,
+    clickPossible,
     updateClear,
     updatePathingInProgres,
+    dispatch
   ]);
 
   const handleRandomClick = useCallback(() => {
-    if (clear || pathingInProgres) {
+    if (clear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
+    dispatch(setCirclePointZero());
+    dispatch(setRandomPointsZero());
     updatePathingInProgres(true);
     clearRectangle(canvas, context);
-    drawSelectedCity(context, circlePoint, "red");
-    drawCities(context, randomPoints, "black");
+    if (clickPossible) {
+      drawSelectedCity(context, circlePoint, "red");
+    }
+    drawCities(context, randomPoints, "black", true);
     drawSimplePath(
       context,
       randomPoints,
       circlePoint,
+      clickPossible,
       "black",
       updatePathingInProgres,
       true
@@ -202,16 +242,19 @@ export const useMap = () => {
   }, [
     circlePoint,
     clear,
-    pathingInProgres,
+    pathingInProgress,
     randomPoints,
+    clickPossible,
     updateClear,
     updatePathingInProgres,
+    dispatch
   ]);
 
   return {
     canvasRef,
     clear,
-    pathingInProgres,
+    pathingInProgress,
+    activeMode,
     handleCanvasClick,
     handleTSGClick,
     handleSortClick,

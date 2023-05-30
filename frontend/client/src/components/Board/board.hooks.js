@@ -25,6 +25,7 @@ export const useBoard = () => {
   const dispatch = useDispatch();
 
   const { points, grid, isRunning } = useSelector((state) => state.board);
+  const { activeMode } = useSelector((state) => state.toggle);
 
   const updateStartRow = useCallback(
     (row) => {
@@ -66,14 +67,18 @@ export const useBoard = () => {
   );
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
+
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
   };
 
-  useEffect(() => {
-    updateGrid(createInitialGrid(cloneDeep(points)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(()=>{
+    updateGrid(createInitialGrid(cloneDeep(points), activeMode));
+    if (activeMode === 'combo'){
+      handleChange(options[0]);
+    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[activeMode])
 
   const clearGrid = useCallback(() => {
     clearGridUtil(
@@ -134,5 +139,6 @@ export const useBoard = () => {
     selectedOption,
     handleChange,
     options,
+    activeMode
   };
 };

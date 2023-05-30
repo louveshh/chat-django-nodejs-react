@@ -13,25 +13,29 @@ const Baord = () => {
     selectedOption,
     handleChange,
     options,
+    activeMode,
   } = useBoard();
 
   return (
     <div className="temp-top">
       <div className="grid-container">
-        {grid&& [].concat(...grid)?.map((node, nodeIdx) => {
-          const { row, col, isFinish, isStart, isWall } = node;
-          return (
-            <Node
-              key={nodeIdx}
-              col={col}
-              row={row}
-              isFinish={isFinish}
-              isStart={isStart}
-              isWall={isWall}
-              onMouseDown={(row, col) => handleMouseDown(row, col)}
-            >{nodeIdx}</Node>
-          );
-        })}
+        {grid &&
+          [].concat(...grid)?.map((node, nodeIdx) => {
+            const { row, col, isFinish, isStart, isWall } = node;
+            return (
+              <Node
+                key={nodeIdx}
+                col={col}
+                row={row}
+                isFinish={isFinish}
+                isStart={isStart}
+                isWall={isWall}
+                onMouseDown={(row, col) => handleMouseDown(row, col)}
+              >
+                {nodeIdx}
+              </Node>
+            );
+          })}
       </div>
       <div className="temp-space">
         <button
@@ -69,12 +73,7 @@ const Baord = () => {
         >
           Depth First Search
         </button>
-        <Select
-          value={selectedOption}
-          onChange={handleChange}
-          options={options}
-          className="select"
-        />
+      
       </div>
     </div>
   );

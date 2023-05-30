@@ -39,6 +39,8 @@ export const tempRandom = (setRandomPoints) => {
       const x = Math.random() * (canvasWidth - 2 * minDistance) + minDistance;
       const y = Math.random() * (canvasHeight - 2 * minDistance) + minDistance;
       const weight = Math.floor(Math.random() * 50);
+      const selectedStart = false;
+      const name = `name ${i}`
 
       const closePoints = points.filter(
         (pos) =>
@@ -50,7 +52,7 @@ export const tempRandom = (setRandomPoints) => {
       );
 
       if (!closePoints.length) {
-        points.push({ x, y, weight });
+        points.push({ x, y, weight, selectedStart, name});
         break;
       }
     }
@@ -58,34 +60,51 @@ export const tempRandom = (setRandomPoints) => {
   setRandomPoints(points);
 };
 
-export const selectCity = (canvasRef, event, setCirclePoint) => {
+export const selectClickCity = (canvasRef, event, setCirclePoint,circlePoint) => {
   const canvas = canvasRef.current;
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
   const weight = Math.floor(Math.random() * 50);
-  setCirclePoint({ x, y, weight });
+  const name = `click`
+  const selectedStart = circlePoint.selectedStart;
+  setCirclePoint({ x, y, weight, selectedStart,name });
 };
 
-export const drawSelectedCity = (context, selectedPoint, color) => {
+export const drawSelectedCity = (context, selectPointClick, color) => {
+  if(selectPointClick.selectedStart){
+    context.beginPath();
+    context.arc(selectPointClick.x, selectPointClick.y, 8, 0, 2 * Math.PI);
+    context.fillStyle = 'yellow';
+    context.fill();
+    context.closePath();
+  }
   context.beginPath();
-  context.arc(selectedPoint.x, selectedPoint.y, 5, 0, 2 * Math.PI);
+  context.arc(selectPointClick.x, selectPointClick.y, 5, 0, 2 * Math.PI);
   context.fillStyle = color;
   context.fill();
   context.closePath();
 };
 
 export const drawCities = (context, cities, color, weights = false) => {
-  context.fillStyle = color;
   cities.forEach((point) => {
-    context.beginPath();
-    context.arc(point.x, point.y, 5, 0, 2 * Math.PI);
+    if(point.selectedStart && !weights){
+      console.log('xdDDD?', point)
+      context.beginPath();
+      context.arc(point.x, point.y, 8, 0, 2 * Math.PI);
+      context.fillStyle = 'yellow';
+      context.fill();
+      context.closePath();
+    }
+      context.beginPath();
+      context.fillStyle = color;
+      context.arc(point.x, point.y, 5, 0, 2 * Math.PI);
     if (weights) {
       context.fillStyle = "black";
       context.fillText(point.weight.toString(), point.x + 7, point.y + 7);
     }
     context.fill();
-    context.closePath();
+    finishDrawing(context)
   });
 };
 
@@ -93,6 +112,7 @@ export const drawSimplePath = (
   context,
   points,
   circlePoint,
+  clickPossible,
   color,
   setPathingInProgres,
   random = false
@@ -100,7 +120,10 @@ export const drawSimplePath = (
   context.strokeStyle = color;
   context.beginPath();
 
-  const fullPoints = [circlePoint, ...points];
+  const fullPoints = [...points];
+  if (clickPossible){
+    fullPoints.unshift(circlePoint)
+  }
   if (random) {
     fullPoints.sort(() => Math.random() - 0.5);
   }
@@ -130,6 +153,7 @@ export const drawSimplePath = (
 export const calculateShortestPath = (
   circlePoint,
   randomPoints,
+  clickPossible,
   setPathingInProgres,
   setClear,
   canvas,
@@ -193,8 +217,10 @@ export const calculateShortestPath = (
       index++;
 
       clearRectangle(canvas, context);
-      drawSelectedCity(context, circlePoint, "red");
-      drawCities(context, randomPoints, "black");
+      if (clickPossible) {
+        drawSelectedCity(context, circlePoint, "red");
+      }
+      drawCities(context, randomPoints, "black", false);
       drawPath(context, shortestPath, "black");
       drawTestingPathTSG(context, shortestPath, index, randomPoints, "yellow");
       finishDrawing(context);
@@ -204,25 +230,45 @@ export const calculateShortestPath = (
     setTimeout(drawTestingPathTSG(context, shortestPath, index, randomPoints, "yellow"), 500);
     setTimeout(animateStep, 1000);
   };
+    const moveStartObjectToStart = (array) => {
+    const startObjectIndex = array.findIndex(obj => obj.selectedStart === true);
+    if (startObjectIndex !== -1) {
+      const startObject = array.splice(startObjectIndex, 1)[0];
+      console.log('ty1?',array)
+      return array.unshift(startObject);
+    }
+    console.log('ty2?',array)
+    return array
+  }
+  const points = [...randomPoints];
+  if (clickPossible) {
+    points.unshift(circlePoint);
+  }
+  console.log(moveStartObjectToStart(points))
 
-  const points = [circlePoint, ...randomPoints];
   const remainingPoints = [...points];
   const shortestPath = [remainingPoints.shift()];
   setPathingInProgres(true);
   animatePath();
   setClear(true);
+
 };
 export const calculateSortedPath = async (
   randomPoints,
   circlePoint,
+  clickPossible,
   canvas,
   context,
   setClear,
-  setPathingInProgres
+  setPathingInProgres,
 ) => {
-  const points = [...randomPoints, circlePoint];
+  const points = [...randomPoints];
+  console.log(points)
   clearRectangle(canvas, context);
-  drawSelectedCity(context, circlePoint, "red");
+  if (clickPossible) {
+    drawSelectedCity(context, circlePoint, "red");
+    points.unshift(circlePoint)
+  }
   drawCities(context, randomPoints, "black", true);
 
   const customSort = async (arr, start, end) => {
@@ -242,6 +288,7 @@ export const calculateSortedPath = async (
     context.moveTo(arr[j].x, arr[j].y);
     context.lineTo(arr[end].x, arr[end].y);
     context.stroke();
+    finishDrawing(context);
   };
 
   const partition = async (arr, start, end) => {
@@ -262,7 +309,9 @@ export const calculateSortedPath = async (
     arr[i + 1] = arr[end];
     arr[end] = temp;
     clearRectangle(canvas, context);
-    drawSelectedCity(context, circlePoint, "red");
+    if (clickPossible) {
+      drawSelectedCity(context, circlePoint, "red");
+    }
     drawCities(context, randomPoints, "black", true);
     return i + 1;
   };
@@ -272,3 +321,5 @@ export const calculateSortedPath = async (
   await customSort(points, 0, points.length - 1);
   setPathingInProgres(false);
 };
+
+

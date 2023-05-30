@@ -1,18 +1,22 @@
 import "./map.css";
 import { useMap } from "./map.hooks";
+import Click from "./../Click/Click";
+import SelectCity from './../SelectCity/SelectCity';
+
 
 const Map = () => {
   const {
     canvasRef,
     clear,
-    pathingInProgres,
+    pathingInProgress,
+    activeMode,
     handleCanvasClick,
     handleTSGClick,
     handleSortClick,
     handleDateClick,
     handleRandomClick,
     handleClear,
-    handleMouseMove
+    handleMouseMove,
   } = useMap();
 
   return (
@@ -28,7 +32,7 @@ const Map = () => {
             onClick={handleCanvasClick}
             onMouseMove={handleMouseMove}
           />
-          {!clear ? (
+          {!clear && activeMode !== "display" && activeMode !== "add" ? (
             <>
               <button className="button" onClick={handleTSGClick}>
                 TSG alg
@@ -42,10 +46,13 @@ const Map = () => {
               <button className="button" onClick={handleRandomClick}>
                 Random alg
               </button>{" "}
+              {activeMode !== "combo" && <Click />}
+              {activeMode !== "combo" &&<SelectCity/> }
             </>
           ) : (
             <>
-              {!pathingInProgres && (
+              {(!pathingInProgress &&
+                (activeMode !== "display" && activeMode !== "add")) && (
                 <button className="button" onClick={handleClear}>
                   CLEAR
                 </button>

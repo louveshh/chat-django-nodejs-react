@@ -2,19 +2,21 @@ import { configureStore, combineReducers,getDefaultMiddleware } from '@reduxjs/t
 import userReducer from 'store/slices/user';
 import boardReducer from 'store/slices/board'
 import mapReducer from 'store/slices/map'
+import toggleReducer from 'store/slices/toggle'
 import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
 
 const persistConfig = {
   key: 'root',
   storage,
-	whitelist: ['user'],
+	whitelist: ['user' ],
 }
 
 const rootReducer = combineReducers({ 
   user: userReducer,
   map: mapReducer,
-  board: boardReducer
+  board: boardReducer,
+  toggle: toggleReducer
   // notes: NotesReducer
 })
 

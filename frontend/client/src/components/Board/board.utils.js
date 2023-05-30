@@ -10,13 +10,13 @@ export const options = [
   { value: "finish", label: "Finish" },
 ];
 
-export const createInitialGrid = (points) => {
+export const createInitialGrid = (points, mode) => {
   const node = (row, col, startRow, finishRow, startCol, finishCol) => {
     return {
       row,
       col,
-      isStart: row === startRow && col === startCol,
-      isFinish: row === finishRow && col === finishCol,
+      isStart: row === startRow && col === startCol && mode !== 'combo',
+      isFinish: row === finishRow && col === finishCol && mode !== 'combo',
       distance: Infinity,
       distanceToFinishNode:
         Math.abs(finishRow - row) + Math.abs(finishCol - col),
