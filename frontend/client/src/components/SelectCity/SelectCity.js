@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelectCity } from "./selectCity.hooks";
 import Select from "react-select";
 

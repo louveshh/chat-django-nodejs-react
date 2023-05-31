@@ -1,6 +1,6 @@
 export const bfs = (grid, startNode, finishNode) => {
   const visitedNodesInOrder = [];
-  let nextNodesStack = [startNode];
+  const nextNodesStack = [startNode];
 
   while (nextNodesStack.length) {
     const currentNode = nextNodesStack.shift();

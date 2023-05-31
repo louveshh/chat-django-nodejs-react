@@ -1,19 +1,15 @@
-import { Helmet } from "react-helmet"
-import Navbar from "../Navbar/Navbar"
+import { Helmet } from 'react-helmet';
+import Navbar from '../Navbar/Navbar';
 
-const Layout = ({title, content, children}) => {
-  return (
-    <>
-      <Helmet>
-        <title>{title}</title>
-        <meta name='description' content={content}/>
-      </Helmet>
-      <Navbar/>
-      <div>
-        {children}
-      </div>
-    </>
-  )
-}
+const Layout = ({ title, content, children }) => (
+  <>
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={content} />
+    </Helmet>
+    <Navbar />
+    <div>{children}</div>
+  </>
+);
 
-export default Layout
+export default Layout;

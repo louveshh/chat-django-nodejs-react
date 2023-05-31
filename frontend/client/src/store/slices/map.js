@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  circlePoint: { x: 320, y: 320, weight: 0, selectedStart: false, name: "click" },
+  circlePoint: { x: 320, y: 320, weight: -1, selectedStart: false, name: "click" },
   randomPoints: [],
   pathingInProgress: false,
   toClear: false,

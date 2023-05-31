@@ -1,9 +1,9 @@
-import Select from "react-select";
-import Node from "./../Node/Node";
-import { useBoard } from "./board.hooks";
+import Select from 'react-select';
+import Node from '../Node/Node';
+import { useBoard } from './board.hooks';
 
-import "./Board.css";
-import { configBoard } from "config/config";
+import './Board.css';
+import { configBoard } from '../../config/config';
 
 const Baord = () => {
   const {
@@ -24,7 +24,7 @@ const Baord = () => {
             const { row, col, isFinish, isStart, isWall } = node;
             return (
               <Node
-                key={nodeIdx}
+                key={`l${nodeIdx}`}
                 col={col}
                 row={row}
                 isFinish={isFinish}
@@ -48,32 +48,32 @@ const Baord = () => {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => handleAlgorithm("Dijkstra")}
+          onClick={() => handleAlgorithm('Dijkstra')}
         >
           Dijkstra's
         </button>
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => handleAlgorithm("AStar")}
+          onClick={() => handleAlgorithm('AStar')}
         >
           A*
         </button>
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => handleAlgorithm("BFS")}
+          onClick={() => handleAlgorithm('BFS')}
         >
           Bread First Search
         </button>
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => handleAlgorithm("DFS")}
+          onClick={() => handleAlgorithm('DFS')}
         >
           Depth First Search
         </button>
-        {activeMode === "board" && (
+        {activeMode === 'board' && (
           <Select
             className="select"
             onChange={handleChange}

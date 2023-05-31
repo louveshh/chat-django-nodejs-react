@@ -1,0 +1,76 @@
+{
+  "sourceType": "unambiguous",
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },  
+  "plugins": ["sort-destructure-keys", "prettier"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  },
+  "rules": {
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
+    "linebreak-style": 0,
+    "react/jsx-filename-extension": [0],
+    "consistent-return": "off",
+    "object-shorthand": "warn",
+    "prefer-template": "warn",
+    "arrow-body-style": "warn",
+    "react/self-closing-comp": "warn",
+    "no-unneeded-ternary": "warn",
+    "import/no-useless-path-segments": "warn",
+    "react/button-has-type": "warn",
+    "prefer-const": "warn",
+    "import/no-named-default": "warn",
+    "spaced-comment": "warn",
+    "no-prototype-builtins": "warn",
+    "prefer-arrow-callback": "warn",
+    "vars-on-top": "warn",
+    "no-var": "warn",
+    "no-continue": "warn",
+    "no-undefined": "warn",
+    "lines-between-class-members": "warn",
+    "no-console": "warn",
+    "no-debugger": "warn",
+    "no-else-return": "warn",
+    "no-empty-function": "off",
+    "no-nested-ternary": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-return-assign": "warn",
+    "no-return-await": "warn",
+    "no-sequences": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": "warn",
+    "no-unused-vars": "warn",
+    "no-useless-return": "warn",
+    "prefer-destructuring": "warn",
+    "prettier/prettier": "warn",
+    "sort-destructure-keys/sort-destructure-keys": "off",
+    "sort-keys": "off",
+    "react/destructuring-assignment": "warn",
+    "react/no-array-index-key": "warn",
+    "react/no-unescaped-entities": "off"
+  }
+}

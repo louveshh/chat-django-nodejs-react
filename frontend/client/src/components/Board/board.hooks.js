@@ -1,9 +1,6 @@
-import { useCallback } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import cloneDeep from "lodash/cloneDeep";
+import { useCallback, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import cloneDeep from 'lodash/cloneDeep';
 
 import {
   setStartRow,
@@ -12,12 +9,12 @@ import {
   setFinishCol,
   setGrid,
   toggleRunning,
-} from "store/slices/board";
-import { createInitialGrid } from "./utils/createInitalGrid.utils";
-import { clearGrid } from "./utils/common/clearGrid.utils";
-import { clickGrid } from "./utils/clickGrid.utils";
-import { runAlgorithm } from "./utils/runAlgorithm.utils";
-import { configBoard } from "./../../config/config";
+} from '../../store/slices/board';
+import { createInitialGrid } from './utils/createInitalGrid.utils';
+import { clearGrid } from './utils/common/clearGrid.utils';
+import { clickGrid } from './utils/clickGrid.utils';
+import { runAlgorithm } from './utils/runAlgorithm.utils';
+import { configBoard } from '../../config/config';
 
 export const useBoard = () => {
   const dispatch = useDispatch();
@@ -69,7 +66,7 @@ export const useBoard = () => {
 
   useEffect(() => {
     updateGrid(createInitialGrid(cloneDeep(points), activeMode));
-    if (activeMode === "combo") {
+    if (activeMode === 'combo') {
       handleChange(configBoard.defaultDrawOption);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

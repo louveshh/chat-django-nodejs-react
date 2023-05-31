@@ -32,7 +32,7 @@ const Map = () => {
             onClick={handleCanvasClick}
             onMouseMove={handleMouseMove}
           />
-          {!toClear && activeMode === 'map' &&
+          {!toClear && (activeMode === 'map' || activeMode === 'combo') &&
             <>
               <button className="button" onClick={handleTSGClick}>
                 TSG alg

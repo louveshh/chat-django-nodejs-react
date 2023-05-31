@@ -1,8 +1,9 @@
-import { clearGrid } from "./common/clearGrid.utils";
-import { dijkstra } from "./algorithms/dijkstra.algorithm";
-import { AStar } from "./algorithms/aStar.algorithm";
-import { bfs } from "./algorithms/bfs.algorithm";
-import { dfs } from "./algorithms/dfs.algorithm";
+import { clearGrid } from './common/clearGrid.utils';
+import { dijkstra } from './algorithms/dijkstra.algorithm';
+import { AStar } from './algorithms/aStar.algorithm';
+import { bfs } from './algorithms/bfs.algorithm';
+import { dfs } from './algorithms/dfs.algorithm';
+
 export const runAlgorithm = (
   algorithm,
   isRunning,
@@ -11,6 +12,12 @@ export const runAlgorithm = (
   points
 ) => {
   if (!isRunning) {
+    let visitedNodesInOrder;
+    const { startRow, finishRow, startCol, finishCol } = points;
+    updateIsRunning();
+    clearGrid(isRunning, grid, finishRow, finishCol);
+    const startNode = grid[startRow][startCol];
+    const finishNode = grid[finishRow][finishCol];
     const getShortestPath = (finishNode) => {
       const shortestPathNodes = [];
       let currentNode = finishNode;
@@ -22,7 +29,7 @@ export const runAlgorithm = (
     };
     const animateFinalPath = (shortestPathNodes, setIsRunning) => {
       for (let i = 0; i < shortestPathNodes.length; i++) {
-        if (shortestPathNodes[i] === "end") {
+        if (shortestPathNodes[i] === 'end') {
           setTimeout(() => {
             setIsRunning((prevIsRunning) => !prevIsRunning);
           }, i * 50);
@@ -33,12 +40,12 @@ export const runAlgorithm = (
               `grid-cell-${node.row}-${node.col}`
             ).className;
             if (
-              classId !== "grid-cell node-start" &&
-              classId !== "grid-cell node-finish"
+              classId !== 'grid-cell node-start' &&
+              classId !== 'grid-cell node-finish'
             ) {
               document.getElementById(
                 `grid-cell-${node.row}-${node.col}`
-              ).className = "grid-cell node-shortest-path";
+              ).className = 'grid-cell node-shortest-path';
             }
           }, i * 40);
         }
@@ -59,44 +66,37 @@ export const runAlgorithm = (
             `grid-cell-${node.row}-${node.col}`
           ).className;
           if (
-            classId !== "grid-cell node-start" &&
-            classId !== "grid-cell node-finish"
+            classId !== 'grid-cell node-start' &&
+            classId !== 'grid-cell node-finish'
           ) {
             document.getElementById(
               `grid-cell-${node.row}-${node.col}`
-            ).className = "grid-cell node-visited";
+            ).className = 'grid-cell node-visited';
           }
         }, 10 * i);
       }
     };
     const switchAlgorithm = (algorithm) => {
       switch (algorithm) {
-        case "Dijkstra":
+        case 'Dijkstra':
           visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
           break;
-        case "AStar":
+        case 'AStar':
           visitedNodesInOrder = AStar(grid, startNode, finishNode);
           break;
-        case "BFS":
+        case 'BFS':
           visitedNodesInOrder = bfs(grid, startNode, finishNode);
           break;
-        case "DFS":
+        case 'DFS':
           visitedNodesInOrder = dfs(grid, startNode, finishNode);
           break;
         default:
           break;
       }
     };
-
-    const { startRow, finishRow, startCol, finishCol } = points;
-    updateIsRunning();
-    clearGrid(isRunning, grid, finishRow, finishCol);
-    const startNode = grid[startRow][startCol];
-    const finishNode = grid[finishRow][finishCol];
-    let visitedNodesInOrder;
     switchAlgorithm(algorithm);
     const nodesInShortestPathOrder = getShortestPath(finishNode);
-    nodesInShortestPathOrder.push("end");
+    nodesInShortestPathOrder.push('end');
     animate(visitedNodesInOrder, nodesInShortestPathOrder, updateIsRunning);
   }
 };

@@ -1,12 +1,13 @@
 export const AStar = (grid, startNode, finishNode) => {
+  const sortByDistance = (unvisitedNodes) => {
+    unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
+  };
   const visitedNodesInOrder = [];
   startNode.distance = 0;
   const unvisitedNodes = grid.flat();
-
   while (unvisitedNodes.length) {
     sortByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
-
     if (closestNode.isWall) {
       continue;
     }
@@ -41,16 +42,12 @@ export const AStar = (grid, startNode, finishNode) => {
       neighbors.push(grid[row][col + 1]);
     }
 
-    for (const neighbor of neighbors) {
+    neighbors.forEach((neighbor) => {
       if (!neighbor.isVisited) {
         neighbor.distance =
           closestNode.distance + 1 + neighbor.distanceToFinishNode;
         neighbor.previousNode = closestNode;
       }
-    }
+    });
   }
-};
-
-const sortByDistance = (unvisitedNodes) => {
-  unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
 };

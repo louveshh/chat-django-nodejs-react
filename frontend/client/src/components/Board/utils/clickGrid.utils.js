@@ -23,7 +23,7 @@ export const clickGrid = (
     !currentNode.isStart &&
     !currentNode.isFinish &&
     currentNode.isNode &&
-    selectedOption.value === "wall"
+    selectedOption.value === 'wall'
   ) {
     const updatedNode = {
       ...currentNode,
@@ -33,7 +33,7 @@ export const clickGrid = (
   } else if (
     currentNode.isNode &&
     !currentNode.isFinish &&
-    selectedOption.value === "start"
+    selectedOption.value === 'start'
   ) {
     const previousStartNode = grid[startRow][startCol];
     const resetStartNode = {
@@ -52,7 +52,7 @@ export const clickGrid = (
   } else if (
     currentNode.isNode &&
     !currentNode.isStart &&
-    selectedOption.value === "finish"
+    selectedOption.value === 'finish'
   ) {
     const previousFinishNode = grid[finishRow][finishCol];
     const resetFinishNode = {
