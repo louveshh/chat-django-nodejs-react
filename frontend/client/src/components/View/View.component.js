@@ -1,5 +1,5 @@
 import 'react-toggle/style.css';
-import Board from '../../components/Board/Baord';
+import Board from '../Board/Baord';
 import { useView } from './view.hooks';
 import { configView } from '../../config/config';
 import { ViewContainer, PanelWrapper } from './view.styles';

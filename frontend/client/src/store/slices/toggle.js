@@ -1,16 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  activeMode: "display",
+  activeMode: 'display',
 };
 
 const toogleSlice = createSlice({
-  name: "toggle",
+  name: 'toggle',
   initialState,
   reducers: {
     toggleActiveMode: (state, action) => {
       state.activeMode = action.payload;
-    }
+    },
   },
 });
 
