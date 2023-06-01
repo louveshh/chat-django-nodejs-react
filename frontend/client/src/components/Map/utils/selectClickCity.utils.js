@@ -9,7 +9,7 @@ export const selectClickCity = (
 
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
-  const weight = Math.floor(Math.random() * 50);
+  const weight = -1;
   const name = `click`;
   const { selectedStart } = circlePoint;
 

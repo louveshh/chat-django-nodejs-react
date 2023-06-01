@@ -11,7 +11,6 @@ export const runAlgorithm = (
   grid,
   points
 ) => {
-  if (!isRunning) {
     const getShortestPath = (finishNode) => {
       const shortestPathNodes = [];
       let currentNode = finishNode;
@@ -84,6 +83,9 @@ export const runAlgorithm = (
           break;
       }
     };
+    if (isRunning) {
+      return
+    }
     const { startRow, finishRow, startCol, finishCol } = points;
     updateIsRunning();
     clearGrid(isRunning, grid, finishRow, finishCol);
@@ -97,5 +99,4 @@ export const runAlgorithm = (
     const nodesInShortestPathOrder = getShortestPath(finishNode);
     nodesInShortestPathOrder.push('end');
     animate(visitedNodesInOrder, nodesInShortestPathOrder, updateIsRunning);
-  }
 };
