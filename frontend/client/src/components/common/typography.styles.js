@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SectionTitle = styled.h2`
   letter-spacing: 0rem;

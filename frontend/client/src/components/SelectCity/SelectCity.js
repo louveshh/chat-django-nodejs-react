@@ -1,8 +1,8 @@
-import { useSelectCity } from "./selectCity.hooks";
-import Select from "react-select";
+import Select from 'react-select';
+import { useSelectCity } from './selectCity.hooks';
 
 const SelectCity = () => {
-  const { selectValue,selectValueData, handleSelectCity } = useSelectCity();
+  const { selectValue, selectValueData, handleSelectCity } = useSelectCity();
   return (
     <div>
       <Select

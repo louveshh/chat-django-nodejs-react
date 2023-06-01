@@ -1,8 +1,8 @@
-import "./map.css";
-import { useMap } from "./map.hooks";
-import Click from "./../Click/Click";
-import SelectCity from './../SelectCity/SelectCity';
-import {configMap} from '../../config/config'
+import './map.css';
+import { useMap } from './map.hooks';
+import Click from '../Click/Click';
+import SelectCity from '../SelectCity/SelectCity';
+import { configMap } from '../../config/config';
 
 const Map = () => {
   const {
@@ -23,7 +23,7 @@ const Map = () => {
     <div>
       <div>
         <div className="parent-canvas">
-          <div className="image"></div>
+          <div className="image" />
           <canvas
             ref={canvasRef}
             width={640}
@@ -32,34 +32,43 @@ const Map = () => {
             onClick={handleCanvasClick}
             onMouseMove={handleMouseMove}
           />
-          {!toClear && (activeMode === 'map' || activeMode === 'combo') &&
+          {!toClear && (activeMode === 'map' || activeMode === 'combo') && (
             <>
-              <button className="button" onClick={handleTSGClick}>
+              <button type="button" className="button" onClick={handleTSGClick}>
                 TSG alg
               </button>
-              <button className="button" onClick={handleSortClick}>
+              <button
+                type="button"
+                className="button"
+                onClick={handleSortClick}
+              >
                 Sort alg
               </button>
-              <button className="button" onClick={handleDateClick}>
+              <button
+                type="button"
+                className="button"
+                onClick={handleDateClick}
+              >
                 Date alg
               </button>
-              <button className="button" onClick={handleRandomClick}>
+              <button
+                type="button"
+                className="button"
+                onClick={handleRandomClick}
+              >
                 Random alg
-              </button>{" "}
-              {activeMode !== "combo" && <Click />}
-              {activeMode !== "combo" &&<SelectCity/> }
+              </button>{' '}
+              {activeMode !== 'combo' && <Click />}
+              {activeMode !== 'combo' && <SelectCity />}
             </>
-          } 
-            <>
-              {!pathingInProgress && toClear &&
-                configMap.clearButton.includes(activeMode) && (
-                <button className="button" onClick={handleClear}>
-                  CLEAR
-                </button>
-              )}
-            </>
-          
-          <div></div>
+          )}
+          {!pathingInProgress &&
+            toClear &&
+            configMap.clearButton.includes(activeMode) && (
+              <button type="button" className="button" onClick={handleClear}>
+                CLEAR
+              </button>
+            )}
         </div>
       </div>
     </div>

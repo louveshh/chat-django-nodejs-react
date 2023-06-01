@@ -1,5 +1,9 @@
-import { useSelector, useDispatch } from "react-redux";
-import { setCirclePointZero, setRandomPointsZero,setClickPossible } from "store/slices/map";
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setCirclePointZero,
+  setRandomPointsZero,
+  setClickPossible,
+} from 'store/slices/map';
 
 export const useCLick = () => {
   const isClickable = useSelector((state) => state.map.clickPossible);

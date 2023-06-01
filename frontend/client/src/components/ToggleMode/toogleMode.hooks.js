@@ -1,4 +1,4 @@
-import { useSelector,  useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toggleActiveMode } from 'store/slices/toggle';
 
 export const useToggleMode = () => {
@@ -8,6 +8,5 @@ export const useToggleMode = () => {
   const handleToggle = (buttonId) => {
     dispatch(toggleActiveMode(buttonId));
   };
-  return {activeMode, handleToggle}
-}
-
+  return { activeMode, handleToggle };
+};

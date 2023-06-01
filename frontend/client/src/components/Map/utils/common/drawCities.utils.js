@@ -1,5 +1,6 @@
-import { configMap } from "../../../../config/config";
-import { finishDrawing } from "./finishDrawing.utils";
+import { configMap } from '../../../../config/config';
+import { finishDrawing } from './finishDrawing.utils';
+
 export const drawCities = (context, cities, weights = false) => {
   cities.forEach((point) => {
     if (point.selectedStart) {

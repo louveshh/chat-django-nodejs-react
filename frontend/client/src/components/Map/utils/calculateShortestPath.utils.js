@@ -1,9 +1,10 @@
-import { clearMap } from "./common/clearMap.utils";
-import { drawClickedCity } from "./common/drawClickedCity.utils";
-import { drawCities } from "./common/drawCities.utils";
-import { drawPath } from "./common/drawPath.utils";
-import { finishDrawing } from "./common/finishDrawing.utils";
-import { configMap } from "../../../config/config";
+import { clearMap } from './common/clearMap.utils';
+import { drawClickedCity } from './common/drawClickedCity.utils';
+import { drawCities } from './common/drawCities.utils';
+import { drawPath } from './common/drawPath.utils';
+import { finishDrawing } from './common/finishDrawing.utils';
+import { configMap } from '../../../config/config';
+
 export const calculateShortestPath = (
   canvas,
   context,
@@ -36,10 +37,10 @@ export const calculateShortestPath = (
     context.closePath();
   };
 
-  const animatePath = () => {
+  const animatePath = (remainingPoints, shortestPath) => {
     let index = 0;
 
-    const animateStep = () => {
+    const animateStep = (remainingPoints, shortestPath) => {
       if (remainingPoints.length === 0) {
         setPathingInProgres(false);
         return;
@@ -73,13 +74,17 @@ export const calculateShortestPath = (
       drawTestingPathTSG(shortestPath, index, randomPoints);
       finishDrawing(context);
 
-      setTimeout(animateStep, 500);
+      setTimeout(() => {
+        animateStep(remainingPoints, shortestPath);
+      }, 500);
     };
     setTimeout(
       () => drawTestingPathTSG(shortestPath, index, randomPoints),
       500
     );
-    setTimeout(animateStep, 1000);
+    setTimeout(() => {
+      animateStep(remainingPoints, shortestPath);
+    }, 1000);
   };
 
   const moveStartObjectToStart = (array) => {
@@ -102,6 +107,6 @@ export const calculateShortestPath = (
   const remainingPoints = [...modifiedPoints];
   const shortestPath = [remainingPoints.shift()];
   setPathingInProgres(true);
-  animatePath();
+  animatePath(remainingPoints, shortestPath);
   setClear(true);
 };

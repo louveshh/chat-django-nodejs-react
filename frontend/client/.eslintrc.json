@@ -3,7 +3,12 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb", "plugin:prettier/recommended","eslint:recommended","plugin:import/recommended"],
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "eslint:recommended",
+    "plugin:import/recommended"
+  ],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": 2023,
@@ -20,14 +25,8 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ],
-        "moduleDirectory": [
-          "node_modules",
-          "src"
-        ]
+        "extensions": [".js", ".jsx"],
+        "moduleDirectory": ["node_modules", "src"]
       }
     }
   },
@@ -94,7 +93,7 @@
     "no-sequences": "off",
     "no-shadow": "off",
     "no-underscore-dangle": "warn",
-    "no-unused-vars": "warn",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
     "no-useless-return": "warn",
     "prefer-destructuring": "warn",
     "sort-destructure-keys/sort-destructure-keys": "off",

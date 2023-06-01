@@ -1,7 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { resetRegistered, login } from "store/slices/user";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { resetRegistered, login } from 'store/slices/user';
+import { useNavigate } from 'react-router-dom';
 
 export const useLogin = () => {
   const dispatch = useDispatch();
@@ -11,8 +11,8 @@ export const useLogin = () => {
   );
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export const useLogin = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard");
+      navigate('/dashboard');
     }
   }, [isAuthenticated, navigate]);
 

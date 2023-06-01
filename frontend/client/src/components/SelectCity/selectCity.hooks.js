@@ -21,7 +21,7 @@ export const useSelectCity = () => {
     if (clickPossible) {
       data.unshift(circlePoint);
     }
-    const dataTransfom = data.map(({ x, y, name }, index) => ({
+    const dataTransfom = data.map(({ x, y, name }) => ({
       value: { x, y },
       label: name,
     }));

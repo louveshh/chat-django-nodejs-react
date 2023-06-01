@@ -1,5 +1,5 @@
-import { useRef, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useRef, useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   setCirclePoint,
@@ -7,20 +7,20 @@ import {
   setPathingInProgress,
   setClear,
   setZeroStartCity,
-} from "store/slices/map";
-import { tempRandom } from "./utils/tempRandom.utils";
-import { getCanvasContext } from "./utils/getCanvasContext.utils";
-import { clearMap } from "./utils/common/clearMap.utils";
-import { drawCities } from "./utils/common/drawCities.utils";
-import { finishDrawing } from "./utils/common/finishDrawing.utils";
-import { selectClickCity } from "./utils/selectClickCity.utils";
-import { calculateShortestPath } from "./utils/calculateShortestPath.utils";
-import { calculateSortedPath } from "./utils/calculateSortedPath.utils";
-import { drawClickedCity } from "./utils/common/drawClickedCity.utils";
-import { drawSimplePath } from "./utils/drawSimplePath.utils";
-import { configMap } from "../../config/config";
-import { calculateDatePath } from "./utils/calculateDatePath.utils";
-import { calculateRandomPath } from "./utils/calculateRandomPath.utils";
+} from 'store/slices/map';
+import { tempRandom } from './utils/tempRandom.utils';
+import { getCanvasContext } from './utils/getCanvasContext.utils';
+import { clearMap } from './utils/common/clearMap.utils';
+import { drawCities } from './utils/common/drawCities.utils';
+import { finishDrawing } from './utils/common/finishDrawing.utils';
+import { selectClickCity } from './utils/selectClickCity.utils';
+import { calculateShortestPath } from './utils/calculateShortestPath.utils';
+import { calculateSortedPath } from './utils/calculateSortedPath.utils';
+import { drawClickedCity } from './utils/common/drawClickedCity.utils';
+import { drawSimplePath } from './utils/drawSimplePath.utils';
+import { configMap } from '../../config/config';
+import { calculateDatePath } from './utils/calculateDatePath.utils';
+import { calculateRandomPath } from './utils/calculateRandomPath.utils';
 
 export const useMap = () => {
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ export const useMap = () => {
     tempRandom(updateRandomPoints);
   }, [updateRandomPoints]);
 
-  //base setup
+  // base setup
   useEffect(() => {
     if (toClear || pathingInProgress) {
       return;
@@ -116,7 +116,8 @@ export const useMap = () => {
     });
 
     if (selectedCoordinate) {
-      console.log("Object detected:", selectedCoordinate);
+      // eslint-disable-next-line no-console
+      console.log('Object detected:', selectedCoordinate);
     }
   };
 

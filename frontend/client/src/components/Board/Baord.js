@@ -24,7 +24,7 @@ const Baord = () => {
             const { row, col, isFinish, isStart, isWall } = node;
             return (
               <Node
-                key={`l${nodeIdx}`}
+                key={`${row}-${col}-key`}
                 col={col}
                 row={row}
                 isFinish={isFinish}

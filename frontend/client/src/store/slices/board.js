@@ -30,7 +30,7 @@ const boardSlice = createSlice({
     setGrid: (state, action) => {
       state.grid = action.payload;
     },
-    toggleRunning: (state, action) => {
+    toggleRunning: (state, _) => {
       state.isRunning = !state.isRunning;
     },
   },

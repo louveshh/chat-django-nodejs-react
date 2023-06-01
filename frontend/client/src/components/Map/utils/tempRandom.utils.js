@@ -5,7 +5,8 @@ export const tempRandom = (setRandomPoints) => {
   const minDistance = 40;
 
   for (let i = 0; i < 10; i++) {
-    while (true) {
+    const whileCond = true;
+    while (whileCond) {
       const x = Math.random() * (canvasWidth - 2 * minDistance) + minDistance;
       const y = Math.random() * (canvasHeight - 2 * minDistance) + minDistance;
       const weight = Math.floor(Math.random() * 50);

@@ -1,5 +1,6 @@
-import Layout from "components/Layout/Layout";
-import { useRegister } from "./register.hooks";
+/* eslint-disable camelcase */
+import Layout from 'components/Layout/Layout';
+import { useRegister } from './register.hooks';
 
 const RegisterPage = () => {
   const {
@@ -37,7 +38,7 @@ const RegisterPage = () => {
           />
         </div>
         <div>
-          <label>Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             name="email"
@@ -61,7 +62,7 @@ const RegisterPage = () => {
             <span>Loading...</span>
           </div>
         ) : (
-          <button>Register</button>
+          <button type="submit">Register</button>
         )}
       </form>
     </Layout>

@@ -1,18 +1,21 @@
-import { useEffect, useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { register } from "store/slices/user";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable camelcase */
+import { useEffect, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from 'store/slices/user';
+import { useNavigate } from 'react-router-dom';
 
 export const useRegister = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, loading, registered } = useSelector((state) => state.user);
+  const { isAuthenticated, loading, registered } = useSelector(
+    (state) => state.user
+  );
 
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
   });
   const sendRegister = useCallback(
     (first_name, last_name, email, password) => {
@@ -35,9 +38,9 @@ export const useRegister = () => {
 
   useEffect(() => {
     if (isAuthenticated || registered) {
-      navigate("/login");
+      navigate('/login');
     }
-  }, [isAuthenticated,registered, navigate]);
+  }, [isAuthenticated, registered, navigate]);
   return {
     onSubmit,
     onChange,

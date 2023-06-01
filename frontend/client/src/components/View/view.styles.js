@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ViewContainer = styled.main`
   display: inline-block;
@@ -9,5 +9,5 @@ export const ViewContainer = styled.main`
 export const PanelWrapper = styled.div`
   margin-top: 2rem;
   position: absolute;
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${(props) => props.theme.primaryColor};
 `;

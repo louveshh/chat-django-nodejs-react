@@ -1,15 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  circlePoint: { x: 320, y: 320, weight: -1, selectedStart: false, name: "click" },
+  circlePoint: {
+    x: 320,
+    y: 320,
+    weight: -1,
+    selectedStart: false,
+    name: 'click',
+  },
   randomPoints: [],
   pathingInProgress: false,
   toClear: false,
-  clickPossible: false
+  clickPossible: false,
 };
 
 const mapSlice = createSlice({
-  name: "map",
+  name: 'map',
   initialState,
   reducers: {
     setCirclePoint: (state, action) => {
@@ -50,10 +56,10 @@ const mapSlice = createSlice({
         selectedStart: action.payload,
       }));
     },
-    setZeroStartCity: (state, action) => {
+    setZeroStartCity: (state, _) => {
       const updatedPoints = state.randomPoints.map((point) => ({
         ...point,
-        selectedStart: false
+        selectedStart: false,
       }));
       const updatedCirclePoint = {
         ...state.circlePoint,
@@ -66,7 +72,7 @@ const mapSlice = createSlice({
         circlePoint: updatedCirclePoint,
       };
     },
-    setClickPossible: (state, action) => {
+    setClickPossible: (state, _) => {
       state.clickPossible = !state.clickPossible;
     },
   },
@@ -81,7 +87,7 @@ export const {
   setCirclePointZero,
   setRandomPointsZero,
   setZeroStartCity,
-  setClickPossible
+  setClickPossible,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;
