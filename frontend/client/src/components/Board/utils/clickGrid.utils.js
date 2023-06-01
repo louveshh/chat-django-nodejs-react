@@ -10,7 +10,7 @@ export const clickGrid = (
   updateStartCol,
   updateFinishCol
 ) => {
-  if (grid === undefined) {
+  if (typeof grid === 'undefined') {
     return;
   }
   if (grid.length === 0) {

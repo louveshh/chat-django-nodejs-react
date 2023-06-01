@@ -12,12 +12,6 @@ export const runAlgorithm = (
   points
 ) => {
   if (!isRunning) {
-    let visitedNodesInOrder;
-    const { startRow, finishRow, startCol, finishCol } = points;
-    updateIsRunning();
-    clearGrid(isRunning, grid, finishRow, finishCol);
-    const startNode = grid[startRow][startCol];
-    const finishNode = grid[finishRow][finishCol];
     const getShortestPath = (finishNode) => {
       const shortestPathNodes = [];
       let currentNode = finishNode;
@@ -76,25 +70,30 @@ export const runAlgorithm = (
         }, 10 * i);
       }
     };
-    const switchAlgorithm = (algorithm) => {
+    const switchAlgorithm = (algorithm, startNode, finishNode) => {
       switch (algorithm) {
         case 'Dijkstra':
-          visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-          break;
+          return dijkstra(grid, startNode, finishNode);
         case 'AStar':
-          visitedNodesInOrder = AStar(grid, startNode, finishNode);
-          break;
+          return AStar(grid, startNode, finishNode);
         case 'BFS':
-          visitedNodesInOrder = bfs(grid, startNode, finishNode);
-          break;
+          return bfs(grid, startNode, finishNode);
         case 'DFS':
-          visitedNodesInOrder = dfs(grid, startNode, finishNode);
-          break;
+          return dfs(grid, startNode, finishNode);
         default:
           break;
       }
     };
-    switchAlgorithm(algorithm);
+    const { startRow, finishRow, startCol, finishCol } = points;
+    updateIsRunning();
+    clearGrid(isRunning, grid, finishRow, finishCol);
+    const startNode = grid[startRow][startCol];
+    const finishNode = grid[finishRow][finishCol];
+    const visitedNodesInOrder = switchAlgorithm(
+      algorithm,
+      startNode,
+      finishNode
+    );
     const nodesInShortestPathOrder = getShortestPath(finishNode);
     nodesInShortestPathOrder.push('end');
     animate(visitedNodesInOrder, nodesInShortestPathOrder, updateIsRunning);

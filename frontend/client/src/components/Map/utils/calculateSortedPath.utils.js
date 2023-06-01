@@ -1,9 +1,10 @@
-import { clearMap } from "./common/clearMap.utils";
-import { drawClickedCity } from "./common/drawClickedCity.utils";
-import { drawCities } from "./common/drawCities.utils";
-import { drawPath } from "./common/drawPath.utils";
-import { finishDrawing } from "./common/finishDrawing.utils";
-import { configMap } from "../../../config/config";
+import { clearMap } from './common/clearMap.utils';
+import { drawClickedCity } from './common/drawClickedCity.utils';
+import { drawCities } from './common/drawCities.utils';
+import { drawPath } from './common/drawPath.utils';
+import { finishDrawing } from './common/finishDrawing.utils';
+import { configMap } from '../../../config/config';
+
 const drawTestingPathSort = (context, arr, startIndex, lastIndex) => {
   context.strokeStyle = configMap.colors.testingLine;
   context.beginPath();
@@ -26,17 +27,26 @@ export const calculateSortedPath = async (
     const pivot = array[endIndex].weight;
     let smallerElementIndex = startIndex - 1;
 
-    for (let i = startIndex; i < endIndex; i++) {
+    const processElement = async (i) => {
       drawTestingPathSort(context, array, i, endIndex);
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          if (array[i].weight < pivot) {
+            smallerElementIndex++;
+            const temp = array[smallerElementIndex];
+            array[smallerElementIndex] = array[i];
+            array[i] = temp;
+          }
+          resolve();
+        }, 600);
+      });
+    };
 
-      if (array[i].weight < pivot) {
-        smallerElementIndex++;
-        const temp = array[smallerElementIndex];
-        array[smallerElementIndex] = array[i];
-        array[i] = temp;
-      }
-    }
+    await Promise.all(
+      Array.from({ length: endIndex - startIndex }, (_, index) =>
+        processElement(startIndex + index)
+      )
+    );
 
     const pivotIndex = smallerElementIndex + 1;
     const temp = array[pivotIndex];
@@ -65,19 +75,14 @@ export const calculateSortedPath = async (
   };
 
   const points = [...randomPoints];
-
   clearMap(canvas, context);
-
   if (clickPossible) {
     drawClickedCity(context, circlePoint);
     points.unshift(circlePoint);
   }
-
   drawCities(context, randomPoints, true);
   setClear(true);
   setPathingInProgress(true);
-
   await customSort(points, 0, points.length - 1);
-
   setPathingInProgress(false);
 };
