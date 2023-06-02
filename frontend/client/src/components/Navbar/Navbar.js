@@ -1,57 +1,84 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useNavbar } from './navbar.hooks';
+import { TrapezoidNavbar, WrapperNavbar, Triangle } from './navbar.styles';
+import './navbar.css';
 
 const Navbar = () => {
   const { isAuthenticated, onClick } = useNavbar();
 
-  const authLinks = (
-    <>
-      <li>
-        <NavLink className="nav-link" to="/dashboard">
-          Dashboard
-        </NavLink>
-      </li>
-      <li>
-        <NavLink className="nav-link" to="/algorithms">
-          Algorithms
-        </NavLink>
-      </li>
-      <li>
-        <button type="button" onClick={onClick}>
-          <div>Logout</div>
-        </button>
-      </li>
-    </>
-  );
-  const guestLinks = (
-    <>
-      <li>
-        <NavLink className="nav-link" to="/login">
-          Login
-        </NavLink>
-      </li>
-      <li>
-        <NavLink className="nav-link" to="/register">
-          Register
-        </NavLink>
-      </li>
-    </>
-  );
-
   return (
-    <nav>
-      <Link to="/">Auth Site</Link>
-      <div>
-        <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          {isAuthenticated ? authLinks : guestLinks}
-        </ul>
-      </div>
-      -----------------------
-    </nav>
+    <WrapperNavbar>
+      <TrapezoidNavbar>
+        {!isAuthenticated ? (
+          <Triangle>
+            <NavLink to="/login">Login</NavLink>
+          </Triangle>
+        ) : (
+          <Triangle>
+            <NavLink to="/about">About</NavLink>
+          </Triangle>
+        )}
+        <Triangle>
+          <NavLink to="/algorithms">Algorithms</NavLink>
+        </Triangle>
+        {!isAuthenticated ? (
+          <Triangle>
+            <NavLink to="/login">Register</NavLink>
+          </Triangle>
+        ) : (
+          <Triangle>
+            <div
+              onClick={onClick}
+              role="button"
+              tabIndex="0"
+              onKeyDown={() => {}}
+            >
+              <div>Logout</div>
+            </div>
+          </Triangle>
+        )}
+      </TrapezoidNavbar>
+    </WrapperNavbar>
   );
 };
 
 export default Navbar;
+
+// const Navbar = () => {
+//   const { isAuthenticated, onClick } = useNavbar();
+
+//   return (
+//     <nav className="wrapper-navbar">
+//       <div className="trapezoid-navbar">
+//         {!isAuthenticated ? (
+//           <NavLink className="triangle" to="/login">
+//             Login
+//           </NavLink>
+//         ) : (
+//           <NavLink className="triangle" to="/about">
+//             About
+//           </NavLink>
+//         )}
+//         <NavLink className="triangle" to="/algorithms">
+//           Algorithms
+//         </NavLink>
+//         {!isAuthenticated ? (
+//           <NavLink className="triangle" to="/login">
+//             Register
+//           </NavLink>
+//         ) : (
+//           <div className="triangle">
+//             <div
+//               onClick={onClick}
+//               role="button"
+//               tabIndex="0"
+//               onKeyDown={() => {}}
+//             >
+//               <div>Logout</div>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </nav>
+//   );
+// };

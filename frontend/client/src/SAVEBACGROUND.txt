@@ -1,0 +1,121 @@
+var N_SQUARES = 50,
+  canvas = document.querySelector('canvas'),
+  ctx = canvas.getContext('2d'),
+  squares = [];
+
+var rand = function (max, min, is_int) {
+  var max = ((max - 1) || 0) + 1,
+    min = min || 0,
+    gen = min + (max - min) * Math.random();
+
+  return is_int ? ~~gen : gen;
+};
+
+var Square = function () {
+  var x, y, edgeLength, offset, angle, velocity, angularVelocity, alphas, phis, amplitudes, frequencies;
+
+  this.init = function () {
+    edgeLength = rand(20, 8, 1);
+    offset = -0.5 * edgeLength;
+    x = rand(canvas.width - offset, offset, 1);
+    y = rand(-canvas.height * 0.8, -edgeLength, 1);
+    angle = rand(0.5 * Math.PI);
+    velocity = rand(1, 0.25);
+    angularVelocity = rand(0.02, 0.005) * Math.PI;
+    alphas = [0.5, 0.5];
+    phis = [];
+    amplitudes = [];
+    frequencies = [];
+    ctx.imageSmoothingEnabled = true;
+
+    for (var i = 0; i < 2; i++) {
+      phis.push(rand(2 * Math.PI));
+      amplitudes.push(rand(0.4, 0.1));
+      frequencies.push(rand(0.001, 0.0001) * Math.PI);
+    }
+  };
+
+  this.update = function (t) {
+    var k, d;
+
+    y += velocity;
+    angle += angularVelocity;
+
+    k = Math.max(0, Math.floor(y / (canvas.height * 0.8)));
+    d = y - (canvas.height * 0.8);
+
+    for (var i = 0; i < 2; i++)
+      alphas[i] = Math.max(0, 0.4 + 0.1 * i + amplitudes[i] * Math.sin(frequencies[i] * t + phis[i]) - k * d * 0.01);
+
+    if (y > canvas.height + edgeLength || !(alphas[0] + alphas[1])) this.init();
+
+    ctx.fillStyle = 'ffffff';
+
+    this.draw();
+  };
+
+  this.draw = function () {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+
+    for (var i = 0; i < 2; i++) {
+      ctx.beginPath();
+      ctx.globalAlpha = alphas[i];
+      ctx.fillRect(offset, offset, edgeLength, edgeLength);
+    }
+
+    ctx.restore();
+  };
+
+  this.init();
+};
+
+var animate = function (t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (var i = 0; i < N_SQUARES; i++)
+    squares[i].update(t);
+
+  requestAnimationFrame(animate.bind(this, ++t));
+};
+
+(function init() {
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  for (var i = 0; i < N_SQUARES; i++)
+    squares.push(new Square);
+
+  animate(0);
+})();
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+
+==============
+
+body {
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+	margin: 0;
+	height: 100vh;
+	background: #111;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  align-self: center;
+  background: transparent;
+  image-rendering: pixelated;
+	background: gray;
+}
+============
+
+
+<canvas id="myCanvas"></canvas>

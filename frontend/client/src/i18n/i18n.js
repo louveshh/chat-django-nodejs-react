@@ -3,8 +3,8 @@ import { initReactI18next } from 'react-i18next';
 
 import translationEN from './locales/en.json';
 import translationPL from './locales/pl.json';
+import { store } from '../store/store';
 
-// Define the translations for each language
 const resources = {
   en: {
     translation: translationEN,
@@ -14,13 +14,15 @@ const resources = {
   },
 };
 
-i18n.use(initReactI18next).init({
-  resources,
-  lng: 'en', // Default language
-  fallbackLng: 'en', // Fallback language if translation is missing
-  interpolation: {
-    escapeValue: false, // React already escapes values
-  },
-});
+const initI18n = () => {
+  const lng = store?.getState()?.toggle?.language || 'en';
 
-export default i18n;
+  return i18n.use(initReactI18next).init({
+    fallbackLng: 'en',
+    debug: true,
+    resources,
+    lng,
+  });
+};
+
+export default initI18n;

@@ -7,7 +7,7 @@ const initialState = {
     mode: light,
     name: 'light',
   },
-  language: 'pl',
+  language: '',
 };
 
 const toogleSlice = createSlice({

@@ -24,17 +24,15 @@ const AppRoutes = () => {
 
   return (
     <ThemeProvider theme={theme.mode}>
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/algorithms" element={<AlgorithmsPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-          </Routes>
-        </Router>
-      </I18nextProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/algorithms" element={<AlgorithmsPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Routes>
+      </Router>
       <GlobalStyles />
     </ThemeProvider>
   );

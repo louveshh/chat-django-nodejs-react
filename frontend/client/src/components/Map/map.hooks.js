@@ -33,7 +33,7 @@ export const useMap = () => {
     toClear,
     clickPossible,
   } = useSelector((state) => state.map);
-  const { activeMode } = useSelector((state) => state.toggle);
+  const { activeMode, theme } = useSelector((state) => state.toggle);
 
   const updateCirclePoint = (newPoint) => {
     dispatch(setCirclePoint(newPoint));
@@ -239,6 +239,7 @@ export const useMap = () => {
     toClear,
     pathingInProgress,
     activeMode,
+    theme,
     handleCanvasClick,
     handleTSGClick,
     handleSortClick,

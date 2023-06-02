@@ -5,13 +5,22 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store/store';
 
 import AppRoutes from './App';
+import initI18n from './i18n/i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const handleBeforeLiftI18n = async () => {
+  await initI18n();
+};
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate
+        loading={null}
+        persistor={persistor}
+        onBeforeLift={handleBeforeLiftI18n}
+      >
         <AppRoutes />
       </PersistGate>
     </Provider>

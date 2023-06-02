@@ -4,6 +4,7 @@
   height: 640px;
   background-size: cover;
   background-position: center;
+  /* filter: brightness(0.6) contrast(0.99) hue-rotate(2deg) sepia(10%); */
 }
 
 .parent-canvas{

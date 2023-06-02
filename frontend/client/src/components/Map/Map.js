@@ -3,6 +3,7 @@ import { useMap } from './map.hooks';
 import Click from '../Click/Click';
 import SelectCity from '../SelectCity/SelectCity';
 import { configMap } from '../../config/config';
+import { BackgroundImage, CanvasMap } from './map.styles';
 
 const Map = () => {
   const {
@@ -10,6 +11,7 @@ const Map = () => {
     toClear,
     pathingInProgress,
     activeMode,
+    theme,
     handleCanvasClick,
     handleTSGClick,
     handleSortClick,
@@ -23,14 +25,15 @@ const Map = () => {
     <div>
       <div>
         <div className="parent-canvas">
-          <div className="image" />
-          <canvas
+          <BackgroundImage theme={theme.name} mode={activeMode} />
+          <CanvasMap
             ref={canvasRef}
             width={640}
             height={640}
             className="canvas1"
             onClick={handleCanvasClick}
             onMouseMove={handleMouseMove}
+            mode={activeMode}
           />
           {!toClear && (activeMode === 'map' || activeMode === 'combo') && (
             <>

@@ -14,9 +14,8 @@ const ToggleLanguage = () => {
         <label htmlFor="toogle-theme">'</label>
         <Toggle
           id="toogle-theme"
-          checked={language === 'en'}
-          value="yes"
-          onChange={() => handleToggle('add')}
+          checked={language === 'pl'}
+          onChange={() => handleToggle()}
         />
         <span>pl</span>
       </div>
