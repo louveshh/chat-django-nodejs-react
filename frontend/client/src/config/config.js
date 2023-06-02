@@ -10,7 +10,8 @@ export const configBoard = {
 };
 
 export const configMap = {
-  clearButton: ['display', 'map', 'add'],
+  settings: ['map', 'combo'],
+  clearButton: ['display', 'map', 'add', 'combo'],
   clickPossibleTargets: ['map'],
   mouseMoveCities: ['display', 'map', 'add'],
   colors: {
