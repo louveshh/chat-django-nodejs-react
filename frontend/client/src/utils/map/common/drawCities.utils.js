@@ -1,4 +1,4 @@
-import { configMap } from '../../../../config/config';
+import { configMap } from '../../../config/config';
 import { finishDrawing } from './finishDrawing.utils';
 
 export const drawCities = (context, cities, weights = false) => {

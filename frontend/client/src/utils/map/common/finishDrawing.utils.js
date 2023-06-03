@@ -1,4 +1,4 @@
-import { configMap } from '../../../../config/config';
+import { configMap } from '../../../config/config';
 
 export const finishDrawing = (context) => {
   context.stroke();

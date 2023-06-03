@@ -1,4 +1,4 @@
-import { configMap } from '../../../../config/config';
+import { configMap } from '../../../config/config';
 
 export const drawClickedCity = (context, selectPointClick) => {
   if (selectPointClick.selectedStart) {

@@ -12,9 +12,9 @@ export const BoardWrapper = styled.div`
 `;
 
 export const ButtonsWrapper = styled.div`
-  height: 50px;
+  height: 200px;
   display: flex;
-  align-items: end;
+  align-items: start;
 `;
 
 export const StyledSelect = styled(Select)`

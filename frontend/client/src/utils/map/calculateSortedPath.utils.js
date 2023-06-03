@@ -3,7 +3,7 @@ import { drawClickedCity } from './common/drawClickedCity.utils';
 import { drawCities } from './common/drawCities.utils';
 import { drawPath } from './common/drawPath.utils';
 import { finishDrawing } from './common/finishDrawing.utils';
-import { configMap } from '../../../config/config';
+import { configMap } from '../../config/config';
 
 const drawTestingPathSort = (context, arr, startIndex, lastIndex) => {
   context.strokeStyle = configMap.colors.testingLine;

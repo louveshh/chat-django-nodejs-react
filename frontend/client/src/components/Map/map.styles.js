@@ -11,13 +11,6 @@ export const MapWrapper = styled.div`
     justify-content: center;
     flex-direction: column;
   }
-  ${(props) => {
-    if (!props.active) {
-      return `
-      visibility: hidden;
-        `;
-    }
-  }}
 `;
 
 export const BackgroundImage = styled.div`
@@ -26,11 +19,15 @@ export const BackgroundImage = styled.div`
   background-image: url('${canvasImage}');
   background-size: cover;
   background-position: center;
-
-  ${(props) => `
-    width: ${props.width || 640}px;
-    height: ${props.height || 640}px;
-    `}
+  width: 640px;
+  height: 640px;
+  ${(props) => {
+    if (!props.active) {
+      return `
+        visibility: hidden;
+          `;
+    }
+  }}
   ${(props) => {
     if (props.mode !== 'combo') {
       return `
@@ -66,7 +63,7 @@ export const CanvasMap = styled.canvas`
   }}
 `;
 
-export const ButtonsWrapper = styled.div`
+export const RightPanel = styled.div`
   display: flex;
   padding-right: 1rem;
   flex-flow: column;
@@ -81,9 +78,9 @@ export const ButtonsWrapper = styled.div`
     justify-content: center;
     width: 100%;
     ${(props) => {
-      if (props.mode !== 'combo') {
+      if (props.mode === 'map') {
         return `
-        max-height: 150px;
+        height: 150px;
           `;
       }
     }}
@@ -94,7 +91,7 @@ export const StyledButton = styled.button`
   height: 50px;
 `;
 
-export const CitiesWrapper = styled.div`
+export const LeftPanel = styled.div`
   width: 210px;
   @media (max-width: 1100px) {
     order: 2;

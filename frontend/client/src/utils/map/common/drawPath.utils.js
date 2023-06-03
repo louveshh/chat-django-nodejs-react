@@ -1,4 +1,4 @@
-import { configMap } from '../../../../config/config';
+import { configMap } from '../../../config/config';
 
 export const drawPath = (context, shortestPath) => {
   context.strokeStyle = configMap.colors.line;

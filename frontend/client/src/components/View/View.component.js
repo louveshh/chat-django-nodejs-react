@@ -3,7 +3,7 @@ import Board from '../Board/Baord';
 import { useView } from './view.hooks';
 import { configView } from '../../config/config';
 import { ViewContainer, PanelWrapper } from './view.styles';
-import Map from '../Map/Map';
+import Panel from '../Panel/Panel';
 import ToggleMode from '../ToggleMode/ToggleMode.component';
 import ToggleTheme from '../ToggleTheme/ToggleTheme.component';
 import ToggleLanguage from '../ToggleLanguage/ToggleLanguage.component';
@@ -17,8 +17,7 @@ const View = () => {
       <ViewContainer>
         <ToggleMode />
         <PanelWrapper>
-          <Map />
-          <Board />
+          <Panel />
         </PanelWrapper>
       </ViewContainer>
     </Layout>
