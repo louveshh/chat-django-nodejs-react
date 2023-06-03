@@ -1,9 +1,6 @@
-import Baord from 'components/Board/Baord';
 import { useMap } from './map.hooks';
-import Click from '../Click/Click';
-import SelectCity from '../SelectCity/SelectCity';
 
-import { configMap, configView } from '../../config/config';
+import { configView } from '../../config/config';
 import { BackgroundImage, CanvasMap } from './map.styles';
 
 const Map = ({ canvasRef }) => {

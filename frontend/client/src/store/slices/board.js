@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { configBoard } from '../../config/config';
 
 const initialState = {
   points: {
@@ -9,6 +10,7 @@ const initialState = {
   },
   grid: [],
   isRunning: false,
+  selectedOption: configBoard.defaultDrawOption,
 };
 
 const boardSlice = createSlice({
@@ -33,6 +35,9 @@ const boardSlice = createSlice({
     toggleRunning: (state, _) => {
       state.isRunning = !state.isRunning;
     },
+    setSelectedOption: (state, action) => {
+      state.selectedOption = action.payload;
+    },
   },
 });
 
@@ -43,6 +48,7 @@ export const {
   setFinishCol,
   setGrid,
   toggleRunning,
+  setSelectedOption,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

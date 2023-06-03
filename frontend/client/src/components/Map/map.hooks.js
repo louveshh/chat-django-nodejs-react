@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setCirclePoint, setRandomPoints, setClear } from 'store/slices/map';

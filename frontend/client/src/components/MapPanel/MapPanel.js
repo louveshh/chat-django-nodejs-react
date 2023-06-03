@@ -1,9 +1,8 @@
-import React from 'react';
 import { useMapPanel } from './mapPanel.hooks';
-import { StyledButton } from './../Map/map.styles';
-import { configMap, configView } from '../../config/config';
-import Click from './../Click/Click';
-import SelectCity from './../SelectCity/SelectCity';
+import { StyledButton } from '../Map/map.styles';
+import { configMap } from '../../config/config';
+import Click from '../Click/Click';
+import SelectCity from '../SelectCity/SelectCity';
 
 const MapPanel = ({ canvasRef }) => {
   const {
