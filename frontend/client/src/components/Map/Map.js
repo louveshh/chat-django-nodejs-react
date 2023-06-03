@@ -46,7 +46,7 @@ const Map = () => {
           mode={activeMode}
         />
       </BackgroundImage>
-      <ButtonsWrapper>
+      <ButtonsWrapper mode={activeMode}>
         {!toClear && configMap.settings.includes(activeMode) && (
           <>
             <StyledButton

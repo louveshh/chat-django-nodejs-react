@@ -10,7 +10,6 @@ export const MapWrapper = styled.div`
   @media (max-width: 1100px) {
     justify-content: center;
     flex-direction: column;
-    order: 1;
   }
   ${(props) => {
     if (!props.active) {
@@ -74,13 +73,20 @@ export const ButtonsWrapper = styled.div`
   width: 210px;
   align-self: stretch;
   justify-content: start;
+
   @media (max-width: 1100px) {
     flex-flow: row;
     align-self: unset;
     order: 3;
     justify-content: center;
     width: 100%;
-    min-height: 150px;
+    ${(props) => {
+      if (props.mode !== 'combo') {
+        return `
+        max-height: 150px;
+          `;
+      }
+    }}
   }
 `;
 

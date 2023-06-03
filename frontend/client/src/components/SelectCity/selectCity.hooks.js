@@ -9,6 +9,7 @@ export const useSelectCity = () => {
   const { randomPoints, circlePoint, clickPossible } = useSelector(
     (state) => state.map
   );
+  const { activeMode } = useSelector((state) => state.toggle);
   const dispatch = useDispatch();
 
   const handleSelectCity = (event) => {
@@ -30,5 +31,5 @@ export const useSelectCity = () => {
   useEffect(() => {
     setSelectValue(null);
   }, [clickPossible]);
-  return { selectValue, selectValueData, handleSelectCity };
+  return { selectValue, activeMode, selectValueData, handleSelectCity };
 };

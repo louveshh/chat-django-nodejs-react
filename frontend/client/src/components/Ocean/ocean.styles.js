@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
 export const StyledSVG = styled.svg`
-  position: absolute;
+  position: fixed;
+  overflow-y: scroll;
   width: 100%;
-  height: 90%;
+  height: 100%;
   max-height: 100%;
-  bottom: -15%;
+  bottom: -20%;
   z-index: -1;
+  overflow: hidden;
   @media (max-width: 1100px) {
     bottom: -20%;
   }
   @media (max-width: 700px) {
-    max-height: 300px;
-    bottom: 0%;
+    bottom: -20%;
     height: 90%;
   }
 `;

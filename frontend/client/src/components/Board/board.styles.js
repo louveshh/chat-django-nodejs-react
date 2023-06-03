@@ -12,15 +12,9 @@ export const BoardWrapper = styled.div`
 `;
 
 export const ButtonsWrapper = styled.div`
-  position: absolute;
-  top: 96%;
   height: 50px;
   display: flex;
   align-items: end;
-  left: 50%;
-  @media (max-width: 1100px) {
-    top: 76%;
-  }
 `;
 
 export const StyledSelect = styled(Select)`
