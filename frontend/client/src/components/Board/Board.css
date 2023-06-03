@@ -1,19 +1,20 @@
-.temp-top {
+
+.without-absolute {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 650px;
+  top: 100%;
+  /* Add any styling for the third div */
 }
 
 .grid-container {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
   width: 640px;
   height: 640px;
   display: grid;
   grid-template-columns: repeat(40, 16px);
   grid-template-rows: repeat(40, 16px);
-  gap: 0;
-  margin-left: -2px;
-  margin-top: -1px;
   border: 1px solid black;
 }
 
@@ -34,8 +35,4 @@ button {
   margin-top: 10px;
   display: inline-block;
   width: 200px;
-}
-.temp-space {
-  margin-top: 100px;
-  height: 300px;
 }

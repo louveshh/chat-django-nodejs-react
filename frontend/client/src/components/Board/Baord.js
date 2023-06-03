@@ -17,7 +17,7 @@ const Baord = () => {
   } = useBoard();
 
   return (
-    <div className="temp-top">
+    <>
       <div className="grid-container">
         {grid &&
           [].concat(...grid)?.map((node, nodeIdx) => {
@@ -37,7 +37,7 @@ const Baord = () => {
             );
           })}
       </div>
-      <div className="temp-space">
+      <div className="without-absolute">
         <button
           type="button"
           className="btn btn-danger"
@@ -82,7 +82,7 @@ const Baord = () => {
           />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

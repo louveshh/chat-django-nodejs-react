@@ -2,12 +2,13 @@ import 'react-toggle/style.css';
 import Toggle from 'react-toggle';
 import './toggleMode.css';
 import { useToggleMode } from './toogleMode.hooks';
+import { ToggleContainer, ToggleWrapper } from './toggleMode.styles';
 
 const ToggleMode = () => {
   const { activeMode, handleToggle } = useToggleMode();
   return (
-    <div className="toogle-container">
-      <div className="toggle-wrapper">
+    <ToggleContainer>
+      <ToggleWrapper className="toggle-wrapper">
         <label htmlFor="toogle-display">display</label>
         <Toggle
           id="toogle-display"
@@ -15,8 +16,8 @@ const ToggleMode = () => {
           value="yes"
           onChange={() => handleToggle('display')}
         />
-      </div>
-      <div className="toggle-wrapper">
+      </ToggleWrapper>
+      <ToggleWrapper>
         <label htmlFor="toogle-board">board</label>
         <Toggle
           id="toogle-board"
@@ -24,8 +25,8 @@ const ToggleMode = () => {
           value="yes"
           onChange={() => handleToggle('board')}
         />
-      </div>
-      <div className="toggle-wrapper">
+      </ToggleWrapper>
+      <ToggleWrapper>
         <label htmlFor="toogle-map">map</label>
         <Toggle
           id="toogle-map"
@@ -33,8 +34,8 @@ const ToggleMode = () => {
           value="yes"
           onChange={() => handleToggle('map')}
         />
-      </div>
-      <div className="toggle-wrapper">
+      </ToggleWrapper>
+      <ToggleWrapper>
         <label htmlFor="toogle-combo">combo</label>
         <Toggle
           id="toogle-combo"
@@ -42,8 +43,8 @@ const ToggleMode = () => {
           value="yes"
           onChange={() => handleToggle('combo')}
         />
-      </div>
-      <div className="toggle-wrapper">
+      </ToggleWrapper>
+      <ToggleWrapper>
         <label htmlFor="toogle-add">add</label>
         <Toggle
           id="toogle-add"
@@ -51,8 +52,8 @@ const ToggleMode = () => {
           value="yes"
           onChange={() => handleToggle('add')}
         />
-      </div>
-    </div>
+      </ToggleWrapper>
+    </ToggleContainer>
   );
 };
 

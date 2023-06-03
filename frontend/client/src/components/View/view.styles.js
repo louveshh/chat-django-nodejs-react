@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 
-export const ViewContainer = styled.main`
-  display: inline-block;
-  maxx-width: 100%;
-  postion: relative;
+export const ViewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `;
 
 export const PanelWrapper = styled.div`
-  margin-top: 2rem;
-  position: absolute;
-  background-color: ${(props) => props.theme.primaryColor};
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 650px;
 `;

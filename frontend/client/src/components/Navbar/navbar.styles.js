@@ -3,8 +3,12 @@ import styled from 'styled-components';
 export const WrapperNavbar = styled.nav`
   width: 100%;
   background-color: transparent;
-  height: 100px;
+  height: 50px;
   filter: drop-shadow(3px 3px 10px #121212);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const TrapezoidNavbar = styled.div`
@@ -13,8 +17,6 @@ export const TrapezoidNavbar = styled.div`
   position: relative;
   overflow: hidden;
   clip-path: polygon(0% 100%, 100% 100%, 100% 0, 0 0);
-  position: relative;
-  left: 20%;
   width: 60%;
   background-color: transparent;
   filter: drop-shadow(2px 2px 5px #212121);

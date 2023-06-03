@@ -8,14 +8,13 @@ import ToggleMode from '../ToggleMode/ToggleMode.component';
 import ToggleTheme from '../ToggleTheme/ToggleTheme.component';
 import ToggleLanguage from '../ToggleLanguage/ToggleLanguage.component';
 import Layout from '../Layout/Layout';
+import Ocean from './../Ocean/Ocean';
 
 const View = () => {
   const { activeMode } = useView();
   return (
     <Layout title="Auth Site | Dashboard" content="Dashboard page">
       <ViewContainer>
-        <ToggleLanguage />
-        <ToggleTheme />
         <ToggleMode />
         <PanelWrapper>
           {configView.mapModes.includes(activeMode) && <Map />}

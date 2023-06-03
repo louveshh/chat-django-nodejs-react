@@ -1,13 +1,15 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useNavbar } from './navbar.hooks';
 import { TrapezoidNavbar, WrapperNavbar, Triangle } from './navbar.styles';
-import './navbar.css';
+import ToggleLanguage from './../ToggleLanguage/ToggleLanguage.component';
+import ToggleTheme from './../ToggleTheme/ToggleTheme.component';
 
 const Navbar = () => {
   const { isAuthenticated, onClick } = useNavbar();
 
   return (
     <WrapperNavbar>
+      <ToggleLanguage />
       <TrapezoidNavbar>
         {!isAuthenticated ? (
           <Triangle>
@@ -38,6 +40,7 @@ const Navbar = () => {
           </Triangle>
         )}
       </TrapezoidNavbar>
+      <ToggleTheme />
     </WrapperNavbar>
   );
 };

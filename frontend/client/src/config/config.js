@@ -15,7 +15,7 @@ export const configMap = {
   clickPossibleTargets: ['map'],
   mouseMoveCities: ['display', 'map', 'add'],
   colors: {
-    clickedCity: 'red',
+    clickedCity: '#ffaacc',
     highlightedCity: 'yellow',
     city: 'black',
     testingLine: 'yellow',

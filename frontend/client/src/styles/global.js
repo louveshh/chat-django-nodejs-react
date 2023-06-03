@@ -14,28 +14,13 @@ export default createGlobalStyle`
   }
 
   html, body, #root {
-    min-height: 100%;
+    height:100%;
+    min-height:100%;
   }
 
   body {
     -webkit-font-smoothing: antialiased;
     background-color: ${(props) => props.theme.color.background};
-  }
-
-  body, input, button {
-    font: 14px 'Roboto', sans-serif;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  ul {
-    list-style: none;
-  }
-
-  button {
-    cursor: pointer;
   }
 
 `;
