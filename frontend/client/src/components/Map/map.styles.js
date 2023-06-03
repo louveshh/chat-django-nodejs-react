@@ -61,9 +61,18 @@ export const CanvasMap = styled.canvas`
 `;
 
 export const ButtonsWrapper = styled.div`
+  display: flex;
+  padding-right: 1rem;
+  flex-flow: column;
   width: 210px;
+  align-self: stretch;
+  justify-content: start;
   @media (max-width: 1100px) {
+    flex-flow: row;
+    align-self: unset;
     order: 2;
+    justify-content: center;
+    width: 100%;
   }
 `;
 

@@ -7,6 +7,9 @@ export const StyledSVG = styled.svg`
   max-height: 100%;
   bottom: -15%;
   z-index: -1;
+  @media (max-width: 1100px) {
+    bottom: -20%;
+  }
   @media (max-width: 700px) {
     max-height: 300px;
     bottom: 0%;
