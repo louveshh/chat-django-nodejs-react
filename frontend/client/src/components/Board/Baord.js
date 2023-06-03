@@ -1,9 +1,14 @@
-import Select from 'react-select';
 import Node from '../Node/Node';
 import { useBoard } from './board.hooks';
 
-import './Board.css';
 import { configBoard } from '../../config/config';
+import {
+  ButtonsWrapper,
+  StyledSelect,
+  GridContainer,
+  BoardWrapper,
+} from './board.styles';
+import { configView } from './../../config/config';
 
 const Baord = () => {
   const {
@@ -17,8 +22,8 @@ const Baord = () => {
   } = useBoard();
 
   return (
-    <>
-      <div className="grid-container">
+    <BoardWrapper active={configView.boardModes.includes(activeMode)}>
+      <GridContainer>
         {grid &&
           [].concat(...grid)?.map((node, nodeIdx) => {
             const { row, col, isFinish, isStart, isWall } = node;
@@ -36,53 +41,32 @@ const Baord = () => {
               </Node>
             );
           })}
-      </div>
-      <div className="without-absolute">
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={handleClearGrid}
-        >
+      </GridContainer>
+      <ButtonsWrapper>
+        <button type="button" onClick={handleClearGrid}>
           Clear Grid
         </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => handleAlgorithm('Dijkstra')}
-        >
+        <button type="button" onClick={() => handleAlgorithm('Dijkstra')}>
           Dijkstra's
         </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => handleAlgorithm('AStar')}
-        >
+        <button type="button" onClick={() => handleAlgorithm('AStar')}>
           A*
         </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => handleAlgorithm('BFS')}
-        >
+        <button type="button" onClick={() => handleAlgorithm('BFS')}>
           Bread First Search
         </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => handleAlgorithm('DFS')}
-        >
+        <button type="button" onClick={() => handleAlgorithm('DFS')}>
           Depth First Search
         </button>
         {activeMode === 'board' && (
-          <Select
-            className="select"
+          <StyledSelect
             onChange={handleChange}
             value={selectedOption}
             options={configBoard.drawOptions}
           />
         )}
-      </div>
-    </>
+      </ButtonsWrapper>
+    </BoardWrapper>
   );
 };
 

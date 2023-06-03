@@ -1,13 +1,4 @@
 
-.without-absolute {
-  position: absolute;
-  top: 76%;
-  height: 50px;
-  display: flex;
-  align-items: end;
-  /* Add any styling for the third div */
-}
-
 .grid-container {
   position: absolute;
   top: 0%;
@@ -35,7 +26,5 @@ button {
   border: 1px solid #000;
 }
 .select {
-  margin-top: 10px;
-  display: inline-block;
-  width: 200px;
+  width: 100px;
 }

@@ -1,8 +1,7 @@
 import { useMap } from './map.hooks';
 import Click from '../Click/Click';
 import SelectCity from '../SelectCity/SelectCity';
-import { configMap } from '../../config/config';
-import { configView } from './../../config/config';
+import { configMap, configView } from '../../config/config';
 import {
   BackgroundImage,
   CanvasMap,
