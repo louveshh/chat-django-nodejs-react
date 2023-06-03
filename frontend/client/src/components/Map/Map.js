@@ -2,12 +2,14 @@ import { useMap } from './map.hooks';
 import Click from '../Click/Click';
 import SelectCity from '../SelectCity/SelectCity';
 import { configMap } from '../../config/config';
+import { configView } from './../../config/config';
 import {
   BackgroundImage,
   CanvasMap,
   MapWrapper,
   ButtonsWrapper,
   CitiesWrapper,
+  StyledButton,
 } from './map.styles';
 
 const Map = () => {
@@ -27,7 +29,7 @@ const Map = () => {
   } = useMap();
 
   return (
-    <MapWrapper id="help">
+    <MapWrapper active={configView.mapModes.includes(activeMode)}>
       <CitiesWrapper>xd</CitiesWrapper>
       <BackgroundImage
         theme={theme.name}
@@ -48,22 +50,34 @@ const Map = () => {
       <ButtonsWrapper>
         {!toClear && configMap.settings.includes(activeMode) && (
           <>
-            <button type="button" className="button" onClick={handleTSGClick}>
+            <StyledButton
+              type="button"
+              className="button"
+              onClick={handleTSGClick}
+            >
               TSG alg
-            </button>
-            <button type="button" className="button" onClick={handleSortClick}>
+            </StyledButton>
+            <StyledButton
+              type="button"
+              className="button"
+              onClick={handleSortClick}
+            >
               Sort alg
-            </button>
-            <button type="button" className="button" onClick={handleDateClick}>
+            </StyledButton>
+            <StyledButton
+              type="button"
+              className="button"
+              onClick={handleDateClick}
+            >
               Date alg
-            </button>
-            <button
+            </StyledButton>
+            <StyledButton
               type="button"
               className="button"
               onClick={handleRandomClick}
             >
               Random alg
-            </button>{' '}
+            </StyledButton>{' '}
             {activeMode !== 'combo' && <Click />}
             {activeMode !== 'combo' && <SelectCity />}
           </>
@@ -71,9 +85,13 @@ const Map = () => {
         {!pathingInProgress &&
           toClear &&
           configMap.clearButton.includes(activeMode) && (
-            <button type="button" className="button" onClick={handleClear}>
+            <StyledButton
+              type="button"
+              className="button"
+              onClick={handleClear}
+            >
               CLEAR
-            </button>
+            </StyledButton>
           )}
       </ButtonsWrapper>
     </MapWrapper>

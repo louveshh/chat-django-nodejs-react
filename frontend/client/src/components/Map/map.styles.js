@@ -12,6 +12,13 @@ export const MapWrapper = styled.div`
     flex-direction: column;
     order: 1;
   }
+  ${(props) => {
+    if (!props.active) {
+      return `
+      visibility: hidden;
+        `;
+    }
+  }}
 `;
 
 export const BackgroundImage = styled.div`
@@ -70,15 +77,20 @@ export const ButtonsWrapper = styled.div`
   @media (max-width: 1100px) {
     flex-flow: row;
     align-self: unset;
-    order: 2;
+    order: 3;
     justify-content: center;
     width: 100%;
+    min-height: 150px;
   }
+`;
+
+export const StyledButton = styled.button`
+  height: 50px;
 `;
 
 export const CitiesWrapper = styled.div`
   width: 210px;
   @media (max-width: 1100px) {
-    order: 3;
+    order: 2;
   }
 `;

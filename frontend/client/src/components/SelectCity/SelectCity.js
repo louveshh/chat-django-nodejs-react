@@ -1,11 +1,10 @@
-import Select from 'react-select';
 import { useSelectCity } from './selectCity.hooks';
-import { StyledMenuList } from './selectCity.styles';
+import { StyledSelect, StyledMenuList } from './selectCity.styles';
 
 const SelectCity = () => {
   const { selectValue, selectValueData, handleSelectCity } = useSelectCity();
   return (
-    <Select
+    <StyledSelect
       onChange={handleSelectCity}
       options={selectValueData()}
       value={selectValue}

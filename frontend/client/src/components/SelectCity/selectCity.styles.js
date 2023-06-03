@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { components } from 'react-select';
+import Select, { components } from 'react-select';
+
+export const StyledSelect = styled(Select)`
+  height: 30px;
+`;
 
 export const StyledMenuList = styled(components.MenuList)`
   max-height: 300px !important;

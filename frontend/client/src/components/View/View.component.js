@@ -17,8 +17,8 @@ const View = () => {
       <ViewContainer>
         <ToggleMode />
         <PanelWrapper>
-          {configView.mapModes.includes(activeMode) && <Map />}
-          {configView.boardModes.includes(activeMode) && <Board />}
+          <Map />
+          <Board />
         </PanelWrapper>
       </ViewContainer>
     </Layout>

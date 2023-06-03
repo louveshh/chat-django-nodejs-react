@@ -1,7 +1,10 @@
 
 .without-absolute {
   position: absolute;
-  top: 100%;
+  top: 76%;
+  height: 50px;
+  display: flex;
+  align-items: end;
   /* Add any styling for the third div */
 }
 
