@@ -1,6 +1,5 @@
 import 'react-toggle/style.css';
 import Toggle from 'react-toggle';
-import './toggleMode.css';
 import { useToggleMode } from './toogleMode.hooks';
 import { ToggleContainer, ToggleWrapper } from './toggleMode.styles';
 
@@ -8,7 +7,7 @@ const ToggleMode = () => {
   const { activeMode, handleToggle } = useToggleMode();
   return (
     <ToggleContainer>
-      <ToggleWrapper className="toggle-wrapper">
+      <ToggleWrapper>
         <label htmlFor="toogle-display">display</label>
         <Toggle
           id="toogle-display"

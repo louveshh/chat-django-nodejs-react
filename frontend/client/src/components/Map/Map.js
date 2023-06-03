@@ -2,7 +2,13 @@ import { useMap } from './map.hooks';
 import Click from '../Click/Click';
 import SelectCity from '../SelectCity/SelectCity';
 import { configMap } from '../../config/config';
-import { BackgroundImage, CanvasMap, MapWrapper } from './map.styles';
+import {
+  BackgroundImage,
+  CanvasMap,
+  MapWrapper,
+  ButtonsWrapper,
+  CitiesWrapper,
+} from './map.styles';
 
 const Map = () => {
   const {
@@ -21,7 +27,8 @@ const Map = () => {
   } = useMap();
 
   return (
-    <MapWrapper>
+    <MapWrapper id="help">
+      <CitiesWrapper>xd</CitiesWrapper>
       <BackgroundImage
         theme={theme.name}
         mode={activeMode}
@@ -38,7 +45,7 @@ const Map = () => {
           mode={activeMode}
         />
       </BackgroundImage>
-      <div>
+      <ButtonsWrapper>
         {!toClear && configMap.settings.includes(activeMode) && (
           <>
             <button type="button" className="button" onClick={handleTSGClick}>
@@ -68,7 +75,7 @@ const Map = () => {
               CLEAR
             </button>
           )}
-      </div>
+      </ButtonsWrapper>
     </MapWrapper>
   );
 };

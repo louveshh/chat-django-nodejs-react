@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import Navbar from '../Navbar/Navbar';
-import Ocean from './../Ocean/Ocean';
+import Ocean from '../Ocean/Ocean';
 
 const Layout = ({ title, content, children }) => (
   <>
@@ -9,7 +9,8 @@ const Layout = ({ title, content, children }) => (
       <meta name="description" content={content} />
     </Helmet>
     <Navbar />
-    <Ocean>{children}</Ocean>
+    {children}
+    <Ocean />
   </>
 );
 

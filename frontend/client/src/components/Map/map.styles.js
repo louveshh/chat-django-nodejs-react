@@ -5,8 +5,13 @@ export const MapWrapper = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  @media (max-width: 1100px) {
+    justify-content: center;
+    flex-direction: column;
+    order: 1;
+  }
 `;
 
 export const BackgroundImage = styled.div`
@@ -53,4 +58,18 @@ export const CanvasMap = styled.canvas`
       border-radius: 50%;
         `;
   }}
+`;
+
+export const ButtonsWrapper = styled.div`
+  width: 210px;
+  @media (max-width: 1100px) {
+    order: 2;
+  }
+`;
+
+export const CitiesWrapper = styled.div`
+  width: 210px;
+  @media (max-width: 1100px) {
+    order: 3;
+  }
 `;

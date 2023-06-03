@@ -14,9 +14,14 @@ export default createGlobalStyle`
   }
 
   html, body, #root {
-    height:100%;
     min-height:100%;
+    height: 100%;
+    
+    @media (max-width: 700px) {
+      min-height:unset;
+    }
   }
+
 
   body {
     -webkit-font-smoothing: antialiased;

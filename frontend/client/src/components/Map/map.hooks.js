@@ -106,8 +106,15 @@ export const useMap = () => {
     }
     const canvas = event.target;
     const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
+    let mouseX;
+    let mouseY;
+    if (rect?.height > 321 && rect.width > 321) {
+      mouseX = event.clientX - rect.left;
+      mouseY = event.clientY - rect.top;
+    } else {
+      mouseX = (event.clientX - rect.left) * 2;
+      mouseY = (event.clientY - rect.top) * 2;
+    }
     const selectedSize = 5;
 
     const selectedCoordinate = randomPoints.find(({ x, y }) => {

@@ -6,6 +6,12 @@ export const ViewContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  @media (max-width: 700px) {
+    transform: scale(0.5);
+    position: absolute;
+    top: 10%;
+    max-height: 300px;
+  }
 `;
 
 export const PanelWrapper = styled.div`
@@ -14,5 +20,8 @@ export const PanelWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-height: 650px;
+  @media (max-width: 700px) {
+    position: absolute;
+    top: 100%;
+  }
 `;
