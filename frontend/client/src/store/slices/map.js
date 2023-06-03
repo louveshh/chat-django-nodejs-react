@@ -72,8 +72,11 @@ const mapSlice = createSlice({
         circlePoint: updatedCirclePoint,
       };
     },
-    setClickPossible: (state, _) => {
+    toggleClickPossible: (state, _) => {
       state.clickPossible = !state.clickPossible;
+    },
+    setClickPossible: (state, action) => {
+      state.clickPossible = action.payload;
     },
   },
 });
@@ -87,6 +90,7 @@ export const {
   setCirclePointZero,
   setRandomPointsZero,
   setZeroStartCity,
+  toggleClickPossible,
   setClickPossible,
 } = mapSlice.actions;
 

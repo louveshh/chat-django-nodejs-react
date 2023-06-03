@@ -5,7 +5,6 @@ const Click = () => {
   const { isClickable, handleClick } = useCLick();
   return (
     <div>
-      {' '}
       <div className="toggle-wrapper">
         <label htmlFor="toogle-click">Can Click</label>
         <Toggle
