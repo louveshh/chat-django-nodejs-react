@@ -6,17 +6,17 @@ import { usePanel } from './panel.hooks';
 import BoardPanel from '../BoardPanel/BoardPanel';
 
 const Panel = () => {
-  const { canvasRef } = usePanel();
+  const { canvasRef, isMapActive, isBoardActive } = usePanel();
   return (
     <PanelWrapper>
       <LeftPanel>xd</LeftPanel>
       <MainPanel>
-        <Map canvasRef={canvasRef} />
-        <Baord />
+        <Map canvasRef={canvasRef} active={isMapActive} />
+        <Baord active={isBoardActive} />
       </MainPanel>
       <RightPanel>
-        <MapPanel canvasRef={canvasRef} />
-        <BoardPanel />
+        {isMapActive && <MapPanel canvasRef={canvasRef} />}
+        {isBoardActive && <BoardPanel />}
       </RightPanel>
     </PanelWrapper>
   );

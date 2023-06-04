@@ -27,9 +27,15 @@ export const configMap = {
     lineCap: 'round',
     lineWidth: 2,
   },
+  algorithmOptions: [
+    { value: 'tsg', label: 'TSG' },
+    { value: 'sort', label: 'Sort' },
+    { value: 'date', label: 'Date' },
+    { value: 'random', label: 'Random' },
+  ],
 };
 
-export const configView = {
+export const configPanel = {
   mapModes: ['map', 'display', 'combo', 'add'],
   boardModes: ['board', 'combo'],
 };

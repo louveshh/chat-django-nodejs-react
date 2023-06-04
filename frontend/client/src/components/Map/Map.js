@@ -1,18 +1,13 @@
 import { useMap } from './map.hooks';
 
-import { configView } from '../../config/config';
 import { BackgroundImage, CanvasMap } from './map.styles';
 
-const Map = ({ canvasRef }) => {
+const Map = ({ canvasRef, active }) => {
   const { activeMode, theme, handleCanvasClick, handleMouseMove } =
     useMap(canvasRef);
 
   return (
-    <BackgroundImage
-      theme={theme.name}
-      mode={activeMode}
-      active={configView.mapModes.includes(activeMode)}
-    >
+    <BackgroundImage theme={theme.name} mode={activeMode} active={active}>
       <CanvasMap
         ref={canvasRef}
         width={640}

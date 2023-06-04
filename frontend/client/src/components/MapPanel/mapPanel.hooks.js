@@ -5,6 +5,8 @@ import {
   setPathingInProgress,
   setClear,
   setZeroStartCity,
+  setAlgorithm,
+  setClickPossible,
 } from 'store/slices/map';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
@@ -26,6 +28,7 @@ export const useMapPanel = (canvasRef) => {
     pathingInProgress,
     toClear,
     clickPossible,
+    algorithm,
   } = useSelector((state) => state.map);
   const { activeMode } = useSelector((state) => state.toggle);
 
@@ -51,6 +54,8 @@ export const useMapPanel = (canvasRef) => {
     zeroStartCity();
     clearMap(canvas, context);
     updateClearState(false);
+    dispatch(setAlgorithm(null));
+    dispatch(setClickPossible(false));
   }, [updateClearState, zeroStartCity]);
 
   const handleTSGClick = useCallback(() => {
@@ -159,14 +164,28 @@ export const useMapPanel = (canvasRef) => {
     updateClearState,
   ]);
 
+  const handleAlgorithm = () => {
+    switch (algorithm) {
+      case 'tsg':
+        return handleTSGClick;
+      case 'sort':
+        return handleSortClick;
+      case 'date':
+        return handleDateClick;
+      case 'random':
+        return handleRandomClick;
+      default:
+        break;
+    }
+  };
+
   return {
     toClear,
     pathingInProgress,
     activeMode,
-    handleTSGClick,
-    handleSortClick,
-    handleDateClick,
-    handleRandomClick,
+    algorithm,
+    clickPossible,
+    handleAlgorithm,
     handleClear,
   };
 };

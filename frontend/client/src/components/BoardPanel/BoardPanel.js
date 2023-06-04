@@ -33,6 +33,7 @@ const BoardPanel = () => {
           onChange={handleChange}
           value={selectedOption}
           options={configBoard.drawOptions}
+          placeholder="?"
         />
       )}
     </ButtonsWrapper>

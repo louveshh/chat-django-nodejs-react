@@ -6,7 +6,7 @@ const Click = () => {
   return (
     <div>
       <div className="toggle-wrapper">
-        <label htmlFor="toogle-click">Can Click</label>
+        <label htmlFor="toogle-click">Add Custom Start Point</label>
         <Toggle
           id="toogle-click"
           checked={isClickable}

@@ -20,6 +20,7 @@ export const useMap = (canvasRef) => {
     pathingInProgress,
     toClear,
     clickPossible,
+    algorithm,
   } = useSelector((state) => state.map);
   const { activeMode, theme } = useSelector((state) => state.toggle);
 
@@ -60,7 +61,11 @@ export const useMap = (canvasRef) => {
     if (clickPossible && configMap.clickPossibleTargets.includes(activeMode)) {
       drawClickedCity(context, circlePoint);
     }
-    drawCities(context, randomPoints, false);
+    if (algorithm === 'sort') {
+      drawCities(context, randomPoints, true);
+    } else {
+      drawCities(context, randomPoints, false);
+    }
     finishDrawing(context);
   }, [
     circlePoint,
@@ -69,6 +74,7 @@ export const useMap = (canvasRef) => {
     pathingInProgress,
     activeMode,
     clickPossible,
+    algorithm,
     updateClearState,
   ]);
 

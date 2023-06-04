@@ -12,6 +12,7 @@ const initialState = {
   pathingInProgress: false,
   toClear: false,
   clickPossible: false,
+  algorithm: '',
 };
 
 const mapSlice = createSlice({
@@ -47,13 +48,13 @@ const mapSlice = createSlice({
         circlePoint: updatedCirclePoint,
       };
     },
-    setCirclePointZero: (state, action) => {
-      state.circlePoint.selectedStart = action.payload;
+    setCirclePointZero: (state, _) => {
+      state.circlePoint.selectedStart = false;
     },
-    setRandomPointsZero: (state, action) => {
+    setRandomPointsZero: (state, _) => {
       state.randomPoints = state.randomPoints.map((point) => ({
         ...point,
-        selectedStart: action.payload,
+        selectedStart: false,
       }));
     },
     setZeroStartCity: (state, _) => {
@@ -78,6 +79,9 @@ const mapSlice = createSlice({
     setClickPossible: (state, action) => {
       state.clickPossible = action.payload;
     },
+    setAlgorithm: (state, action) => {
+      state.algorithm = action.payload;
+    },
   },
 });
 
@@ -92,6 +96,7 @@ export const {
   setZeroStartCity,
   toggleClickPossible,
   setClickPossible,
+  setAlgorithm,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

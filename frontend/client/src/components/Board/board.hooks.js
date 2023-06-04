@@ -93,6 +93,5 @@ export const useBoard = () => {
   return {
     grid,
     handleMouseDown,
-    activeMode,
   };
 };

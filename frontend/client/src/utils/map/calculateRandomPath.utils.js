@@ -18,7 +18,7 @@ export const calculateRandomPath = (
   if (clickPossible) {
     drawClickedCity(context, circlePoint);
   }
-  drawCities(context, randomPoints, true);
+  drawCities(context, randomPoints, false);
   drawSimplePath(
     context,
     randomPoints,

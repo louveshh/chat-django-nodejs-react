@@ -3,52 +3,36 @@ import { StyledButton } from '../Map/map.styles';
 import { configMap } from '../../config/config';
 import Click from '../Click/Click';
 import SelectCity from '../SelectCity/SelectCity';
+import SelectMapAlgorithm from '../SelectMapAlgorithm/SelectMapAlgorithm';
+import WeightBar from './../WeightBar/WeightBar';
 
 const MapPanel = ({ canvasRef }) => {
   const {
     toClear,
     pathingInProgress,
     activeMode,
-    handleTSGClick,
-    handleSortClick,
-    handleDateClick,
-    handleRandomClick,
+    algorithm,
+    clickPossible,
+    handleAlgorithm,
     handleClear,
   } = useMapPanel(canvasRef);
   return (
     <div>
       {!toClear && configMap.settings.includes(activeMode) && (
         <>
-          <StyledButton
-            type="button"
-            className="button"
-            onClick={handleTSGClick}
-          >
-            TSG alg
-          </StyledButton>
-          <StyledButton
-            type="button"
-            className="button"
-            onClick={handleSortClick}
-          >
-            Sort alg
-          </StyledButton>
-          <StyledButton
-            type="button"
-            className="button"
-            onClick={handleDateClick}
-          >
-            Date alg
-          </StyledButton>
-          <StyledButton
-            type="button"
-            className="button"
-            onClick={handleRandomClick}
-          >
-            Random alg
-          </StyledButton>
-          {activeMode !== 'combo' && <Click />}
-          {activeMode !== 'combo' && <SelectCity />}
+          {activeMode !== 'combo' && <SelectMapAlgorithm />}
+          {activeMode !== 'combo' && algorithm && <Click />}
+          {activeMode !== 'combo' && algorithm === 'tsg' && clickPossible && (
+            <SelectCity />
+          )}
+          {activeMode !== 'combo' && algorithm === 'sort' && clickPossible && (
+            <WeightBar />
+          )}
+          {algorithm && (
+            <StyledButton type="button" onClick={handleAlgorithm()}>
+              RUN ALGO
+            </StyledButton>
+          )}
         </>
       )}
       {!pathingInProgress &&

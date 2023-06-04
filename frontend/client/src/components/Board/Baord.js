@@ -2,13 +2,12 @@ import Node from '../Node/Node';
 import { useBoard } from './board.hooks';
 
 import { GridContainer, BoardWrapper } from './board.styles';
-import { configView } from '../../config/config';
 
-const Baord = () => {
-  const { grid, handleMouseDown, activeMode } = useBoard();
+const Baord = ({ active }) => {
+  const { grid, handleMouseDown } = useBoard();
 
   return (
-    <BoardWrapper active={configView.boardModes.includes(activeMode)}>
+    <BoardWrapper active={active}>
       <GridContainer>
         {grid &&
           [].concat(...grid)?.map((node, nodeIdx) => {

@@ -1,11 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
 import { setSelectStartCity } from 'store/slices/map';
 import cloneDeep from 'lodash/cloneDeep';
 
 export const useSelectCity = () => {
-  const [selectValue, setSelectValue] = useState();
-
   const { randomPoints, circlePoint, clickPossible } = useSelector(
     (state) => state.map
   );
@@ -13,7 +10,6 @@ export const useSelectCity = () => {
   const dispatch = useDispatch();
 
   const handleSelectCity = (event) => {
-    setSelectValue(event);
     const { x, y } = event.value;
     dispatch(setSelectStartCity({ x, y }));
   };
@@ -28,8 +24,6 @@ export const useSelectCity = () => {
     }));
     return dataTransfom;
   };
-  useEffect(() => {
-    setSelectValue(null);
-  }, [clickPossible]);
-  return { selectValue, activeMode, selectValueData, handleSelectCity };
+
+  return { activeMode, selectValueData, handleSelectCity };
 };

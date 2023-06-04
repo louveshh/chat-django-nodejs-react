@@ -2,17 +2,18 @@ import { useSelectCity } from './selectCity.hooks';
 import { StyledSelect, StyledMenuList } from './selectCity.styles';
 
 const SelectCity = () => {
-  const { selectValue, activeMode, selectValueData, handleSelectCity } =
-    useSelectCity();
+  const { activeMode, selectValueData, handleSelectCity } = useSelectCity();
   return (
-    <StyledSelect
-      onChange={handleSelectCity}
-      options={selectValueData()}
-      value={selectValue}
-      className="select"
-      components={{ MenuList: StyledMenuList }}
-      mode={activeMode}
-    />
+    <>
+      Select City
+      <StyledSelect
+        onChange={handleSelectCity}
+        options={selectValueData()}
+        defaultValue={selectValueData()[0]}
+        components={{ MenuList: StyledMenuList }}
+        mode={activeMode}
+      />
+    </>
   );
 };
 
