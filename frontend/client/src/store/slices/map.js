@@ -4,7 +4,7 @@ const initialState = {
   circlePoint: {
     x: 320,
     y: 320,
-    weight: -1,
+    weight: 0,
     selectedStart: false,
     name: 'click',
   },
@@ -49,7 +49,7 @@ const mapSlice = createSlice({
       };
     },
     setCirclePointZero: (state, _) => {
-      state.circlePoint.selectedStart = false;
+      state.circlePoint.selectedStart = true;
     },
     setRandomPointsZero: (state, _) => {
       state.randomPoints = state.randomPoints.map((point) => ({

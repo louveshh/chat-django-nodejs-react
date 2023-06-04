@@ -10,7 +10,7 @@ const initialState = {
   language: '',
 };
 
-const toogleSlice = createSlice({
+const toggleSlice = createSlice({
   name: 'toggle',
   initialState,
   reducers: {
@@ -43,6 +43,6 @@ const toogleSlice = createSlice({
 });
 
 export const { toggleActiveMode, changeTheme, changeLanguage } =
-  toogleSlice.actions;
+  toggleSlice.actions;
 
-export default toogleSlice.reducer;
+export default toggleSlice.reducer;

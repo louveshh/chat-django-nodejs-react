@@ -30,7 +30,6 @@ export const configMap = {
   algorithmOptions: [
     { value: 'tsg', label: 'TSG' },
     { value: 'sort', label: 'Sort' },
-    { value: 'date', label: 'Date' },
     { value: 'random', label: 'Random' },
   ],
 };
@@ -40,4 +39,4 @@ export const configPanel = {
   boardModes: ['board', 'combo'],
 };
 
-export const toogle = ['display', 'board', 'map', 'combo', 'add'];
+export const toggle = ['display', 'board', 'map', 'combo', 'add'];

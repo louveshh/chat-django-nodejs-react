@@ -59,7 +59,11 @@ export const useMap = (canvasRef) => {
     clearMap(canvas, context);
     updateClearState(false);
     if (clickPossible && configMap.clickPossibleTargets.includes(activeMode)) {
-      drawClickedCity(context, circlePoint);
+      if (algorithm === 'sort') {
+        drawClickedCity(context, circlePoint, true);
+      } else {
+        drawClickedCity(context, circlePoint, false);
+      }
     }
     if (algorithm === 'sort') {
       drawCities(context, randomPoints, true);

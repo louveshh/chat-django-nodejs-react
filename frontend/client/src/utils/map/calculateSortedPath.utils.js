@@ -55,7 +55,7 @@ export const calculateSortedPath = async (
 
     clearMap(canvas, context);
     if (clickPossible) {
-      drawClickedCity(context, circlePoint);
+      drawClickedCity(context, circlePoint, true);
     }
     drawCities(context, randomPoints, true);
 
@@ -77,7 +77,7 @@ export const calculateSortedPath = async (
   const points = [...randomPoints];
   clearMap(canvas, context);
   if (clickPossible) {
-    drawClickedCity(context, circlePoint);
+    drawClickedCity(context, circlePoint, true);
     points.unshift(circlePoint);
   }
   drawCities(context, randomPoints, true);
@@ -85,4 +85,5 @@ export const calculateSortedPath = async (
   setPathingInProgress(true);
   await customSort(points, 0, points.length - 1);
   setPathingInProgress(false);
+  drawCities(context, randomPoints, true);
 };

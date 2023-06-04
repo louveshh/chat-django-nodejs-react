@@ -20,9 +20,9 @@ const ToggleLanguage = () => {
     <ToggleContainer>
       <ToggleWrapper>
         <LabelWrapper>
-          <label htmlFor="toogle-language">{t('language')}</label>
+          <label htmlFor="toggle-language">{t('language')}</label>
           <StyledToggle
-            id="toogle-language"
+            id="toggle-language"
             checked={language === 'pl'}
             onChange={() => handleToggle()}
             name="language"

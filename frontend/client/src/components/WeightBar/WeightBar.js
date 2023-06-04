@@ -1,22 +1,35 @@
-import { useState } from 'react';
+import Toggle from 'react-toggle';
+
+import { useWeightBar } from './weightbar.hooks';
 
 const WeightBar = () => {
-  const [inputValue, setInputValue] = useState(0);
-
-  const handleChange = (event) => {
-    if (event.target.value === '0') {
-      setInputValue(-Infinity);
-    } else if (event.target.value === '50') {
-      setInputValue(Infinity);
-    } else {
-      setInputValue(event.target.value);
-    }
-  };
+  const { weightBar, inputValue, handleClick, handleBar } = useWeightBar();
 
   return (
     <div>
-      <input type="range" min={0} max={50} step={1} onChange={handleChange} />
-      <span>{inputValue}</span>
+      <div className="toggle-wrapper">
+        <label htmlFor="toggle-weight">Add Custom Start Point</label>
+        <Toggle
+          id="toggle-weight"
+          checked={weightBar}
+          value="yes"
+          onChange={handleClick}
+        />
+      </div>
+      {weightBar && (
+        <>
+          <label htmlFor="bar-weight">range</label>
+          <input
+            type="range"
+            min={0}
+            max={50}
+            step={1}
+            id="bar-weight"
+            onChange={handleBar}
+            defaultValue={0}
+          />
+        </>
+      )}
     </div>
   );
 };

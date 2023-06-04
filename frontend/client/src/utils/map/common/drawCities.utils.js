@@ -14,9 +14,12 @@ export const drawCities = (context, cities, weights = false) => {
     context.fillStyle = configMap.colors.city;
     context.arc(point.x, point.y, 5, 0, 2 * Math.PI);
     if (weights) {
-      context.fillStyle = configMap.colors.city;
+      context.fillStyle = 'red';
+      context.font = `15px Arial`;
       context.fillText(point.weight.toString(), point.x + 7, point.y + 7);
+      context.fill();
     }
+    context.fillStyle = configMap.colors.city;
     context.fill();
     finishDrawing(context);
   });

@@ -15,8 +15,7 @@ import { finishDrawing } from '../../utils/map/common/finishDrawing.utils';
 import { calculateShortestPath } from '../../utils/map/calculateShortestPath.utils';
 import { calculateSortedPath } from '../../utils/map/calculateSortedPath.utils';
 import { drawClickedCity } from '../../utils/map/common/drawClickedCity.utils';
-import { drawSimplePath } from '../../utils/map/drawSimplePath.utils';
-import { calculateDatePath } from '../../utils/map/calculateDatePath.utils';
+import { drawSimplePath } from '../../utils/map/common/drawSimplePath.utils';
 import { calculateRandomPath } from '../../utils/map/calculateRandomPath.utils';
 
 export const useMapPanel = (canvasRef) => {
@@ -106,35 +105,6 @@ export const useMapPanel = (canvasRef) => {
     updatePathingInProgress,
   ]);
 
-  const handleDateClick = useCallback(() => {
-    if (toClear || pathingInProgress) {
-      return;
-    }
-    const { canvas, context } = getCanvasContext(canvasRef);
-    calculateDatePath(
-      canvas,
-      context,
-      clickPossible,
-      circlePoint,
-      randomPoints,
-      updatePathingInProgress,
-      clearMap,
-      drawClickedCity,
-      drawCities,
-      drawSimplePath,
-      finishDrawing,
-      updateClearState
-    );
-  }, [
-    circlePoint,
-    toClear,
-    pathingInProgress,
-    randomPoints,
-    clickPossible,
-    updateClearState,
-    updatePathingInProgress,
-  ]);
-
   const handleRandomClick = useCallback(() => {
     if (toClear || pathingInProgress) {
       return;
@@ -170,8 +140,6 @@ export const useMapPanel = (canvasRef) => {
         return handleTSGClick;
       case 'sort':
         return handleSortClick;
-      case 'date':
-        return handleDateClick;
       case 'random':
         return handleRandomClick;
       default:

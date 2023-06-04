@@ -15,9 +15,9 @@ export const selectClickCity = (
     x = (event.clientX - rect.left) * 2;
     y = (event.clientY - rect.top) * 2;
   }
-  const weight = -1;
+
   const name = `click`;
-  const { selectedStart } = circlePoint;
+  const { selectedStart, weight } = circlePoint;
 
   setCirclePoint({ x, y, weight, selectedStart, name });
 };
