@@ -1,0 +1,11 @@
+.sortable-multi-value:first-child {
+  background-color: green;
+}
+
+.sortable-multi-value:last-child {
+  background-color: red !important;
+}
+
+.last {
+  background-color: yellow;
+}
