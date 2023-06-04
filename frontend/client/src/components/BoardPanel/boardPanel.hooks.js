@@ -6,13 +6,14 @@ import {
   setGrid,
   toggleRunning,
   setSelectedOption,
+  setAlgorithm,
 } from '../../store/slices/board';
 import { clearGrid } from '../../utils/board/common/clearGrid.utils';
 import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
 
 export const useBoardPanel = () => {
   const dispatch = useDispatch();
-  const { points, grid, isRunning, selectedOption } = useSelector(
+  const { points, grid, isRunning, selectedOption, algorithm } = useSelector(
     (state) => state.board
   );
   const { activeMode } = useSelector((state) => state.toggle);
@@ -46,23 +47,23 @@ export const useBoardPanel = () => {
     );
   }, [grid, isRunning, points.finishCol, points.finishRow, updateGrid]);
 
-  const handleAlgorithm = useCallback(
-    (algorithm) => {
-      runAlgorithm(
-        algorithm,
-        isRunning,
-        updateIsRunning,
-        cloneDeep(grid),
-        cloneDeep(points)
-      );
-    },
-    [grid, isRunning, points, updateIsRunning]
-  );
+  const handleAlgorithm = useCallback(() => {
+    runAlgorithm(
+      algorithm,
+      isRunning,
+      updateIsRunning,
+      cloneDeep(grid),
+      cloneDeep(points)
+    );
+    dispatch(setAlgorithm(''));
+  }, [grid, isRunning, points, updateIsRunning, algorithm]);
   return {
+    isRunning,
     handleClearGrid,
     handleAlgorithm,
     selectedOption,
     handleChange,
     activeMode,
+    algorithm,
   };
 };

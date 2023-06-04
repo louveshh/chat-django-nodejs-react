@@ -7,6 +7,12 @@ export const configBoard = {
     { value: 'finish', label: 'Finish' },
   ],
   defaultDrawOption: { value: 'wall', label: 'Wall' },
+  algorithmOptions: [
+    { value: 'dijkstra', label: 'Dijkstra' },
+    { value: 'astar', label: 'AStar' },
+    { value: 'dfs', label: 'DFS' },
+    { value: 'bfs', label: 'BFS' },
+  ],
 };
 
 export const configMap = {

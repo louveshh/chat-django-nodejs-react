@@ -7,6 +7,7 @@ import {
   setAlgorithm,
   setCirclePoint,
 } from 'store/slices/map';
+import { setAlgorithm as setAlgorithmBoard } from 'store/slices/board';
 
 export const useToggleMode = () => {
   const { circlePoint } = useSelector((state) => state.map);
@@ -19,6 +20,7 @@ export const useToggleMode = () => {
     dispatch(setRandomPointsZero());
     dispatch(setZeroStartCity());
     dispatch(setAlgorithm(null));
+    dispatch(setAlgorithmBoard(null));
     dispatch(setCirclePoint({ ...circlePoint, weight: 0 }));
   };
   return { activeMode, handleToggle };

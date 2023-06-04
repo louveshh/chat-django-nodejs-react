@@ -16,7 +16,9 @@ import { configBoard } from '../../config/config';
 
 export const useBoard = () => {
   const dispatch = useDispatch();
-  const { points, grid, selectedOption } = useSelector((state) => state.board);
+  const { points, grid, selectedOption, isRunning } = useSelector(
+    (state) => state.board
+  );
   const { activeMode } = useSelector((state) => state.toggle);
 
   const updateStartRow = useCallback(
@@ -69,6 +71,7 @@ export const useBoard = () => {
         col,
         cloneDeep(grid),
         selectedOption,
+        isRunning,
         cloneDeep(points),
         updateGrid,
         updateStartRow,
@@ -82,6 +85,7 @@ export const useBoard = () => {
       grid,
       points,
       selectedOption,
+      isRunning,
       updateFinishCol,
       updateFinishRow,
       updateGrid,

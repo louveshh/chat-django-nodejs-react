@@ -11,6 +11,7 @@ const initialState = {
   grid: [],
   isRunning: false,
   selectedOption: configBoard.defaultDrawOption,
+  algorithm: '',
 };
 
 const boardSlice = createSlice({
@@ -38,6 +39,9 @@ const boardSlice = createSlice({
     setSelectedOption: (state, action) => {
       state.selectedOption = action.payload;
     },
+    setAlgorithm: (state, action) => {
+      state.algorithm = action.payload;
+    },
   },
 });
 
@@ -49,6 +53,7 @@ export const {
   setGrid,
   toggleRunning,
   setSelectedOption,
+  setAlgorithm,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

@@ -3,6 +3,7 @@ export const clickGrid = (
   col,
   grid,
   selectedOption,
+  isRunning,
   points,
   updateGrid,
   updateStartRow,
@@ -14,6 +15,9 @@ export const clickGrid = (
     return;
   }
   if (grid.length === 0) {
+    return;
+  }
+  if (isRunning) {
     return;
   }
   const { startRow, finishRow, startCol, finishCol } = points;

@@ -7,7 +7,6 @@ import {
 } from 'store/slices/map';
 
 export const useSelectMapAlgorithm = () => {
-  const { algorithm } = useSelector((state) => state.map);
   const { activeMode } = useSelector((state) => state.toggle);
   const dispatch = useDispatch();
 
@@ -17,5 +16,5 @@ export const useSelectMapAlgorithm = () => {
     dispatch(setZeroStartCity());
     dispatch(setClickPossible(false));
   };
-  return { algorithm, activeMode, handleSelectMapAlgorithm };
+  return { activeMode, handleSelectMapAlgorithm };
 };

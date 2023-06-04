@@ -71,13 +71,13 @@ export const runAlgorithm = (
   };
   const switchAlgorithm = (algorithm, startNode, finishNode) => {
     switch (algorithm) {
-      case 'Dijkstra':
+      case 'dijkstra':
         return dijkstra(grid, startNode, finishNode);
-      case 'AStar':
+      case 'astar':
         return AStar(grid, startNode, finishNode);
-      case 'BFS':
+      case 'bfs':
         return bfs(grid, startNode, finishNode);
-      case 'DFS':
+      case 'dfs':
         return dfs(grid, startNode, finishNode);
       default:
         break;
