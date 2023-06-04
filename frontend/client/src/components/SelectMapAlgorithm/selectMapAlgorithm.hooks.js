@@ -3,6 +3,7 @@ import {
   setAlgorithm,
   setRandomPointsZero,
   setZeroStartCity,
+  setClickPossible,
 } from 'store/slices/map';
 
 export const useSelectMapAlgorithm = () => {
@@ -14,6 +15,7 @@ export const useSelectMapAlgorithm = () => {
     dispatch(setAlgorithm(event.value));
     dispatch(setRandomPointsZero());
     dispatch(setZeroStartCity());
+    dispatch(setClickPossible(false));
   };
   return { algorithm, activeMode, handleSelectMapAlgorithm };
 };

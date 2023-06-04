@@ -3,7 +3,7 @@ import Select, { components } from 'react-select';
 
 export const StyledSelect = styled(Select)`
   height: 30px;
-  margin-bottom: 300px;
+  margin-bottom: 20px;
 `;
 
 export const StyledMenuList = styled(components.MenuList)`

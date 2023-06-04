@@ -48,8 +48,8 @@ const mapSlice = createSlice({
         circlePoint: updatedCirclePoint,
       };
     },
-    setCirclePointZero: (state, _) => {
-      state.circlePoint.selectedStart = true;
+    setCirclePointZero: (state, action) => {
+      state.circlePoint.selectedStart = action.payload;
     },
     setRandomPointsZero: (state, _) => {
       state.randomPoints = state.randomPoints.map((point) => ({

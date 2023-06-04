@@ -4,7 +4,7 @@ import { configMap } from '../../config/config';
 import Click from '../Click/Click';
 import SelectCity from '../SelectCity/SelectCity';
 import SelectMapAlgorithm from '../SelectMapAlgorithm/SelectMapAlgorithm';
-import WeightBar from './../WeightBar/WeightBar';
+import WeightBar from '../WeightBar/WeightBar';
 
 const MapPanel = ({ canvasRef }) => {
   const {

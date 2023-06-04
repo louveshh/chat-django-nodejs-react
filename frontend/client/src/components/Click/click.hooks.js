@@ -6,12 +6,19 @@ import {
 } from 'store/slices/map';
 
 export const useCLick = () => {
-  const isClickable = useSelector((state) => state.map.clickPossible);
+  const { clickPossible, algorithm } = useSelector((state) => state.map);
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(toggleClickPossible());
+    dispatch(setRandomPointsZero(true));
     dispatch(setCirclePointZero());
-    dispatch(setRandomPointsZero());
+    console.log(algorithm);
+    if (algorithm === 'tsg') {
+      console.log('tu?');
+      dispatch(setCirclePointZero(true));
+    } else {
+      dispatch(setCirclePointZero(false));
+    }
   };
-  return { isClickable, handleClick };
+  return { clickPossible, handleClick };
 };
