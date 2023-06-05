@@ -109,4 +109,9 @@ export const calculateShortestPath = (
   setPathingInProgres(true);
   animatePath(remainingPoints, shortestPath);
   setClear(true);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(shortestPath);
+    }, 1000 * (remainingPoints.length + 1));
+  });
 };

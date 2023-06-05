@@ -13,7 +13,8 @@ export const PanelWrapper = styled.div`
 `;
 
 export const LeftPanel = styled.div`
-  width: 210px;
+  min-width: 210px;
+  width: 20%;
   @media (max-width: 1100px) {
     order: 2;
   }
@@ -24,7 +25,8 @@ export const RightPanel = styled.div`
   display: flex;
   padding-right: 1rem;
   flex-flow: column;
-  width: 210px;
+  min-width: 210px;
+  width: 20%;
   align-self: stretch;
   justify-content: start;
 

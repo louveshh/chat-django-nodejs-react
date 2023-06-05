@@ -21,6 +21,7 @@ export const useMap = (canvasRef) => {
     toClear,
     clickPossible,
     algorithm,
+    filteredCities,
   } = useSelector((state) => state.map);
   const { activeMode, theme } = useSelector((state) => state.toggle);
 
@@ -51,26 +52,28 @@ export const useMap = (canvasRef) => {
     if (toClear || pathingInProgress) {
       return;
     }
-    const { canvas, context } = getCanvasContext(canvasRef);
-    context.lineJoin = configMap.context.lineJoin;
-    context.lineCap = configMap.context.lineCap;
-    context.lineWidth = configMap.context.lineWidth;
-    context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
-    clearMap(canvas, context);
-    updateClearState(false);
-    if (clickPossible && configMap.clickPossibleTargets.includes(activeMode)) {
-      if (algorithm === 'sort') {
+    if (activeMode === 'map') {
+      const { canvas, context } = getCanvasContext(canvasRef);
+      context.lineJoin = configMap.context.lineJoin;
+      context.lineCap = configMap.context.lineCap;
+      context.lineWidth = configMap.context.lineWidth;
+      context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
+      clearMap(canvas, context);
+      updateClearState(false);
+      console.log(randomPoints);
+      if (clickPossible && algorithm === 'sort') {
         drawClickedCity(context, circlePoint, true);
-      } else {
+      }
+      if (clickPossible && algorithm !== 'sort') {
         drawClickedCity(context, circlePoint, false);
       }
+      if (algorithm === 'sort') {
+        drawCities(context, randomPoints, true);
+      } else {
+        drawCities(context, randomPoints, false);
+      }
+      finishDrawing(context);
     }
-    if (algorithm === 'sort') {
-      drawCities(context, randomPoints, true);
-    } else {
-      drawCities(context, randomPoints, false);
-    }
-    finishDrawing(context);
   }, [
     circlePoint,
     randomPoints,
@@ -79,6 +82,36 @@ export const useMap = (canvasRef) => {
     activeMode,
     clickPossible,
     algorithm,
+    updateClearState,
+  ]);
+
+  useEffect(() => {
+    if (toClear || pathingInProgress) {
+      return;
+    }
+    if (activeMode === 'combo') {
+      const { canvas, context } = getCanvasContext(canvasRef);
+      context.lineJoin = configMap.context.lineJoin;
+      context.lineCap = configMap.context.lineCap;
+      context.lineWidth = configMap.context.lineWidth;
+      context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
+      clearMap(canvas, context);
+      updateClearState(false);
+      const filteredCitiesMapped = filteredCities.map((item) => ({
+        x: item.value.x,
+        y: item.value.y,
+        selectedStart: item.value.selectedStart,
+      }));
+      drawCities(context, filteredCitiesMapped, false);
+      finishDrawing(context);
+    }
+  }, [
+    circlePoint,
+    randomPoints,
+    toClear,
+    pathingInProgress,
+    activeMode,
+    filteredCities,
     updateClearState,
   ]);
 

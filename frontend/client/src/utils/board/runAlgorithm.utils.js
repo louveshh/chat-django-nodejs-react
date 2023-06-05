@@ -9,7 +9,9 @@ export const runAlgorithm = (
   isRunning,
   updateIsRunning,
   grid,
-  points
+  points,
+  mode = 'board',
+  step = 0
 ) => {
   const getShortestPath = (finishNode) => {
     const shortestPathNodes = [];
@@ -23,24 +25,37 @@ export const runAlgorithm = (
   const animateFinalPath = (shortestPathNodes, setIsRunning) => {
     for (let i = 0; i < shortestPathNodes.length; i++) {
       if (shortestPathNodes[i] === 'end') {
-        setTimeout(() => {
-          setIsRunning((prevIsRunning) => !prevIsRunning);
-        }, i * 50);
+        setTimeout(
+          () => {
+            setIsRunning((prevIsRunning) => !prevIsRunning);
+          },
+          mode === 'combo' ? i * 10 : i * 50
+        );
       } else {
-        setTimeout(() => {
-          const node = shortestPathNodes[i];
-          const classId = document.getElementById(
-            `grid-cell-${node.row}-${node.col}`
-          ).className;
-          if (
-            classId !== 'grid-cell node-start' &&
-            classId !== 'grid-cell node-finish'
-          ) {
-            document.getElementById(
+        setTimeout(
+          () => {
+            const node = shortestPathNodes[i];
+            const classId = document.getElementById(
               `grid-cell-${node.row}-${node.col}`
-            ).className = 'grid-cell node-shortest-path';
-          }
-        }, i * 40);
+            ).className;
+            if (
+              classId !== 'grid-cell node-start' &&
+              classId !== 'grid-cell node-finish'
+            ) {
+              document.getElementById(
+                `grid-cell-${node.row}-${node.col}`
+              ).className = 'grid-cell node-shortest-path';
+            }
+            if (mode === 'combo') {
+              const doc = document.getElementById(
+                `grid-cell-${node.row}-${node.col}`
+              );
+              console.log(step, 'step');
+              doc.innerText += doc.innerText ? `\n${i + step}` : i + step;
+            }
+          },
+          mode === 'combo' ? i * 20 : i * 40
+        );
       }
     }
   };
@@ -48,25 +63,40 @@ export const runAlgorithm = (
   const animate = (visitedNodesInOrder, shortestPathNodes, setIsRunning) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
-        setTimeout(() => {
-          animateFinalPath(shortestPathNodes, setIsRunning);
-        }, 10 * i);
-        return;
+        setTimeout(
+          () => {
+            animateFinalPath(shortestPathNodes, setIsRunning);
+          },
+          mode === 'combo' ? i * 5 : i * 10
+        );
+        return shortestPathNodes.length;
       }
-      setTimeout(() => {
-        const node = visitedNodesInOrder[i];
-        const classId = document.getElementById(
-          `grid-cell-${node.row}-${node.col}`
-        ).className;
-        if (
-          classId !== 'grid-cell node-start' &&
-          classId !== 'grid-cell node-finish'
-        ) {
-          document.getElementById(
+      setTimeout(
+        () => {
+          const node = visitedNodesInOrder[i];
+          const classId = document.getElementById(
             `grid-cell-${node.row}-${node.col}`
-          ).className = 'grid-cell node-visited';
-        }
-      }, 10 * i);
+          ).className;
+          if (
+            classId !== 'grid-cell node-start' &&
+            classId !== 'grid-cell node-finish'
+          ) {
+            if (
+              mode === 'combo' &&
+              classId !== 'grid-cell node-shortest-path'
+            ) {
+              document.getElementById(
+                `grid-cell-${node.row}-${node.col}`
+              ).className = 'grid-cell node-visited';
+            } else if (mode !== 'combo') {
+              document.getElementById(
+                `grid-cell-${node.row}-${node.col}`
+              ).className = 'grid-cell node-visited';
+            }
+          }
+        },
+        mode === 'combo' ? i * 1 : i * 10
+      );
     }
   };
   const switchAlgorithm = (algorithm, startNode, finishNode) => {
@@ -88,11 +118,17 @@ export const runAlgorithm = (
   }
   const { startRow, finishRow, startCol, finishCol } = points;
   updateIsRunning();
-  clearGrid(isRunning, grid, finishRow, finishCol);
+  if (mode !== 'combo') {
+    clearGrid(isRunning, grid, finishRow, finishCol);
+  }
   const startNode = grid[startRow][startCol];
   const finishNode = grid[finishRow][finishCol];
   const visitedNodesInOrder = switchAlgorithm(algorithm, startNode, finishNode);
   const nodesInShortestPathOrder = getShortestPath(finishNode);
   nodesInShortestPathOrder.push('end');
-  animate(visitedNodesInOrder, nodesInShortestPathOrder, updateIsRunning);
+  return animate(
+    visitedNodesInOrder,
+    nodesInShortestPathOrder,
+    updateIsRunning
+  );
 };

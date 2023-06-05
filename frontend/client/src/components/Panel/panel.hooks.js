@@ -7,5 +7,5 @@ export const usePanel = () => {
   const canvasRef = useRef(null);
   const isMapActive = configPanel.mapModes.includes(activeMode);
   const isBoardActive = configPanel.boardModes.includes(activeMode);
-  return { canvasRef, isMapActive, isBoardActive };
+  return { canvasRef, isMapActive, isBoardActive, activeMode };
 };

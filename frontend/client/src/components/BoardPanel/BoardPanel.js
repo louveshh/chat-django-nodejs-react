@@ -16,12 +16,12 @@ const BoardPanel = () => {
   } = useBoardPanel();
   return (
     <ButtonsWrapper>
-      {!isRunning && (
+      {!isRunning && activeMode === 'board' && (
         <button type="button" onClick={handleClearGrid}>
           Clear Grid
         </button>
       )}
-      {!isRunning && <SelectBoardAlgorithm />}
+      {!isRunning && activeMode === 'board' && <SelectBoardAlgorithm />}
       {activeMode === 'board' && !algorithm && !isRunning && (
         <StyledSelect
           onChange={handleChange}
@@ -31,7 +31,7 @@ const BoardPanel = () => {
         />
       )}
 
-      {!isRunning && algorithm && (
+      {!isRunning && algorithm && activeMode === 'board' && (
         <button type="button" onClick={() => handleAlgorithm()}>
           runAlgorithm
         </button>

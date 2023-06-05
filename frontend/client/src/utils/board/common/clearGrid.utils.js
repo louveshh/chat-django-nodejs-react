@@ -3,6 +3,10 @@ export const clearGrid = (isRunning, grid, finishRow, finishCol) => {
     const updatedGrid = grid.slice();
     updatedGrid.forEach((row) => {
       row.forEach((currentNode) => {
+        const item = document.getElementById(
+          `grid-cell-${currentNode.row}-${currentNode.col}`
+        );
+        item.innerHTML = '';
         const classId = document.getElementById(
           `grid-cell-${currentNode.row}-${currentNode.col}`
         ).className;

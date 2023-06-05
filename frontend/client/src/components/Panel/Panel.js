@@ -4,15 +4,13 @@ import { RightPanel, MainPanel, LeftPanel, PanelWrapper } from './panel.styles';
 import Map from '../Map/Map';
 import { usePanel } from './panel.hooks';
 import BoardPanel from '../BoardPanel/BoardPanel';
-import { MultiSelectSort } from './../SortableMultiSelect/MultiSelectSort';
+import ComboPanel from '../ComboPanel/ComboPanel';
 
 const Panel = () => {
-  const { canvasRef, isMapActive, isBoardActive } = usePanel();
+  const { canvasRef, isMapActive, isBoardActive, activeMode } = usePanel();
   return (
     <PanelWrapper>
-      <LeftPanel>
-        <MultiSelectSort />
-      </LeftPanel>
+      <LeftPanel>xd</LeftPanel>
       <MainPanel>
         <Map canvasRef={canvasRef} active={isMapActive} />
         <Baord active={isBoardActive} />
@@ -20,6 +18,7 @@ const Panel = () => {
       <RightPanel>
         {isMapActive && <MapPanel canvasRef={canvasRef} />}
         {isBoardActive && <BoardPanel />}
+        {activeMode === 'combo' && <ComboPanel canvasRef={canvasRef} />}
       </RightPanel>
     </PanelWrapper>
   );

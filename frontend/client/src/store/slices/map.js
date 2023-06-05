@@ -9,6 +9,7 @@ const initialState = {
     name: 'click',
   },
   randomPoints: [],
+  filteredCities: [],
   pathingInProgress: false,
   toClear: false,
   clickPossible: false,
@@ -82,6 +83,9 @@ const mapSlice = createSlice({
     setAlgorithm: (state, action) => {
       state.algorithm = action.payload;
     },
+    setFilteredCities: (state, action) => {
+      state.filteredCities = action.payload;
+    },
   },
 });
 
@@ -97,6 +101,8 @@ export const {
   toggleClickPossible,
   setClickPossible,
   setAlgorithm,
+  setFilteredCities,
+  setFilteredCitiesStart,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

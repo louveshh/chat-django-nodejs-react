@@ -54,6 +54,7 @@ export const {
   toggleRunning,
   setSelectedOption,
   setAlgorithm,
+  setStep,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;
