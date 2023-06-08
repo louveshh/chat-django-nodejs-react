@@ -1,5 +1,4 @@
 import { useComboPanel } from './comboPanel.hooks';
-import { configMap } from '../../config/config';
 import { StyledButton } from './comboPanel.styles';
 import { MultiSelectSort } from '../SortableMultiSelect/SortableMultiSelectSort';
 

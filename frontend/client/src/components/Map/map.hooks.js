@@ -1,13 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  setCirclePoint,
-  setRandomPoints,
-  setClearMap,
-  setFilteredCities,
-  setPathingInProgress,
-} from 'store/slices/map';
+import { setCirclePoint, setRandomPoints, setClearMap } from 'store/slices/map';
 import { tempRandom } from '../../utils/map/tempRandom.utils';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
@@ -105,7 +99,6 @@ export const useMap = (canvasRef) => {
         y: item.value.y,
         selectedStart: item.value.selectedStart,
       }));
-      console.log(filteredCitiesMapped);
       drawCities(context, filteredCitiesMapped, false);
     }
   }, [

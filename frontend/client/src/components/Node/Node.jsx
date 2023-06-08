@@ -1,15 +1,7 @@
 import './node.styles.css';
 import { useNode } from './node.hooks';
 
-const Node = ({
-  col,
-  row,
-  isFinish,
-  isStart,
-  isWall,
-  onMouseDown,
-  // children,
-}) => {
+const Node = ({ col, row, isFinish, isStart, isWall, onMouseDown }) => {
   const { extraClassName, extraNodeBorder } = useNode(
     isFinish,
     isStart,
