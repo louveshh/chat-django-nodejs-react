@@ -18,17 +18,13 @@ const boardSlice = createSlice({
   name: 'board',
   initialState,
   reducers: {
-    setStartRow: (state, action) => {
-      state.points.startRow = action.payload;
+    setStart: (state, action) => {
+      const { x, y } = action.payload;
+      state.points = { ...state.points, startRow: x, startCol: y };
     },
-    setFinishRow: (state, action) => {
-      state.points.finishRow = action.payload;
-    },
-    setStartCol: (state, action) => {
-      state.points.startCol = action.payload;
-    },
-    setFinishCol: (state, action) => {
-      state.points.finishCol = action.payload;
+    setFinish: (state, action) => {
+      const { x, y } = action.payload;
+      state.points = { ...state.points, finishRow: x, finishCol: y };
     },
     setGrid: (state, action) => {
       state.grid = action.payload;
@@ -46,10 +42,8 @@ const boardSlice = createSlice({
 });
 
 export const {
-  setStartRow,
-  setFinishRow,
-  setStartCol,
-  setFinishCol,
+  setStart,
+  setFinish,
   setGrid,
   toggleRunning,
   setSelectedOption,

@@ -1,4 +1,5 @@
-import './Node.css';
+import './node.styles.css';
+import { useNode } from './node.hooks';
 
 const Node = ({
   col,
@@ -9,22 +10,20 @@ const Node = ({
   onMouseDown,
   // children,
 }) => {
-  const extraClassName = isFinish
-    ? 'node-finish'
-    : isStart
-    ? 'node-start'
-    : isWall
-    ? 'node-wall'
-    : '';
+  const { extraClassName, extraNodeBorder } = useNode(
+    isFinish,
+    isStart,
+    isWall
+  );
   return (
     <div
       id={`grid-cell-${row}-${col}`}
-      className={`grid-cell ${extraClassName}`}
+      className={`grid-cell ${extraClassName} ${extraNodeBorder}`}
       onMouseDown={() => onMouseDown(row, col)}
       role="button"
       tabIndex="0"
     >
-      {/* <span className="grid-cell-span ">{children}</span> */}
+      {' '}
     </div>
   );
 };

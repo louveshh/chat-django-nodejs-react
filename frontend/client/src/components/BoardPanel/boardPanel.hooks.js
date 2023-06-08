@@ -18,23 +18,12 @@ export const useBoardPanel = () => {
   );
   const { activeMode } = useSelector((state) => state.toggle);
 
-  const updateGrid = useCallback(
-    (grid) => {
-      dispatch(setGrid(grid));
-    },
-    [dispatch]
-  );
-
   const updateIsRunning = useCallback(() => {
     dispatch(toggleRunning());
   }, [dispatch]);
 
-  const updateSelectedOption = useCallback((selectedOption) => {
-    dispatch(setSelectedOption(selectedOption));
-  });
-
   const handleChange = (option) => {
-    updateSelectedOption(option);
+    dispatch(setSelectedOption(option));
   };
 
   const handleClearGrid = useCallback(() => {
@@ -42,10 +31,9 @@ export const useBoardPanel = () => {
       isRunning,
       cloneDeep(grid),
       cloneDeep(points.finishRow),
-      cloneDeep(points.finishCol),
-      updateGrid
+      cloneDeep(points.finishCol)
     );
-  }, [grid, isRunning, points.finishCol, points.finishRow, updateGrid]);
+  }, [grid, isRunning, points.finishCol, points.finishRow]);
 
   const handleAlgorithm = useCallback(() => {
     runAlgorithm(

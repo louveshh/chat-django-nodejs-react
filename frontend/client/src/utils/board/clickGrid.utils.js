@@ -6,10 +6,8 @@ export const clickGrid = (
   isRunning,
   points,
   updateGrid,
-  updateStartRow,
-  updateFinishRow,
-  updateStartCol,
-  updateFinishCol
+  updateStart,
+  updateFinish
 ) => {
   if (typeof grid === 'undefined') {
     return;
@@ -51,8 +49,7 @@ export const clickGrid = (
       isStart: !currentNode.isStart,
     };
     updatedGrid[row][col] = updatedNode;
-    updateStartRow(row);
-    updateStartCol(col);
+    updateStart({ x: row, y: col });
   } else if (
     currentNode.isNode &&
     !currentNode.isStart &&
@@ -70,8 +67,7 @@ export const clickGrid = (
       isFinish: !currentNode.isFinish,
     };
     updatedGrid[row][col] = updatedNode;
-    updateFinishRow(row);
-    updateFinishCol(col);
+    updateFinish({ x: row, y: col });
   }
   updateGrid(updatedGrid);
 };

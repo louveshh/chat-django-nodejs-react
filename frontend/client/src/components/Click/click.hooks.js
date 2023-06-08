@@ -10,11 +10,8 @@ export const useCLick = () => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(toggleClickPossible());
-    dispatch(setRandomPointsZero(true));
-    dispatch(setCirclePointZero());
-    console.log(algorithm);
+    dispatch(setRandomPointsZero());
     if (algorithm === 'tsg') {
-      console.log('tu?');
       dispatch(setCirclePointZero(true));
     } else {
       dispatch(setCirclePointZero(false));

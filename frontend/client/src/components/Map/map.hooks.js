@@ -1,7 +1,12 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setCirclePoint, setRandomPoints, setClear } from 'store/slices/map';
+import {
+  setCirclePoint,
+  setRandomPoints,
+  setClear,
+  setZeroStartCity,
+} from 'store/slices/map';
 import { tempRandom } from '../../utils/map/tempRandom.utils';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
@@ -43,9 +48,18 @@ export const useMap = (canvasRef) => {
     [dispatch]
   );
 
+  const updateSelectedMaps = useCallback(() => {
+    dispatch(setZeroStartCity());
+  });
+
   useEffect(() => {
     tempRandom(updateRandomPoints);
   }, [updateRandomPoints]);
+
+  useEffect(() => {
+    const { canvas, context } = getCanvasContext(canvasRef);
+    clearMap(canvas, context);
+  }, [activeMode]);
 
   // base setup
   useEffect(() => {

@@ -37,21 +37,19 @@ export const runAlgorithm = (
             const node = shortestPathNodes[i];
             const classId = document.getElementById(
               `grid-cell-${node.row}-${node.col}`
-            ).className;
+            );
+            const words = classId.className.split(' ');
             if (
-              classId !== 'grid-cell node-start' &&
-              classId !== 'grid-cell node-finish'
+              words.indexOf('node-start') < 0 &&
+              words.indexOf('node-finish') < 0 &&
+              words.indexOf('node-wall') < 0
             ) {
-              document.getElementById(
-                `grid-cell-${node.row}-${node.col}`
-              ).className = 'grid-cell node-shortest-path';
+              classId.className = 'grid-cell node-shortest-path';
             }
             if (mode === 'combo') {
-              const doc = document.getElementById(
-                `grid-cell-${node.row}-${node.col}`
-              );
-              console.log(step, 'step');
-              doc.innerText += doc.innerText ? `\n${i + step}` : i + step;
+              classId.innerText += classId.innerText
+                ? `\n${i + step}`
+                : i + step;
             }
           },
           mode === 'combo' ? i * 20 : i * 40
@@ -76,19 +74,14 @@ export const runAlgorithm = (
           const node = visitedNodesInOrder[i];
           const classId = document.getElementById(
             `grid-cell-${node.row}-${node.col}`
-          ).className;
+          );
+          const words = classId.className.split(' ');
           if (
-            classId !== 'grid-cell node-start' &&
-            classId !== 'grid-cell node-finish'
+            words.indexOf('node-start') < 0 &&
+            words.indexOf('node-finish') < 0 &&
+            words.indexOf('node-wall') < 0
           ) {
-            if (
-              mode === 'combo' &&
-              classId !== 'grid-cell node-shortest-path'
-            ) {
-              document.getElementById(
-                `grid-cell-${node.row}-${node.col}`
-              ).className = 'grid-cell node-visited';
-            } else if (mode !== 'combo') {
+            if (mode !== 'combo') {
               document.getElementById(
                 `grid-cell-${node.row}-${node.col}`
               ).className = 'grid-cell node-visited';

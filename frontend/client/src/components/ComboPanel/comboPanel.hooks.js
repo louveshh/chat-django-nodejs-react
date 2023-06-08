@@ -9,49 +9,16 @@ import {
   setAlgorithm,
   setClickPossible,
 } from 'store/slices/map';
-import {
-  setStartRow,
-  setFinishRow,
-  setStartCol,
-  setFinishCol,
-  setStep,
-} from '../../store/slices/board';
-import { toggleRunning } from '../../store/slices/board';
+
+import { toggleRunning, setGrid } from '../../store/slices/board';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
 import { calculateShortestPath } from '../../utils/map/calculateShortestPath.utils';
 import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
+import { removeBorders } from '../../utils/board/common/removeBorders.utils';
 
 export const useComboPanel = (canvasRef) => {
   const dispatch = useDispatch();
-
-  const updateIsRunning = useCallback(() => {
-    dispatch(toggleRunning());
-  }, [dispatch]);
-  const updateStartRow = useCallback(
-    (row) => {
-      dispatch(setStartRow(row));
-    },
-    [dispatch]
-  );
-  const updateFinishRow = useCallback(
-    (row) => {
-      dispatch(setFinishRow(row));
-    },
-    [dispatch]
-  );
-  const updateStartCol = useCallback(
-    (col) => {
-      dispatch(setStartCol(col));
-    },
-    [dispatch]
-  );
-  const updateFinishCol = useCallback(
-    (col) => {
-      dispatch(setFinishCol(col));
-    },
-    [dispatch]
-  );
 
   const {
     circlePoint,
@@ -61,7 +28,7 @@ export const useComboPanel = (canvasRef) => {
     clickPossible,
     algorithm,
   } = useSelector((state) => state.map);
-  const { points, grid, isRunning, step } = useSelector((state) => state.board);
+  const { grid, isRunning, points } = useSelector((state) => state.board);
   const { activeMode } = useSelector((state) => state.toggle);
 
   const updatePathingInProgress = useCallback(
@@ -70,6 +37,9 @@ export const useComboPanel = (canvasRef) => {
     },
     [dispatch]
   );
+  const updateIsRunning = useCallback(() => {
+    dispatch(toggleRunning());
+  }, [dispatch]);
 
   const updateClearState = useCallback(
     (shouldClear) => {
@@ -77,15 +47,16 @@ export const useComboPanel = (canvasRef) => {
     },
     [dispatch]
   );
-  const updateStep = useCallback(
-    (step) => {
-      dispatch(setStep(step));
-    },
-    [dispatch]
-  );
   const zeroStartCity = useCallback(() => {
     dispatch(setZeroStartCity());
   }, [dispatch]);
+
+  const updateGrid = useCallback(
+    (grid) => {
+      dispatch(setGrid(grid));
+    },
+    [dispatch]
+  );
 
   const handleClear = useCallback(() => {
     const { canvas, context } = getCanvasContext(canvasRef);
@@ -122,8 +93,7 @@ export const useComboPanel = (canvasRef) => {
     );
     shortestPathPromise
       .then((shortestPath) => {
-        // Do something with the shortestPath array
-        console.log(shortestPath);
+        removeBorders(grid);
         const outputArray = shortestPath.reduce((result, obj, index) => {
           if (index < shortestPath.length - 1) {
             result.push([obj, shortestPath[index + 1]]);
@@ -133,17 +103,13 @@ export const useComboPanel = (canvasRef) => {
         return outputArray;
       })
       .then((outputArray) => {
-        console.log(outputArray);
         const algorithm = 'dijkstra';
-        let newStep;
         async function iterateArray(index, newStep) {
           if (index >= outputArray.length) {
-            // Base case: end of array reached, stop recursion
             return;
           }
 
           const item = outputArray[index];
-          console.log(item, 'xddddddddddd');
 
           const newPoints = {
             startRow: coordinatesToBlockNumbers(item[0].y),
@@ -151,8 +117,7 @@ export const useComboPanel = (canvasRef) => {
             startCol: coordinatesToBlockNumbers(item[0].x),
             finishCol: coordinatesToBlockNumbers(item[1].x),
           };
-          console.log('newPoints', newStep);
-          let newStepAlg = runAlgorithm(
+          const newStepAlg = runAlgorithm(
             algorithm,
             isRunning,
             updateIsRunning,
@@ -162,16 +127,13 @@ export const useComboPanel = (canvasRef) => {
             newStep
           );
 
-          // Wait for the algorithm to finish before proceeding
           await new Promise((resolve) => {
-            setTimeout(resolve, 5000); // Adjust the delay as needed
+            setTimeout(resolve, 200);
           });
 
-          // Recursive call to iterateArray with the next index
           iterateArray(index + 1, newStepAlg);
         }
 
-        // Start the iteration from the beginning
         iterateArray(0, 0);
       });
   }, [
@@ -184,9 +146,7 @@ export const useComboPanel = (canvasRef) => {
     updatePathingInProgress,
   ]);
 
-  const handleAlgorithm = () => {
-    return handleTSGClick;
-  };
+  const handleAlgorithm = () => handleTSGClick;
 
   return {
     toClear,

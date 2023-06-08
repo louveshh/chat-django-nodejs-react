@@ -1,16 +1,14 @@
 .grid-cell {
   width: 16px;
   height: 16px;
-  border: 1px solid #000000c0;
   font-size: 7px;
   text-align: center;
   display: table;
   border-radius: 35%;
 }
 
-.grid-cell-span {
-  display: table-cell;
-  vertical-align: middle;
+.grid-background {
+  border: 1px solid #000000c0;
 }
 
 .node-finish {

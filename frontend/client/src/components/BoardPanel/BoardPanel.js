@@ -22,7 +22,7 @@ const BoardPanel = () => {
         </button>
       )}
       {!isRunning && activeMode === 'board' && <SelectBoardAlgorithm />}
-      {activeMode === 'board' && !algorithm && !isRunning && (
+      {activeMode === 'board' && !isRunning && (
         <StyledSelect
           onChange={handleChange}
           value={selectedOption}

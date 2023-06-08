@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
 import {
-  setStartRow,
-  setFinishRow,
-  setStartCol,
-  setFinishCol,
+  setStart,
+  setFinish,
   setGrid,
   setSelectedOption,
 } from '../../store/slices/board';
 import { createInitialGrid } from '../../utils/board/createInitalGrid.utils';
 import { clickGrid } from '../../utils/board/clickGrid.utils';
 import { configBoard } from '../../config/config';
+import { addBorders } from './../../utils/board/common/addBorders.util';
 
 export const useBoard = () => {
   const dispatch = useDispatch();
@@ -21,27 +20,15 @@ export const useBoard = () => {
   );
   const { activeMode } = useSelector((state) => state.toggle);
 
-  const updateStartRow = useCallback(
+  const updateStart = useCallback(
     (row) => {
-      dispatch(setStartRow(row));
+      dispatch(setStart(row));
     },
     [dispatch]
   );
-  const updateFinishRow = useCallback(
+  const updateFinish = useCallback(
     (row) => {
-      dispatch(setFinishRow(row));
-    },
-    [dispatch]
-  );
-  const updateStartCol = useCallback(
-    (col) => {
-      dispatch(setStartCol(col));
-    },
-    [dispatch]
-  );
-  const updateFinishCol = useCallback(
-    (col) => {
-      dispatch(setFinishCol(col));
+      dispatch(setFinish(row));
     },
     [dispatch]
   );
@@ -58,6 +45,7 @@ export const useBoard = () => {
   });
   useEffect(() => {
     updateGrid(createInitialGrid(cloneDeep(points), activeMode));
+    addBorders(grid);
     if (activeMode === 'combo') {
       resetSelectedOption();
     }
@@ -74,10 +62,8 @@ export const useBoard = () => {
         isRunning,
         cloneDeep(points),
         updateGrid,
-        updateStartRow,
-        updateFinishRow,
-        updateStartCol,
-        updateFinishCol
+        updateStart,
+        updateFinish
       );
     },
 
@@ -86,11 +72,9 @@ export const useBoard = () => {
       points,
       selectedOption,
       isRunning,
-      updateFinishCol,
-      updateFinishRow,
       updateGrid,
-      updateStartCol,
-      updateStartRow,
+      updateStart,
+      updateFinish,
     ]
   );
 
