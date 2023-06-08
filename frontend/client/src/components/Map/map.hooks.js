@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setCirclePoint,
   setRandomPoints,
-  setClear,
-  setZeroStartCity,
+  setClearMap,
+  setFilteredCities,
+  setPathingInProgress,
 } from 'store/slices/map';
 import { tempRandom } from '../../utils/map/tempRandom.utils';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
@@ -35,31 +36,22 @@ export const useMap = (canvasRef) => {
   };
 
   const updateRandomPoints = useCallback(
-    (newPoints) => {
-      dispatch(setRandomPoints(newPoints));
+    (payload) => {
+      dispatch(setRandomPoints(payload));
     },
     [dispatch]
   );
 
-  const updateClearState = useCallback(
-    (shouldClear) => {
-      dispatch(setClear(shouldClear));
+  const updateClearMap = useCallback(
+    (payload) => {
+      dispatch(setClearMap(payload));
     },
     [dispatch]
   );
-
-  const updateSelectedMaps = useCallback(() => {
-    dispatch(setZeroStartCity());
-  });
 
   useEffect(() => {
     tempRandom(updateRandomPoints);
   }, [updateRandomPoints]);
-
-  useEffect(() => {
-    const { canvas, context } = getCanvasContext(canvasRef);
-    clearMap(canvas, context);
-  }, [activeMode]);
 
   // base setup
   useEffect(() => {
@@ -73,8 +65,6 @@ export const useMap = (canvasRef) => {
       context.lineWidth = configMap.context.lineWidth;
       context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
       clearMap(canvas, context);
-      updateClearState(false);
-      console.log(randomPoints);
       if (clickPossible && algorithm === 'sort') {
         drawClickedCity(context, circlePoint, true);
       }
@@ -96,7 +86,7 @@ export const useMap = (canvasRef) => {
     activeMode,
     clickPossible,
     algorithm,
-    updateClearState,
+    updateClearMap,
   ]);
 
   useEffect(() => {
@@ -110,14 +100,13 @@ export const useMap = (canvasRef) => {
       context.lineWidth = configMap.context.lineWidth;
       context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
       clearMap(canvas, context);
-      updateClearState(false);
       const filteredCitiesMapped = filteredCities.map((item) => ({
         x: item.value.x,
         y: item.value.y,
         selectedStart: item.value.selectedStart,
       }));
+      console.log(filteredCitiesMapped);
       drawCities(context, filteredCitiesMapped, false);
-      finishDrawing(context);
     }
   }, [
     circlePoint,
@@ -126,7 +115,7 @@ export const useMap = (canvasRef) => {
     pathingInProgress,
     activeMode,
     filteredCities,
-    updateClearState,
+    updateClearMap,
   ]);
 
   const handleCanvasClick = (event) => {
@@ -158,8 +147,7 @@ export const useMap = (canvasRef) => {
     });
 
     if (selectedCoordinate) {
-      // eslint-disable-next-line no-console
-      console.log('Object detected:', selectedCoordinate);
+      // console.log('Object detected:', selectedCoordinate);
     }
   };
 

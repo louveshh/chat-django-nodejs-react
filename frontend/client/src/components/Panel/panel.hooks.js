@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { configPanel } from './../../config/config';
+import { configPanel } from '../../config/config';
 
 export const usePanel = () => {
   const { activeMode } = useSelector((state) => state.toggle);

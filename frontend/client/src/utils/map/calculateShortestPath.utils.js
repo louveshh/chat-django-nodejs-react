@@ -76,15 +76,15 @@ export const calculateShortestPath = (
 
       setTimeout(() => {
         animateStep(remainingPoints, shortestPath);
-      }, 500);
+      }, 250);
     };
     setTimeout(
       () => drawTestingPathTSG(shortestPath, index, randomPoints),
-      500
+      250
     );
     setTimeout(() => {
       animateStep(remainingPoints, shortestPath);
-    }, 1000);
+    }, 500);
   };
 
   const moveStartObjectToStart = (array) => {
@@ -112,6 +112,6 @@ export const calculateShortestPath = (
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(shortestPath);
-    }, 1000 * (remainingPoints.length + 1));
+    }, 500 * (remainingPoints.length + 1));
   });
 };

@@ -29,7 +29,7 @@ const mapSlice = createSlice({
     setPathingInProgress: (state, action) => {
       state.pathingInProgress = action.payload;
     },
-    setClear: (state, action) => {
+    setClearMap: (state, action) => {
       state.toClear = action.payload;
     },
     setSelectStartCity: (state, action) => {
@@ -74,7 +74,10 @@ const mapSlice = createSlice({
         circlePoint: updatedCirclePoint,
       };
     },
-    toggleClickPossible: (state, _) => {
+    setZeroStartCityFiltered: (state, _) => {
+      state.filteredCities = [];
+    },
+    setToggleClickPossible: (state, _) => {
       state.clickPossible = !state.clickPossible;
     },
     setClickPossible: (state, action) => {
@@ -93,7 +96,7 @@ export const {
   setCirclePoint,
   setRandomPoints,
   setPathingInProgress,
-  setClear,
+  setClearMap,
   setSelectStartCity,
   setCirclePointZero,
   setRandomPointsZero,
@@ -103,6 +106,7 @@ export const {
   setAlgorithm,
   setFilteredCities,
   setFilteredCitiesStart,
+  setZeroStartCityFiltered,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

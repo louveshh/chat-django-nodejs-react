@@ -12,11 +12,12 @@ import { createInitialGrid } from '../../utils/board/createInitalGrid.utils';
 import { clickGrid } from '../../utils/board/clickGrid.utils';
 import { configBoard } from '../../config/config';
 import { addBorders } from '../../utils/board/common/addBorders.util';
+import { clearGrid } from '../../utils/board/common/clearGrid.utils';
 
 export const useBoard = () => {
   const dispatch = useDispatch();
 
-  const { points, grid, selectedOption, isRunning } = useSelector(
+  const { points, grid, selectedOption, pathingInProgress } = useSelector(
     (state) => state.board
   );
   const { activeMode } = useSelector((state) => state.toggle);
@@ -44,7 +45,6 @@ export const useBoard = () => {
     if (activeMode === 'combo') {
       updateSelectedOption(configBoard.defaultDrawOption);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeMode]);
 
   const handleMouseDown = (row, col) => {
@@ -52,7 +52,7 @@ export const useBoard = () => {
       row,
       col,
       selectedOption,
-      isRunning,
+      pathingInProgress,
       memoGrid,
       memoPoints,
       updateStart,

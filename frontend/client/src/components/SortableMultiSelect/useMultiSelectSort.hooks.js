@@ -1,11 +1,6 @@
 import { cloneDeep } from 'lodash';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setFilteredCities,
-  setZeroStartCity,
-  setFilteredCitiesStart,
-} from 'store/slices/map';
+import { setFilteredCities } from 'store/slices/map';
 
 export const useMultiSelectSort = () => {
   const { randomPoints, filteredCities } = useSelector((state) => state.map);

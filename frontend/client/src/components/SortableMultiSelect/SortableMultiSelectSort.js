@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
-import { useState, useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { useSortable, SortableContext, arrayMove } from '@dnd-kit/sortable';
 import Select, { components } from 'react-select';
@@ -13,24 +13,14 @@ const SortableMultiValue = (props) => {
       id: `${props.data.value.x}${props.data.value.y}`,
     });
 
-  let isLastElement = false;
-  if (props.selectProps.selectedProps.length > 0) {
-    isLastElement =
-      props.data.value ===
-      props.selectProps.selectedProps[
-        props.selectProps.selectedProps.length - 1
-      ].value;
-  }
-
   const style = {
     width: '70%',
     position: 'relative',
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
-      : undefined,
+      : '',
     transition,
   };
-  const additionalClass = !isLastElement ? 'sortable-multi-value' : 'last';
 
   return (
     <div
@@ -42,7 +32,6 @@ const SortableMultiValue = (props) => {
       <components.MultiValue
         {...props}
         {...attributes}
-        innerRef={undefined}
         innerProps={{
           ...props.innerProps,
         }}
@@ -51,9 +40,9 @@ const SortableMultiValue = (props) => {
   );
 };
 
-const SortableMultiValueLabel = (props) => {
-  return <components.MultiValueLabel {...props} />;
-};
+const SortableMultiValueLabel = (props) => (
+  <components.MultiValueLabel {...props} />
+);
 const MultiValueRemove = ({ ...props }) => {
   const { value } = props.data;
   const selected = props.selectProps.selectedProps;
@@ -98,7 +87,6 @@ export const MultiSelectSort = () => {
         (item) => `${item.value.x}${item.value.y}` === over.id
       );
     }
-    console.log(active, over);
     if (oldIndex !== -1 && newIndex !== -1) {
       const newValue = arrayMove(filteredCities, oldIndex, newIndex);
       handleFilteredCities(newValue);
@@ -130,8 +118,8 @@ export const MultiSelectSort = () => {
           closeMenuOnSelect={false}
           components={{
             MultiValue: SortableMultiValue,
-            SortableMultiValueLabel: SortableMultiValueLabel,
-            MultiValueRemove: MultiValueRemove,
+            SortableMultiValueLabel,
+            MultiValueRemove,
           }}
         />
       </SortableContext>

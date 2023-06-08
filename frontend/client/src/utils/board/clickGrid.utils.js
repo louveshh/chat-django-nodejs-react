@@ -2,7 +2,7 @@ export const clickGrid = (
   row,
   col,
   selectedOption,
-  isRunning,
+  pathingInProgress,
   memoGrid,
   memoPoints,
   updateStart,
@@ -15,7 +15,7 @@ export const clickGrid = (
   if (memoGrid.length === 0) {
     return;
   }
-  if (isRunning) {
+  if (pathingInProgress) {
     return;
   }
   const { startRow, finishRow, startCol, finishCol } = memoPoints;

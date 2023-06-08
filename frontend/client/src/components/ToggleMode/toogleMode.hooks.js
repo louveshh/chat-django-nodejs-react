@@ -6,6 +6,7 @@ import {
   setZeroStartCity,
   setAlgorithm,
   setCirclePoint,
+  setZeroStartCityFiltered,
 } from 'store/slices/map';
 import { setAlgorithm as setAlgorithmBoard } from 'store/slices/board';
 
@@ -19,6 +20,7 @@ export const useToggleMode = () => {
     dispatch(setClickPossible(false));
     dispatch(setRandomPointsZero());
     dispatch(setZeroStartCity());
+    dispatch(setZeroStartCityFiltered());
     dispatch(setAlgorithm(null));
     dispatch(setAlgorithmBoard(null));
     dispatch(setCirclePoint({ ...circlePoint, weight: 0 }));

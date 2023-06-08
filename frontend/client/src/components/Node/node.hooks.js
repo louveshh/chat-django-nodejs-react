@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 export const useNode = (isFinish, isStart, isWall) => {
   const { activeMode } = useSelector((state) => state.toggle);
-  const { isRunning } = useSelector((state) => state.map);
+  const { pathingInProgress } = useSelector((state) => state.map);
   const { toClear } = useSelector((state) => state.board);
   const extraClassName = isFinish
     ? 'node-finish'

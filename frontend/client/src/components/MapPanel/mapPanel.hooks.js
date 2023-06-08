@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   setPathingInProgress,
-  setClear,
+  setClearMap,
   setZeroStartCity,
   setAlgorithm,
   setClickPossible,
@@ -40,7 +40,7 @@ export const useMapPanel = (canvasRef) => {
 
   const updateClearState = useCallback(
     (shouldClear) => {
-      dispatch(setClear(shouldClear));
+      dispatch(setClearMap(shouldClear));
     },
     [dispatch]
   );

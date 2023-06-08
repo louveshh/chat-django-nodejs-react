@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { useNavbar } from './navbar.hooks';
 import { TrapezoidNavbar, WrapperNavbar, Triangle } from './navbar.styles';
-import ToggleLanguage from './../ToggleLanguage/ToggleLanguage.component';
-import ToggleTheme from './../ToggleTheme/ToggleTheme.component';
+import ToggleLanguage from '../ToggleLanguage/ToggleLanguage.component';
+import ToggleTheme from '../ToggleTheme/ToggleTheme.component';
 
 const Navbar = () => {
   const { isAuthenticated, onClick } = useNavbar();

@@ -6,6 +6,7 @@ import {
   setToggleRunning,
   setSelectedOption,
   setAlgorithm,
+  setClearBoard,
 } from '../../store/slices/board';
 import { clearGrid } from '../../utils/board/common/clearGrid.utils';
 import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
@@ -13,9 +14,14 @@ import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
 export const useBoardPanel = () => {
   const dispatch = useDispatch();
 
-  const { points, grid, isRunning, selectedOption, algorithm } = useSelector(
-    (state) => state.board
-  );
+  const {
+    points,
+    grid,
+    pathingInProgress,
+    selectedOption,
+    algorithm,
+    toClear,
+  } = useSelector((state) => state.board);
   const { activeMode } = useSelector((state) => state.toggle);
 
   const currentGrid = useMemo(() => cloneDeep(grid), [grid]);
@@ -30,15 +36,20 @@ export const useBoardPanel = () => {
   const updateAlgorithm = useCallback((payload) => {
     dispatch(setAlgorithm(payload));
   }, []);
+  const updateClear = useCallback((payload) => {
+    dispatch(setClearBoard(payload));
+  }, []);
 
   const handleClearGrid = () => {
-    clearGrid(isRunning, currentGrid);
+    updateClear(false);
+    clearGrid(pathingInProgress, currentGrid);
   };
 
   const handleAlgorithm = () => {
+    updateClear(true);
     runAlgorithm(
       algorithm,
-      isRunning,
+      pathingInProgress,
       currentGrid,
       currentPoints,
       updateToggleRunning
@@ -46,10 +57,11 @@ export const useBoardPanel = () => {
     updateAlgorithm('');
   };
   return {
-    isRunning,
+    pathingInProgress,
     selectedOption,
     activeMode,
     algorithm,
+    toClear,
     handleClearGrid,
     handleAlgorithm,
     updateSelectedOption,

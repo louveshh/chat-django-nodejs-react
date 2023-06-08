@@ -6,7 +6,7 @@ import { dfs } from './algorithms/dfs.algorithm';
 
 export const runAlgorithm = (
   algorithm,
-  isRunning,
+  pathingInProgress,
   currentGrid,
   currentPoints,
   updateToggleRunning,
@@ -65,9 +65,12 @@ export const runAlgorithm = (
           () => {
             animateFinalPath(shortestPathNodes);
           },
-          mode === 'combo' ? i * 5 : i * 10
+          mode === 'combo' ? i * 1 : i * 5
         );
-        return shortestPathNodes.length;
+        if (shortestPathNodes) {
+          return shortestPathNodes.length;
+        }
+        return 0;
       }
       setTimeout(
         () => {
@@ -88,7 +91,7 @@ export const runAlgorithm = (
             }
           }
         },
-        mode === 'combo' ? i * 1 : i * 10
+        mode === 'combo' ? i * 1 : i * 5
       );
     }
   };
@@ -106,17 +109,16 @@ export const runAlgorithm = (
         break;
     }
   };
-  if (isRunning) {
+  if (pathingInProgress) {
     return;
   }
   const { startRow, finishRow, startCol, finishCol } = currentPoints;
   updateToggleRunning();
   if (mode !== 'combo') {
-    clearGrid(isRunning, currentGrid);
+    clearGrid(pathingInProgress, currentGrid);
   }
   const startNode = currentGrid[startRow][startCol];
   const finishNode = currentGrid[finishRow][finishCol];
-  console.log(startNode, finishNode);
   const visitedNodesInOrder = switchAlgorithm(algorithm, startNode, finishNode);
   const nodesInShortestPathOrder = getShortestPath(finishNode);
   nodesInShortestPathOrder.push('end');

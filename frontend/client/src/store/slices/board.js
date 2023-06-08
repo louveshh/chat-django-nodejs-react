@@ -9,7 +9,8 @@ const initialState = {
     finishCol: 15,
   },
   grid: [],
-  isRunning: false,
+  pathingInProgress: false,
+  toClear: false,
   selectedOption: configBoard.defaultDrawOption,
   algorithm: '',
 };
@@ -30,13 +31,16 @@ const boardSlice = createSlice({
       state.grid = action.payload;
     },
     setToggleRunning: (state, _) => {
-      state.isRunning = !state.isRunning;
+      state.pathingInProgress = !state.pathingInProgress;
     },
     setSelectedOption: (state, action) => {
       state.selectedOption = action.payload;
     },
     setAlgorithm: (state, action) => {
       state.algorithm = action.payload;
+    },
+    setClearBoard: (state, action) => {
+      state.toClear = action.payload;
     },
   },
 });
@@ -49,6 +53,7 @@ export const {
   setSelectedOption,
   setAlgorithm,
   setStep,
+  setClearBoard,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

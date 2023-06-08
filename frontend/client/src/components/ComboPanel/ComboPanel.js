@@ -5,25 +5,49 @@ import { MultiSelectSort } from '../SortableMultiSelect/SortableMultiSelectSort'
 
 const ComboPanel = ({ canvasRef }) => {
   const {
-    toClear,
-    pathingInProgress,
+    mapToClear,
+    mapPathingInProgress,
+    boardToClear,
+    boardPathingInProgress,
     activeMode,
+    filteredCities,
     handleAlgorithm,
-    handleClear,
+    handleClearMap,
+    handleClearBoard,
   } = useComboPanel(canvasRef);
   return (
     <div>
-      {!pathingInProgress &&
-        toClear &&
-        configMap.clearButton.includes(activeMode) && (
-          <StyledButton type="button" className="button" onClick={handleClear}>
-            CLEAR
-          </StyledButton>
+      {!boardPathingInProgress &&
+        !mapPathingInProgress &&
+        mapToClear &&
+        activeMode === 'combo' && (
+          <button type="button" onClick={handleClearMap}>
+            Clear Map
+          </button>
         )}
-      <MultiSelectSort />
-      <StyledButton type="button" onClick={handleAlgorithm}>
-        RUN ALGO
-      </StyledButton>
+      {!boardPathingInProgress &&
+        !mapPathingInProgress &&
+        boardToClear &&
+        activeMode === 'combo' && (
+          <button type="button" onClick={() => handleClearBoard(false)}>
+            Clear Board
+          </button>
+        )}
+      {!(
+        mapPathingInProgress ||
+        mapToClear ||
+        boardToClear ||
+        boardPathingInProgress
+      ) && (
+        <>
+          <MultiSelectSort />
+          {filteredCities.length >= 2 && (
+            <StyledButton type="button" onClick={handleAlgorithm}>
+              RUN ALGO
+            </StyledButton>
+          )}
+        </>
+      )}
     </div>
   );
 };

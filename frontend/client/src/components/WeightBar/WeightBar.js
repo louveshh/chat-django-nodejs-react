@@ -3,7 +3,7 @@ import Toggle from 'react-toggle';
 import { useWeightBar } from './weightbar.hooks';
 
 const WeightBar = () => {
-  const { weightBar, inputValue, handleClick, handleBar } = useWeightBar();
+  const { weightBar, handleClick, handleBar } = useWeightBar();
 
   return (
     <div>

@@ -1,5 +1,5 @@
-export const clearGrid = (isRunning, grid) => {
-  if (!isRunning) {
+export const clearGrid = (pathingInProgress, grid) => {
+  if (!pathingInProgress) {
     const updatedGrid = grid.slice();
     updatedGrid.forEach((row) => {
       row.forEach((currentNode) => {
