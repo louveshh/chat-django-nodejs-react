@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -37,7 +37,7 @@ export const useComboPanel = (canvasRef) => {
     },
     [dispatch]
   );
-  const updateIsRunning = useCallback(() => {
+  const updateToggleRunning = useCallback(() => {
     dispatch(setToggleRunning());
   }, [dispatch]);
 
@@ -47,20 +47,17 @@ export const useComboPanel = (canvasRef) => {
     },
     [dispatch]
   );
-  const zeroStartCity = useCallback(() => {
-    dispatch(setZeroStartCity());
-  }, [dispatch]);
 
   const handleClear = useCallback(() => {
     const { canvas, context } = getCanvasContext(canvasRef);
-    zeroStartCity();
+    dispatch(setZeroStartCity());
     clearMap(canvas, context);
     updateClearState(false);
     dispatch(setAlgorithm(null));
     dispatch(setClickPossible(false));
-  }, [updateClearState, zeroStartCity]);
+  }, [updateClearState]);
 
-  const handleTSGClick = useCallback(() => {
+  const handleAlgorithm = () => {
     if (toClear || pathingInProgress) {
       return;
     }
@@ -104,18 +101,19 @@ export const useComboPanel = (canvasRef) => {
 
           const item = outputArray[index];
 
-          const newPoints = {
+          const currentPoints = {
             startRow: coordinatesToBlockNumbers(item[0].y),
             finishRow: coordinatesToBlockNumbers(item[1].y),
             startCol: coordinatesToBlockNumbers(item[0].x),
             finishCol: coordinatesToBlockNumbers(item[1].x),
           };
+          const currentGrid = cloneDeep(grid);
           const newStepAlg = runAlgorithm(
             algorithm,
             isRunning,
-            updateIsRunning,
-            cloneDeep(grid),
-            newPoints,
+            currentGrid,
+            currentPoints,
+            updateToggleRunning,
             'combo',
             newStep
           );
@@ -124,22 +122,12 @@ export const useComboPanel = (canvasRef) => {
             setTimeout(resolve, 200);
           });
 
-          iterateArray(index + 1, newStepAlg);
+          iterateArray(index + 1, newStepAlg - 1);
         }
 
         iterateArray(0, 0);
       });
-  }, [
-    circlePoint,
-    toClear,
-    pathingInProgress,
-    filteredCities,
-    clickPossible,
-    updateClearState,
-    updatePathingInProgress,
-  ]);
-
-  const handleAlgorithm = () => handleTSGClick;
+  };
 
   return {
     toClear,

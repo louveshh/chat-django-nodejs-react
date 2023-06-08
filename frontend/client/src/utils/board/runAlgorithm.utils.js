@@ -7,9 +7,9 @@ import { dfs } from './algorithms/dfs.algorithm';
 export const runAlgorithm = (
   algorithm,
   isRunning,
-  updateIsRunning,
-  memoGrid,
-  memoPoints,
+  currentGrid,
+  currentPoints,
+  updateToggleRunning,
   mode = 'board',
   step = 0
 ) => {
@@ -22,12 +22,12 @@ export const runAlgorithm = (
     }
     return shortestPathNodes;
   };
-  const animateFinalPath = (shortestPathNodes, setIsRunning) => {
+  const animateFinalPath = (shortestPathNodes) => {
     for (let i = 0; i < shortestPathNodes.length; i++) {
       if (shortestPathNodes[i] === 'end') {
         setTimeout(
           () => {
-            setIsRunning((prevIsRunning) => !prevIsRunning);
+            updateToggleRunning();
           },
           mode === 'combo' ? i * 10 : i * 50
         );
@@ -58,12 +58,12 @@ export const runAlgorithm = (
     }
   };
 
-  const animate = (visitedNodesInOrder, shortestPathNodes, setIsRunning) => {
+  const animate = (visitedNodesInOrder, shortestPathNodes) => {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(
           () => {
-            animateFinalPath(shortestPathNodes, setIsRunning);
+            animateFinalPath(shortestPathNodes);
           },
           mode === 'combo' ? i * 5 : i * 10
         );
@@ -95,13 +95,13 @@ export const runAlgorithm = (
   const switchAlgorithm = (algorithm, startNode, finishNode) => {
     switch (algorithm) {
       case 'dijkstra':
-        return dijkstra(memoGrid, startNode, finishNode);
+        return dijkstra(currentGrid, startNode, finishNode);
       case 'astar':
-        return AStar(memoGrid, startNode, finishNode);
+        return AStar(currentGrid, startNode, finishNode);
       case 'bfs':
-        return bfs(memoGrid, startNode, finishNode);
+        return bfs(currentGrid, startNode, finishNode);
       case 'dfs':
-        return dfs(memoGrid, startNode, finishNode);
+        return dfs(currentGrid, startNode, finishNode);
       default:
         break;
     }
@@ -109,19 +109,16 @@ export const runAlgorithm = (
   if (isRunning) {
     return;
   }
-  const { startRow, finishRow, startCol, finishCol } = memoPoints;
-  updateIsRunning();
+  const { startRow, finishRow, startCol, finishCol } = currentPoints;
+  updateToggleRunning();
   if (mode !== 'combo') {
-    clearGrid(isRunning, memoGrid, finishRow, finishCol);
+    clearGrid(isRunning, currentGrid);
   }
-  const startNode = memoGrid[startRow][startCol];
-  const finishNode = memoGrid[finishRow][finishCol];
+  const startNode = currentGrid[startRow][startCol];
+  const finishNode = currentGrid[finishRow][finishCol];
+  console.log(startNode, finishNode);
   const visitedNodesInOrder = switchAlgorithm(algorithm, startNode, finishNode);
   const nodesInShortestPathOrder = getShortestPath(finishNode);
   nodesInShortestPathOrder.push('end');
-  return animate(
-    visitedNodesInOrder,
-    nodesInShortestPathOrder,
-    updateIsRunning
-  );
+  return animate(visitedNodesInOrder, nodesInShortestPathOrder);
 };

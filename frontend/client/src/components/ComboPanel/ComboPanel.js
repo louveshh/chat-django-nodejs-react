@@ -1,11 +1,7 @@
 import { useComboPanel } from './comboPanel.hooks';
 import { configMap } from '../../config/config';
-import Click from '../Click/Click';
-import SelectCity from '../SelectCity/SelectCity';
-import SelectMapAlgorithm from '../SelectMapAlgorithm/SelectMapAlgorithm';
-import WeightBar from '../WeightBar/WeightBar';
 import { StyledButton } from './comboPanel.styles';
-import { MultiSelectSort } from './../SortableMultiSelect/SortableMultiSelectSort';
+import { MultiSelectSort } from '../SortableMultiSelect/SortableMultiSelectSort';
 
 const ComboPanel = ({ canvasRef }) => {
   const {
@@ -25,7 +21,7 @@ const ComboPanel = ({ canvasRef }) => {
           </StyledButton>
         )}
       <MultiSelectSort />
-      <StyledButton type="button" onClick={handleAlgorithm()}>
+      <StyledButton type="button" onClick={handleAlgorithm}>
         RUN ALGO
       </StyledButton>
     </div>

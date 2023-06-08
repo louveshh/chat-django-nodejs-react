@@ -18,8 +18,8 @@ export const useBoardPanel = () => {
   );
   const { activeMode } = useSelector((state) => state.toggle);
 
-  const memoGrid = useMemo(() => cloneDeep(grid), [grid]);
-  const memoPoints = useMemo(() => cloneDeep(points), [points]);
+  const currentGrid = useMemo(() => cloneDeep(grid), [grid]);
+  const currentPoints = useMemo(() => cloneDeep(points), [points]);
 
   const updateToggleRunning = useCallback(() => {
     dispatch(setToggleRunning());
@@ -31,17 +31,17 @@ export const useBoardPanel = () => {
     dispatch(setAlgorithm(payload));
   }, []);
 
-  const handleClearGrid = useCallback(() => {
-    clearGrid(isRunning, memoGrid);
-  }, [grid, isRunning, points.finishCol, points.finishRow]);
+  const handleClearGrid = () => {
+    clearGrid(isRunning, currentGrid);
+  };
 
   const handleAlgorithm = () => {
     runAlgorithm(
       algorithm,
       isRunning,
-      updateToggleRunning,
-      memoGrid,
-      memoPoints
+      currentGrid,
+      currentPoints,
+      updateToggleRunning
     );
     updateAlgorithm('');
   };
