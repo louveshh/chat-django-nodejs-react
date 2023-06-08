@@ -98,7 +98,7 @@ export const {
   setCirclePointZero,
   setRandomPointsZero,
   setZeroStartCity,
-  toggleClickPossible,
+  setToggleClickPossible,
   setClickPossible,
   setAlgorithm,
   setFilteredCities,

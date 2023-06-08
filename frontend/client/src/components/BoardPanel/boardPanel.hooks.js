@@ -1,10 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
 import {
-  setGrid,
-  toggleRunning,
+  setToggleRunning,
   setSelectedOption,
   setAlgorithm,
 } from '../../store/slices/board';
@@ -13,45 +12,46 @@ import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
 
 export const useBoardPanel = () => {
   const dispatch = useDispatch();
+
   const { points, grid, isRunning, selectedOption, algorithm } = useSelector(
     (state) => state.board
   );
   const { activeMode } = useSelector((state) => state.toggle);
 
-  const updateIsRunning = useCallback(() => {
-    dispatch(toggleRunning());
-  }, [dispatch]);
+  const memoGrid = useMemo(() => cloneDeep(grid), [grid]);
+  const memoPoints = useMemo(() => cloneDeep(points), [points]);
 
-  const handleChange = (option) => {
-    dispatch(setSelectedOption(option));
-  };
+  const updateToggleRunning = useCallback(() => {
+    dispatch(setToggleRunning());
+  }, []);
+  const updateSelectedOption = useCallback((payload) => {
+    dispatch(setSelectedOption(payload));
+  }, []);
+  const updateAlgorithm = useCallback((payload) => {
+    dispatch(setAlgorithm(payload));
+  }, []);
 
   const handleClearGrid = useCallback(() => {
-    clearGrid(
-      isRunning,
-      cloneDeep(grid),
-      cloneDeep(points.finishRow),
-      cloneDeep(points.finishCol)
-    );
+    clearGrid(isRunning, memoGrid);
   }, [grid, isRunning, points.finishCol, points.finishRow]);
 
-  const handleAlgorithm = useCallback(() => {
+  const handleAlgorithm = () => {
     runAlgorithm(
       algorithm,
       isRunning,
-      updateIsRunning,
-      cloneDeep(grid),
-      cloneDeep(points)
+      updateToggleRunning,
+      memoGrid,
+      memoPoints
     );
-    dispatch(setAlgorithm(''));
-  }, [grid, isRunning, points, updateIsRunning, algorithm]);
+    updateAlgorithm('');
+  };
   return {
     isRunning,
-    handleClearGrid,
-    handleAlgorithm,
     selectedOption,
-    handleChange,
     activeMode,
     algorithm,
+    handleClearGrid,
+    handleAlgorithm,
+    updateSelectedOption,
   };
 };

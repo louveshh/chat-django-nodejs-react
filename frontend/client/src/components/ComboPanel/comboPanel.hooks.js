@@ -10,7 +10,7 @@ import {
   setClickPossible,
 } from 'store/slices/map';
 
-import { toggleRunning, setGrid } from '../../store/slices/board';
+import { setToggleRunning } from '../../store/slices/board';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
 import { calculateShortestPath } from '../../utils/map/calculateShortestPath.utils';
@@ -28,7 +28,7 @@ export const useComboPanel = (canvasRef) => {
     clickPossible,
     algorithm,
   } = useSelector((state) => state.map);
-  const { grid, isRunning, points } = useSelector((state) => state.board);
+  const { grid, isRunning } = useSelector((state) => state.board);
   const { activeMode } = useSelector((state) => state.toggle);
 
   const updatePathingInProgress = useCallback(
@@ -38,7 +38,7 @@ export const useComboPanel = (canvasRef) => {
     [dispatch]
   );
   const updateIsRunning = useCallback(() => {
-    dispatch(toggleRunning());
+    dispatch(setToggleRunning());
   }, [dispatch]);
 
   const updateClearState = useCallback(
@@ -50,13 +50,6 @@ export const useComboPanel = (canvasRef) => {
   const zeroStartCity = useCallback(() => {
     dispatch(setZeroStartCity());
   }, [dispatch]);
-
-  const updateGrid = useCallback(
-    (grid) => {
-      dispatch(setGrid(grid));
-    },
-    [dispatch]
-  );
 
   const handleClear = useCallback(() => {
     const { canvas, context } = getCanvasContext(canvasRef);

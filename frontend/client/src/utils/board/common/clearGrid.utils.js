@@ -1,4 +1,4 @@
-export const clearGrid = (isRunning, grid, finishRow, finishCol) => {
+export const clearGrid = (isRunning, grid) => {
   if (!isRunning) {
     const updatedGrid = grid.slice();
     updatedGrid.forEach((row) => {
@@ -11,7 +11,6 @@ export const clearGrid = (isRunning, grid, finishRow, finishCol) => {
           `grid-cell-${currentNode.row}-${currentNode.col}`
         );
         const words = classId.className.split(' ');
-        console.log(words);
         if (
           words.indexOf('node-start') < 0 &&
           words.indexOf('node-finish') < 0 &&

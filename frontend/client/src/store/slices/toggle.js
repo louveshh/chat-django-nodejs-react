@@ -14,10 +14,10 @@ const toggleSlice = createSlice({
   name: 'toggle',
   initialState,
   reducers: {
-    toggleActiveMode: (state, action) => {
+    setToggleActiveMode: (state, action) => {
       state.activeMode = action.payload;
     },
-    changeTheme: (state, _) => {
+    setChangeTheme: (state, _) => {
       if (state.theme.name === 'light') {
         const darkTheme = {
           mode: dark,
@@ -32,7 +32,7 @@ const toggleSlice = createSlice({
         state.theme = lightTheme;
       }
     },
-    changeLanguage: (state, _) => {
+    setChangeLanguage: (state, _) => {
       if (state.language === 'pl') {
         state.language = 'en';
       } else {
@@ -42,7 +42,7 @@ const toggleSlice = createSlice({
   },
 });
 
-export const { toggleActiveMode, changeTheme, changeLanguage } =
+export const { setToggleActiveMode, setChangeTheme, setChangeLanguage } =
   toggleSlice.actions;
 
 export default toggleSlice.reducer;

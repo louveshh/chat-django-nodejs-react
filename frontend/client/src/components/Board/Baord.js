@@ -1,11 +1,9 @@
 import Node from '../Node/Node';
 import { useBoard } from './board.hooks';
-
 import { GridContainer, BoardWrapper } from './board.styles';
 
 const Baord = ({ active }) => {
   const { grid, handleMouseDown } = useBoard();
-
   return (
     <BoardWrapper active={active}>
       <GridContainer>

@@ -1,18 +1,17 @@
 import { useBoardPanel } from './boardPanel.hooks';
-
 import { configBoard } from '../../config/config';
 import { ButtonsWrapper, StyledSelect } from './boardPanel.styles';
 import SelectBoardAlgorithm from './../SelectBoardAlgorithm/SelectBoardAlgorithm';
 
 const BoardPanel = () => {
   const {
+    isRunning,
+    selectedOption,
+    activeMode,
+    algorithm,
     handleClearGrid,
     handleAlgorithm,
-    selectedOption,
-    handleChange,
-    activeMode,
-    isRunning,
-    algorithm,
+    updateSelectedOption,
   } = useBoardPanel();
   return (
     <ButtonsWrapper>
@@ -24,7 +23,7 @@ const BoardPanel = () => {
       {!isRunning && activeMode === 'board' && <SelectBoardAlgorithm />}
       {activeMode === 'board' && !isRunning && (
         <StyledSelect
-          onChange={handleChange}
+          onChange={updateSelectedOption}
           value={selectedOption}
           options={configBoard.drawOptions}
           placeholder="?"

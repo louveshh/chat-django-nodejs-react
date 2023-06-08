@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -11,72 +11,55 @@ import {
 import { createInitialGrid } from '../../utils/board/createInitalGrid.utils';
 import { clickGrid } from '../../utils/board/clickGrid.utils';
 import { configBoard } from '../../config/config';
-import { addBorders } from './../../utils/board/common/addBorders.util';
+import { addBorders } from '../../utils/board/common/addBorders.util';
 
 export const useBoard = () => {
   const dispatch = useDispatch();
+
   const { points, grid, selectedOption, isRunning } = useSelector(
     (state) => state.board
   );
   const { activeMode } = useSelector((state) => state.toggle);
 
-  const updateStart = useCallback(
-    (row) => {
-      dispatch(setStart(row));
-    },
-    [dispatch]
-  );
-  const updateFinish = useCallback(
-    (row) => {
-      dispatch(setFinish(row));
-    },
-    [dispatch]
-  );
+  const memoGrid = useMemo(() => cloneDeep(grid), [grid]);
+  const memoPoints = useMemo(() => cloneDeep(points), [points]);
 
-  const updateGrid = useCallback(
-    (grid) => {
-      dispatch(setGrid(grid));
-    },
-    [dispatch]
-  );
+  const updateStart = useCallback((payload) => {
+    dispatch(setStart(payload));
+  }, []);
+  const updateFinish = useCallback((payload) => {
+    dispatch(setFinish(payload));
+  }, []);
+  const updateGrid = useCallback((payload) => {
+    dispatch(setGrid(payload));
+  }, []);
 
-  const resetSelectedOption = useCallback(() => {
-    dispatch(setSelectedOption(configBoard.defaultDrawOption));
-  });
+  const updateSelectedOption = useCallback((payload) => {
+    dispatch(setSelectedOption(payload));
+  }, []);
+
   useEffect(() => {
-    updateGrid(createInitialGrid(cloneDeep(points), activeMode));
+    updateGrid(createInitialGrid(memoPoints, activeMode));
     addBorders(grid);
     if (activeMode === 'combo') {
-      resetSelectedOption();
+      updateSelectedOption(configBoard.defaultDrawOption);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeMode]);
 
-  const handleMouseDown = useCallback(
-    (row, col) => {
-      clickGrid(
-        row,
-        col,
-        cloneDeep(grid),
-        selectedOption,
-        isRunning,
-        cloneDeep(points),
-        updateGrid,
-        updateStart,
-        updateFinish
-      );
-    },
-
-    [
-      grid,
-      points,
+  const handleMouseDown = (row, col) => {
+    clickGrid(
+      row,
+      col,
       selectedOption,
       isRunning,
-      updateGrid,
+      memoGrid,
+      memoPoints,
       updateStart,
       updateFinish,
-    ]
-  );
+      updateGrid
+    );
+  };
 
   return {
     grid,

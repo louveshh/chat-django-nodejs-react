@@ -1,26 +1,26 @@
 export const clickGrid = (
   row,
   col,
-  grid,
   selectedOption,
   isRunning,
-  points,
-  updateGrid,
+  memoGrid,
+  memoPoints,
   updateStart,
-  updateFinish
+  updateFinish,
+  updateGrid
 ) => {
-  if (typeof grid === 'undefined') {
+  if (typeof memoGrid === 'undefined') {
     return;
   }
-  if (grid.length === 0) {
+  if (memoGrid.length === 0) {
     return;
   }
   if (isRunning) {
     return;
   }
-  const { startRow, finishRow, startCol, finishCol } = points;
-  const updatedGrid = grid.slice();
-  const currentNode = grid[row][col];
+  const { startRow, finishRow, startCol, finishCol } = memoPoints;
+  const updatedGrid = memoGrid.slice();
+  const currentNode = memoGrid[row][col];
   if (
     !currentNode.isStart &&
     !currentNode.isFinish &&
@@ -37,7 +37,7 @@ export const clickGrid = (
     !currentNode.isFinish &&
     selectedOption.value === 'start'
   ) {
-    const previousStartNode = grid[startRow][startCol];
+    const previousStartNode = memoGrid[startRow][startCol];
     const resetStartNode = {
       ...previousStartNode,
       isStart: false,
@@ -55,7 +55,7 @@ export const clickGrid = (
     !currentNode.isStart &&
     selectedOption.value === 'finish'
   ) {
-    const previousFinishNode = grid[finishRow][finishCol];
+    const previousFinishNode = memoGrid[finishRow][finishCol];
     const resetFinishNode = {
       ...previousFinishNode,
       isFinish: false,

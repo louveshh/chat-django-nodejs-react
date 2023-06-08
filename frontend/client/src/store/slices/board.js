@@ -29,7 +29,7 @@ const boardSlice = createSlice({
     setGrid: (state, action) => {
       state.grid = action.payload;
     },
-    toggleRunning: (state, _) => {
+    setToggleRunning: (state, _) => {
       state.isRunning = !state.isRunning;
     },
     setSelectedOption: (state, action) => {
@@ -45,7 +45,7 @@ export const {
   setStart,
   setFinish,
   setGrid,
-  toggleRunning,
+  setToggleRunning,
   setSelectedOption,
   setAlgorithm,
   setStep,

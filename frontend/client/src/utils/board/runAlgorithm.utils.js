@@ -8,8 +8,8 @@ export const runAlgorithm = (
   algorithm,
   isRunning,
   updateIsRunning,
-  grid,
-  points,
+  memoGrid,
+  memoPoints,
   mode = 'board',
   step = 0
 ) => {
@@ -95,13 +95,13 @@ export const runAlgorithm = (
   const switchAlgorithm = (algorithm, startNode, finishNode) => {
     switch (algorithm) {
       case 'dijkstra':
-        return dijkstra(grid, startNode, finishNode);
+        return dijkstra(memoGrid, startNode, finishNode);
       case 'astar':
-        return AStar(grid, startNode, finishNode);
+        return AStar(memoGrid, startNode, finishNode);
       case 'bfs':
-        return bfs(grid, startNode, finishNode);
+        return bfs(memoGrid, startNode, finishNode);
       case 'dfs':
-        return dfs(grid, startNode, finishNode);
+        return dfs(memoGrid, startNode, finishNode);
       default:
         break;
     }
@@ -109,13 +109,13 @@ export const runAlgorithm = (
   if (isRunning) {
     return;
   }
-  const { startRow, finishRow, startCol, finishCol } = points;
+  const { startRow, finishRow, startCol, finishCol } = memoPoints;
   updateIsRunning();
   if (mode !== 'combo') {
-    clearGrid(isRunning, grid, finishRow, finishCol);
+    clearGrid(isRunning, memoGrid, finishRow, finishCol);
   }
-  const startNode = grid[startRow][startCol];
-  const finishNode = grid[finishRow][finishCol];
+  const startNode = memoGrid[startRow][startCol];
+  const finishNode = memoGrid[finishRow][finishCol];
   const visitedNodesInOrder = switchAlgorithm(algorithm, startNode, finishNode);
   const nodesInShortestPathOrder = getShortestPath(finishNode);
   nodesInShortestPathOrder.push('end');

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleActiveMode } from 'store/slices/toggle';
+import { setToggleActiveMode } from 'store/slices/toggle';
 import {
   setClickPossible,
   setRandomPointsZero,
@@ -15,7 +15,7 @@ export const useToggleMode = () => {
   const dispatch = useDispatch();
 
   const handleToggle = (buttonId) => {
-    dispatch(toggleActiveMode(buttonId));
+    dispatch(setToggleActiveMode(buttonId));
     dispatch(setClickPossible(false));
     dispatch(setRandomPointsZero());
     dispatch(setZeroStartCity());
