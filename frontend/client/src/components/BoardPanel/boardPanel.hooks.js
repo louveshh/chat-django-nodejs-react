@@ -29,16 +29,25 @@ export const useBoardPanel = () => {
 
   const updateToggleRunning = useCallback(() => {
     dispatch(setToggleRunning());
-  }, []);
-  const updateSelectedOption = useCallback((payload) => {
-    dispatch(setSelectedOption(payload));
-  }, []);
-  const updateAlgorithm = useCallback((payload) => {
-    dispatch(setAlgorithm(payload));
-  }, []);
-  const updateClear = useCallback((payload) => {
-    dispatch(setClearBoard(payload));
-  }, []);
+  }, [dispatch]);
+  const updateSelectedOption = useCallback(
+    (payload) => {
+      dispatch(setSelectedOption(payload));
+    },
+    [dispatch]
+  );
+  const updateAlgorithm = useCallback(
+    (payload) => {
+      dispatch(setAlgorithm(payload));
+    },
+    [dispatch]
+  );
+  const updateClear = useCallback(
+    (payload) => {
+      dispatch(setClearBoard(payload));
+    },
+    [dispatch]
+  );
 
   const handleClearGrid = () => {
     updateClear(false);

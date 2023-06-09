@@ -1,6 +1,5 @@
 import { useMapPanel } from './mapPanel.hooks';
 import { StyledButton } from '../Map/map.styles';
-import { configMap } from '../../config/config';
 import Click from '../Click/Click';
 import SelectCity from '../SelectCity/SelectCity';
 import SelectMapAlgorithm from '../SelectMapAlgorithm/SelectMapAlgorithm';

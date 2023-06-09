@@ -3,9 +3,9 @@ import { drawClickedCity } from './common/drawClickedCity.utils';
 import { drawCities } from './common/drawCities.utils';
 import { drawPath } from './common/drawPath.utils';
 import { finishDrawing } from './common/finishDrawing.utils';
-import { configMap } from '../../config/config';
 
 export const calculateShortestPath = (
+  theme,
   canvas,
   context,
   circlePoint,
@@ -21,7 +21,7 @@ export const calculateShortestPath = (
   };
 
   const drawTestingPathTSG = (shortestPath, animationIndex, cities) => {
-    context.strokeStyle = configMap.colors.testingLine;
+    context.strokeStyle = theme.map.testingLine;
     context.beginPath();
     shortestPath.forEach((point, index) => {
       if (index >= animationIndex) {
@@ -67,10 +67,10 @@ export const calculateShortestPath = (
 
       clearMap(canvas, context);
       if (clickPossible) {
-        drawClickedCity(context, circlePoint);
+        drawClickedCity(theme, context, circlePoint);
       }
-      drawCities(context, randomPoints);
-      drawPath(context, shortestPath);
+      drawCities(theme, context, randomPoints);
+      drawPath(theme, context, shortestPath);
       drawTestingPathTSG(shortestPath, index, randomPoints);
       finishDrawing(context);
 

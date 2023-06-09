@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
+import { useTheme } from 'styled-components';
 
 import {
   setPathingInProgress,
@@ -9,8 +10,6 @@ import {
   setAlgorithm,
   setClickPossible,
 } from 'store/slices/map';
-
-import { configDisplay } from 'config/config';
 import { setToggleRunning, setClearBoard } from '../../store/slices/board';
 import { clearGrid } from '../../utils/board/common/clearGrid.utils';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
@@ -18,9 +17,12 @@ import { clearMap } from '../../utils/map/common/clearMap.utils';
 import { calculateShortestPath } from '../../utils/map/calculateShortestPath.utils';
 import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
 import { removeBorders } from '../../utils/board/common/removeBorders.utils';
+import { coordinatesToBlockNumbers } from '../../utils/combo/coordinatesToBlockNumbers.utils';
+import { dividePoints } from '../../utils/combo/dividePoints.utils';
 
 export const useComboPanel = (canvasRef) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const {
     pathingInProgress: mapPathingInProgress,
@@ -60,39 +62,51 @@ export const useComboPanel = (canvasRef) => {
     },
     [dispatch]
   );
-  const handleClearMap = useCallback(() => {
-    const { canvas, context } = getCanvasContext(canvasRef);
+
+  const updateAlgorithm = useCallback(
+    (payload) => {
+      dispatch(setAlgorithm(payload));
+    },
+    [dispatch]
+  );
+
+  const updateZeroStartCity = useCallback(() => {
     dispatch(setZeroStartCity());
-    clearMap(canvas, context);
-    updateClearMap(false);
-    dispatch(setAlgorithm(null));
-    dispatch(setClickPossible(false));
-  }, [updateClearMap]);
+  }, [dispatch]);
+
+  const updateClickPossible = useCallback(() => {
+    dispatch(setClickPossible());
+  }, [dispatch]);
 
   const updateToggleRunning = useCallback(() => {
     dispatch(setToggleRunning());
   }, [dispatch]);
 
-  const updateClearBoard = useCallback((payload) => {
-    dispatch(setClearBoard(payload));
-  }, []);
+  const updateClearBoard = useCallback(
+    (payload) => {
+      dispatch(setClearBoard(payload));
+    },
+    [dispatch]
+  );
+
+  const handleClearMap = useCallback(() => {
+    const { canvas, context } = getCanvasContext(canvasRef);
+    updateZeroStartCity();
+    clearMap(canvas, context);
+    updateClearMap(false);
+    updateAlgorithm(null);
+    updateClickPossible(false);
+  }, [
+    canvasRef,
+    updateAlgorithm,
+    updateClearMap,
+    updateClickPossible,
+    updateZeroStartCity,
+  ]);
+
   const handleClearBoard = (payload) => {
     updateClearBoard(payload);
     clearGrid(boardPathingInProgress, currentGrid);
-  };
-
-  const coordinatesToBlockNumbers = (input) => {
-    const blockSize = configDisplay.NODE_SIZE();
-    return Math.floor(input / blockSize);
-  };
-  const dividePoints = (shortestPath) => {
-    const outputArray = shortestPath.reduce((result, obj, index) => {
-      if (index < shortestPath.length - 1) {
-        result.push([obj, shortestPath[index + 1]]);
-      }
-      return result;
-    }, []);
-    return outputArray;
   };
 
   const iterateArrayAsync = async (outputArray, index, newStep) => {
@@ -141,6 +155,7 @@ export const useComboPanel = (canvasRef) => {
     const { canvas, context } = getCanvasContext(canvasRef);
 
     const shortestPathPromise = calculateShortestPath(
+      theme,
       canvas,
       context,
       circlePoint,
@@ -155,12 +170,15 @@ export const useComboPanel = (canvasRef) => {
     updateClearMap(true);
     shortestPathPromise
       .then((shortestPath) => {
-        removeBorders(grid);
+        removeBorders();
         const dividedPoints = dividePoints(shortestPath);
         return dividedPoints;
       })
       .then((outputArray) => {
         iterateArrayAsync(outputArray, 0, 0);
+      })
+      .then(() => {
+        updateZeroStartCity();
       });
   };
 

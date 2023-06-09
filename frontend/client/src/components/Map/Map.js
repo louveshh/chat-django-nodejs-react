@@ -4,11 +4,11 @@ import { BackgroundImage, CanvasMap } from './map.styles';
 import { configDisplay } from '../../config/config';
 
 const Map = ({ canvasRef, active }) => {
-  const { activeMode, theme, handleCanvasClick, handleMouseMove } =
+  const { activeMode, themeName, handleCanvasClick, handleMouseMove } =
     useMap(canvasRef);
 
   return (
-    <BackgroundImage theme={theme.name} mode={activeMode} active={active}>
+    <BackgroundImage theme={themeName.name} mode={activeMode} active={active}>
       <CanvasMap
         ref={canvasRef}
         width={configDisplay.DISPLAY_SIZE}

@@ -1,4 +1,4 @@
-import { configDisplay } from './../../config/config';
+import { configDisplay } from '../../config/config';
 
 export const selectClickCity = (
   canvasRef,

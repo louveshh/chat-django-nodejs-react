@@ -24,27 +24,39 @@ export const useBoard = () => {
   const memoGrid = useMemo(() => cloneDeep(grid), [grid]);
   const memoPoints = useMemo(() => cloneDeep(points), [points]);
 
-  const updateStart = useCallback((payload) => {
-    dispatch(setStart(payload));
-  }, []);
-  const updateFinish = useCallback((payload) => {
-    dispatch(setFinish(payload));
-  }, []);
-  const updateGrid = useCallback((payload) => {
-    dispatch(setGrid(payload));
-  }, []);
+  const updateStart = useCallback(
+    (payload) => {
+      dispatch(setStart(payload));
+    },
+    [dispatch]
+  );
+  const updateFinish = useCallback(
+    (payload) => {
+      dispatch(setFinish(payload));
+    },
+    [dispatch]
+  );
+  const updateGrid = useCallback(
+    (payload) => {
+      dispatch(setGrid(payload));
+    },
+    [dispatch]
+  );
 
-  const updateSelectedOption = useCallback((payload) => {
-    dispatch(setSelectedOption(payload));
-  }, []);
+  const updateSelectedOption = useCallback(
+    (payload) => {
+      dispatch(setSelectedOption(payload));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     updateGrid(createInitialGrid(memoPoints, activeMode));
-    addBorders(grid);
+    addBorders();
     if (activeMode === 'combo') {
       updateSelectedOption(configBoard.defaultDrawOption);
     }
-  }, [activeMode]);
+  }, [activeMode, memoPoints, updateGrid, updateSelectedOption]);
 
   const handleMouseDown = (row, col) => {
     clickGrid(

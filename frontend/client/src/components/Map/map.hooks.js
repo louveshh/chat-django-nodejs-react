@@ -1,7 +1,8 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from 'styled-components';
 
-import { setCirclePoint, setRandomPoints, setClearMap } from 'store/slices/map';
+import { setCirclePoint, setRandomPoints } from 'store/slices/map';
 import { tempRandom } from '../../utils/map/tempRandom.utils';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
@@ -13,6 +14,7 @@ import { configDisplay, configMap } from '../../config/config';
 
 export const useMap = (canvasRef) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const {
     circlePoint,
@@ -23,7 +25,7 @@ export const useMap = (canvasRef) => {
     algorithm,
     filteredCities,
   } = useSelector((state) => state.map);
-  const { activeMode, theme } = useSelector((state) => state.toggle);
+  const { activeMode, theme: themeName } = useSelector((state) => state.toggle);
 
   const updateCirclePoint = (newPoint) => {
     dispatch(setCirclePoint(newPoint));
@@ -32,13 +34,6 @@ export const useMap = (canvasRef) => {
   const updateRandomPoints = useCallback(
     (payload) => {
       dispatch(setRandomPoints(payload));
-    },
-    [dispatch]
-  );
-
-  const updateClearMap = useCallback(
-    (payload) => {
-      dispatch(setClearMap(payload));
     },
     [dispatch]
   );
@@ -54,33 +49,34 @@ export const useMap = (canvasRef) => {
     }
     if (activeMode === 'map') {
       const { canvas, context } = getCanvasContext(canvasRef);
+      clearMap(canvas, context);
       context.lineJoin = configMap.context.lineJoin;
       context.lineCap = configMap.context.lineCap;
       context.lineWidth = configMap.context.lineWidth;
       context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
-      clearMap(canvas, context);
       if (clickPossible && algorithm === 'sort') {
-        drawClickedCity(context, circlePoint, true);
+        drawClickedCity(theme, context, circlePoint, true);
       }
       if (clickPossible && algorithm !== 'sort') {
-        drawClickedCity(context, circlePoint, false);
+        drawClickedCity(theme, context, circlePoint, false);
       }
       if (algorithm === 'sort') {
-        drawCities(context, randomPoints, true);
+        drawCities(theme, context, randomPoints, true);
       } else {
-        drawCities(context, randomPoints, false);
+        drawCities(theme, context, randomPoints, false);
       }
       finishDrawing(context);
     }
   }, [
-    circlePoint,
-    randomPoints,
-    toClear,
-    pathingInProgress,
     activeMode,
-    clickPossible,
     algorithm,
-    updateClearMap,
+    canvasRef,
+    circlePoint,
+    clickPossible,
+    pathingInProgress,
+    randomPoints,
+    theme,
+    toClear,
   ]);
 
   useEffect(() => {
@@ -100,18 +96,18 @@ export const useMap = (canvasRef) => {
         selectedStart: item.value.selectedStart,
       }));
       if (configMap.clickPossibleTargets.includes(activeMode)) {
-        drawClickedCity(context, circlePoint, false);
+        drawClickedCity(theme, context, circlePoint, false);
       }
-      drawCities(context, filteredCitiesMapped, false);
+      drawCities(theme, context, filteredCitiesMapped, false);
     }
   }, [
-    circlePoint,
-    randomPoints,
-    toClear,
-    pathingInProgress,
     activeMode,
+    canvasRef,
+    circlePoint,
     filteredCities,
-    updateClearMap,
+    pathingInProgress,
+    theme,
+    toClear,
   ]);
 
   const handleCanvasClick = (event) => {
@@ -156,7 +152,7 @@ export const useMap = (canvasRef) => {
   return {
     canvasRef,
     activeMode,
-    theme,
+    themeName,
     handleCanvasClick,
     handleMouseMove,
   };

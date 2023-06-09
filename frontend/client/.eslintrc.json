@@ -7,7 +7,8 @@
     "airbnb",
     "plugin:prettier/recommended",
     "eslint:recommended",
-    "plugin:import/recommended"
+    "plugin:import/recommended",
+    "react-app"
   ],
   "overrides": [],
   "parserOptions": {
@@ -23,8 +24,6 @@
     "import"
   ],
   "settings": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error",
     "import/resolver": {
       "node": {
         "extensions": [".js", ".jsx"],
@@ -34,6 +33,8 @@
   },
 
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "prettier/prettier": [
       "error",
       {

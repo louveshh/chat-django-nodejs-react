@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from 'styled-components';
 
 import {
   setPathingInProgress,
@@ -20,6 +21,7 @@ import { calculateRandomPath } from '../../utils/map/calculateRandomPath.utils';
 
 export const useMapPanel = (canvasRef) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const {
     circlePoint,
@@ -55,14 +57,15 @@ export const useMapPanel = (canvasRef) => {
     updateClearState(false);
     dispatch(setAlgorithm(null));
     dispatch(setClickPossible(false));
-  }, [updateClearState, zeroStartCity]);
+  }, [canvasRef, dispatch, updateClearState, zeroStartCity]);
 
-  const handleTSGClick = useCallback(() => {
+  const handleTSGClick = () => {
     if (toClear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
     calculateShortestPath(
+      theme,
       canvas,
       context,
       circlePoint,
@@ -71,22 +74,15 @@ export const useMapPanel = (canvasRef) => {
       updatePathingInProgress,
       updateClearState
     );
-  }, [
-    circlePoint,
-    toClear,
-    pathingInProgress,
-    randomPoints,
-    clickPossible,
-    updateClearState,
-    updatePathingInProgress,
-  ]);
+  };
 
-  const handleSortClick = useCallback(() => {
+  const handleSortClick = () => {
     if (toClear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
     calculateSortedPath(
+      theme,
       randomPoints,
       circlePoint,
       clickPossible,
@@ -95,44 +91,29 @@ export const useMapPanel = (canvasRef) => {
       updateClearState,
       updatePathingInProgress
     );
-  }, [
-    circlePoint,
-    toClear,
-    pathingInProgress,
-    randomPoints,
-    clickPossible,
-    updateClearState,
-    updatePathingInProgress,
-  ]);
+  };
 
-  const handleRandomClick = useCallback(() => {
+  const handleRandomClick = () => {
     if (toClear || pathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
     calculateRandomPath(
+      theme,
       canvas,
       context,
       clickPossible,
       circlePoint,
       randomPoints,
-      updatePathingInProgress,
       clearMap,
+      updatePathingInProgress,
       drawClickedCity,
       drawCities,
       drawSimplePath,
       finishDrawing,
       updateClearState
     );
-  }, [
-    toClear,
-    pathingInProgress,
-    clickPossible,
-    circlePoint,
-    randomPoints,
-    updatePathingInProgress,
-    updateClearState,
-  ]);
+  };
 
   const handleAlgorithm = () => {
     switch (algorithm) {

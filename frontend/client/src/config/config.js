@@ -92,14 +92,6 @@ export const configMap = {
     { value: map.sort, label: map.sort },
     { value: map.random, label: map.random },
   ],
-  colors: {
-    // colors used in map
-    clickedCity: '#ffaacc',
-    highlightedCity: 'yellow',
-    city: 'black',
-    testingLine: 'yellow',
-    line: 'black',
-  },
 };
 
 export const configPanel = {

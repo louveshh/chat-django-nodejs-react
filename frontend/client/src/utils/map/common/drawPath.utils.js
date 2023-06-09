@@ -1,7 +1,5 @@
-import { configMap } from '../../../config/config';
-
-export const drawPath = (context, shortestPath) => {
-  context.strokeStyle = configMap.colors.line;
+export const drawPath = (theme, context, shortestPath) => {
+  context.strokeStyle = theme.map.line;
   context.beginPath();
 
   shortestPath.forEach((point, index) => {

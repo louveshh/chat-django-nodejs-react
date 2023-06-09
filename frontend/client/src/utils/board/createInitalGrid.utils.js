@@ -1,4 +1,4 @@
-import { configBoard, configDisplay } from 'config/config';
+import { configDisplay } from 'config/config';
 
 export const createInitialGrid = (points, mode) => {
   const node = (row, col, startRow, finishRow, startCol, finishCol) => ({

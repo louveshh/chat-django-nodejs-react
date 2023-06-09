@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import canvasImage from '../../assets/map.jpg';
-import { configDisplay } from './../../config/config';
+import { configDisplay } from '../../config/config';
 
 export const MapWrapper = styled.div`
   height: 100%;
@@ -40,7 +40,7 @@ export const BackgroundImage = styled.div`
   ${(props) => {
     if (props.theme === 'dark') {
       return `
-      filter: brightness(0.6) contrast(0.99) hue-rotate(2deg) sepia(10%) drop-shadow(10px 10px 20px #121212);
+      filter: brightness(0.6) contrast(0.99) hue-rotate(2deg) sepia(10%) drop-shadow(10px 10px 20px #121212) !important;
         `;
     }
   }}

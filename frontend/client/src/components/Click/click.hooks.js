@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCirclePointZero,
@@ -8,13 +9,29 @@ import {
 export const useCLick = () => {
   const { clickPossible, algorithm } = useSelector((state) => state.map);
   const dispatch = useDispatch();
-  const handleClick = () => {
+
+  const updateToggleClickPossible = useCallback(() => {
     dispatch(setToggleClickPossible());
+  }, [dispatch]);
+
+  const updateRandomPointsZero = useCallback(() => {
     dispatch(setRandomPointsZero());
+  }, [dispatch]);
+
+  const updateCirclePointZero = useCallback(
+    (payload) => {
+      dispatch(setCirclePointZero(payload));
+    },
+    [dispatch]
+  );
+
+  const handleClick = () => {
+    updateToggleClickPossible();
+    updateRandomPointsZero();
     if (algorithm === 'tsg') {
-      dispatch(setCirclePointZero(true));
+      updateCirclePointZero(true);
     } else {
-      dispatch(setCirclePointZero(false));
+      updateCirclePointZero(false);
     }
   };
   return { clickPossible, handleClick };

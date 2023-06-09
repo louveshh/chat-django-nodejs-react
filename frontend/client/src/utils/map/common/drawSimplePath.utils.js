@@ -1,6 +1,5 @@
-import { configMap } from '../../../config/config';
-
 export const drawSimplePath = (
+  theme,
   context,
   points,
   circlePoint,
@@ -8,7 +7,7 @@ export const drawSimplePath = (
   setPathingInProgres,
   random = false
 ) => {
-  context.strokeStyle = configMap.colors.line;
+  context.strokeStyle = theme.map.line;
   context.beginPath();
 
   const fullPoints = [...points];
