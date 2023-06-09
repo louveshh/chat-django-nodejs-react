@@ -25,7 +25,18 @@ export default createGlobalStyle`
 
   body {
     -webkit-font-smoothing: antialiased;
-    background-color: ${(props) => props.theme.color.background};
+    background-color: ${(props) => props.theme.view.background};
+  }
+  :root {
+    --board-start: ${(props) => props.theme.board.start};
+    --board-finish: ${(props) => props.theme.board.finish};
+    --board-wall: ${(props) => props.theme.board.wall};
+    --board-visited0: ${(props) => props.theme.board.visited0};
+    --board-visited25: ${(props) => props.theme.board.visited25};
+    --board-visited100: ${(props) => props.theme.board.visited100};
+    --board-shortest0: ${(props) => props.theme.board.shortest0};
+    --board-shortest50: ${(props) => props.theme.board.shortest50};
+    --board-shortest100: ${(props) => props.theme.board.shortest100};
   }
 
 `;

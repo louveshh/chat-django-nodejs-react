@@ -10,11 +10,11 @@
 }
 
 .node-finish {
-  background-color: rgba(256, 0, 0, 0.8);
+  background-color: var(--board-finish);
 }
 
 .node-start {
-  background-color: rgba(0, 256, 0, 0.9);
+  background-color: var(--board-start);
 }
 
 .node-visited {
@@ -31,21 +31,21 @@
 @keyframes visitedAnimation {
   0% {
     transform: scale(1) rotate(0deg);
-    background-color: rgb(255, 200, 0);
+    background-color: var(--board-visited0);
   }
   25% {
-    background-color: rgba(255, 0, 0, 0.922);
     transform: scale(0.7) rotate(90deg);
+    background-color: var(--board-visited25);
   }
 
   100% {
     transform: scale(0.6) rotate(360deg);
-    background-color: rgba(89, 60, 143, 0.74);
+    background-color: var(--board-visited100);
   }
 }
 
 .node-wall {
-  background-color: rgb(3, 58, 80);
+  background-color: var(--board-wall);
 }
 
 .node-shortest-path {
@@ -62,16 +62,16 @@
 @keyframes shortestPath {
   0% {
     transform: scale(0.6);
-    background-color: rgba(0, 181, 60, 0.682);
+    background-color: var(--board-shortest0);
   }
 
   50% {
     transform: scale(1.2);
-    background-color: rgba(165, 16, 16, 0.686);
+    background-color: var(--board-shortest50);
   }
 
   100% {
     transform: scale(1);
-    background-color: rgba(245, 221, 9, 0.776);
+    background-color: var(--board-shortest100);
   }
 }

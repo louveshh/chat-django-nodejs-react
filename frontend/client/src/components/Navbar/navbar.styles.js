@@ -35,22 +35,22 @@ export const Triangle = styled.div`
   &:nth-child(1) {
     left: 0;
     clip-path: polygon(100% 0, 0 0, 50% 100%);
-    background-color: ${(props) => props.theme.color.primary};
+    background-color: ${(props) => props.theme.view.primary};
   }
 
   &:nth-child(2) {
     left: 25%;
     clip-path: polygon(50% 0, 0 100%, 100% 100%);
-    background-color: ${(props) => props.theme.color.secondary};
+    background-color: ${(props) => props.theme.view.secondary};
   }
 
   &:nth-child(3) {
     left: 50%;
     clip-path: polygon(100% 0, 0 0, 50% 100%);
-    background-color: ${(props) => props.theme.color.primary};
+    background-color: ${(props) => props.theme.view.primary};
   }
 
   &:hover {
-    background-color: ${(props) => props.theme.color.secondary2};
+    background-color: ${(props) => props.theme.view.secondary2};
   }
 `;
