@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import canvasImage from '../../assets/map.jpg';
+import { configDisplay } from './../../config/config';
 
 export const MapWrapper = styled.div`
   height: 100%;
@@ -19,8 +20,8 @@ export const BackgroundImage = styled.div`
   background-image: url('${canvasImage}');
   background-size: cover;
   background-position: center;
-  width: 640px;
-  height: 640px;
+  width: ${configDisplay.DISPLAY_SIZE}px;
+  height: ${configDisplay.DISPLAY_SIZE}px;
   ${(props) => {
     if (!props.active) {
       return `

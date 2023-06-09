@@ -9,7 +9,7 @@ import { drawCities } from '../../utils/map/common/drawCities.utils';
 import { finishDrawing } from '../../utils/map/common/finishDrawing.utils';
 import { selectClickCity } from '../../utils/map/selectClickCity.utils';
 import { drawClickedCity } from '../../utils/map/common/drawClickedCity.utils';
-import { configMap } from '../../config/config';
+import { configDisplay, configMap } from '../../config/config';
 
 export const useMap = (canvasRef) => {
   const dispatch = useDispatch();
@@ -87,7 +87,7 @@ export const useMap = (canvasRef) => {
     if (toClear || pathingInProgress) {
       return;
     }
-    if (activeMode === 'combo') {
+    if (activeMode !== 'map') {
       const { canvas, context } = getCanvasContext(canvasRef);
       context.lineJoin = configMap.context.lineJoin;
       context.lineCap = configMap.context.lineCap;
@@ -99,6 +99,9 @@ export const useMap = (canvasRef) => {
         y: item.value.y,
         selectedStart: item.value.selectedStart,
       }));
+      if (configMap.clickPossibleTargets.includes(activeMode)) {
+        drawClickedCity(context, circlePoint, false);
+      }
       drawCities(context, filteredCitiesMapped, false);
     }
   }, [
@@ -112,7 +115,10 @@ export const useMap = (canvasRef) => {
   ]);
 
   const handleCanvasClick = (event) => {
-    if (!clickPossible && configMap.clickPossibleTargets.includes(activeMode)) {
+    if (
+      !clickPossible &&
+      !configMap.clickPossibleTargets.includes(activeMode)
+    ) {
       return;
     }
     selectClickCity(canvasRef, event, updateCirclePoint, circlePoint);
@@ -125,12 +131,15 @@ export const useMap = (canvasRef) => {
     const rect = canvas.getBoundingClientRect();
     let mouseX;
     let mouseY;
-    if (rect?.height > 321 && rect.width > 321) {
+    if (
+      rect?.height > configDisplay.SCALED_DISPLAY_SIZE() &&
+      rect.width > configDisplay.SCALED_DISPLAY_SIZE()
+    ) {
       mouseX = event.clientX - rect.left;
       mouseY = event.clientY - rect.top;
     } else {
-      mouseX = (event.clientX - rect.left) * 2;
-      mouseY = (event.clientY - rect.top) * 2;
+      mouseX = (event.clientX - rect.left) * configDisplay.SCALED_CLICK();
+      mouseY = (event.clientY - rect.top) * configDisplay.SCALED_CLICK();
     }
     const selectedSize = 5;
 

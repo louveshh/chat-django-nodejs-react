@@ -18,25 +18,19 @@ const MapPanel = ({ canvasRef }) => {
   } = useMapPanel(canvasRef);
   return (
     <div>
-      {!toClear &&
-        !pathingInProgress &&
-        configMap.settings.includes(activeMode) && (
-          <>
-            {activeMode !== 'combo' && <SelectMapAlgorithm />}
-            {activeMode !== 'combo' && algorithm && <Click />}
-            {activeMode !== 'combo' && algorithm === 'tsg' && clickPossible && (
-              <SelectCity />
-            )}
-            {activeMode !== 'combo' &&
-              algorithm === 'sort' &&
-              clickPossible && <WeightBar />}
-            {algorithm && (
-              <StyledButton type="button" onClick={handleAlgorithm()}>
-                RUN ALGO
-              </StyledButton>
-            )}
-          </>
-        )}
+      {!toClear && !pathingInProgress && activeMode === 'map' && (
+        <>
+          <SelectMapAlgorithm />
+          {algorithm && <Click />}
+          {algorithm === 'tsg' && clickPossible && <SelectCity />}
+          {algorithm === 'sort' && clickPossible && <WeightBar />}
+          {algorithm && (
+            <StyledButton type="button" onClick={handleAlgorithm()}>
+              RUN ALGO
+            </StyledButton>
+          )}
+        </>
+      )}
       {!pathingInProgress && toClear && activeMode === 'map' && (
         <StyledButton type="button" className="button" onClick={handleClear}>
           CLEAR MAP

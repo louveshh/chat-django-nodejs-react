@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { configDisplay } from '../../config/config';
 
 export const ViewContainer = styled.div`
   display: flex;
@@ -6,7 +7,7 @@ export const ViewContainer = styled.div`
   align-items: center;
   width: 100%;
   @media (max-width: 700px) {
-    transform: scale(0.5);
+    transform: scale(${configDisplay.SCALE});
     position: absolute;
     top: 10%;
     max-height: 300px;

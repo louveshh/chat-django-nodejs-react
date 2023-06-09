@@ -1,4 +1,4 @@
-import { configBoard } from 'config/config';
+import { configBoard, configDisplay } from 'config/config';
 
 export const createInitialGrid = (points, mode) => {
   const node = (row, col, startRow, finishRow, startCol, finishCol) => ({
@@ -15,10 +15,9 @@ export const createInitialGrid = (points, mode) => {
   });
   const grid = [];
   const { startRow, finishRow, startCol, finishCol } = points;
-  const { ROW_COUNT, COLUMN_COUNT } = configBoard;
-  for (let row = 0; row < ROW_COUNT; row++) {
+  for (let row = 0; row < configDisplay.AMOUNT_OF_CELLS; row++) {
     const currentRow = [];
-    for (let col = 0; col < COLUMN_COUNT; col++) {
+    for (let col = 0; col < configDisplay.AMOUNT_OF_CELLS; col++) {
       currentRow.push(node(row, col, startRow, finishRow, startCol, finishCol));
     }
     grid.push(currentRow);

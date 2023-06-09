@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { configDisplay } from './../../config/config';
 
 const initialState = {
   circlePoint: {
-    x: 320,
-    y: 320,
+    x: configDisplay.DISPLAY_SIZE / 2,
+    y: configDisplay.DISPLAY_SIZE / 2,
     weight: 0,
     selectedStart: false,
     name: 'click',

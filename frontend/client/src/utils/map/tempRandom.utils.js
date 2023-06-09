@@ -1,8 +1,10 @@
+import { configDisplay } from '../../config/config';
+
 export const tempRandom = (setRandomPoints) => {
   const points = [];
-  const canvasWidth = 640;
-  const canvasHeight = 640;
-  const minDistance = 40;
+  const canvasWidth = configDisplay.DISPLAY_SIZE;
+  const canvasHeight = configDisplay.DISPLAY_SIZE;
+  const minDistance = configDisplay.AMOUNT_OF_CELLS;
 
   for (let i = 0; i < 10; i++) {
     const whileCond = true;

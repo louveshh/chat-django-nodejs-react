@@ -1,4 +1,5 @@
 import './node.styles.css';
+import { configDisplay } from 'config/config';
 import { useNode } from './node.hooks';
 
 const Node = ({ col, row, isFinish, isStart, isWall, onMouseDown }) => {
@@ -10,6 +11,10 @@ const Node = ({ col, row, isFinish, isStart, isWall, onMouseDown }) => {
   return (
     <div
       id={`grid-cell-${row}-${col}`}
+      style={{
+        width: `${configDisplay.NODE_SIZE}px`,
+        height: `${configDisplay.NODE_SIZE}px`,
+      }}
       className={`grid-cell ${extraClassName} ${extraNodeBorder}`}
       onMouseDown={() => onMouseDown(row, col)}
       role="button"

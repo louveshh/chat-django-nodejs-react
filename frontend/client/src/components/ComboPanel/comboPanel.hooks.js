@@ -10,6 +10,7 @@ import {
   setClickPossible,
 } from 'store/slices/map';
 
+import { configDisplay } from 'config/config';
 import { setToggleRunning, setClearBoard } from '../../store/slices/board';
 import { clearGrid } from '../../utils/board/common/clearGrid.utils';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
@@ -81,7 +82,7 @@ export const useComboPanel = (canvasRef) => {
   };
 
   const coordinatesToBlockNumbers = (input) => {
-    const blockSize = 16;
+    const blockSize = configDisplay.NODE_SIZE();
     return Math.floor(input / blockSize);
   };
   const dividePoints = (shortestPath) => {
@@ -160,8 +161,7 @@ export const useComboPanel = (canvasRef) => {
       })
       .then((outputArray) => {
         iterateArrayAsync(outputArray, 0, 0);
-      })
-      .then(() => {});
+      });
   };
 
   return {
