@@ -2,23 +2,14 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
-import {
-  setStart,
-  setFinish,
-  setGrid,
-  setSelectedOption,
-} from '../../store/slices/board';
+import { setStart, setFinish, setGrid } from '../../store/slices/board';
 import { createInitialGrid } from '../../utils/board/createInitalGrid.utils';
 import { clickGrid } from '../../utils/board/clickGrid.utils';
-import { configBoard } from '../../config/config';
-import { addBorders } from '../../utils/board/common/addBorders.util';
 
 export const useBoard = () => {
   const dispatch = useDispatch();
 
-  const { points, grid, selectedOption, pathingInProgress } = useSelector(
-    (state) => state.board
-  );
+  const { points, grid, selectedOption, pathingInProgress } = useSelector((state) => state.board);
   const { activeMode } = useSelector((state) => state.toggle);
 
   const memoGrid = useMemo(() => cloneDeep(grid), [grid]);
@@ -43,33 +34,13 @@ export const useBoard = () => {
     [dispatch]
   );
 
-  const updateSelectedOption = useCallback(
-    (payload) => {
-      dispatch(setSelectedOption(payload));
-    },
-    [dispatch]
-  );
-
   useEffect(() => {
     updateGrid(createInitialGrid(memoPoints, activeMode));
-    addBorders();
-    if (activeMode === 'combo') {
-      updateSelectedOption(configBoard.defaultDrawOption);
-    }
-  }, [activeMode, memoPoints, updateGrid, updateSelectedOption]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeMode]);
 
   const handleMouseDown = (row, col) => {
-    clickGrid(
-      row,
-      col,
-      selectedOption,
-      pathingInProgress,
-      memoGrid,
-      memoPoints,
-      updateStart,
-      updateFinish,
-      updateGrid
-    );
+    clickGrid(row, col, selectedOption, pathingInProgress, memoGrid, memoPoints, updateStart, updateFinish, updateGrid);
   };
 
   return {

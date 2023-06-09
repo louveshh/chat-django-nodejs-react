@@ -1,5 +1,3 @@
-import { finishDrawing } from './finishDrawing.utils';
-
 export const drawCities = (theme, context, cities, weights = false) => {
   cities.forEach((point) => {
     if (point.selectedStart) {

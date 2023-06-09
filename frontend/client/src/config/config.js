@@ -11,7 +11,7 @@ export const mode = {
 export const grid = {
   display: 640,
   cells: 40, // cannot be 0
-  scale: 0.7, // cannot be 0
+  scale: 0.4, // cannot be 0
 };
 export const board = {
   dijkstra: 'dijkstra',
@@ -39,8 +39,8 @@ export const configDisplay = {
   SCALE: grid.scale, // cannot be 0
 
   NODE_SIZE: () => configDisplay.DISPLAY_SIZE / configDisplay.AMOUNT_OF_CELLS,
-  SCALED_DISPLAY_SIZE: () =>
-    configDisplay.DISPLAY_SIZE / configDisplay.SCALE + 1,
+  SCALED_DISPLAY_SIZE: () => configDisplay.DISPLAY_SIZE * configDisplay.SCALE + 2,
+  RESCALED_VALUE: () => configDisplay.DISPLAY_SIZE / configDisplay.SCALE + 1,
   SCALED_CLICK: () => 1 / configDisplay.SCALE,
 };
 

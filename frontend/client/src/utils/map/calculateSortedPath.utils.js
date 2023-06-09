@@ -2,7 +2,6 @@ import { clearMap } from './common/clearMap.utils';
 import { drawClickedCity } from './common/drawClickedCity.utils';
 import { drawCities } from './common/drawCities.utils';
 import { drawPath } from './common/drawPath.utils';
-import { finishDrawing } from './common/finishDrawing.utils';
 
 const drawTestingPathSort = (theme, context, arr, startIndex, lastIndex) => {
   context.strokeStyle = theme.map.testingLine;
@@ -10,7 +9,6 @@ const drawTestingPathSort = (theme, context, arr, startIndex, lastIndex) => {
   context.moveTo(arr[startIndex].x, arr[startIndex].y);
   context.lineTo(arr[lastIndex].x, arr[lastIndex].y);
   context.stroke();
-  finishDrawing(context);
 };
 
 export const calculateSortedPath = async (

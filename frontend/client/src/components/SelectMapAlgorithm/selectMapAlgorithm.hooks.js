@@ -1,20 +1,35 @@
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setAlgorithm,
-  setRandomPointsZero,
-  setZeroStartCity,
-  setClickPossible,
-} from 'store/slices/map';
+import { setAlgorithm, setRandomPointsZero, setZeroStartCity, setClickPossible } from 'store/slices/map';
 
 export const useSelectMapAlgorithm = () => {
   const { activeMode } = useSelector((state) => state.toggle);
   const dispatch = useDispatch();
 
-  const handleSelectMapAlgorithm = (event) => {
-    dispatch(setAlgorithm(event.value));
+  const handleAlgorithm = useCallback(
+    (payload) => {
+      dispatch(setAlgorithm(payload));
+    },
+    [dispatch]
+  );
+  const handleRandomPointsZero = useCallback(() => {
     dispatch(setRandomPointsZero());
+  }, [dispatch]);
+  const handleZeroStartCity = useCallback(() => {
     dispatch(setZeroStartCity());
-    dispatch(setClickPossible(false));
+  }, [dispatch]);
+  const handleClickPossible = useCallback(
+    (payload) => {
+      dispatch(setClickPossible(payload));
+    },
+    [dispatch]
+  );
+
+  const handleSelectMapAlgorithm = (event) => {
+    handleAlgorithm(event.value);
+    handleRandomPointsZero();
+    handleZeroStartCity();
+    handleClickPossible(false);
   };
   return { activeMode, handleSelectMapAlgorithm };
 };

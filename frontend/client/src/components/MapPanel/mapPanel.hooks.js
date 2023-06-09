@@ -2,17 +2,10 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
-import {
-  setPathingInProgress,
-  setClearMap,
-  setZeroStartCity,
-  setAlgorithm,
-  setClickPossible,
-} from 'store/slices/map';
+import { setPathingInProgress, setClearMap, setZeroStartCity, setAlgorithm, setClickPossible } from 'store/slices/map';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
 import { drawCities } from '../../utils/map/common/drawCities.utils';
-import { finishDrawing } from '../../utils/map/common/finishDrawing.utils';
 import { calculateShortestPath } from '../../utils/map/calculateShortestPath.utils';
 import { calculateSortedPath } from '../../utils/map/calculateSortedPath.utils';
 import { drawClickedCity } from '../../utils/map/common/drawClickedCity.utils';
@@ -23,14 +16,9 @@ export const useMapPanel = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const {
-    circlePoint,
-    randomPoints,
-    pathingInProgress,
-    toClear,
-    clickPossible,
-    algorithm,
-  } = useSelector((state) => state.map);
+  const { circlePoint, randomPoints, pathingInProgress, toClear, clickPossible, algorithm } = useSelector(
+    (state) => state.map
+  );
   const { activeMode } = useSelector((state) => state.toggle);
 
   const updatePathingInProgress = useCallback(
@@ -46,18 +34,32 @@ export const useMapPanel = (canvasRef) => {
     },
     [dispatch]
   );
-  const zeroStartCity = useCallback(() => {
+  const updateZeroStartCity = useCallback(() => {
     dispatch(setZeroStartCity());
   }, [dispatch]);
 
+  const updateAlgorithm = useCallback(
+    (payload) => {
+      dispatch(setAlgorithm(payload));
+    },
+    [dispatch]
+  );
+
+  const updateClickPossible = useCallback(
+    (payload) => {
+      dispatch(setClickPossible(payload));
+    },
+    [dispatch]
+  );
+
   const handleClear = useCallback(() => {
     const { canvas, context } = getCanvasContext(canvasRef);
-    zeroStartCity();
+    updateZeroStartCity();
     clearMap(canvas, context);
     updateClearState(false);
-    dispatch(setAlgorithm(null));
-    dispatch(setClickPossible(false));
-  }, [canvasRef, dispatch, updateClearState, zeroStartCity]);
+    updateAlgorithm(null);
+    updateClickPossible(false);
+  }, [canvasRef, updateAlgorithm, updateClearState, updateClickPossible, updateZeroStartCity]);
 
   const handleTSGClick = () => {
     if (toClear || pathingInProgress) {
@@ -110,7 +112,6 @@ export const useMapPanel = (canvasRef) => {
       drawClickedCity,
       drawCities,
       drawSimplePath,
-      finishDrawing,
       updateClearState
     );
   };

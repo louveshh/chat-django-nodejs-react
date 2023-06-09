@@ -8,8 +8,8 @@ const SelectCity = () => {
       Select City
       <StyledSelect
         onChange={handleSelectCity}
-        options={selectValueData()}
-        defaultValue={selectValueData()[0]}
+        options={selectValueData}
+        defaultValue={selectValueData[0]}
         components={{ MenuList: StyledMenuList }}
         mode={activeMode}
       />

@@ -7,7 +7,6 @@ import { tempRandom } from '../../utils/map/tempRandom.utils';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
 import { drawCities } from '../../utils/map/common/drawCities.utils';
-import { finishDrawing } from '../../utils/map/common/finishDrawing.utils';
 import { selectClickCity } from '../../utils/map/selectClickCity.utils';
 import { drawClickedCity } from '../../utils/map/common/drawClickedCity.utils';
 import { configDisplay, configMap } from '../../config/config';
@@ -16,15 +15,8 @@ export const useMap = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const {
-    circlePoint,
-    randomPoints,
-    pathingInProgress,
-    toClear,
-    clickPossible,
-    algorithm,
-    filteredCities,
-  } = useSelector((state) => state.map);
+  const { circlePoint, randomPoints, pathingInProgress, toClear, clickPossible, algorithm, filteredCities } =
+    useSelector((state) => state.map);
   const { activeMode, theme: themeName } = useSelector((state) => state.toggle);
 
   const updateCirclePoint = (newPoint) => {
@@ -65,19 +57,8 @@ export const useMap = (canvasRef) => {
       } else {
         drawCities(theme, context, randomPoints, false);
       }
-      finishDrawing(context);
     }
-  }, [
-    activeMode,
-    algorithm,
-    canvasRef,
-    circlePoint,
-    clickPossible,
-    pathingInProgress,
-    randomPoints,
-    theme,
-    toClear,
-  ]);
+  }, [activeMode, algorithm, canvasRef, circlePoint, clickPossible, pathingInProgress, randomPoints, theme, toClear]);
 
   useEffect(() => {
     if (toClear || pathingInProgress) {
@@ -100,21 +81,10 @@ export const useMap = (canvasRef) => {
       }
       drawCities(theme, context, filteredCitiesMapped, false);
     }
-  }, [
-    activeMode,
-    canvasRef,
-    circlePoint,
-    filteredCities,
-    pathingInProgress,
-    theme,
-    toClear,
-  ]);
+  }, [activeMode, canvasRef, circlePoint, filteredCities, pathingInProgress, theme, toClear]);
 
   const handleCanvasClick = (event) => {
-    if (
-      !clickPossible &&
-      !configMap.clickPossibleTargets.includes(activeMode)
-    ) {
+    if (!clickPossible && !configMap.clickPossibleTargets.includes(activeMode)) {
       return;
     }
     selectClickCity(canvasRef, event, updateCirclePoint, circlePoint);
@@ -127,10 +97,7 @@ export const useMap = (canvasRef) => {
     const rect = canvas.getBoundingClientRect();
     let mouseX;
     let mouseY;
-    if (
-      rect?.height > configDisplay.SCALED_DISPLAY_SIZE() &&
-      rect.width > configDisplay.SCALED_DISPLAY_SIZE()
-    ) {
+    if (rect?.height > configDisplay.RESCALED_VALUE() && rect.width > configDisplay.RESCALED_VALUE()) {
       mouseX = event.clientX - rect.left;
       mouseY = event.clientY - rect.top;
     } else {

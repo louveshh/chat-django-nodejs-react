@@ -7,28 +7,20 @@ import Select, { components } from 'react-select';
 import { useMultiSelectSort } from './useMultiSelectSort.hooks';
 import './styles.css';
 
-const SortableMultiValue = (props) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: `${props.data.value.x}${props.data.value.y}`,
-    });
+const MultiValue = (props) => {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: `${props.data.value.x}${props.data.value.y}`,
+  });
 
   const style = {
     width: '70%',
     position: 'relative',
-    transform: transform
-      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
-      : '',
+    transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : '',
     transition,
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      className="sortable-multi-value"
-      {...listeners}
-    >
+    <div ref={setNodeRef} style={style} className="sortable-multi-value" {...listeners}>
       <components.MultiValue
         {...props}
         {...attributes}
@@ -40,9 +32,6 @@ const SortableMultiValue = (props) => {
   );
 };
 
-const SortableMultiValueLabel = (props) => (
-  <components.MultiValueLabel {...props} />
-);
 const MultiValueRemove = ({ ...props }) => {
   const { value } = props.data;
   const selected = props.selectProps.selectedProps;
@@ -64,8 +53,7 @@ const MultiValueRemove = ({ ...props }) => {
   );
 };
 export const MultiSelectSort = () => {
-  const { handleFilteredCities, mappedPoints, filteredCities } =
-    useMultiSelectSort();
+  const { handleFilteredCities, mappedPoints, filteredCities } = useMultiSelectSort();
   const sortableRef = useRef(null);
 
   const onChange = (selectedOptions) => handleFilteredCities(selectedOptions);
@@ -80,12 +68,8 @@ export const MultiSelectSort = () => {
     let oldIndex;
     let newIndex;
     if (active.id !== over.id) {
-      oldIndex = filteredCities?.findIndex(
-        (item) => `${item.value.x}${item.value.y}` === active.id
-      );
-      newIndex = filteredCities?.findIndex(
-        (item) => `${item.value.x}${item.value.y}` === over.id
-      );
+      oldIndex = filteredCities?.findIndex((item) => `${item.value.x}${item.value.y}` === active.id);
+      newIndex = filteredCities?.findIndex((item) => `${item.value.x}${item.value.y}` === over.id);
     }
     if (oldIndex !== -1 && newIndex !== -1) {
       const newValue = arrayMove(filteredCities, oldIndex, newIndex);
@@ -105,11 +89,7 @@ export const MultiSelectSort = () => {
           isMulti
           options={mappedPoints.filter(
             (obj1) =>
-              !filteredCities.some(
-                (obj2) =>
-                  `${obj2.value.x}${obj2.value.y}` ===
-                  `${obj1.value.x}${obj1.value.y}`
-              )
+              !filteredCities.some((obj2) => `${obj2.value.x}${obj2.value.y}` === `${obj1.value.x}${obj1.value.y}`)
           )}
           value={filteredCities}
           onChange={onChange}
@@ -117,8 +97,7 @@ export const MultiSelectSort = () => {
           setSelectedProps={handleFilteredCities}
           closeMenuOnSelect={false}
           components={{
-            MultiValue: SortableMultiValue,
-            SortableMultiValueLabel,
+            MultiValue,
             MultiValueRemove,
           }}
         />

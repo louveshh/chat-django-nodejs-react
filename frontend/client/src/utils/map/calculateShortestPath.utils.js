@@ -2,7 +2,6 @@ import { clearMap } from './common/clearMap.utils';
 import { drawClickedCity } from './common/drawClickedCity.utils';
 import { drawCities } from './common/drawCities.utils';
 import { drawPath } from './common/drawPath.utils';
-import { finishDrawing } from './common/finishDrawing.utils';
 
 export const calculateShortestPath = (
   theme,
@@ -72,7 +71,7 @@ export const calculateShortestPath = (
       drawCities(theme, context, randomPoints);
       drawPath(theme, context, shortestPath);
       drawTestingPathTSG(shortestPath, index, randomPoints);
-      finishDrawing(context);
+      context.closePath();
 
       setTimeout(() => {
         animateStep(remainingPoints, shortestPath);

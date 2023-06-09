@@ -10,7 +10,6 @@ export const calculateRandomPath = (
   drawClickedCity,
   drawCities,
   drawSimplePath,
-  finishDrawing,
   updateClearState
 ) => {
   updatePathingInProgress(true);
@@ -29,6 +28,5 @@ export const calculateRandomPath = (
     updatePathingInProgress,
     true
   );
-  finishDrawing(context);
   updateClearState(true);
 };

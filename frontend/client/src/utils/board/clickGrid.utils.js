@@ -21,22 +21,14 @@ export const clickGrid = (
   const { startRow, finishRow, startCol, finishCol } = memoPoints;
   const updatedGrid = memoGrid.slice();
   const currentNode = memoGrid[row][col];
-  if (
-    !currentNode.isStart &&
-    !currentNode.isFinish &&
-    currentNode.isNode &&
-    selectedOption.value === 'wall'
-  ) {
+  if (!currentNode.isStart && !currentNode.isFinish && currentNode.isNode && selectedOption.value === 'wall') {
     const updatedNode = {
       ...currentNode,
       isWall: !currentNode.isWall,
     };
+    console.log(updatedNode);
     updatedGrid[row][col] = updatedNode;
-  } else if (
-    currentNode.isNode &&
-    !currentNode.isFinish &&
-    selectedOption.value === 'start'
-  ) {
+  } else if (currentNode.isNode && !currentNode.isFinish && selectedOption.value === 'start') {
     const previousStartNode = memoGrid[startRow][startCol];
     const resetStartNode = {
       ...previousStartNode,
@@ -50,11 +42,7 @@ export const clickGrid = (
     };
     updatedGrid[row][col] = updatedNode;
     updateStart({ x: row, y: col });
-  } else if (
-    currentNode.isNode &&
-    !currentNode.isStart &&
-    selectedOption.value === 'finish'
-  ) {
+  } else if (currentNode.isNode && !currentNode.isStart && selectedOption.value === 'finish') {
     const previousFinishNode = memoGrid[finishRow][finishCol];
     const resetFinishNode = {
       ...previousFinishNode,

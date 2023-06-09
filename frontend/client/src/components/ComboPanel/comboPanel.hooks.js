@@ -3,13 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import { useTheme } from 'styled-components';
 
-import {
-  setPathingInProgress,
-  setClearMap,
-  setZeroStartCity,
-  setAlgorithm,
-  setClickPossible,
-} from 'store/slices/map';
+import { setPathingInProgress, setClearMap, setZeroStartCity, setAlgorithm, setClickPossible } from 'store/slices/map';
 import { setToggleRunning, setClearBoard } from '../../store/slices/board';
 import { clearGrid } from '../../utils/board/common/clearGrid.utils';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
@@ -96,13 +90,7 @@ export const useComboPanel = (canvasRef) => {
     updateClearMap(false);
     updateAlgorithm(null);
     updateClickPossible(false);
-  }, [
-    canvasRef,
-    updateAlgorithm,
-    updateClearMap,
-    updateClickPossible,
-    updateZeroStartCity,
-  ]);
+  }, [canvasRef, updateAlgorithm, updateClearMap, updateClickPossible, updateZeroStartCity]);
 
   const handleClearBoard = (payload) => {
     updateClearBoard(payload);
@@ -126,15 +114,7 @@ export const useComboPanel = (canvasRef) => {
     };
     const currentGrid = cloneDeep(grid);
     let newStepAlg = newStep;
-    newStepAlg += runAlgorithm(
-      algorithm,
-      mapPathingInProgress,
-      currentGrid,
-      currentPoints,
-      () => {},
-      'combo',
-      newStep
-    );
+    newStepAlg += runAlgorithm(algorithm, mapPathingInProgress, currentGrid, currentPoints, () => {}, 'combo', newStep);
 
     await new Promise((resolve) => {
       setTimeout(resolve, 3000);
@@ -144,12 +124,7 @@ export const useComboPanel = (canvasRef) => {
   };
 
   const handleAlgorithm = () => {
-    if (
-      mapToClear ||
-      mapPathingInProgress ||
-      boardToClear ||
-      boardPathingInProgress
-    ) {
+    if (mapToClear || mapPathingInProgress || boardToClear || boardPathingInProgress) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
