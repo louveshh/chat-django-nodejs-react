@@ -37,7 +37,12 @@ export const runAlgorithm = (
             const node = shortestPathNodes[i];
             const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
             const words = classId.className.split(' ');
-            if (words.indexOf(node.start) < 0 && words.indexOf(node.finish) < 0 && words.indexOf(node.wall) < 0) {
+            const { startRow, finishRow, startCol, finishCol } = currentPoints;
+            if (startRow === node.row && startCol === node.col && mode !== 'combo') {
+              classId.className = 'node-base node-start';
+            } else if (finishRow === node.row && finishCol === node.col && mode !== 'combo') {
+              classId.className = 'node-base node-finish';
+            } else if (words.indexOf('node-shortest-path') < 0) {
               classId.className = 'node-base node-shortest-path';
             }
             if (mode === 'combo') {
@@ -68,11 +73,14 @@ export const runAlgorithm = (
         () => {
           const node = visitedNodesInOrder[i];
           const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
+          const { startRow, finishRow, startCol, finishCol } = currentPoints;
           const words = classId.className.split(' ');
-          if (words.indexOf(node.start) < 0 && words.indexOf(node.finish) < 0 && words.indexOf(node.wall) < 0) {
-            if (mode !== 'combo') {
-              document.getElementById(`node-base-${node.row}-${node.col}`).className = 'node-base node-visited';
-            }
+          if (
+            !(startRow === node.row && startCol === node.col) &&
+            !(finishRow === node.row && finishCol === node.col) &&
+            words.indexOf('node-shortest-path') < 0
+          ) {
+            classId.className = 'node-base node-visited';
           }
         },
         mode === 'combo' ? i * 1 : i * 5

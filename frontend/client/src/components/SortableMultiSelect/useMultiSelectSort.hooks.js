@@ -1,8 +1,15 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-props-no-spreading */
 import { cloneDeep } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilteredCities } from 'store/slices/map';
+import { useRef } from 'react';
+import { useSortable, arrayMove } from '@dnd-kit/sortable';
+import { components } from 'react-select';
+import './styles.css';
 
 export const useMultiSelectSort = () => {
+  const sortableRef = useRef(null);
   const { randomPoints, filteredCities } = useSelector((state) => state.map);
   const dispatch = useDispatch();
 
@@ -21,5 +28,81 @@ export const useMultiSelectSort = () => {
     label: name,
   }));
 
-  return { handleFilteredCities, mappedPoints, filteredCities };
+  const MultiValue = (props) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+      id: `${props.data.value.x}${props.data.value.y}`,
+    });
+
+    const style = {
+      width: '70%',
+      position: 'relative',
+      transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : '',
+      transition,
+    };
+
+    return (
+      <div ref={setNodeRef} style={style} className="sortable-multi-value" {...listeners}>
+        <components.MultiValue
+          {...props}
+          {...attributes}
+          innerProps={{
+            ...props.innerProps,
+          }}
+        />
+      </div>
+    );
+  };
+
+  const MultiValueRemove = (props) => {
+    const { value } = props.data;
+    const selected = props.selectProps.selectedProps;
+    const setSelected = props.selectProps.setSelectedProps;
+    const remove = (event) => {
+      event.stopPropagation();
+      event.preventDefault();
+      setSelected(selected.filter((option) => option.value !== value));
+    };
+    return (
+      <components.MultiValueRemove
+        onClick={remove}
+        {...props}
+        innerProps={{
+          ...props.innerProps,
+          onMouseDown: remove,
+        }}
+      />
+    );
+  };
+
+  const onChange = (selectedOptions) => handleFilteredCities(selectedOptions);
+
+  const onSortEnd = ({ active, over }) => {
+    if (!active?.id) {
+      return;
+    }
+    if (!over?.id) {
+      return;
+    }
+    let oldIndex;
+    let newIndex;
+    if (active.id !== over.id) {
+      oldIndex = filteredCities?.findIndex((item) => `${item.value.x}${item.value.y}` === active.id);
+      newIndex = filteredCities?.findIndex((item) => `${item.value.x}${item.value.y}` === over.id);
+    }
+    if (oldIndex !== -1 && newIndex !== -1) {
+      const newValue = arrayMove(filteredCities, oldIndex, newIndex);
+      handleFilteredCities(newValue);
+    }
+  };
+
+  return {
+    sortableRef,
+    mappedPoints,
+    filteredCities,
+    handleFilteredCities,
+    onChange,
+    onSortEnd,
+    MultiValue,
+    MultiValueRemove,
+  };
 };

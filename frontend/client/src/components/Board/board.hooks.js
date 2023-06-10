@@ -37,6 +37,9 @@ export const useBoard = () => {
   useEffect(() => {
     updateGrid(createInitialGrid(memoPoints, activeMode));
     return () => {};
+    // do not want to update the grid when memoPoints are changed
+    // excluded memoPoints from dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeMode, updateGrid]);
 
   const handleMouseDown = (row, col) => {

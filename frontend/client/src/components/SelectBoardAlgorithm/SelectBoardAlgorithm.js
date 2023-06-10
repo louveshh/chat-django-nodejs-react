@@ -5,12 +5,17 @@ import { StyledSelect, StyledMenuList } from './selectBoardAlgorithm.styles';
 const SelectBoardAlgorithm = () => {
   const { activeMode, handleSelectBoardAlgorithm } = useSelectBoardAlgorithm();
   return (
-    <StyledSelect
-      onChange={handleSelectBoardAlgorithm}
-      options={configBoard.algorithmOptions}
-      components={{ MenuList: StyledMenuList }}
-      mode={activeMode}
-    />
+    <>
+      <label htmlFor="selectBoard">Select an option:</label>
+      <StyledSelect
+        onChange={handleSelectBoardAlgorithm}
+        options={configBoard.algorithmOptions}
+        components={{ MenuList: StyledMenuList }}
+        mode={activeMode}
+        aria-labelledby="selectBoard"
+        aria-label="selectBoard"
+      />
+    </>
   );
 };
 

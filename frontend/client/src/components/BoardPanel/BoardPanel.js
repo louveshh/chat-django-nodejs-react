@@ -24,12 +24,7 @@ const BoardPanel = () => {
       {!toClear && !pathingInProgress && activeMode === 'board' && (
         <>
           <SelectBoardAlgorithm />
-          <StyledSelect
-            onChange={updateSelectedOption}
-            value={selectedOption}
-            options={configBoard.drawOptions}
-            placeholder="?"
-          />
+          <StyledSelect onChange={updateSelectedOption} value={selectedOption} options={configBoard.drawOptions} />
         </>
       )}
 

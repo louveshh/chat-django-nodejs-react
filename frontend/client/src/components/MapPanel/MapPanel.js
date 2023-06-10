@@ -6,15 +6,8 @@ import SelectMapAlgorithm from '../SelectMapAlgorithm/SelectMapAlgorithm';
 import WeightBar from '../WeightBar/WeightBar';
 
 const MapPanel = ({ canvasRef }) => {
-  const {
-    toClear,
-    pathingInProgress,
-    activeMode,
-    algorithm,
-    clickPossible,
-    handleAlgorithm,
-    handleClear,
-  } = useMapPanel(canvasRef);
+  const { toClear, pathingInProgress, activeMode, algorithm, clickPossible, handleAlgorithm, handleClear } =
+    useMapPanel(canvasRef);
   return (
     <div>
       {!toClear && !pathingInProgress && activeMode === 'map' && (

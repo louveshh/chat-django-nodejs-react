@@ -12,6 +12,7 @@ const color = {
   blue5: 'RGBA(16,35,84)',
   blue6: 'RGBA(0, 181, 255, 0.32)',
   blue7: 'RGBA(0, 221, 255, 0.56)',
+  blue8: 'RGBA(0, 200, 255, 1)',
   red1: 'RGBA(255,0,0,0.8)',
   red2: 'RGBA(165, 16, 16, 0.686)',
   red3: 'RGBA(255,0,0,0.3)',
@@ -86,10 +87,10 @@ export const dark = {
   },
 
   map: {
-    clickedCity: color.red3,
-    highlightedCity: color.blue7,
+    clickedCity: color.blue8,
+    highlightedCity: color.blue8,
     city: color.black1,
-    testingLine: color.blue1,
+    testingLine: color.blue8,
     line: color.black1,
   },
 
