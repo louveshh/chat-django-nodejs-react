@@ -1,10 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  setCirclePointZero,
-  setRandomPointsZero,
-  setToggleClickPossible,
-} from 'store/slices/map';
+import { setCirclePointZero, setRandomPointsZero, setToggleClickPossible } from 'store/slices/map';
+import { map } from '../../config/config';
 
 export const useCLick = () => {
   const { clickPossible, algorithm } = useSelector((state) => state.map);
@@ -28,7 +25,7 @@ export const useCLick = () => {
   const handleClick = () => {
     updateToggleClickPossible();
     updateRandomPointsZero();
-    if (algorithm === 'tsg') {
+    if (algorithm === map.tsg) {
       updateCirclePointZero(true);
     } else {
       updateCirclePointZero(false);

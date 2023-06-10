@@ -9,6 +9,7 @@ export const useDashboard = () => {
 
   useEffect(() => {
     if (!isAuthenticated && !loading) return navigate('/login');
+    return () => {};
   }, [isAuthenticated, loading, navigate]);
 
   return { user, loading };

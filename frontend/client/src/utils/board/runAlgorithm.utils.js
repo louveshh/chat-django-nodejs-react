@@ -35,21 +35,13 @@ export const runAlgorithm = (
         setTimeout(
           () => {
             const node = shortestPathNodes[i];
-            const classId = document.getElementById(
-              `grid-cell-${node.row}-${node.col}`
-            );
+            const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
             const words = classId.className.split(' ');
-            if (
-              words.indexOf('node-start') < 0 &&
-              words.indexOf('node-finish') < 0 &&
-              words.indexOf('node-wall') < 0
-            ) {
-              classId.className = 'grid-cell node-shortest-path';
+            if (words.indexOf(node.start) < 0 && words.indexOf(node.finish) < 0 && words.indexOf(node.wall) < 0) {
+              classId.className = 'node-base node-shortest-path';
             }
             if (mode === 'combo') {
-              classId.innerText += classId.innerText
-                ? `\n${i + step}`
-                : i + step;
+              classId.innerText += classId.innerText ? `\n${i + step}` : i + step;
             }
           },
           mode === 'combo' ? i * 20 : i * 40
@@ -75,19 +67,11 @@ export const runAlgorithm = (
       setTimeout(
         () => {
           const node = visitedNodesInOrder[i];
-          const classId = document.getElementById(
-            `grid-cell-${node.row}-${node.col}`
-          );
+          const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
           const words = classId.className.split(' ');
-          if (
-            words.indexOf('node-start') < 0 &&
-            words.indexOf('node-finish') < 0 &&
-            words.indexOf('node-wall') < 0
-          ) {
+          if (words.indexOf(node.start) < 0 && words.indexOf(node.finish) < 0 && words.indexOf(node.wall) < 0) {
             if (mode !== 'combo') {
-              document.getElementById(
-                `grid-cell-${node.row}-${node.col}`
-              ).className = 'grid-cell node-visited';
+              document.getElementById(`node-base-${node.row}-${node.col}`).className = 'node-base node-visited';
             }
           }
         },

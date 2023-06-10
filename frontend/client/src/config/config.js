@@ -31,6 +31,14 @@ export const map = {
   sort: 'sort',
   random: 'random',
 };
+
+export const node = {
+  base: 'node-base',
+  finish: 'node-finish',
+  start: 'node-start',
+  wall: 'node-wall',
+  border: 'node-border',
+};
 // ADJUSTABLE CONFIG SETUP
 
 export const configDisplay = {

@@ -7,12 +7,7 @@ const Click = () => {
     <div>
       <div className="toggle-wrapper">
         <label htmlFor="toggle-click">Add Custom Start Point</label>
-        <Toggle
-          id="toggle-click"
-          checked={clickPossible}
-          value="yes"
-          onChange={handleClick}
-        />
+        <Toggle id="toggle-click" checked={clickPossible} value="yes" onChange={handleClick} />
       </div>
     </div>
   );

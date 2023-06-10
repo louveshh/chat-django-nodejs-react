@@ -11,6 +11,7 @@ export const useToggleLangauge = () => {
 
   useEffect(() => {
     i18n.changeLanguage(language);
+    return () => {};
   }, [language]);
   const handleToggle = () => {
     dispatch(setChangeLanguage());

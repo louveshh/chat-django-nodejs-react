@@ -9,7 +9,7 @@ import { clearMap } from '../../utils/map/common/clearMap.utils';
 import { drawCities } from '../../utils/map/common/drawCities.utils';
 import { selectClickCity } from '../../utils/map/selectClickCity.utils';
 import { drawClickedCity } from '../../utils/map/common/drawClickedCity.utils';
-import { configDisplay, configMap } from '../../config/config';
+import { configDisplay, configMap, mode, map } from '../../config/config';
 
 export const useMap = (canvasRef) => {
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ export const useMap = (canvasRef) => {
 
   useEffect(() => {
     tempRandom(updateRandomPoints);
+    return () => {};
   }, [updateRandomPoints]);
 
   // base setup
@@ -39,32 +40,33 @@ export const useMap = (canvasRef) => {
     if (toClear || pathingInProgress) {
       return;
     }
-    if (activeMode === 'map') {
+    if (activeMode === mode.map) {
       const { canvas, context } = getCanvasContext(canvasRef);
       clearMap(canvas, context);
       context.lineJoin = configMap.context.lineJoin;
       context.lineCap = configMap.context.lineCap;
       context.lineWidth = configMap.context.lineWidth;
       context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
-      if (clickPossible && algorithm === 'sort') {
+      if (clickPossible && algorithm === map.sort) {
         drawClickedCity(theme, context, circlePoint, true);
       }
-      if (clickPossible && algorithm !== 'sort') {
+      if (clickPossible && algorithm !== map.sort) {
         drawClickedCity(theme, context, circlePoint, false);
       }
-      if (algorithm === 'sort') {
+      if (algorithm === map.sort) {
         drawCities(theme, context, randomPoints, true);
       } else {
         drawCities(theme, context, randomPoints, false);
       }
     }
+    return () => {};
   }, [activeMode, algorithm, canvasRef, circlePoint, clickPossible, pathingInProgress, randomPoints, theme, toClear]);
 
   useEffect(() => {
     if (toClear || pathingInProgress) {
       return;
     }
-    if (activeMode !== 'map') {
+    if (activeMode !== mode.map) {
       const { canvas, context } = getCanvasContext(canvasRef);
       context.lineJoin = configMap.context.lineJoin;
       context.lineCap = configMap.context.lineCap;
@@ -81,6 +83,7 @@ export const useMap = (canvasRef) => {
       }
       drawCities(theme, context, filteredCitiesMapped, false);
     }
+    return () => {};
   }, [activeMode, canvasRef, circlePoint, filteredCities, pathingInProgress, theme, toClear]);
 
   const handleCanvasClick = (event) => {

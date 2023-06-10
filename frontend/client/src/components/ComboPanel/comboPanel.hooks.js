@@ -13,6 +13,7 @@ import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
 import { removeBorders } from '../../utils/board/common/removeBorders.utils';
 import { coordinatesToBlockNumbers } from '../../utils/combo/coordinatesToBlockNumbers.utils';
 import { dividePoints } from '../../utils/combo/dividePoints.utils';
+import { board, mode } from '../../config/config';
 
 export const useComboPanel = (canvasRef) => {
   const dispatch = useDispatch();
@@ -102,7 +103,7 @@ export const useComboPanel = (canvasRef) => {
       updateToggleRunning();
       return;
     }
-    const algorithm = 'dijkstra';
+    const algorithm = board.dijkstra;
 
     const item = outputArray[index];
 
@@ -114,7 +115,15 @@ export const useComboPanel = (canvasRef) => {
     };
     const currentGrid = cloneDeep(grid);
     let newStepAlg = newStep;
-    newStepAlg += runAlgorithm(algorithm, mapPathingInProgress, currentGrid, currentPoints, () => {}, 'combo', newStep);
+    newStepAlg += runAlgorithm(
+      algorithm,
+      mapPathingInProgress,
+      currentGrid,
+      currentPoints,
+      () => {},
+      mode.combo,
+      newStep
+    );
 
     await new Promise((resolve) => {
       setTimeout(resolve, 3000);

@@ -26,8 +26,8 @@ export const clickGrid = (
       ...currentNode,
       isWall: !currentNode.isWall,
     };
-    console.log(updatedNode);
     updatedGrid[row][col] = updatedNode;
+    updateGrid(updatedGrid);
   } else if (currentNode.isNode && !currentNode.isFinish && selectedOption.value === 'start') {
     const previousStartNode = memoGrid[startRow][startCol];
     const resetStartNode = {
@@ -41,6 +41,7 @@ export const clickGrid = (
       isStart: !currentNode.isStart,
     };
     updatedGrid[row][col] = updatedNode;
+    updateGrid(updatedGrid);
     updateStart({ x: row, y: col });
   } else if (currentNode.isNode && !currentNode.isStart && selectedOption.value === 'finish') {
     const previousFinishNode = memoGrid[finishRow][finishCol];
@@ -55,7 +56,7 @@ export const clickGrid = (
       isFinish: !currentNode.isFinish,
     };
     updatedGrid[row][col] = updatedNode;
+    updateGrid(updatedGrid);
     updateFinish({ x: row, y: col });
   }
-  updateGrid(updatedGrid);
 };

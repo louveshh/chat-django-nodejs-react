@@ -36,8 +36,8 @@ export const useBoard = () => {
 
   useEffect(() => {
     updateGrid(createInitialGrid(memoPoints, activeMode));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeMode]);
+    return () => {};
+  }, [activeMode, updateGrid]);
 
   const handleMouseDown = (row, col) => {
     clickGrid(row, col, selectedOption, pathingInProgress, memoGrid, memoPoints, updateStart, updateFinish, updateGrid);

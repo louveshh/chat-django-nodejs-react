@@ -7,9 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export const useRegister = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, loading, registered } = useSelector(
-    (state) => state.user
-  );
+  const { isAuthenticated, loading, registered } = useSelector((state) => state.user);
 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -40,6 +38,7 @@ export const useRegister = () => {
     if (isAuthenticated || registered) {
       navigate('/login');
     }
+    return () => {};
   }, [isAuthenticated, registered, navigate]);
   return {
     onSubmit,
