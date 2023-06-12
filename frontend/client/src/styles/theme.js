@@ -5,6 +5,7 @@ const color = {
   green4: 'RGBA(0, 256, 0, 0.9)',
   green5: 'RGBA(0, 181, 60, 0.682)',
   green6: 'RGBA(0, 256, 0, 0.3)',
+  green7: 'RGBA(0, 181, 60, 1)',
   blue1: 'RGBA(15,57,147,1)',
   blue2: 'RGB(0,57,93)',
   blue3: 'RGB(0,49,83)',
@@ -34,8 +35,10 @@ const font = {
 export const light = {
   view: {
     primary: color.green1,
+    primary2: color.green7,
     secondary: color.green2,
     secondary2: color.green3,
+    secondary3: color.green5,
     background: color.blue1,
   },
 
@@ -69,8 +72,10 @@ export const light = {
 export const dark = {
   view: {
     primary: color.blue2,
+    primary2: color.blue7,
     secondary: color.blue3,
     secondary2: color.blue4,
+    secondary3: color.blue8,
     background: color.blue5,
   },
 

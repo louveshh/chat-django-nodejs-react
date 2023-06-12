@@ -1,11 +1,9 @@
-import 'react-toggle/style.css';
-
+import ToggleStyled from 'components/common/ToggleStyled/ToggleStyled.component';
 import { useToggleLangauge } from './toggleLanguage.hooks';
 import {
   ToggleContainer,
   ToggleWrapper,
   LabelWrapper,
-  StyledToggle,
   ToggleSpanIcons,
 } from './toggleLanguage.styles';
 
@@ -20,11 +18,11 @@ const ToggleLanguage = () => {
     <ToggleContainer>
       <ToggleWrapper>
         <LabelWrapper>
-          <label htmlFor="toggle-language">{t('language')}</label>
-          <StyledToggle
+          <ToggleStyled
+            label="language"
             id="toggle-language"
             checked={language === 'pl'}
-            onChange={() => handleToggle()}
+            onChange={handleToggle}
             name="language"
             icons={toggleIcons}
           />

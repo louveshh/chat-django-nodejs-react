@@ -31,17 +31,16 @@ export const RightPanel = styled.div`
   justify-content: start;
 
   @media (max-width: 1100px) {
-    flex-flow: row;
-    align-self: unset;
+    align-self: center;
     order: 3;
-    justify-content: center;
+    align-items: center;
+    width: 50%;
+    min-height: 400px;
+    padding-right: 0;
+    flex-grow: 1;
+  }
+
+  @media (max-width: 700px) {
     width: 100%;
-    ${(props) => {
-      if (props.mode === 'map') {
-        return `
-        height: 150px;
-          `;
-      }
-    }}
   }
 `;

@@ -5,7 +5,6 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export const useSelectCity = () => {
   const { randomPoints, circlePoint, clickPossible } = useSelector((state) => state.map);
-  const { activeMode } = useSelector((state) => state.toggle);
   const dispatch = useDispatch();
 
   const selectValueData = useMemo(() => {
@@ -32,5 +31,5 @@ export const useSelectCity = () => {
     updateSelectStartCity({ x, y });
   };
 
-  return { activeMode, selectValueData, handleSelectCity };
+  return { selectValueData, handleSelectCity };
 };

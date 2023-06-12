@@ -3,13 +3,26 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb", "plugin:prettier/recommended", "eslint:recommended", "plugin:import/recommended", "react-app"],
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "react-app"
+  ],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": 2023,
     "sourceType": "module"
   },
-  "plugins": ["sort-destructure-keys", "prettier", "eslint-plugin-prettier", "react", "react-hooks", "import"],
+  "plugins": [
+    "sort-destructure-keys",
+    "prettier",
+    "eslint-plugin-prettier",
+    "react",
+    "react-hooks",
+    "import"
+  ],
   "settings": {
     "import/resolver": {
       "node": {

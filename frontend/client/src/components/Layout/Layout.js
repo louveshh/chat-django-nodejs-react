@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import Navbar from '../Navbar/Navbar';
+import Navbar from '../Navbar/Navbar.component';
 import Ocean from '../Ocean/Ocean';
 
 const Layout = ({ title, content, children }) => (

@@ -1,17 +1,24 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
+import { useCallback, useRef } from 'react';
 import { cloneDeep } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilteredCities } from 'store/slices/map';
-import { useRef } from 'react';
 import { useSortable, arrayMove } from '@dnd-kit/sortable';
 import { components } from 'react-select';
-import './styles.css';
+import { SortableMultiValueDiv, CustomMultiValueStyle } from './selectStyled.styles';
 
 export const useMultiSelectSort = () => {
   const sortableRef = useRef(null);
   const { randomPoints, filteredCities } = useSelector((state) => state.map);
   const dispatch = useDispatch();
+
+  const updateFilteredCities = useCallback(
+    (payload) => {
+      dispatch(setFilteredCities(payload));
+    },
+    [dispatch]
+  );
 
   const handleFilteredCities = (event) => {
     const newCities = cloneDeep(event);
@@ -21,39 +28,37 @@ export const useMultiSelectSort = () => {
     if (newCities.length > 0) {
       newCities[0].value.selectedStart = true;
     }
-    dispatch(setFilteredCities(newCities));
+    updateFilteredCities(newCities);
   };
   const mappedPoints = randomPoints.map(({ x, y, selectedStart, name }) => ({
     value: { x, y, selectedStart },
     label: name,
   }));
 
-  const MultiValue = (props) => {
+  const CustomMultiValue = (props) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
       id: `${props.data.value.x}${props.data.value.y}`,
     });
 
-    const style = {
-      width: '70%',
-      position: 'relative',
-      transform: transform ? `translate3d(${transform.x}px, ${transform.y}px, 0)` : '',
-      transition,
-    };
-
     return (
-      <div ref={setNodeRef} style={style} className="sortable-multi-value" {...listeners}>
-        <components.MultiValue
+      <SortableMultiValueDiv
+        ref={setNodeRef}
+        transform={transform}
+        transition={transition}
+        {...listeners}
+      >
+        <CustomMultiValueStyle
           {...props}
           {...attributes}
           innerProps={{
             ...props.innerProps,
           }}
         />
-      </div>
+      </SortableMultiValueDiv>
     );
   };
 
-  const MultiValueRemove = (props) => {
+  const CustomMultiValueRemove = (props) => {
     const { value } = props.data;
     const selected = props.selectProps.selectedProps;
     const setSelected = props.selectProps.setSelectedProps;
@@ -86,7 +91,9 @@ export const useMultiSelectSort = () => {
     let oldIndex;
     let newIndex;
     if (active.id !== over.id) {
-      oldIndex = filteredCities?.findIndex((item) => `${item.value.x}${item.value.y}` === active.id);
+      oldIndex = filteredCities?.findIndex(
+        (item) => `${item.value.x}${item.value.y}` === active.id
+      );
       newIndex = filteredCities?.findIndex((item) => `${item.value.x}${item.value.y}` === over.id);
     }
     if (oldIndex !== -1 && newIndex !== -1) {
@@ -102,7 +109,7 @@ export const useMultiSelectSort = () => {
     handleFilteredCities,
     onChange,
     onSortEnd,
-    MultiValue,
-    MultiValueRemove,
+    CustomMultiValue,
+    CustomMultiValueRemove,
   };
 };

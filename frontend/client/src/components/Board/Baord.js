@@ -1,4 +1,4 @@
-import Node from '../Node/Node';
+import Node from '../Node/Node.component';
 import { useBoard } from './board.hooks';
 import { GridContainer, BoardWrapper } from './board.styles';
 

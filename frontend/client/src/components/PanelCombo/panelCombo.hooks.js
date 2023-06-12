@@ -15,7 +15,7 @@ import { coordinatesToBlockNumbers } from '../../utils/combo/coordinatesToBlockN
 import { dividePoints } from '../../utils/combo/dividePoints.utils';
 import { board, mode } from '../../config/config';
 
-export const useComboPanel = (canvasRef) => {
+export const usePanelCombo = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 

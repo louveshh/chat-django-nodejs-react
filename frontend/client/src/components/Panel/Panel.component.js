@@ -1,10 +1,10 @@
 import Baord from 'components/Board/Baord';
-import MapPanel from 'components/MapPanel/MapPanel';
+import PanelMap from 'components/PanelMap/PanelMap.component';
+import PanelBoard from 'components/PanelBoard/PanelBoard.component';
+import PanelCombo from 'components/PanelCombo/PanelCombo.component';
+import Map from 'components/Map/Map.component';
 import { RightPanel, MainPanel, LeftPanel, PanelWrapper } from './panel.styles';
-import Map from '../Map/Map';
 import { usePanel } from './panel.hooks';
-import BoardPanel from '../BoardPanel/BoardPanel';
-import ComboPanel from '../ComboPanel/ComboPanel';
 
 const Panel = () => {
   const { canvasRef, isMapActive, isBoardActive, activeMode } = usePanel();
@@ -16,9 +16,9 @@ const Panel = () => {
         <Baord active={isBoardActive} />
       </MainPanel>
       <RightPanel>
-        {isMapActive && <MapPanel canvasRef={canvasRef} />}
-        {isBoardActive && <BoardPanel />}
-        {activeMode === 'combo' && <ComboPanel canvasRef={canvasRef} />}
+        {isMapActive && <PanelMap canvasRef={canvasRef} />}
+        {isBoardActive && <PanelBoard />}
+        {activeMode === 'combo' && <PanelCombo canvasRef={canvasRef} />}
       </RightPanel>
     </PanelWrapper>
   );

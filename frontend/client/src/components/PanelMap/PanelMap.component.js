@@ -1,21 +1,28 @@
-import { useMapPanel } from './mapPanel.hooks';
+import { usePanelMap } from './panelMap.hooks';
 import { StyledButton } from '../Map/map.styles';
-import Click from '../Click/Click';
-import SelectCity from '../SelectCity/SelectCity';
+import Click from '../ToggleClick/ToggleClick.component';
+import SelectCity from '../SelectCity/SelectCity.component';
 import SelectMapAlgorithm from '../SelectMapAlgorithm/SelectMapAlgorithm';
-import WeightBar from '../WeightBar/WeightBar';
+import BarWeight from '../BarWeight/BarWeight.component';
 
-const MapPanel = ({ canvasRef }) => {
-  const { toClear, pathingInProgress, activeMode, algorithm, clickPossible, handleAlgorithm, handleClear } =
-    useMapPanel(canvasRef);
+const PanelMap = ({ canvasRef }) => {
+  const {
+    toClear,
+    pathingInProgress,
+    activeMode,
+    algorithm,
+    clickPossible,
+    handleAlgorithm,
+    handleClear,
+  } = usePanelMap(canvasRef);
   return (
-    <div>
+    <>
       {!toClear && !pathingInProgress && activeMode === 'map' && (
         <>
           <SelectMapAlgorithm />
           {algorithm && <Click />}
           {algorithm === 'tsg' && clickPossible && <SelectCity />}
-          {algorithm === 'sort' && clickPossible && <WeightBar />}
+          {algorithm === 'sort' && clickPossible && <BarWeight />}
           {algorithm && (
             <StyledButton type="button" onClick={handleAlgorithm()}>
               RUN ALGO
@@ -28,8 +35,8 @@ const MapPanel = ({ canvasRef }) => {
           CLEAR MAP
         </StyledButton>
       )}
-    </div>
+    </>
   );
 };
 
-export default MapPanel;
+export default PanelMap;

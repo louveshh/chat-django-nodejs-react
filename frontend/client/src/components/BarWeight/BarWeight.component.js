@@ -1,9 +1,9 @@
 import Toggle from 'react-toggle';
 
-import { useWeightBar } from './weightbar.hooks';
+import { useBarWeight } from './barWeight.hooks';
 
-const WeightBar = () => {
-  const { weightBar, handleClick, handleBar } = useWeightBar();
+const BarWeight = () => {
+  const { weightBar, handleClick, handleBar } = useBarWeight();
 
   return (
     <div>
@@ -14,11 +14,19 @@ const WeightBar = () => {
       {weightBar && (
         <>
           <label htmlFor="bar-weight">range</label>
-          <input type="range" min={0} max={50} step={1} id="bar-weight" onChange={handleBar} defaultValue={0} />
+          <input
+            type="range"
+            min={0}
+            max={50}
+            step={1}
+            id="bar-weight"
+            onChange={handleBar}
+            defaultValue={0}
+          />
         </>
       )}
     </div>
   );
 };
 
-export default WeightBar;
+export default BarWeight;

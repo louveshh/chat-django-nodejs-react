@@ -1,9 +1,9 @@
-import { useBoardPanel } from './boardPanel.hooks';
+import { usePanelBoard } from './panelBoard.hooks';
 import { configBoard } from '../../config/config';
-import { ButtonsWrapper, StyledSelect } from './boardPanel.styles';
-import SelectBoardAlgorithm from '../SelectBoardAlgorithm/SelectBoardAlgorithm';
+import { StyledSelect } from './panelBoard.styles';
+import SelectBoardAlgorithm from '../SelectBoardAlgorithm/SelectBoardAlgorithm.component';
 
-const BoardPanel = () => {
+const PanelBoard = () => {
   const {
     pathingInProgress,
     selectedOption,
@@ -13,9 +13,9 @@ const BoardPanel = () => {
     handleClearGrid,
     handleAlgorithm,
     updateSelectedOption,
-  } = useBoardPanel();
+  } = usePanelBoard();
   return (
-    <ButtonsWrapper>
+    <>
       {!pathingInProgress && toClear && activeMode === 'board' && (
         <button type="button" onClick={handleClearGrid}>
           Clear Grid
@@ -24,7 +24,11 @@ const BoardPanel = () => {
       {!toClear && !pathingInProgress && activeMode === 'board' && (
         <>
           <SelectBoardAlgorithm />
-          <StyledSelect onChange={updateSelectedOption} value={selectedOption} options={configBoard.drawOptions} />
+          <StyledSelect
+            onChange={updateSelectedOption}
+            value={selectedOption}
+            options={configBoard.drawOptions}
+          />
         </>
       )}
 
@@ -33,8 +37,8 @@ const BoardPanel = () => {
           runAlgorithm
         </button>
       )}
-    </ButtonsWrapper>
+    </>
   );
 };
 
-export default BoardPanel;
+export default PanelBoard;

@@ -6,9 +6,10 @@ export const ToggleContainer = styled.div`
 
 export const ToggleWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  gap: 10px;
 }
 `;

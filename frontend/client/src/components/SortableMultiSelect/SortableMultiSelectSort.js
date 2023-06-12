@@ -2,9 +2,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
-import Select from 'react-select';
 import { useMultiSelectSort } from './useMultiSelectSort.hooks';
-import './styles.css';
+import {
+  CustomMultiSelect,
+  CustomMenuList,
+  CustomPlaceholder,
+  CustomMenu,
+} from './selectStyled.styles';
 
 export const MultiSelectSort = () => {
   const {
@@ -14,8 +18,8 @@ export const MultiSelectSort = () => {
     handleFilteredCities,
     onChange,
     onSortEnd,
-    MultiValue,
-    MultiValueRemove,
+    CustomMultiValue,
+    CustomMultiValueRemove,
   } = useMultiSelectSort();
 
   return (
@@ -26,12 +30,14 @@ export const MultiSelectSort = () => {
           id: `${item.value.x}${item.value.y}`,
         }))}
       >
-        <Select
+        <CustomMultiSelect
           ref={sortableRef}
           isMulti
           options={mappedPoints.filter(
             (obj1) =>
-              !filteredCities.some((obj2) => `${obj2.value.x}${obj2.value.y}` === `${obj1.value.x}${obj1.value.y}`)
+              !filteredCities.some(
+                (obj2) => `${obj2.value.x}${obj2.value.y}` === `${obj1.value.x}${obj1.value.y}`
+              )
           )}
           value={filteredCities}
           onChange={onChange}
@@ -39,9 +45,15 @@ export const MultiSelectSort = () => {
           setSelectedProps={handleFilteredCities}
           closeMenuOnSelect={false}
           components={{
-            MultiValue,
-            MultiValueRemove,
+            MultiValue: CustomMultiValue,
+            MultiValueRemove: CustomMultiValueRemove,
+            Menu: CustomMenu,
+            MenuList: CustomMenuList,
+            Placeholder: CustomPlaceholder,
           }}
+          placeholder="Select at least two city"
+          aria-labelledby="Select Board Algorithm"
+          aria-label="Select Board Algorithm"
         />
       </SortableContext>
     </DndContext>

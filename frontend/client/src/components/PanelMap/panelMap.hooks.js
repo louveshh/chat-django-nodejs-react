@@ -12,7 +12,7 @@ import { drawClickedCity } from '../../utils/map/common/drawClickedCity.utils';
 import { drawSimplePath } from '../../utils/map/common/drawSimplePath.utils';
 import { calculateRandomPath } from '../../utils/map/calculateRandomPath.utils';
 
-export const useMapPanel = (canvasRef) => {
+export const usePanelMap = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 

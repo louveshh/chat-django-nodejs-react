@@ -29,12 +29,7 @@ const Navbar = () => {
           </Triangle>
         ) : (
           <Triangle>
-            <div
-              onClick={onClick}
-              role="button"
-              tabIndex="0"
-              onKeyDown={() => {}}
-            >
+            <div onClick={onClick} role="button" tabIndex="0" onKeyDown={() => {}}>
               <div>Logout</div>
             </div>
           </Triangle>

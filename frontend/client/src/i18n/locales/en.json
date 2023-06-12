@@ -2,5 +2,10 @@
   "theme": "theme",
   "en": "en",
   "pl": "pl",
-  "language": "Language:"
+  "language": "Language:",
+
+  "dijkstra": "Dijkstra",
+  "astar": "Astar",
+  "dfs": "DFS",
+  "bfs": "BFS"
 }

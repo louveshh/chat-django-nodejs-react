@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCirclePointZero, setRandomPointsZero, setToggleClickPossible } from 'store/slices/map';
 import { map } from '../../config/config';
 
-export const useCLick = () => {
+export const useToggleCLick = () => {
   const { clickPossible, algorithm } = useSelector((state) => state.map);
   const dispatch = useDispatch();
 

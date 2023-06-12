@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCirclePoint } from 'store/slices/map';
 
-export const useWeightBar = () => {
+export const useBarWeight = () => {
   const [weightBar, setWeightBar] = useState(false);
   const [inputValue, setInputValue] = useState(0);
   const { circlePoint } = useSelector((state) => state.map);

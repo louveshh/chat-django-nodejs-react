@@ -1,10 +1,15 @@
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { setAlgorithm } from 'store/slices/board';
+import { translateOptions } from 'utils/common/translateOptions';
+import { configBoard } from 'config/config';
+import { useTranslation } from 'react-i18next';
 
 export const useSelectBoardAlgorithm = () => {
-  const { activeMode } = useSelector((state) => state.toggle);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const options = useMemo(() => translateOptions(t, configBoard.algorithmOptions), [t]);
 
   const updateAlgorithm = useCallback(
     (payload) => {
@@ -16,5 +21,6 @@ export const useSelectBoardAlgorithm = () => {
   const handleSelectBoardAlgorithm = (event) => {
     updateAlgorithm(event.value);
   };
-  return { activeMode, handleSelectBoardAlgorithm };
+
+  return { options, handleSelectBoardAlgorithm };
 };

@@ -1,6 +1,5 @@
-import 'react-toggle/style.css';
 import { ViewContainer, PanelWrapper } from './view.styles';
-import Panel from '../Panel/Panel';
+import Panel from '../Panel/Panel.component';
 import ToggleMode from '../ToggleMode/ToggleMode.component';
 import Layout from '../Layout/Layout';
 

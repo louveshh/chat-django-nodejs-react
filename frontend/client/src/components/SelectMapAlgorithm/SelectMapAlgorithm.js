@@ -1,15 +1,15 @@
-import { configMap } from 'config/config';
+import SelectStyled from 'components/common/SelectStyled/SelectStyled.component';
 import { useSelectMapAlgorithm } from './selectMapAlgorithm.hooks';
-import { StyledSelect, StyledMenuList } from './selectMapAlgorithm.styles';
 
 const SelectMapAlgorithm = () => {
-  const { activeMode, handleSelectMapAlgorithm } = useSelectMapAlgorithm();
+  const { options, handleSelectMapAlgorithm } = useSelectMapAlgorithm();
   return (
-    <StyledSelect
+    <SelectStyled
       onChange={handleSelectMapAlgorithm}
-      options={configMap.algorithmOptions}
-      components={{ MenuList: StyledMenuList }}
-      mode={activeMode}
+      options={options}
+      placeholder="Select Algorithm"
+      aria-labelledby="Select Map Algorithm"
+      aria-label="Select Map Algorithm"
     />
   );
 };
