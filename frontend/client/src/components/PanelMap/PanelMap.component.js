@@ -1,4 +1,4 @@
-import ButtonStyled from 'components/common/ButtonStyled/ButtonStyled';
+import CommonButton from 'components/common/CommonButton/CommonButton';
 
 import { usePanelMap } from './panelMap.hooks';
 
@@ -33,11 +33,18 @@ const PanelMap = ({ canvasRef }) => {
           )}
         </>
       )}
-      <ButtonStyled></ButtonStyled>
       {!pathingInProgress && toClear && activeMode === 'map' && (
         <StyledButton type="button" className="button" onClick={handleClear}>
           CLEAR MAP
         </StyledButton>
+      )}
+      {activeMode === 'map' && (
+        <CommonButton
+          type="button"
+          onClick={handleAlgorithm()}
+          pathingInProgress={pathingInProgress}
+          disabled={!algorithm || pathingInProgress || toClear}
+        />
       )}
     </>
   );
