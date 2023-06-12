@@ -2,7 +2,13 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
-import { setPathingInProgress, setClearMap, setZeroStartCity, setAlgorithm, setClickPossible } from 'store/slices/map';
+import {
+  setPathingInProgress,
+  setClearMap,
+  setZeroStartCity,
+  setAlgorithm,
+  setClickPossible,
+} from 'store/slices/map';
 import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
 import { clearMap } from '../../utils/map/common/clearMap.utils';
 import { drawCities } from '../../utils/map/common/drawCities.utils';
@@ -16,9 +22,8 @@ export const usePanelMap = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const { circlePoint, randomPoints, pathingInProgress, toClear, clickPossible, algorithm } = useSelector(
-    (state) => state.map
-  );
+  const { circlePoint, randomPoints, pathingInProgress, toClear, clickPossible, algorithm } =
+    useSelector((state) => state.map);
   const { activeMode } = useSelector((state) => state.toggle);
 
   const updatePathingInProgress = useCallback(

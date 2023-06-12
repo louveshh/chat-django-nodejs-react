@@ -5,7 +5,10 @@ export const selectClickCity = (canvasRef, event, setCirclePoint, circlePoint) =
   const rect = canvas.getBoundingClientRect();
   let x;
   let y;
-  if (rect?.height > configDisplay.SCALED_DISPLAY_SIZE() && rect?.width > configDisplay.SCALED_DISPLAY_SIZE()) {
+  if (
+    rect?.height > configDisplay.SCALED_DISPLAY_SIZE() &&
+    rect?.width > configDisplay.SCALED_DISPLAY_SIZE()
+  ) {
     x = event.clientX - rect.left;
     y = event.clientY - rect.top;
     console.log('tu111', rect?.height, configDisplay.SCALED_DISPLAY_SIZE());

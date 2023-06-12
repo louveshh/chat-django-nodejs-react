@@ -1,4 +1,3 @@
-import Toggle from 'react-toggle';
 import ToggleStyled from 'components/common/ToggleStyled/ToggleStyled.component';
 import { mode } from 'config/config';
 import { useToggleMode } from './toogleMode.hooks';

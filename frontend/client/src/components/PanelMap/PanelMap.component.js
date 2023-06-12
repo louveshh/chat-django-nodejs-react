@@ -1,4 +1,7 @@
+import ButtonStyled from 'components/common/ButtonStyled/ButtonStyled';
+
 import { usePanelMap } from './panelMap.hooks';
+
 import { StyledButton } from '../Map/map.styles';
 import Click from '../ToggleClick/ToggleClick.component';
 import SelectCity from '../SelectCity/SelectCity.component';
@@ -30,6 +33,7 @@ const PanelMap = ({ canvasRef }) => {
           )}
         </>
       )}
+      <ButtonStyled></ButtonStyled>
       {!pathingInProgress && toClear && activeMode === 'map' && (
         <StyledButton type="button" className="button" onClick={handleClear}>
           CLEAR MAP
