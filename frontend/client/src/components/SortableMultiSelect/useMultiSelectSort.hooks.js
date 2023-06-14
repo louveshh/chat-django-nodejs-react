@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFilteredCities } from 'store/slices/map';
 import { useSortable, arrayMove } from '@dnd-kit/sortable';
 import { components } from 'react-select';
+
 import { SortableMultiValueDiv, CustomMultiValueStyle } from './selectStyled.styles';
 
 export const useMultiSelectSort = () => {

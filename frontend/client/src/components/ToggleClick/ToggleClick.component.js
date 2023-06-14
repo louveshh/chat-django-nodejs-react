@@ -1,5 +1,4 @@
 import ToggleStyled from 'components/common/CommonToggle/CommonToggle.component';
-
 import { useToggleCLick } from './toggleClick.hooks';
 
 const ToggleClick = () => {

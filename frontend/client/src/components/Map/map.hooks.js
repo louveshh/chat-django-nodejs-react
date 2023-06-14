@@ -3,20 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
 import { setCirclePoint, setRandomPoints } from 'store/slices/map';
-import { tempRandom } from '../../utils/map/tempRandom.utils';
-import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
-import { clearMap } from '../../utils/map/common/clearMap.utils';
-import { drawCities } from '../../utils/map/common/drawCities.utils';
-import { selectClickCity } from '../../utils/map/selectClickCity.utils';
-import { drawClickedCity } from '../../utils/map/common/drawClickedCity.utils';
-import { configDisplay, configMap, mode, map } from '../../config/config';
+import { tempRandom } from 'utils/map/tempRandom.utils';
+import { getCanvasContext } from 'utils/map/getCanvasContext.utils';
+import { clearMap } from 'utils/map/common/clearMap.utils';
+import { drawCities } from 'utils/map/common/drawCities.utils';
+import { selectClickCity } from 'utils/map/selectClickCity.utils';
+import { drawClickedCity } from 'utils/map/common/drawClickedCity.utils';
+import { configDisplay, configMap, mode, map } from 'config/config';
 
 export const useMap = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const { circlePoint, randomPoints, pathingInProgress, toClear, clickPossible, algorithm, filteredCities } =
-    useSelector((state) => state.map);
+  const {
+    circlePoint,
+    randomPoints,
+    pathingInProgress,
+    toClear,
+    clickPossible,
+    algorithm,
+    filteredCities,
+  } = useSelector((state) => state.map);
   const { activeMode, theme: themeName } = useSelector((state) => state.toggle);
 
   const updateCirclePoint = (newPoint) => {
@@ -60,7 +67,17 @@ export const useMap = (canvasRef) => {
       }
     }
     return () => {};
-  }, [activeMode, algorithm, canvasRef, circlePoint, clickPossible, pathingInProgress, randomPoints, theme, toClear]);
+  }, [
+    activeMode,
+    algorithm,
+    canvasRef,
+    circlePoint,
+    clickPossible,
+    pathingInProgress,
+    randomPoints,
+    theme,
+    toClear,
+  ]);
 
   useEffect(() => {
     if (toClear || pathingInProgress) {
@@ -100,7 +117,10 @@ export const useMap = (canvasRef) => {
     const rect = canvas.getBoundingClientRect();
     let mouseX;
     let mouseY;
-    if (rect?.height > configDisplay.RESCALED_VALUE() && rect.width > configDisplay.RESCALED_VALUE()) {
+    if (
+      rect?.height > configDisplay.RESCALED_VALUE() &&
+      rect.width > configDisplay.RESCALED_VALUE()
+    ) {
       mouseX = event.clientX - rect.left;
       mouseY = event.clientY - rect.top;
     } else {

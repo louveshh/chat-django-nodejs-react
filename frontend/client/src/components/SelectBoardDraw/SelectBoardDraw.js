@@ -1,5 +1,5 @@
 import CommonSelect from 'components/common/CommonSelect/commonSelect.component';
-import { configBoard } from '../../config/config';
+import { configBoard } from 'config/config';
 import { useSelectBoardDraw } from './selectBoardDraw.hooks';
 
 const SelectBoardDraw = () => {

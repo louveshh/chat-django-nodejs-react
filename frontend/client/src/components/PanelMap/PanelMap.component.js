@@ -1,12 +1,9 @@
-import CommonButton from 'components/common/CommonButton/CommonButton';
-
+import CommonButton from 'components/common/CommonButton/CommonButton.component';
+import Click from 'components/ToggleClick/ToggleClick.component';
+import SelectCity from 'components/SelectCity/SelectCity.component';
+import SelectMapAlgorithm from 'components/SelectMapAlgorithm/SelectMapAlgorithm.component';
+import BarWeight from 'components/BarWeight/BarWeight.component';
 import { usePanelMap } from './panelMap.hooks';
-
-import { StyledButton } from '../Map/map.styles';
-import Click from '../ToggleClick/ToggleClick.component';
-import SelectCity from '../SelectCity/SelectCity.component';
-import SelectMapAlgorithm from '../SelectMapAlgorithm/SelectMapAlgorithm';
-import BarWeight from '../BarWeight/BarWeight.component';
 
 const PanelMap = ({ canvasRef }) => {
   const {

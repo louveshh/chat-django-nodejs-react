@@ -1,7 +1,7 @@
-import CommonButton from 'components/common/CommonButton/CommonButton';
+import CommonButton from 'components/common/CommonButton/CommonButton.component';
+import { mode } from 'config/config';
 import { usePanelCombo } from './panelCombo.hooks';
-import { MultiSelectSort } from '../SortableMultiSelect/SortableMultiSelectSort';
-import { mode } from '../../config/config';
+import { MultiSelectSort } from '../SortableMultiSelect/SortableMultiSelectSort.component';
 
 const PanelCombo = ({ canvasRef }) => {
   const {
@@ -17,6 +17,14 @@ const PanelCombo = ({ canvasRef }) => {
   } = usePanelCombo(canvasRef);
   return (
     <>
+      <CommonButton
+        type="button"
+        onClick={handleAlgorithm}
+        disabled={filteredCities.length < 2 || mapToClear || boardToClear}
+        pathingInProgress={mapPathingInProgress || boardPathingInProgress}
+      >
+        RUN
+      </CommonButton>
       {!boardPathingInProgress &&
         !mapPathingInProgress &&
         mapToClear &&
@@ -36,14 +44,6 @@ const PanelCombo = ({ canvasRef }) => {
       {!(mapPathingInProgress || mapToClear || boardToClear || boardPathingInProgress) && (
         <MultiSelectSort />
       )}
-      <CommonButton
-        type="button"
-        onClick={handleAlgorithm}
-        disabled={filteredCities.length < 2 || mapToClear || boardToClear}
-        pathingInProgress={mapPathingInProgress || boardPathingInProgress}
-      >
-        RUN
-      </CommonButton>
     </>
   );
 };

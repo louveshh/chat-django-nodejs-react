@@ -1,7 +1,6 @@
+import { configDisplay } from 'config/config';
 import { useMap } from './map.hooks';
-
 import { BackgroundImage, CanvasMap } from './map.styles';
-import { configDisplay } from '../../config/config';
 
 const Map = ({ canvasRef, active }) => {
   const { activeMode, themeName, handleCanvasClick, handleMouseMove } = useMap(canvasRef);

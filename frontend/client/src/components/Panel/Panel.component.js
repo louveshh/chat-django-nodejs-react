@@ -1,4 +1,4 @@
-import Baord from 'components/Board/Baord';
+import Baord from 'components/Board/Baord.component';
 import PanelMap from 'components/PanelMap/PanelMap.component';
 import PanelBoard from 'components/PanelBoard/PanelBoard.component';
 import PanelCombo from 'components/PanelCombo/PanelCombo.component';

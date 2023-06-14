@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { setCirclePointZero, setRandomPointsZero, setToggleClickPossible } from 'store/slices/map';
-import { map } from '../../config/config';
+import { map } from 'config/config';
 
 export const useToggleCLick = () => {
   const { clickPossible, algorithm } = useSelector((state) => state.map);

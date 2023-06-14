@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { setCirclePoint } from 'store/slices/map';
 
 export const useBarWeight = () => {

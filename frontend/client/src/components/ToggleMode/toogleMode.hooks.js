@@ -10,8 +10,8 @@ import {
   setZeroStartCityFiltered,
 } from 'store/slices/map';
 import { setAlgorithm as setAlgorithmBoard, setSelectedOption } from 'store/slices/board';
-import { configBoard } from '../../config/config';
-import { addBorders } from '../../utils/board/common/addBorders.util';
+import { configBoard } from 'config/config';
+import { addBorders } from 'utils/board/common/addBorders.util';
 
 export const useToggleMode = () => {
   const { circlePoint } = useSelector((state) => state.map);

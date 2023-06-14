@@ -9,14 +9,14 @@ import {
   setAlgorithm,
   setClickPossible,
 } from 'store/slices/map';
-import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
-import { clearMap } from '../../utils/map/common/clearMap.utils';
-import { drawCities } from '../../utils/map/common/drawCities.utils';
-import { calculateShortestPath } from '../../utils/map/calculateShortestPath.utils';
-import { calculateSortedPath } from '../../utils/map/calculateSortedPath.utils';
-import { drawClickedCity } from '../../utils/map/common/drawClickedCity.utils';
-import { drawSimplePath } from '../../utils/map/common/drawSimplePath.utils';
-import { calculateRandomPath } from '../../utils/map/calculateRandomPath.utils';
+import { getCanvasContext } from 'utils/map/getCanvasContext.utils';
+import { clearMap } from 'utils/map/common/clearMap.utils';
+import { drawCities } from 'utils/map/common/drawCities.utils';
+import { calculateShortestPath } from 'utils/map/calculateShortestPath.utils';
+import { calculateSortedPath } from 'utils/map/calculateSortedPath.utils';
+import { drawClickedCity } from 'utils/map/common/drawClickedCity.utils';
+import { drawSimplePath } from 'utils/map/common/drawSimplePath.utils';
+import { calculateRandomPath } from 'utils/map/calculateRandomPath.utils';
 
 export const usePanelMap = (canvasRef) => {
   const dispatch = useDispatch();

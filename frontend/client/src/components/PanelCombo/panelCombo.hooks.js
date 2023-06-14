@@ -3,17 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import { useTheme } from 'styled-components';
 
-import { setPathingInProgress, setClearMap, setZeroStartCity, setAlgorithm, setClickPossible } from 'store/slices/map';
-import { setToggleRunning, setClearBoard } from '../../store/slices/board';
-import { clearGrid } from '../../utils/board/common/clearGrid.utils';
-import { getCanvasContext } from '../../utils/map/getCanvasContext.utils';
-import { clearMap } from '../../utils/map/common/clearMap.utils';
-import { calculateShortestPath } from '../../utils/map/calculateShortestPath.utils';
-import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
-import { removeBorders } from '../../utils/board/common/removeBorders.utils';
-import { coordinatesToBlockNumbers } from '../../utils/combo/coordinatesToBlockNumbers.utils';
-import { dividePoints } from '../../utils/combo/dividePoints.utils';
-import { board, mode } from '../../config/config';
+import {
+  setPathingInProgress,
+  setClearMap,
+  setZeroStartCity,
+  setAlgorithm,
+  setClickPossible,
+} from 'store/slices/map';
+import { setToggleRunning, setClearBoard } from 'store/slices/board';
+import { clearGrid } from 'utils/board/common/clearGrid.utils';
+import { getCanvasContext } from 'utils/map/getCanvasContext.utils';
+import { clearMap } from 'utils/map/common/clearMap.utils';
+import { calculateShortestPath } from 'utils/map/calculateShortestPath.utils';
+import { runAlgorithm } from 'utils/board/runAlgorithm.utils';
+import { removeBorders } from 'utils/board/common/removeBorders.utils';
+import { coordinatesToBlockNumbers } from 'utils/combo/coordinatesToBlockNumbers.utils';
+import { dividePoints } from 'utils/combo/dividePoints.utils';
+import { board, mode } from 'config/config';
 
 export const usePanelCombo = (canvasRef) => {
   const dispatch = useDispatch();

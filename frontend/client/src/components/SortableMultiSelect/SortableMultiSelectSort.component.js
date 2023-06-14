@@ -2,6 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
+
 import { useMultiSelectSort } from './useMultiSelectSort.hooks';
 import {
   CustomMultiSelect,

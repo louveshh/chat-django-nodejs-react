@@ -2,9 +2,9 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { setToggleRunning, setAlgorithm, setClearBoard } from '../../store/slices/board';
-import { clearGrid } from '../../utils/board/common/clearGrid.utils';
-import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
+import { setToggleRunning, setAlgorithm, setClearBoard } from 'store/slices/board';
+import { clearGrid } from 'utils/board/common/clearGrid.utils';
+import { runAlgorithm } from 'utils/board/runAlgorithm.utils';
 
 export const usePanelBoard = () => {
   const dispatch = useDispatch();

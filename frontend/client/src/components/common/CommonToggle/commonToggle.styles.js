@@ -15,7 +15,6 @@ export const StyledToggle = styled(Toggle)`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
   margin-bottom: 10px;
 
@@ -31,21 +30,21 @@ export const StyledToggle = styled(Toggle)`
     height: 24px;
     padding: 0;
     border-radius: 30px;
-    background-color: #4d4d4d;
+    background-color: ${(props) => props.theme.toggle.background1};
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     transition: all 0.2s ease;
 
     &:hover:not(.react-toggle--disabled) {
-      background-color: #000000;
+      background-color: ${(props) => props.theme.toggle.hover};
     }
   }
 
   &.react-toggle--checked .react-toggle-track {
-    background-color: ${(props) => props.theme.view.primary2};
+    background-color: ${(props) => props.theme.toggle.enabled};
 
     &:hover:not(.react-toggle--disabled) {
-      background-color: ${(props) => props.theme.view.secondary3};
+      background-color: ${(props) => props.theme.toggle.hover};
     }
   }
 
@@ -99,9 +98,9 @@ export const StyledToggle = styled(Toggle)`
     left: 1px;
     width: 22px;
     height: 22px;
-    border: 1px solid #4d4d4d;
+    border: 1px solid ${(props) => props.theme.toggle.background1};
     border-radius: 50%;
-    background-color: #fafafa;
+    background-color: ${(props) => props.theme.toggle.background2};
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -112,7 +111,6 @@ export const StyledToggle = styled(Toggle)`
 
   &.react-toggle--checked .react-toggle-thumb {
     left: 27px;
-    border-color: #19ab27;
   }
 
   & .react-toggle-screenreader-only {

@@ -3,13 +3,12 @@ import styled from 'styled-components';
 export const StyledButton = styled.button`
   display: inline-block;
   position: relative;
-  background: none;
   border: none;
   color: #fff;
   font-size: 18px;
   cursor: pointer;
   margin: 20px 30px;
-  background: rgba(0, 0, 0, 0.09);
+  background: ${(props) => props.theme.button.background};
   overflow: hidden;
 
   ${(props) => {
@@ -27,13 +26,13 @@ export const StyledButton = styled.button`
   &::after {
     content: '';
     width: 0;
-    height: 2px;
+    height: 3px;
     position: absolute;
     transition: all 0.8s ease-in-out;
     ${(props) => {
       if (!props.disabled) {
         return `
-        background: #ff00ff;
+        background: ${props.theme.button.enabled};
         `;
       }
       return `
@@ -75,14 +74,14 @@ export const StyledHover = styled.span`
   &::before,
   &::after {
     content: '';
-    width: 2px;
+    width: 3px;
     height: 0;
     position: absolute;
     transition: all 0.8s ease-in-out;
     ${(props) => {
       if (!props.disabled) {
         return `
-        background: #ff00ff;
+        background: ${props.theme.button.enabled};
         `;
       }
       return `
@@ -125,9 +124,19 @@ export const StyledLoading = styled.span`
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 2px;
-    background: -webkit-gradient(linear, right top, left top, from(rgba(43, 8, 8, 0)), to(#d92626));
-    background: linear-gradient(to left, rgba(43, 8, 8, 0), #d92626);
+    height: 3px;
+    background: -webkit-gradient(
+      linear,
+      right top,
+      left top,
+      from(${(props) => props.theme.button.loading}),
+      to(${(props) => props.theme.button.loading2})
+    );
+    background: linear-gradient(
+      to right,
+      ${(props) => props.theme.button.loading},
+      ${(props) => props.theme.button.loading2}
+    );
     animation: 2s animateTop linear infinite;
   }
 
@@ -144,15 +153,19 @@ export const StyledLoading = styled.span`
     top: 0px;
     right: 0px;
     height: 100%;
-    width: 2px;
+    width: 3px;
     background: -webkit-gradient(
       linear,
-      left bottom,
+      right top,
       left top,
-      from(rgba(43, 8, 8, 0)),
-      to(#d92626)
+      from(${(props) => props.theme.button.loading}),
+      to(${(props) => props.theme.button.loading2})
     );
-    background: linear-gradient(to top, rgba(43, 8, 8, 0), #d92626);
+    background: linear-gradient(
+      to right,
+      ${(props) => props.theme.button.loading},
+      ${(props) => props.theme.button.loading2}
+    );    );
     animation: 2s animateRight linear -1s infinite;
   }
 
@@ -169,9 +182,19 @@ export const StyledLoading = styled.span`
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 2px;
-    background: -webkit-gradient(linear, left top, right top, from(rgba(43, 8, 8, 0)), to(#d92626));
-    background: linear-gradient(to right, rgba(43, 8, 8, 0), #d92626);
+    height: 3px;
+    background: -webkit-gradient(
+      linear,
+      right top,
+      left top,
+      from(${(props) => props.theme.button.loading}),
+      to(${(props) => props.theme.button.loading2})
+    );
+    background: linear-gradient(
+      to right,
+      ${(props) => props.theme.button.loading},
+      ${(props) => props.theme.button.loading2}
+    );
     -webkit-animation: 2s animateBottom linear infinite;
     animation: 2s animateBottom linear infinite;
   }
@@ -189,15 +212,19 @@ export const StyledLoading = styled.span`
     top: 0px;
     left: 0px;
     height: 100%;
-    width: 2px;
+    width: 3px;
     background: -webkit-gradient(
       linear,
+      right top,
       left top,
-      left bottom,
-      from(rgba(43, 8, 8, 0)),
-      to(#d92626)
+      from(${(props) => props.theme.button.loading}),
+      to(${(props) => props.theme.button.loading2})
     );
-    background: linear-gradient(to bottom, rgba(43, 8, 8, 0), #d92626);
+    background: linear-gradient(
+      to right,
+      ${(props) => props.theme.button.loading},
+      ${(props) => props.theme.button.loading2}
+    );
     animation: 2s animateLeft linear -1s infinite;
   }
 

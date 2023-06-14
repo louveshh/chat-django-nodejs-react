@@ -24,6 +24,10 @@ const color = {
   black1: 'RGBA(0, 0, 9, 1)',
   black2: 'RGB(3, 28, 30)',
   black3: 'RGBA(255, 200, 0.2)',
+  black4: 'RGBA(0, 0, 0, 0.09)',
+  transparent: 'RGBA(43, 8, 8, 0)',
+  white1: 'RGBA(250,250,250)',
+  gray1: 'RGBA(77,77,77)',
 };
 
 const font = {
@@ -40,6 +44,7 @@ export const light = {
     secondary2: color.green3,
     secondary3: color.green5,
     background: color.blue1,
+    black: color.black1,
   },
 
   board: {
@@ -66,6 +71,18 @@ export const light = {
     gotham: font.gotham,
     gothamXNarr: font.gothamXNarr,
     openSans: font.openSans,
+  },
+  button: {
+    enabled: color.green7,
+    loading: color.black4,
+    loading2: color.green7,
+    background: color.black4,
+  },
+  toggle: {
+    enabled: color.green1,
+    background1: color.gray1,
+    background2: color.white1,
+    hover: color.green5,
   },
 };
 
@@ -103,5 +120,17 @@ export const dark = {
     gotham: font.gotham,
     gothamXNarr: font.gothamXNarr,
     openSans: font.openSans,
+  },
+  button: {
+    enabled: color.blue8,
+    loading: color.black4,
+    loading2: color.blue8,
+    background: color.black4,
+  },
+  toggle: {
+    enabled: color.blue1,
+    background1: color.gray1,
+    background2: color.white1,
+    hover: color.blue7,
   },
 };

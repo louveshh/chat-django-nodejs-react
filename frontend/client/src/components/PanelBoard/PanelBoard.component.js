@@ -1,7 +1,6 @@
 import SelectBoardDraw from 'components/SelectBoardDraw/SelectBoardDraw';
 import SelectBoardAlgorithm from 'components/SelectBoardAlgorithm/SelectBoardAlgorithm.component';
-import CommonButton from 'components/common/CommonButton/CommonButton';
-
+import CommonButton from 'components/common/CommonButton/CommonButton.component';
 import { usePanelBoard } from './panelBoard.hooks';
 
 const PanelBoard = () => {

@@ -1,6 +1,6 @@
-import './node.styles.css';
 import { configDisplay } from 'config/config';
 import { useNode } from './node.hooks';
+import './node.styles.css';
 
 const Node = ({ col, row, isFinish, isStart, isWall, onMouseDown }) => {
   const { baseClassName, extraClassName, extraNodeBorder } = useNode(isFinish, isStart, isWall);

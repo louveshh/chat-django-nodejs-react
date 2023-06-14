@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Select from 'react-select';
-import { configDisplay } from '../../config/config';
+
+import { configDisplay } from 'config/config';
 
 export const BoardWrapper = styled.div`
   ${(props) => {

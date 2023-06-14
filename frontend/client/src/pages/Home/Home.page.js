@@ -1,4 +1,4 @@
-import Layout from 'components/Layout/Layout';
+import Layout from 'components/Layout/Layout.component';
 
 const HomePage = () => (
   <Layout title="Auth Site | Home" content="Home page">

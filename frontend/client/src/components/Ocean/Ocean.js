@@ -14,19 +14,9 @@ const Ocean = () => (
       />
     </defs>
     <StyledG>
-      <use
-        xlinkHref="#gentle-wave"
-        x="30"
-        y="12"
-        fill="rgba(255,255,255,0.1)"
-      />
+      <use xlinkHref="#gentle-wave" x="30" y="12" fill="rgba(255,255,255,0.1)" />
       <use xlinkHref="#gentle-wave" x="40" y="8" fill="rgba(255,255,255,0.1)" />
-      <use
-        xlinkHref="#gentle-wave"
-        x="30"
-        y="14"
-        fill="rgba(255,255,255,0.1)"
-      />
+      <use xlinkHref="#gentle-wave" x="30" y="14" fill="rgba(255,255,255,0.1)" />
       <use xlinkHref="#gentle-wave" x="0" y="10" fill="rgba(255,255,255,0.1)" />
     </StyledG>
   </StyledSVG>

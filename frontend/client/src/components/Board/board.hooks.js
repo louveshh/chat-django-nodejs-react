@@ -2,9 +2,9 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { setStart, setFinish, setGrid } from '../../store/slices/board';
-import { createInitialGrid } from '../../utils/board/createInitalGrid.utils';
-import { clickGrid } from '../../utils/board/clickGrid.utils';
+import { setStart, setFinish, setGrid } from 'store/slices/board';
+import { createInitialGrid } from 'utils/board/createInitalGrid.utils';
+import { clickGrid } from 'utils/board/clickGrid.utils';
 
 export const useBoard = () => {
   const dispatch = useDispatch();
@@ -43,7 +43,17 @@ export const useBoard = () => {
   }, [activeMode, updateGrid]);
 
   const handleMouseDown = (row, col) => {
-    clickGrid(row, col, selectedOption, pathingInProgress, memoGrid, memoPoints, updateStart, updateFinish, updateGrid);
+    clickGrid(
+      row,
+      col,
+      selectedOption,
+      pathingInProgress,
+      memoGrid,
+      memoPoints,
+      updateStart,
+      updateFinish,
+      updateGrid
+    );
   };
 
   return {

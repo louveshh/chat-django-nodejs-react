@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import canvasImage from '../../assets/map.jpg';
-import { configDisplay } from '../../config/config';
+
+import canvasImage from 'assets/map.jpg';
+import { configDisplay } from 'config/config';
 
 export const MapWrapper = styled.div`
   height: 100%;
