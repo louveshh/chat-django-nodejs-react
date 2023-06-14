@@ -115,4 +115,5 @@ export const configPanel = {
     mode.board,
     mode.combo,
   ],
+  comboModes: [mode.combo],
 };

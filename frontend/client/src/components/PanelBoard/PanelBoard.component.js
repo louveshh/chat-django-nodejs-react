@@ -4,28 +4,28 @@ import CommonButton from 'components/common/CommonButton/CommonButton.component'
 import { usePanelBoard } from './panelBoard.hooks';
 
 const PanelBoard = () => {
-  const { pathingInProgress, activeMode, algorithm, toClear, handleClearGrid, handleAlgorithm } =
+  const { pathingInProgress, clear, active, board, disabled, handleClearGrid, handleAlgorithm } =
     usePanelBoard();
   return (
     <>
-      {!pathingInProgress && toClear && activeMode === 'board' && (
+      {clear && (
         <CommonButton type="button" onClick={handleClearGrid}>
           Clear Grid
         </CommonButton>
       )}
-      {!toClear && !pathingInProgress && activeMode === 'board' && (
+      {active && (
         <>
           <SelectBoardAlgorithm />
           <SelectBoardDraw />
         </>
       )}
 
-      {activeMode === 'board' && (
+      {board && (
         <CommonButton
           type="button"
           onClick={() => handleAlgorithm()}
           pathingInProgress={pathingInProgress}
-          disabled={!algorithm || pathingInProgress || toClear}
+          disabled={disabled}
         >
           Run Board
         </CommonButton>

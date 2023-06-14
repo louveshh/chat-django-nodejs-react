@@ -2,8 +2,9 @@ import { NavLink } from 'react-router-dom';
 
 import ToggleLanguage from 'components/ToggleLanguage/ToggleLanguage.component';
 import ToggleTheme from 'components/ToggleTheme/ToggleTheme.component';
+import { configPaths } from 'config/paths';
 import { useNavbar } from './navbar.hooks';
-import { TrapezoidNavbar, WrapperNavbar, Triangle } from './navbar.styles';
+import { TrapezoidNavbar, WrapperNavbar, Triangle, StyledButton } from './navbar.styles';
 
 const Navbar = () => {
   const { isAuthenticated, onClick } = useNavbar();
@@ -14,25 +15,25 @@ const Navbar = () => {
       <TrapezoidNavbar>
         {!isAuthenticated ? (
           <Triangle>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to={configPaths.login}>Login</NavLink>
           </Triangle>
         ) : (
           <Triangle>
-            <NavLink to="/about">About</NavLink>
+            <NavLink to={configPaths.about}>About</NavLink>
           </Triangle>
         )}
         <Triangle>
-          <NavLink to="/algorithms">Algorithms</NavLink>
+          <NavLink to={configPaths.algorithms}>Algorithms</NavLink>
         </Triangle>
         {!isAuthenticated ? (
           <Triangle>
-            <NavLink to="/login">Register</NavLink>
+            <NavLink to={configPaths.login}>Register</NavLink>
           </Triangle>
         ) : (
           <Triangle>
-            <div onClick={onClick} role="button" tabIndex="0" onKeyDown={() => {}}>
-              <div>Logout</div>
-            </div>
+            <StyledButton onClick={onClick} role="button" tabIndex="0" onKeyDown={() => {}}>
+              Logout
+            </StyledButton>
           </Triangle>
         )}
       </TrapezoidNavbar>

@@ -5,6 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { setToggleRunning, setAlgorithm, setClearBoard } from 'store/slices/board';
 import { clearGrid } from 'utils/board/common/clearGrid.utils';
 import { runAlgorithm } from 'utils/board/runAlgorithm.utils';
+import { mode } from 'config/config';
 
 export const usePanelBoard = () => {
   const dispatch = useDispatch();
@@ -44,11 +45,17 @@ export const usePanelBoard = () => {
     runAlgorithm(algorithm, pathingInProgress, currentGrid, currentPoints, updateToggleRunning);
     updateAlgorithm('');
   };
+
+  const board = activeMode === mode.board;
+  const clear = !pathingInProgress && toClear && board;
+  const active = !toClear && !pathingInProgress && board;
+  const disabled = !algorithm || pathingInProgress || toClear;
   return {
     pathingInProgress,
-    activeMode,
-    algorithm,
-    toClear,
+    clear,
+    active,
+    board,
+    disabled,
     handleClearGrid,
     handleAlgorithm,
   };

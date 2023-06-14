@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { logout } from 'store/slices/user';
+import { configPaths } from 'config/paths';
 
 export const useNavbar = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export const useNavbar = () => {
   const onClick = () => {
     updateLogout();
     setTimeout(() => {
-      navigate('/dashboard');
+      navigate(configPaths.home);
     }, 3000);
   };
   return { isAuthenticated, onClick };

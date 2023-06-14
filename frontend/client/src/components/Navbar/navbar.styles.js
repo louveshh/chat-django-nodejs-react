@@ -54,3 +54,5 @@ export const Triangle = styled.div`
     background-color: ${(props) => props.theme.view.secondary2};
   }
 `;
+
+export const StyledButton = styled.div``;

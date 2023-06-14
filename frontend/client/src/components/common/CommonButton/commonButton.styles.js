@@ -69,7 +69,7 @@ export const StyledButton = styled.button`
 
 export const StyledHover = styled.span`
   display: block;
-  padding: 25px 80px;
+  padding: 25px;
 
   &::before,
   &::after {

@@ -7,10 +7,10 @@ import { RightPanel, MainPanel, LeftPanel, PanelWrapper } from './panel.styles';
 import { usePanel } from './panel.hooks';
 
 const Panel = () => {
-  const { canvasRef, isMapActive, isBoardActive, activeMode } = usePanel();
+  const { canvasRef, isMapActive, isBoardActive, isComboActive } = usePanel();
   return (
     <PanelWrapper>
-      <LeftPanel>xd</LeftPanel>
+      <LeftPanel>TODO</LeftPanel>
       <MainPanel>
         <Map canvasRef={canvasRef} active={isMapActive} />
         <Baord active={isBoardActive} />
@@ -18,7 +18,7 @@ const Panel = () => {
       <RightPanel>
         {isMapActive && <PanelMap canvasRef={canvasRef} />}
         {isBoardActive && <PanelBoard />}
-        {activeMode === 'combo' && <PanelCombo canvasRef={canvasRef} />}
+        {isComboActive && <PanelCombo canvasRef={canvasRef} />}
       </RightPanel>
     </PanelWrapper>
   );

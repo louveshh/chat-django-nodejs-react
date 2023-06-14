@@ -28,6 +28,7 @@ const color = {
   transparent: 'RGBA(43, 8, 8, 0)',
   white1: 'RGBA(250,250,250)',
   gray1: 'RGBA(77,77,77)',
+  gray2: 'RGBA(255,255,255,0.1)',
 };
 
 const font = {
@@ -84,6 +85,9 @@ export const light = {
     background2: color.white1,
     hover: color.green5,
   },
+  ocean: {
+    color: color.gray2,
+  },
 };
 
 export const dark = {
@@ -132,5 +136,8 @@ export const dark = {
     background1: color.gray1,
     background2: color.white1,
     hover: color.blue7,
+  },
+  ocean: {
+    color: color.gray2,
   },
 };

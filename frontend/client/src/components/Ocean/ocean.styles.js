@@ -47,3 +47,6 @@ export const StyledG = styled.g`
     }
   }
 `;
+
+export const StyledDefs = styled.defs``;
+export const StyledPath = styled.path``;
