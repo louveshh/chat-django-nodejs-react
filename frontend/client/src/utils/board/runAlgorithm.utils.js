@@ -23,68 +23,72 @@ export const runAlgorithm = (
     return shortestPathNodes;
   };
   const animateFinalPath = (shortestPathNodes) => {
-    for (let i = 0; i < shortestPathNodes.length; i++) {
-      if (shortestPathNodes[i] === 'end') {
-        setTimeout(
-          () => {
-            updateToggleRunning();
-          },
-          mode === 'combo' ? i * 10 : i * 50
-        );
-      } else {
-        setTimeout(
-          () => {
-            const node = shortestPathNodes[i];
-            const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
-            const words = classId.className.split(' ');
-            const { startRow, finishRow, startCol, finishCol } = currentPoints;
-            if (startRow === node.row && startCol === node.col && mode !== 'combo') {
-              classId.className = 'node-base node-start';
-            } else if (finishRow === node.row && finishCol === node.col && mode !== 'combo') {
-              classId.className = 'node-base node-finish';
-            } else if (words.indexOf('node-shortest-path') < 0) {
-              classId.className = 'node-base node-shortest-path';
-            }
-            if (mode === 'combo') {
-              classId.innerText += classId.innerText ? `\n${i + step}` : i + step;
-            }
-          },
-          mode === 'combo' ? i * 20 : i * 40
-        );
+    if (shortestPathNodes) {
+      for (let i = 0; i < shortestPathNodes.length; i++) {
+        if (shortestPathNodes[i] === 'end') {
+          setTimeout(
+            () => {
+              updateToggleRunning();
+            },
+            mode === 'combo' ? i * 10 : i * 50
+          );
+        } else {
+          setTimeout(
+            () => {
+              const node = shortestPathNodes[i];
+              const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
+              const words = classId.className.split(' ');
+              const { startRow, finishRow, startCol, finishCol } = currentPoints;
+              if (startRow === node.row && startCol === node.col && mode !== 'combo') {
+                classId.className = 'node-base node-start';
+              } else if (finishRow === node.row && finishCol === node.col && mode !== 'combo') {
+                classId.className = 'node-base node-finish';
+              } else if (words.indexOf('node-shortest-path') < 0) {
+                classId.className = 'node-base node-shortest-path';
+              }
+              if (mode === 'combo') {
+                classId.innerText += classId.innerText ? `\n${i + step}` : i + step;
+              }
+            },
+            mode === 'combo' ? i * 20 : i * 40
+          );
+        }
       }
     }
   };
 
   const animate = (visitedNodesInOrder, shortestPathNodes) => {
-    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-      if (i === visitedNodesInOrder.length) {
+    if (visitedNodesInOrder) {
+      for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+        if (i === visitedNodesInOrder.length) {
+          setTimeout(
+            () => {
+              animateFinalPath(shortestPathNodes);
+            },
+            mode === 'combo' ? i * 1 : i * 5
+          );
+          if (shortestPathNodes) {
+            return shortestPathNodes.length;
+          }
+          return 0;
+        }
         setTimeout(
           () => {
-            animateFinalPath(shortestPathNodes);
+            const node = visitedNodesInOrder[i];
+            const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
+            const { startRow, finishRow, startCol, finishCol } = currentPoints;
+            const words = classId.className.split(' ');
+            if (
+              !(startRow === node.row && startCol === node.col) &&
+              !(finishRow === node.row && finishCol === node.col) &&
+              words.indexOf('node-shortest-path') < 0
+            ) {
+              classId.className = 'node-base node-visited';
+            }
           },
           mode === 'combo' ? i * 1 : i * 5
         );
-        if (shortestPathNodes) {
-          return shortestPathNodes.length;
-        }
-        return 0;
       }
-      setTimeout(
-        () => {
-          const node = visitedNodesInOrder[i];
-          const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
-          const { startRow, finishRow, startCol, finishCol } = currentPoints;
-          const words = classId.className.split(' ');
-          if (
-            !(startRow === node.row && startCol === node.col) &&
-            !(finishRow === node.row && finishCol === node.col) &&
-            words.indexOf('node-shortest-path') < 0
-          ) {
-            classId.className = 'node-base node-visited';
-          }
-        },
-        mode === 'combo' ? i * 1 : i * 5
-      );
     }
   };
   const switchAlgorithm = (algorithm, startNode, finishNode) => {

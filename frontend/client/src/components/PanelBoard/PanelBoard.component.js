@@ -1,41 +1,35 @@
+import SelectBoardDraw from 'components/SelectBoardDraw/SelectBoardDraw';
+import SelectBoardAlgorithm from 'components/SelectBoardAlgorithm/SelectBoardAlgorithm.component';
+import CommonButton from 'components/common/CommonButton/CommonButton';
+
 import { usePanelBoard } from './panelBoard.hooks';
-import { configBoard } from '../../config/config';
-import { StyledSelect } from './panelBoard.styles';
-import SelectBoardAlgorithm from '../SelectBoardAlgorithm/SelectBoardAlgorithm.component';
 
 const PanelBoard = () => {
-  const {
-    pathingInProgress,
-    selectedOption,
-    activeMode,
-    algorithm,
-    toClear,
-    handleClearGrid,
-    handleAlgorithm,
-    updateSelectedOption,
-  } = usePanelBoard();
+  const { pathingInProgress, activeMode, algorithm, toClear, handleClearGrid, handleAlgorithm } =
+    usePanelBoard();
   return (
     <>
       {!pathingInProgress && toClear && activeMode === 'board' && (
-        <button type="button" onClick={handleClearGrid}>
+        <CommonButton type="button" onClick={handleClearGrid}>
           Clear Grid
-        </button>
+        </CommonButton>
       )}
       {!toClear && !pathingInProgress && activeMode === 'board' && (
         <>
           <SelectBoardAlgorithm />
-          <StyledSelect
-            onChange={updateSelectedOption}
-            value={selectedOption}
-            options={configBoard.drawOptions}
-          />
+          <SelectBoardDraw />
         </>
       )}
 
-      {!pathingInProgress && algorithm && activeMode === 'board' && (
-        <button type="button" onClick={() => handleAlgorithm()}>
-          runAlgorithm
-        </button>
+      {activeMode === 'board' && (
+        <CommonButton
+          type="button"
+          onClick={() => handleAlgorithm()}
+          pathingInProgress={pathingInProgress}
+          disabled={!algorithm || pathingInProgress || toClear}
+        >
+          Run Board
+        </CommonButton>
       )}
     </>
   );

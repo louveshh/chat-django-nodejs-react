@@ -18,7 +18,7 @@ export const ButtonsWrapper = styled.div`
   align-items: start;
 `;
 
-export const StyledSelect = styled(Select)`
+export const CommonSelect = styled(Select)`
   width: 100px;
 `;
 

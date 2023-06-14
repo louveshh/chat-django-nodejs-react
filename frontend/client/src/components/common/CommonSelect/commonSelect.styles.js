@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Select, { components } from 'react-select';
 
-export const CustomSelect = styled(Select)`
+export const StyledSelect = styled(Select)`
   height: 30px;
   margin-bottom: 20px;
   @media (max-width: 1100px) {
@@ -12,7 +12,7 @@ export const CustomSelect = styled(Select)`
   }
 `;
 
-export const CustomMenuList = styled(components.MenuList)`
+export const StyledMenuList = styled(components.MenuList)`s
   max-height: 300px !important;
   @media (max-width: 1100px) {
     max-height: 140px !important;
@@ -23,17 +23,17 @@ export const CustomMenuList = styled(components.MenuList)`
   overflow-y: auto;
 `;
 
-export const CustomPlaceholder = styled(components.Placeholder)`
+export const StyledPlaceholder = styled(components.Placeholder)`
   text-align: center;
 `;
 
-export const CustomValueContainer = styled(components.ValueContainer)`
+export const StyledValueContainer = styled(components.ValueContainer)`
   display: flex;
   justify-content: center;
   margin-left: 2.5rem;
 `;
 
-export const CustomOption = styled(components.Option)`
+export const StyledOption = styled(components.Option)`
   text-align: center;
 `;
-export const CustomLabel = styled.label``;
+export const StyledLabel = styled.label``;

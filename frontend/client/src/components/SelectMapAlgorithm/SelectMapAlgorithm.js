@@ -1,10 +1,10 @@
-import SelectStyled from 'components/common/SelectStyled/SelectStyled.component';
+import CommonSelect from 'components/common/CommonSelect/commonSelect.component';
 import { useSelectMapAlgorithm } from './selectMapAlgorithm.hooks';
 
 const SelectMapAlgorithm = () => {
   const { options, handleSelectMapAlgorithm } = useSelectMapAlgorithm();
   return (
-    <SelectStyled
+    <CommonSelect
       onChange={handleSelectMapAlgorithm}
       options={options}
       placeholder="Select Algorithm"

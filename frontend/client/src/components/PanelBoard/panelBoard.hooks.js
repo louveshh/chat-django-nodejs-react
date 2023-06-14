@@ -2,19 +2,14 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
-import {
-  setToggleRunning,
-  setSelectedOption,
-  setAlgorithm,
-  setClearBoard,
-} from '../../store/slices/board';
+import { setToggleRunning, setAlgorithm, setClearBoard } from '../../store/slices/board';
 import { clearGrid } from '../../utils/board/common/clearGrid.utils';
 import { runAlgorithm } from '../../utils/board/runAlgorithm.utils';
 
 export const usePanelBoard = () => {
   const dispatch = useDispatch();
 
-  const { points, grid, pathingInProgress, selectedOption, algorithm, toClear } = useSelector(
+  const { points, grid, pathingInProgress, algorithm, toClear } = useSelector(
     (state) => state.board
   );
   const { activeMode } = useSelector((state) => state.toggle);
@@ -25,12 +20,7 @@ export const usePanelBoard = () => {
   const updateToggleRunning = useCallback(() => {
     dispatch(setToggleRunning());
   }, [dispatch]);
-  const updateSelectedOption = useCallback(
-    (payload) => {
-      dispatch(setSelectedOption(payload));
-    },
-    [dispatch]
-  );
+
   const updateAlgorithm = useCallback(
     (payload) => {
       dispatch(setAlgorithm(payload));
@@ -56,12 +46,10 @@ export const usePanelBoard = () => {
   };
   return {
     pathingInProgress,
-    selectedOption,
     activeMode,
     algorithm,
     toClear,
     handleClearGrid,
     handleAlgorithm,
-    updateSelectedOption,
   };
 };

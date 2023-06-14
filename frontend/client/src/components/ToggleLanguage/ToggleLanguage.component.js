@@ -1,4 +1,4 @@
-import ToggleStyled from 'components/common/ToggleStyled/ToggleStyled.component';
+import ToggleStyled from 'components/common/CommonToggle/CommonToggle.component';
 import { useToggleLangauge } from './toggleLanguage.hooks';
 import {
   ToggleContainer,

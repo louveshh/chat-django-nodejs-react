@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Toggle from 'react-toggle';
 
-export const CustomToggle = styled(Toggle)`
+export const StyledToggle = styled(Toggle)`
   touch-action: pan-x;
   display: inline-block;
   position: relative;
@@ -121,7 +121,7 @@ export const CustomToggle = styled(Toggle)`
   }
 `;
 
-export const CustomLabel = styled.label`
+export const StyledLabel = styled.label`
   display: flex;
   justify-content: center;
   align-items: start;

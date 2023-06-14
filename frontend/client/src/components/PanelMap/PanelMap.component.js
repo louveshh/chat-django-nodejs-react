@@ -26,17 +26,12 @@ const PanelMap = ({ canvasRef }) => {
           {algorithm && <Click />}
           {algorithm === 'tsg' && clickPossible && <SelectCity />}
           {algorithm === 'sort' && clickPossible && <BarWeight />}
-          {algorithm && (
-            <StyledButton type="button" onClick={handleAlgorithm()}>
-              RUN ALGO
-            </StyledButton>
-          )}
         </>
       )}
       {!pathingInProgress && toClear && activeMode === 'map' && (
-        <StyledButton type="button" className="button" onClick={handleClear}>
+        <CommonButton type="button" onClick={handleClear}>
           CLEAR MAP
-        </StyledButton>
+        </CommonButton>
       )}
       {activeMode === 'map' && (
         <CommonButton
@@ -44,7 +39,9 @@ const PanelMap = ({ canvasRef }) => {
           onClick={handleAlgorithm()}
           pathingInProgress={pathingInProgress}
           disabled={!algorithm || pathingInProgress || toClear}
-        />
+        >
+          RUN
+        </CommonButton>
       )}
     </>
   );

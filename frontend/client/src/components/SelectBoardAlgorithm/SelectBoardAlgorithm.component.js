@@ -1,10 +1,10 @@
-import SelectStyled from 'components/common/SelectStyled/SelectStyled.component';
+import CommonSelect from 'components/common/CommonSelect/commonSelect.component';
 import { useSelectBoardAlgorithm } from './selectBoardAlgorithm.hooks';
 
 const SelectBoardAlgorithm = () => {
   const { options, handleSelectBoardAlgorithm } = useSelectBoardAlgorithm();
   return (
-    <SelectStyled
+    <CommonSelect
       onChange={handleSelectBoardAlgorithm}
       options={options}
       aria-labelledby="Select Board Algorithm"

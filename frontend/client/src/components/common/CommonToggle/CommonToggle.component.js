@@ -1,6 +1,6 @@
-import { CustomToggle, CustomLabel, StyledWrapper } from './toggleStyled.styles';
+import { StyledToggle, StyledLabel, StyledWrapper } from './commonToggle.styles';
 
-const ToggleStyled = ({
+const CommonToggle = ({
   checked,
   onChange,
   labelledby,
@@ -10,8 +10,8 @@ const ToggleStyled = ({
   id = aria || label,
 }) => (
   <StyledWrapper>
-    {label && <CustomLabel htmlFor={id}>{label}</CustomLabel>}
-    <CustomToggle
+    {label && <StyledLabel htmlFor={id}>{label}</StyledLabel>}
+    <StyledToggle
       id={id}
       checked={checked}
       onChange={onChange}
@@ -21,4 +21,4 @@ const ToggleStyled = ({
     />
   </StyledWrapper>
 );
-export default ToggleStyled;
+export default CommonToggle;

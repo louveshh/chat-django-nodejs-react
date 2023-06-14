@@ -1,10 +1,8 @@
 import { StyledText, StyledButton, StyledHover } from './commonButton.styles';
 import { renderLoading } from './commonButton.utils';
 
-const CommonButton = ({ pathingInProgress, onClick, disabled }) => {
-  console.log(disabled);
+const CommonButton = ({ pathingInProgress, onClick, disabled, children }) => {
   const handleClick = () => {
-    console.log('xd?');
     if (onClick) {
       onClick();
     }
@@ -13,7 +11,7 @@ const CommonButton = ({ pathingInProgress, onClick, disabled }) => {
     <StyledButton onClick={handleClick} disabled={disabled}>
       <StyledHover disabled={disabled}>
         {pathingInProgress && renderLoading()}
-        <StyledText>Butto12n</StyledText>
+        <StyledText>{children}</StyledText>
       </StyledHover>
     </StyledButton>
   );

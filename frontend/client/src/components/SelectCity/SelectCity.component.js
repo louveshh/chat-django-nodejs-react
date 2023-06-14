@@ -1,10 +1,10 @@
-import SelectStyled from 'components/common/SelectStyled/SelectStyled.component';
+import CommonSelect from 'components/common/CommonSelect/commonSelect.component';
 import { useSelectCity } from './selectCity.hooks';
 
 const SelectCity = () => {
   const { selectValueData, handleSelectCity } = useSelectCity();
   return (
-    <SelectStyled
+    <CommonSelect
       onChange={handleSelectCity}
       options={selectValueData}
       defaultValue={selectValueData[0]}

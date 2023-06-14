@@ -1,5 +1,5 @@
+import CommonButton from 'components/common/CommonButton/CommonButton';
 import { usePanelCombo } from './panelCombo.hooks';
-import { StyledButton } from './panelCombo.styles';
 import { MultiSelectSort } from '../SortableMultiSelect/SortableMultiSelectSort';
 import { mode } from '../../config/config';
 
@@ -21,28 +21,29 @@ const PanelCombo = ({ canvasRef }) => {
         !mapPathingInProgress &&
         mapToClear &&
         activeMode === mode.combo && (
-          <button type="button" onClick={handleClearMap}>
+          <CommonButton type="button" onClick={handleClearMap}>
             Clear Map
-          </button>
+          </CommonButton>
         )}
       {!boardPathingInProgress &&
         !mapPathingInProgress &&
         boardToClear &&
         activeMode === mode.combo && (
-          <button type="button" onClick={() => handleClearBoard(false)}>
+          <CommonButton type="button" onClick={() => handleClearBoard(false)}>
             Clear Board
-          </button>
+          </CommonButton>
         )}
       {!(mapPathingInProgress || mapToClear || boardToClear || boardPathingInProgress) && (
-        <>
-          {filteredCities.length >= 2 && (
-            <StyledButton type="button" onClick={handleAlgorithm}>
-              RUN ALGO
-            </StyledButton>
-          )}
-          <MultiSelectSort />
-        </>
+        <MultiSelectSort />
       )}
+      <CommonButton
+        type="button"
+        onClick={handleAlgorithm}
+        disabled={filteredCities.length < 2 || mapToClear || boardToClear}
+        pathingInProgress={mapPathingInProgress || boardPathingInProgress}
+      >
+        RUN
+      </CommonButton>
     </>
   );
 };
