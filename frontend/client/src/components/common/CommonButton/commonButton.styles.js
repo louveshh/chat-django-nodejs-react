@@ -26,7 +26,7 @@ export const StyledButton = styled.button`
   &::after {
     content: '';
     width: 0;
-    height: 3px;
+    height: 2px;
     position: absolute;
     transition: all 0.8s ease-in-out;
     ${(props) => {
@@ -74,7 +74,7 @@ export const StyledHover = styled.span`
   &::before,
   &::after {
     content: '';
-    width: 3px;
+    width: 2px;
     height: 0;
     position: absolute;
     transition: all 0.8s ease-in-out;
@@ -124,7 +124,7 @@ export const StyledLoading = styled.span`
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background: -webkit-gradient(
       linear,
       right top,
@@ -153,7 +153,7 @@ export const StyledLoading = styled.span`
     top: 0px;
     right: 0px;
     height: 100%;
-    width: 3px;
+    width: 2px;
     background: -webkit-gradient(
       linear,
       right top,
@@ -182,7 +182,7 @@ export const StyledLoading = styled.span`
     bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background: -webkit-gradient(
       linear,
       right top,
@@ -212,7 +212,7 @@ export const StyledLoading = styled.span`
     top: 0px;
     left: 0px;
     height: 100%;
-    width: 3px;
+    width: 2px;
     background: -webkit-gradient(
       linear,
       right top,

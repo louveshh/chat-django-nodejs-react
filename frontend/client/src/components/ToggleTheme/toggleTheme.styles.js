@@ -5,6 +5,7 @@ export const ToggleContainer = styled.div`
   width: 20%;
   justify-content: end;
   height: 50px;
+  min-width: 160px;
 `;
 
 export const ToggleWrapper = styled.div`
@@ -13,6 +14,7 @@ export const ToggleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
+  min-width: 100px;
 `;
 
 export const LabelWrapper = styled.div`
@@ -20,4 +22,5 @@ export const LabelWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  min-width: 50px;
 `;

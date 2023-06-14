@@ -96,7 +96,8 @@ export const StyledToggle = styled(Toggle)`
     position: absolute;
     top: 1px;
     left: 1px;
-    width: 22px;
+    min-width: 22px;
+    max-width: 22px;
     height: 22px;
     border: 1px solid ${(props) => props.theme.toggle.background1};
     border-radius: 50%;
@@ -125,6 +126,7 @@ export const StyledLabel = styled.label`
   align-items: start;
   margin-bottom: 10px;
   height: 10px;
+  min-width: 80px;
 `;
 
 export const StyledWrapper = styled.div`

@@ -1,5 +1,5 @@
 {
-  "theme": "theme",
+  "theme": "Dark Mode",
   "en": "en",
   "pl": "pl",
   "language": "Language:",
@@ -7,5 +7,10 @@
   "dijkstra": "Dijkstra",
   "astar": "Astar",
   "dfs": "DFS",
-  "bfs": "BFS"
+  "bfs": "BFS",
+
+  "barWeight": {
+    "toggle": "Add Custom Weight",
+    "label": "Range"
+  }
 }

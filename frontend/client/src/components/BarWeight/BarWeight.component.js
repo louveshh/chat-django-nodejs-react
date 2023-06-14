@@ -1,19 +1,22 @@
-import Toggle from 'react-toggle';
-
+import ToggleStyled from 'components/common/CommonToggle/CommonToggle.component';
 import { useBarWeight } from './barWeight.hooks';
 
 const BarWeight = () => {
-  const { weightBar, handleClick, handleBar } = useBarWeight();
+  const { weightBar, t, handleClick, handleBar } = useBarWeight();
 
   return (
     <div>
       <div className="toggle-wrapper">
-        <label htmlFor="toggle-weight">Add Custom Start Point</label>
-        <Toggle id="toggle-weight" checked={weightBar} onChange={handleClick} />
+        <ToggleStyled
+          id="toggle-weight"
+          checked={weightBar}
+          onChange={handleClick}
+          label={t('barWeight.toggle')}
+        />
       </div>
       {weightBar && (
         <>
-          <label htmlFor="bar-weight">range</label>
+          <label htmlFor="bar-weight">{t('barWeight.label')}</label>
           <input
             type="range"
             min={0}

@@ -39,7 +39,7 @@ export const node = {
   wall: 'node-wall',
   border: 'node-border',
   end: 'end',
-  visited: 'node-visited`',
+  visited: 'node-visited',
   shortest: 'node-shortest-path',
 };
 // ADJUSTABLE CONFIG SETUP
