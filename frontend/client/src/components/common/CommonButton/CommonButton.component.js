@@ -1,12 +1,14 @@
 import { StyledText, StyledButton, StyledHover } from './commonButton.styles';
-import { renderLoading } from './commonButton.utils';
+import { useCommonButton } from './commonButton.hooks';
 
-const CommonButton = ({ pathingInProgress, onClick, disabled, children, type = 'button' }) => {
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    }
-  };
+const CommonButton = ({
+  pathingInProgress,
+  onClick,
+  disabled,
+  children,
+  type = 'button',
+}) => {
+  const { renderLoading, handleClick } = useCommonButton(onClick);
   return (
     <StyledButton onClick={handleClick} disabled={disabled} type={type}>
       <StyledHover disabled={disabled}>

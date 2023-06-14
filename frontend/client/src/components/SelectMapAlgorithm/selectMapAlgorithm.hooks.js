@@ -15,7 +15,10 @@ export const useSelectMapAlgorithm = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const options = useMemo(() => translateOptions(t, configMap.algorithmOptions), [t]);
+  const options = useMemo(
+    () => translateOptions(t, configMap.algorithmOptions),
+    [t]
+  );
 
   const updateAlgorithm = useCallback(
     (payload) => {

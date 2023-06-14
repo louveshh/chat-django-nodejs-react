@@ -1,11 +1,12 @@
-import { configDisplay } from 'config/config';
+import { configDisplay, mode } from 'config/config';
 
-export const createInitialGrid = (points, mode) => {
+export const createInitialGrid = (points, activeMode) => {
   const node = (row, col, startRow, finishRow, startCol, finishCol) => ({
     row,
     col,
-    isStart: row === startRow && col === startCol && mode !== 'combo',
-    isFinish: row === finishRow && col === finishCol && mode !== 'combo',
+    isStart: row === startRow && col === startCol && activeMode !== mode.combo,
+    isFinish:
+      row === finishRow && col === finishCol && activeMode !== mode.combo,
     distance: Infinity,
     distanceToFinishNode: Math.abs(finishRow - row) + Math.abs(finishCol - col),
     isVisited: false,

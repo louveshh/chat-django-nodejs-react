@@ -7,7 +7,10 @@ import { setFilteredCities } from 'store/slices/map';
 import { useSortable, arrayMove } from '@dnd-kit/sortable';
 import { components } from 'react-select';
 
-import { SortableMultiValueDiv, CustomMultiValueStyle } from './selectStyled.styles';
+import {
+  SortableMultiValueDiv,
+  CustomMultiValueStyle,
+} from './selectStyled.styles';
 
 export const useMultiSelectSort = () => {
   const sortableRef = useRef(null);
@@ -37,9 +40,10 @@ export const useMultiSelectSort = () => {
   }));
 
   const CustomMultiValue = (props) => {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-      id: `${props.data.value.x}${props.data.value.y}`,
-    });
+    const { attributes, listeners, setNodeRef, transform, transition } =
+      useSortable({
+        id: `${props.data.value.x}${props.data.value.y}`,
+      });
 
     return (
       <SortableMultiValueDiv
@@ -95,7 +99,9 @@ export const useMultiSelectSort = () => {
       oldIndex = filteredCities?.findIndex(
         (item) => `${item.value.x}${item.value.y}` === active.id
       );
-      newIndex = filteredCities?.findIndex((item) => `${item.value.x}${item.value.y}` === over.id);
+      newIndex = filteredCities?.findIndex(
+        (item) => `${item.value.x}${item.value.y}` === over.id
+      );
     }
     if (oldIndex !== -1 && newIndex !== -1) {
       const newValue = arrayMove(filteredCities, oldIndex, newIndex);

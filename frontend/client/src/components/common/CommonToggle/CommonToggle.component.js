@@ -1,4 +1,8 @@
-import { StyledToggle, StyledLabel, StyledWrapper } from './commonToggle.styles';
+import {
+  StyledToggle,
+  StyledLabel,
+  StyledWrapper,
+} from './commonToggle.styles';
 
 const CommonToggle = ({
   checked,

@@ -17,13 +17,20 @@ import { calculateSortedPath } from 'utils/map/calculateSortedPath.utils';
 import { drawClickedCity } from 'utils/map/common/drawClickedCity.utils';
 import { drawSimplePath } from 'utils/map/common/drawSimplePath.utils';
 import { calculateRandomPath } from 'utils/map/calculateRandomPath.utils';
+import { mode, map } from 'config/config';
 
 export const usePanelMap = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const { circlePoint, randomPoints, pathingInProgress, toClear, clickPossible, algorithm } =
-    useSelector((state) => state.map);
+  const {
+    circlePoint,
+    randomPoints,
+    pathingInProgress,
+    toClear,
+    clickPossible,
+    algorithm,
+  } = useSelector((state) => state.map);
   const { activeMode } = useSelector((state) => state.toggle);
 
   const updatePathingInProgress = useCallback(
@@ -64,7 +71,13 @@ export const usePanelMap = (canvasRef) => {
     updateClearState(false);
     updateAlgorithm(null);
     updateClickPossible(false);
-  }, [canvasRef, updateAlgorithm, updateClearState, updateClickPossible, updateZeroStartCity]);
+  }, [
+    canvasRef,
+    updateAlgorithm,
+    updateClearState,
+    updateClickPossible,
+    updateZeroStartCity,
+  ]);
 
   const handleTSGClick = () => {
     if (toClear || pathingInProgress) {
@@ -134,12 +147,22 @@ export const usePanelMap = (canvasRef) => {
     }
   };
 
+  const current = activeMode === mode.map;
+  const active = !toClear && !pathingInProgress && current;
+  const clickTsg = algorithm === map.tsg && clickPossible;
+  const clickSort = algorithm === map.sort && clickPossible;
+  const clearing = !pathingInProgress && toClear && current;
+  const disabled = !algorithm || pathingInProgress || toClear;
+
   return {
-    toClear,
     pathingInProgress,
-    activeMode,
     algorithm,
-    clickPossible,
+    current,
+    active,
+    clickTsg,
+    clickSort,
+    clearing,
+    disabled,
     handleAlgorithm,
     handleClear,
   };

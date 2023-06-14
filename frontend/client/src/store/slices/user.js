@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { urls } from 'config/urls';
 
 export const register = createAsyncThunk(
-  'users/register',
+  urls.register,
   async ({ first_name, last_name, email, password }, thunkAPI) => {
     const body = JSON.stringify({
       first_name,
@@ -12,7 +13,7 @@ export const register = createAsyncThunk(
     });
 
     try {
-      const res = await fetch('/api/users/register', {
+      const res = await fetch(urls.register, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -33,9 +34,9 @@ export const register = createAsyncThunk(
   }
 );
 
-const getUser = createAsyncThunk('users/me', async (_, thunkAPI) => {
+const getUser = createAsyncThunk(urls.me, async (_, thunkAPI) => {
   try {
-    const res = await fetch('/api/users/me', {
+    const res = await fetch(urls.me, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -54,7 +55,7 @@ const getUser = createAsyncThunk('users/me', async (_, thunkAPI) => {
 });
 
 export const login = createAsyncThunk(
-  'users/login',
+  urls.login,
   async ({ email, password }, thunkAPI) => {
     const body = JSON.stringify({
       email,
@@ -62,7 +63,7 @@ export const login = createAsyncThunk(
     });
 
     try {
-      const res = await fetch('/api/users/login', {
+      const res = await fetch(urls.login, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -87,36 +88,33 @@ export const login = createAsyncThunk(
   }
 );
 
-export const checkAuth = createAsyncThunk(
-  'users/verify',
-  async (_, thunkAPI) => {
-    try {
-      const res = await fetch('/api/users/verify', {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-        },
-      });
-
-      const data = await res.json();
-
-      if (res.status === 200) {
-        const { dispatch } = thunkAPI;
-
-        dispatch(getUser());
-
-        return data;
-      }
-      return thunkAPI.rejectWithValue(data);
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.response.data);
-    }
-  }
-);
-
-export const logout = createAsyncThunk('users/logout', async (_, thunkAPI) => {
+export const checkAuth = createAsyncThunk(urls.verify, async (_, thunkAPI) => {
   try {
-    const res = await fetch('/api/users/logout', {
+    const res = await fetch(urls.verify, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      const { dispatch } = thunkAPI;
+
+      dispatch(getUser());
+
+      return data;
+    }
+    return thunkAPI.rejectWithValue(data);
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const logout = createAsyncThunk(urls.logout, async (_, thunkAPI) => {
+  try {
+    const res = await fetch(urls.logout, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

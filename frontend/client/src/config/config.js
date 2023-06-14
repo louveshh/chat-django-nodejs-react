@@ -38,6 +38,9 @@ export const node = {
   start: 'node-start',
   wall: 'node-wall',
   border: 'node-border',
+  end: 'end',
+  visited: 'node-visited`',
+  shortest: 'node-shortest-path',
 };
 // ADJUSTABLE CONFIG SETUP
 
@@ -47,7 +50,8 @@ export const configDisplay = {
   SCALE: grid.scale, // cannot be 0
 
   NODE_SIZE: () => configDisplay.DISPLAY_SIZE / configDisplay.AMOUNT_OF_CELLS,
-  SCALED_DISPLAY_SIZE: () => configDisplay.DISPLAY_SIZE * configDisplay.SCALE + 2,
+  SCALED_DISPLAY_SIZE: () =>
+    configDisplay.DISPLAY_SIZE * configDisplay.SCALE + 2,
   RESCALED_VALUE: () => configDisplay.DISPLAY_SIZE / configDisplay.SCALE + 1,
   SCALED_CLICK: () => 1 / configDisplay.SCALE,
 };

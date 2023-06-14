@@ -66,6 +66,7 @@ export const light = {
     city: color.black1,
     testingLine: color.yellow2,
     line: color.black1,
+    text: color.red1,
   },
 
   font: {
@@ -118,6 +119,7 @@ export const dark = {
     city: color.black1,
     testingLine: color.blue8,
     line: color.black1,
+    text: color.red1,
   },
 
   font: {

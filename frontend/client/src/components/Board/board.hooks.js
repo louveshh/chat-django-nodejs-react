@@ -9,7 +9,9 @@ import { clickGrid } from 'utils/board/clickGrid.utils';
 export const useBoard = () => {
   const dispatch = useDispatch();
 
-  const { points, grid, selectedOption, pathingInProgress } = useSelector((state) => state.board);
+  const { points, grid, selectedOption, pathingInProgress } = useSelector(
+    (state) => state.board
+  );
   const { activeMode } = useSelector((state) => state.toggle);
 
   const memoGrid = useMemo(() => cloneDeep(grid), [grid]);

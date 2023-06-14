@@ -7,35 +7,34 @@ import { usePanelMap } from './panelMap.hooks';
 
 const PanelMap = ({ canvasRef }) => {
   const {
-    toClear,
     pathingInProgress,
-    activeMode,
     algorithm,
-    clickPossible,
+    current,
+    active,
+    clickTsg,
+    clickSort,
+    clearing,
+    disabled,
     handleAlgorithm,
     handleClear,
   } = usePanelMap(canvasRef);
   return (
     <>
-      {!toClear && !pathingInProgress && activeMode === 'map' && (
+      {active && (
         <>
           <SelectMapAlgorithm />
           {algorithm && <Click />}
-          {algorithm === 'tsg' && clickPossible && <SelectCity />}
-          {algorithm === 'sort' && clickPossible && <BarWeight />}
+          {clickTsg && <SelectCity />}
+          {clickSort && <BarWeight />}
         </>
       )}
-      {!pathingInProgress && toClear && activeMode === 'map' && (
-        <CommonButton type="button" onClick={handleClear}>
-          CLEAR MAP
-        </CommonButton>
-      )}
-      {activeMode === 'map' && (
+      {clearing && <CommonButton onClick={handleClear}>CLEAR MAP</CommonButton>}
+      {current && (
         <CommonButton
           type="button"
           onClick={handleAlgorithm()}
           pathingInProgress={pathingInProgress}
-          disabled={!algorithm || pathingInProgress || toClear}
+          disabled={disabled}
         >
           RUN
         </CommonButton>

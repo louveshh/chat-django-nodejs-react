@@ -37,7 +37,9 @@ export const MultiSelectSort = () => {
           options={mappedPoints.filter(
             (obj1) =>
               !filteredCities.some(
-                (obj2) => `${obj2.value.x}${obj2.value.y}` === `${obj1.value.x}${obj1.value.y}`
+                (obj2) =>
+                  `${obj2.value.x}${obj2.value.y}` ===
+                  `${obj1.value.x}${obj1.value.y}`
               )
           )}
           value={filteredCities}

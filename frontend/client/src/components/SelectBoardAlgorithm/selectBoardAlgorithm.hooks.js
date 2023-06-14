@@ -9,7 +9,10 @@ export const useSelectBoardAlgorithm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const options = useMemo(() => translateOptions(t, configBoard.algorithmOptions), [t]);
+  const options = useMemo(
+    () => translateOptions(t, configBoard.algorithmOptions),
+    [t]
+  );
 
   const updateAlgorithm = useCallback(
     (payload) => {

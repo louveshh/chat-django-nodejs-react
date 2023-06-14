@@ -3,7 +3,11 @@ import { useNode } from './node.hooks';
 import './node.styles.css';
 
 const Node = ({ col, row, isFinish, isStart, isWall, onMouseDown }) => {
-  const { baseClassName, extraClassName, extraNodeBorder } = useNode(isFinish, isStart, isWall);
+  const { baseClassName, extraClassName, extraNodeBorder } = useNode(
+    isFinish,
+    isStart,
+    isWall
+  );
   return (
     <div
       id={`${baseClassName}-${row}-${col}`}

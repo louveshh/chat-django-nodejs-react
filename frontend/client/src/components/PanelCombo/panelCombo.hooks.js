@@ -97,7 +97,13 @@ export const usePanelCombo = (canvasRef) => {
     updateClearMap(false);
     updateAlgorithm(null);
     updateClickPossible(false);
-  }, [canvasRef, updateAlgorithm, updateClearMap, updateClickPossible, updateZeroStartCity]);
+  }, [
+    canvasRef,
+    updateAlgorithm,
+    updateClearMap,
+    updateClickPossible,
+    updateZeroStartCity,
+  ]);
 
   const handleClearBoard = (payload) => {
     updateClearBoard(payload);
@@ -139,7 +145,12 @@ export const usePanelCombo = (canvasRef) => {
   };
 
   const handleAlgorithm = () => {
-    if (mapToClear || mapPathingInProgress || boardToClear || boardPathingInProgress) {
+    if (
+      mapToClear ||
+      mapPathingInProgress ||
+      boardToClear ||
+      boardPathingInProgress
+    ) {
       return;
     }
     const { canvas, context } = getCanvasContext(canvasRef);
@@ -172,13 +183,30 @@ export const usePanelCombo = (canvasRef) => {
       });
   };
 
+  const clearingMap =
+    !boardPathingInProgress &&
+    !mapPathingInProgress &&
+    mapToClear &&
+    activeMode === mode.combo;
+  const clearingBoard =
+    !boardPathingInProgress &&
+    !mapPathingInProgress &&
+    boardToClear &&
+    activeMode === mode.combo;
+  const active = !(
+    mapPathingInProgress ||
+    mapToClear ||
+    boardToClear ||
+    boardPathingInProgress
+  );
+  const disabled = filteredCities.length < 2 || mapToClear || boardToClear;
+  const pathingInProgress = mapPathingInProgress || boardPathingInProgress;
   return {
-    mapToClear,
-    mapPathingInProgress,
-    boardToClear,
-    boardPathingInProgress,
-    activeMode,
-    filteredCities,
+    clearingMap,
+    clearingBoard,
+    active,
+    disabled,
+    pathingInProgress,
     handleAlgorithm,
     handleClearMap,
     handleClearBoard,

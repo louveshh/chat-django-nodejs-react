@@ -2,7 +2,11 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { setToggleRunning, setAlgorithm, setClearBoard } from 'store/slices/board';
+import {
+  setToggleRunning,
+  setAlgorithm,
+  setClearBoard,
+} from 'store/slices/board';
 import { clearGrid } from 'utils/board/common/clearGrid.utils';
 import { runAlgorithm } from 'utils/board/runAlgorithm.utils';
 import { mode } from 'config/config';
@@ -42,19 +46,25 @@ export const usePanelBoard = () => {
 
   const handleAlgorithm = () => {
     updateClear(true);
-    runAlgorithm(algorithm, pathingInProgress, currentGrid, currentPoints, updateToggleRunning);
+    runAlgorithm(
+      algorithm,
+      pathingInProgress,
+      currentGrid,
+      currentPoints,
+      updateToggleRunning
+    );
     updateAlgorithm('');
   };
 
-  const board = activeMode === mode.board;
-  const clear = !pathingInProgress && toClear && board;
-  const active = !toClear && !pathingInProgress && board;
+  const current = activeMode === mode.board;
+  const clearing = !pathingInProgress && toClear && current;
+  const active = !toClear && !pathingInProgress && current;
   const disabled = !algorithm || pathingInProgress || toClear;
   return {
     pathingInProgress,
-    clear,
+    clearing,
     active,
-    board,
+    current,
     disabled,
     handleClearGrid,
     handleAlgorithm,

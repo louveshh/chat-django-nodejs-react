@@ -16,6 +16,8 @@ export const MapWrapper = styled.div`
 `;
 
 export const BackgroundImage = styled.div`
+  opacity: 1;
+  transition: opacity 1s;
   margin-top: 0rem;
   margin-bottom: 2rem;
   background-image: url('${canvasImage}');

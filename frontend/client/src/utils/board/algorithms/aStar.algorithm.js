@@ -1,4 +1,4 @@
-export const AStar = (grid, startNode, finishNode) => {
+export const aStar = (grid, startNode, finishNode) => {
   const sortByDistance = (unvisitedNodes) => {
     unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
   };

@@ -1,6 +1,11 @@
-import { configDisplay } from '../../config/config';
+import { configDisplay } from 'config/config';
 
-export const selectClickCity = (canvasRef, event, setCirclePoint, circlePoint) => {
+export const selectClickCity = (
+  canvasRef,
+  event,
+  setCirclePoint,
+  circlePoint
+) => {
   const canvas = canvasRef.current;
   const rect = canvas.getBoundingClientRect();
   let x;
@@ -11,9 +16,7 @@ export const selectClickCity = (canvasRef, event, setCirclePoint, circlePoint) =
   ) {
     x = event.clientX - rect.left;
     y = event.clientY - rect.top;
-    console.log('tu111', rect?.height, configDisplay.SCALED_DISPLAY_SIZE());
   } else {
-    console.log('tu22222222?', rect?.height, configDisplay.SCALED_DISPLAY_SIZE());
     x = (event.clientX - rect.left) * configDisplay.SCALED_CLICK();
     y = (event.clientY - rect.top) * configDisplay.SCALED_CLICK();
   }

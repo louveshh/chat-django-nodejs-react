@@ -1,6 +1,7 @@
+import { mode, node, board } from 'config/config';
 import { clearGrid } from './common/clearGrid.utils';
 import { dijkstra } from './algorithms/dijkstra.algorithm';
-import { AStar } from './algorithms/aStar.algorithm';
+import { aStar } from './algorithms/aStar.algorithm';
 import { bfs } from './algorithms/bfs.algorithm';
 import { dfs } from './algorithms/dfs.algorithm';
 
@@ -10,7 +11,7 @@ export const runAlgorithm = (
   currentGrid,
   currentPoints,
   updateToggleRunning,
-  mode = 'board',
+  currentMode = mode.board,
   step = 0
 ) => {
   const getShortestPath = (finishNode) => {
@@ -25,32 +26,45 @@ export const runAlgorithm = (
   const animateFinalPath = (shortestPathNodes) => {
     if (shortestPathNodes) {
       for (let i = 0; i < shortestPathNodes.length; i++) {
-        if (shortestPathNodes[i] === 'end') {
+        if (shortestPathNodes[i] === node.end) {
           setTimeout(
             () => {
               updateToggleRunning();
             },
-            mode === 'combo' ? i * 10 : i * 50
+            currentMode === mode.combo ? i * 10 : i * 50
           );
         } else {
           setTimeout(
             () => {
-              const node = shortestPathNodes[i];
-              const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
+              const currentNode = shortestPathNodes[i];
+              const classId = document.getElementById(
+                `${node.base}-${currentNode.row}-${currentNode.col}`
+              );
               const words = classId.className.split(' ');
-              const { startRow, finishRow, startCol, finishCol } = currentPoints;
-              if (startRow === node.row && startCol === node.col && mode !== 'combo') {
-                classId.className = 'node-base node-start';
-              } else if (finishRow === node.row && finishCol === node.col && mode !== 'combo') {
-                classId.className = 'node-base node-finish';
-              } else if (words.indexOf('node-shortest-path') < 0) {
-                classId.className = 'node-base node-shortest-path';
+              const { startRow, finishRow, startCol, finishCol } =
+                currentPoints;
+              if (
+                startRow === currentNode.row &&
+                startCol === currentNode.col &&
+                currentMode !== mode.combo
+              ) {
+                classId.className = `${node.base} ${node.start}`;
+              } else if (
+                finishRow === currentNode.row &&
+                finishCol === currentNode.col &&
+                currentMode !== mode.combo
+              ) {
+                classId.className = `${node.base} ${node.finish}`;
+              } else if (words.indexOf(`${node.shortest}`) < 0) {
+                classId.className = `${node.base} ${node.shortest}`;
               }
-              if (mode === 'combo') {
-                classId.innerText += classId.innerText ? `\n${i + step}` : i + step;
+              if (currentMode === mode.combo) {
+                classId.innerText += classId.innerText
+                  ? `\n${i + step}`
+                  : i + step;
               }
             },
-            mode === 'combo' ? i * 20 : i * 40
+            currentMode === mode.combo ? i * 20 : i * 40
           );
         }
       }
@@ -65,7 +79,7 @@ export const runAlgorithm = (
             () => {
               animateFinalPath(shortestPathNodes);
             },
-            mode === 'combo' ? i * 1 : i * 5
+            currentMode === mode.combo ? i * 1 : i * 5
           );
           if (shortestPathNodes) {
             return shortestPathNodes.length;
@@ -74,32 +88,36 @@ export const runAlgorithm = (
         }
         setTimeout(
           () => {
-            const node = visitedNodesInOrder[i];
-            const classId = document.getElementById(`node-base-${node.row}-${node.col}`);
+            const currentNode = visitedNodesInOrder[i];
+            const classId = document.getElementById(
+              `${node.base}-${currentNode.row}-${currentNode.col}`
+            );
             const { startRow, finishRow, startCol, finishCol } = currentPoints;
             const words = classId.className.split(' ');
             if (
-              !(startRow === node.row && startCol === node.col) &&
-              !(finishRow === node.row && finishCol === node.col) &&
-              words.indexOf('node-shortest-path') < 0
+              !(startRow === currentNode.row && startCol === currentNode.col) &&
+              !(
+                finishRow === currentNode.row && finishCol === currentNode.col
+              ) &&
+              words.indexOf(`${node.shortest}`) < 0
             ) {
-              classId.className = 'node-base node-visited';
+              classId.className = `${node.base} ${node.visited}`;
             }
           },
-          mode === 'combo' ? i * 1 : i * 5
+          currentMode === mode.combo ? i * 1 : i * 5
         );
       }
     }
   };
   const switchAlgorithm = (algorithm, startNode, finishNode) => {
     switch (algorithm) {
-      case 'dijkstra':
+      case board.dijkstra:
         return dijkstra(currentGrid, startNode, finishNode);
-      case 'astar':
-        return AStar(currentGrid, startNode, finishNode);
-      case 'bfs':
+      case board.astar:
+        return aStar(currentGrid, startNode, finishNode);
+      case board.bfs:
         return bfs(currentGrid, startNode, finishNode);
-      case 'dfs':
+      case board.dfs:
         return dfs(currentGrid, startNode, finishNode);
       default:
         break;
@@ -110,13 +128,13 @@ export const runAlgorithm = (
   }
   const { startRow, finishRow, startCol, finishCol } = currentPoints;
   updateToggleRunning();
-  if (mode !== 'combo') {
+  if (currentMode !== mode.combo) {
     clearGrid(pathingInProgress, currentGrid);
   }
   const startNode = currentGrid[startRow][startCol];
   const finishNode = currentGrid[finishRow][finishCol];
   const visitedNodesInOrder = switchAlgorithm(algorithm, startNode, finishNode);
   const nodesInShortestPathOrder = getShortestPath(finishNode);
-  nodesInShortestPathOrder.push('end');
+  nodesInShortestPathOrder.push(node.end);
   return animate(visitedNodesInOrder, nodesInShortestPathOrder);
 };

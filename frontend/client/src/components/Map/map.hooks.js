@@ -101,10 +101,21 @@ export const useMap = (canvasRef) => {
       drawCities(theme, context, filteredCitiesMapped, false);
     }
     return () => {};
-  }, [activeMode, canvasRef, circlePoint, filteredCities, pathingInProgress, theme, toClear]);
+  }, [
+    activeMode,
+    canvasRef,
+    circlePoint,
+    filteredCities,
+    pathingInProgress,
+    theme,
+    toClear,
+  ]);
 
   const handleCanvasClick = (event) => {
-    if (!clickPossible && !configMap.clickPossibleTargets.includes(activeMode)) {
+    if (
+      !clickPossible &&
+      !configMap.clickPossibleTargets.includes(activeMode)
+    ) {
       return;
     }
     selectClickCity(canvasRef, event, updateCirclePoint, circlePoint);

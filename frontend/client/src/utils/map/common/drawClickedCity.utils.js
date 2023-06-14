@@ -12,7 +12,7 @@ export const drawClickedCity = (
     context.closePath();
   }
   if (weights) {
-    context.fillStyle = 'red';
+    context.fillStyle = theme.map.text;
     context.fillText(
       selectPointClick.weight.toString(),
       selectPointClick.x + 7,
