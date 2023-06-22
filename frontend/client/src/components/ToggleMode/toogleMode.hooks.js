@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 import { setToggleActiveMode } from 'store/slices/toggle';
 import {
   setClickPossible,
@@ -20,6 +22,7 @@ export const useToggleMode = () => {
   const { circlePoint } = useSelector((state) => state.map);
   const activeMode = useSelector((state) => state.toggle.activeMode);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const updateSelectedOption = useCallback(
     (payload) => {
@@ -85,5 +88,5 @@ export const useToggleMode = () => {
     updateSelectedOption(configBoard.defaultDrawOption);
     updateCirclePoint({ ...circlePoint, weight: 0 });
   };
-  return { activeMode, handleToggle };
+  return { activeMode, t, handleToggle };
 };

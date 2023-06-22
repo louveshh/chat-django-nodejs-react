@@ -10,7 +10,7 @@ const Panel = () => {
   const { canvasRef, isMapActive, isBoardActive, isComboActive } = usePanel();
   return (
     <PanelWrapper>
-      <LeftPanel>TODO</LeftPanel>
+      <LeftPanel>xd</LeftPanel>
       <MainPanel>
         <Map canvasRef={canvasRef} active={isMapActive} />
         <Baord active={isBoardActive} />

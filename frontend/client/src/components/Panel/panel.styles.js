@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { configDisplay } from 'config/config';
 
 export const PanelWrapper = styled.div`
   height: 100%;
@@ -6,37 +7,56 @@ export const PanelWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     justify-content: center;
     flex-direction: column;
   }
 `;
 
 export const LeftPanel = styled.div`
-  min-width: 210px;
+  display: flex;
+  flex-flow: column;
   width: 20%;
-  @media (max-width: 1100px) {
+  justify-content: start;
+  flex-flow: column;
+  align-self: start;
+  min-height: ${configDisplay.DISPLAY_SIZE}px;
+  margin: 0px 5px;
+  padding: 0px 10px;
+  border 1px solid ${(props) => props.theme.view.primary};
+  border-radius: 5px;
+  @media (max-width: 1150px) {
     order: 2;
+    width: 50%;
+    align-self: center;
+    min-height: unset;
+    margin: 0px 0px 20px 0px;
   }
+
 `;
 export const MainPanel = styled.div``;
 
 export const RightPanel = styled.div`
   display: flex;
-  padding-right: 1rem;
   flex-flow: column;
-  min-width: 210px;
   width: 20%;
-  align-self: stretch;
   justify-content: start;
+  flex-flow: column;
+  align-self: start;
+  min-height: ${configDisplay.DISPLAY_SIZE}px;
+  border 1px solid ${(props) => props.theme.view.primary};
+  border-radius: 5px;
+  margin: 0px 10px 10px 0px;
+  padding: 0px 10px;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     align-self: center;
     order: 3;
     align-items: center;
     width: 50%;
-    min-height: 400px;
-    padding-right: 0;
+    min-height: ${configDisplay.RIGHT_PANEL_SCALED}px;
+    padding: 0 20px;
+    margin: 0px 0px 20px 0px;
     flex-grow: 1;
   }
 

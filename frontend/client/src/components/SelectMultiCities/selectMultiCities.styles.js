@@ -3,7 +3,7 @@ import Select, { components } from 'react-select';
 
 export const CustomMultiSelect = styled(Select)`
   height: 30px;
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     width: 100% !important;
   }
   margin-bottom: 2rem;
@@ -18,7 +18,7 @@ export const CustomMenuList = styled(components.MenuList)`
   position: relative;
   top: 0%;
   max-height: 300px !important;
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     max-height: 140px !important;
   }
   @media (max-width: 700px) {

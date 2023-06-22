@@ -27,6 +27,7 @@ const color = {
   black4: 'RGBA(0, 0, 0, 0.09)',
   transparent: 'RGBA(43, 8, 8, 0)',
   white1: 'RGBA(250,250,250)',
+  white2: 'RGBA(200,200,200, 0.90)',
   gray1: 'RGBA(77,77,77)',
   gray2: 'RGBA(255,255,255,0.1)',
 };
@@ -46,6 +47,7 @@ export const light = {
     secondary3: color.green5,
     background: color.blue1,
     black: color.black1,
+    white: color.white2,
   },
 
   board: {
@@ -99,6 +101,7 @@ export const dark = {
     secondary2: color.blue4,
     secondary3: color.blue8,
     background: color.blue5,
+    white: color.white2,
   },
 
   board: {

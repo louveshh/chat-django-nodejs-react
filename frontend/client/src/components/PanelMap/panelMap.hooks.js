@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import {
   setPathingInProgress,
@@ -22,6 +23,7 @@ import { mode, map } from 'config/config';
 export const usePanelMap = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const {
     circlePoint,
@@ -163,6 +165,7 @@ export const usePanelMap = (canvasRef) => {
     clickSort,
     clearing,
     disabled,
+    t,
     handleAlgorithm,
     handleClear,
   };

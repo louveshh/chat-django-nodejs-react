@@ -5,6 +5,12 @@ export const ToggleContainer = styled.div`
   width: 20%;
   justify-content: start;
   height: 50px;
+  min-width: 185px;
+  @media (max-width: 650px) {
+    scale: 0.5;
+    width: unset;
+    min-width: 70px;
+  }
 `;
 
 export const ToggleWrapper = styled.div`

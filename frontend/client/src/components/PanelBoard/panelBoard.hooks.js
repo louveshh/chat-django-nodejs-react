@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
+import { useTranslation } from 'react-i18next';
 
 import {
   setToggleRunning,
@@ -13,6 +14,7 @@ import { mode } from 'config/config';
 
 export const usePanelBoard = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const { points, grid, pathingInProgress, algorithm, toClear } = useSelector(
     (state) => state.board
@@ -66,6 +68,7 @@ export const usePanelBoard = () => {
     active,
     current,
     disabled,
+    t,
     handleClearGrid,
     handleAlgorithm,
   };

@@ -1,13 +1,17 @@
-import { NavLink } from 'react-router-dom';
-
 import ToggleLanguage from 'components/ToggleLanguage/ToggleLanguage.component';
 import ToggleTheme from 'components/ToggleTheme/ToggleTheme.component';
 import { configPaths } from 'config/paths';
 import { useNavbar } from './navbar.hooks';
-import { TrapezoidNavbar, WrapperNavbar, Triangle, StyledButton } from './navbar.styles';
+import {
+  TrapezoidNavbar,
+  WrapperNavbar,
+  Triangle,
+  StyledButton,
+  StyledNavLink,
+} from './navbar.styles';
 
 const Navbar = () => {
-  const { isAuthenticated, onClick } = useNavbar();
+  const { isAuthenticated, t, onClick } = useNavbar();
 
   return (
     <WrapperNavbar>
@@ -15,24 +19,37 @@ const Navbar = () => {
       <TrapezoidNavbar>
         {!isAuthenticated ? (
           <Triangle>
-            <NavLink to={configPaths.login}>Login</NavLink>
+            <StyledNavLink to={configPaths.login}>
+              {t('navbar.login')}
+            </StyledNavLink>
           </Triangle>
         ) : (
           <Triangle>
-            <NavLink to={configPaths.about}>About</NavLink>
+            <StyledNavLink to={configPaths.about}>
+              {t('navbar.about')}
+            </StyledNavLink>
           </Triangle>
         )}
         <Triangle>
-          <NavLink to={configPaths.algorithms}>Algorithms</NavLink>
+          <StyledNavLink to={configPaths.algorithms}>
+            {t('navbar.maps')}
+          </StyledNavLink>
         </Triangle>
         {!isAuthenticated ? (
           <Triangle>
-            <NavLink to={configPaths.login}>Register</NavLink>
+            <StyledNavLink to={configPaths.login}>
+              {t('navbar.register')}
+            </StyledNavLink>
           </Triangle>
         ) : (
           <Triangle>
-            <StyledButton onClick={onClick} role="button" tabIndex="0" onKeyDown={() => {}}>
-              Logout
+            <StyledButton
+              onClick={onClick}
+              role="button"
+              tabIndex="0"
+              onKeyDown={() => {}}
+            >
+              {t('navbar.logout')}
             </StyledButton>
           </Triangle>
         )}
@@ -51,21 +68,21 @@ export default Navbar;
 //     <nav className="wrapper-navbar">
 //       <div className="trapezoid-navbar">
 //         {!isAuthenticated ? (
-//           <NavLink className="triangle" to="/login">
+//           <StyledNavLink className="triangle" to="/login">
 //             Login
-//           </NavLink>
+//           </StyledNavLink>
 //         ) : (
-//           <NavLink className="triangle" to="/about">
+//           <StyledNavLink className="triangle" to="/about">
 //             About
-//           </NavLink>
+//           </StyledNavLink>
 //         )}
-//         <NavLink className="triangle" to="/algorithms">
+//         <StyledNavLink className="triangle" to="/algorithms">
 //           Algorithms
-//         </NavLink>
+//         </StyledNavLink>
 //         {!isAuthenticated ? (
-//           <NavLink className="triangle" to="/login">
+//           <StyledNavLink className="triangle" to="/login">
 //             Register
-//           </NavLink>
+//           </StyledNavLink>
 //         ) : (
 //           <div className="triangle">
 //             <div

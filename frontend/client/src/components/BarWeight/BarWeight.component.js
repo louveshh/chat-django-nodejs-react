@@ -1,34 +1,32 @@
-import ToggleStyled from 'components/common/CommonToggle/CommonToggle.component';
+import CommonToggle from 'components/common/CommonToggle/CommonToggle.component';
+import CommonBar from 'components/common/CommonBar/CommonBar.component';
 import { useBarWeight } from './barWeight.hooks';
 
 const BarWeight = () => {
   const { weightBar, t, handleClick, handleBar } = useBarWeight();
 
   return (
-    <div>
-      <div className="toggle-wrapper">
-        <ToggleStyled
-          id="toggle-weight"
-          checked={weightBar}
-          onChange={handleClick}
-          label={t('barWeight.toggle')}
-        />
-      </div>
+    <>
+      <CommonToggle
+        id="toggle-weight"
+        checked={weightBar}
+        onChange={handleClick}
+        label={t('barWeight.toggle')}
+        aria="Toggle Add Weight"
+      />
       {weightBar && (
-        <>
-          <label htmlFor="bar-weight">{t('barWeight.label')}</label>
-          <input
-            type="range"
-            min={0}
-            max={50}
-            step={1}
-            id="bar-weight"
-            onChange={handleBar}
-            defaultValue={0}
-          />
-        </>
+        <CommonBar
+          id="bar-weight"
+          label={t('barWeight.label')}
+          aria="Input Weight"
+          onChange={handleBar}
+          min={0}
+          max={50}
+          step={1}
+          defaultValue={0}
+        />
       )}
-    </div>
+    </>
   );
 };
 

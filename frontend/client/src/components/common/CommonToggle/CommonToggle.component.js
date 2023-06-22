@@ -7,7 +7,6 @@ import {
 const CommonToggle = ({
   checked,
   onChange,
-  labelledby,
   aria,
   label,
   icons,
@@ -19,7 +18,6 @@ const CommonToggle = ({
       id={id}
       checked={checked}
       onChange={onChange}
-      aria-labelledby={labelledby}
       aria-label={aria}
       icons={icons}
     />

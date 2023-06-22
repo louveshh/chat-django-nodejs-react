@@ -42,6 +42,11 @@ export const node = {
   visited: 'node-visited',
   shortest: 'node-shortest-path',
 };
+
+export const pallete = {
+  light: 'light',
+  dark: 'dark',
+};
 // ADJUSTABLE CONFIG SETUP
 
 export const configDisplay = {
@@ -54,6 +59,7 @@ export const configDisplay = {
     configDisplay.DISPLAY_SIZE * configDisplay.SCALE + 2,
   RESCALED_VALUE: () => configDisplay.DISPLAY_SIZE / configDisplay.SCALE + 1,
   SCALED_CLICK: () => 1 / configDisplay.SCALE,
+  RIGHT_PANEL_SCALED: () => configDisplay.DISPLAY_SIZE * 0.7,
 };
 
 export const configBoard = {

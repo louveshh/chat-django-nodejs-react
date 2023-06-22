@@ -1,21 +1,28 @@
-import ToggleStyled from 'components/common/CommonToggle/CommonToggle.component';
 import { mode } from 'config/config';
 import { useToggleMode } from './toogleMode.hooks';
-import { ToggleContainer, ToggleWrapper } from './toggleMode.styles';
+import {
+  ToggleContainer,
+  ToggleWrapper,
+  ToggleStyled,
+  ToggleStyledWrapper,
+} from './toggleMode.styles';
 
 const ToggleMode = () => {
-  const { activeMode, handleToggle } = useToggleMode();
+  const { activeMode, t, handleToggle } = useToggleMode();
   return (
     <ToggleContainer>
       <ToggleWrapper>
         {Object.entries(mode).map(([_, value]) => (
-          <ToggleStyled
-            key={`toggle-${value}`}
-            label={value}
-            id={`toggle-${value}`}
-            checked={activeMode === value}
-            onChange={() => handleToggle(`${value}`)}
-          />
+          <ToggleStyledWrapper>
+            <ToggleStyled
+              key={`toggle-${value}`}
+              label={t(`toggleMode.${value}`)}
+              aria={`Toggle Mode - ${value}`}
+              id={`toggle-${value}`}
+              checked={activeMode === value}
+              onChange={() => handleToggle(`${value}`)}
+            />
+          </ToggleStyledWrapper>
         ))}
       </ToggleWrapper>
     </ToggleContainer>

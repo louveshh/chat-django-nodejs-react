@@ -6,11 +6,17 @@ const CommonButton = ({
   onClick,
   disabled,
   children,
+  aria,
   type = 'button',
 }) => {
   const { renderLoading, handleClick } = useCommonButton(onClick);
   return (
-    <StyledButton onClick={handleClick} disabled={disabled} type={type}>
+    <StyledButton
+      onClick={handleClick}
+      disabled={disabled}
+      type={type}
+      aria-label={aria}
+    >
       <StyledHover disabled={disabled}>
         {pathingInProgress && renderLoading()}
         <StyledText>{children}</StyledText>

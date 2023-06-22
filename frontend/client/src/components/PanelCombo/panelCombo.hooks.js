@@ -20,10 +20,12 @@ import { removeBorders } from 'utils/board/common/removeBorders.utils';
 import { coordinatesToBlockNumbers } from 'utils/combo/coordinatesToBlockNumbers.utils';
 import { dividePoints } from 'utils/combo/dividePoints.utils';
 import { board, mode } from 'config/config';
+import { useTranslation } from 'react-i18next';
 
 export const usePanelCombo = (canvasRef) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const {
     pathingInProgress: mapPathingInProgress,
@@ -207,6 +209,7 @@ export const usePanelCombo = (canvasRef) => {
     active,
     disabled,
     pathingInProgress,
+    t,
     handleAlgorithm,
     handleClearMap,
     handleClearBoard,

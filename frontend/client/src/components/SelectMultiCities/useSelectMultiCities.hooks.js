@@ -6,16 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFilteredCities } from 'store/slices/map';
 import { useSortable, arrayMove } from '@dnd-kit/sortable';
 import { components } from 'react-select';
+import { useTranslation } from 'react-i18next';
 
 import {
   SortableMultiValueDiv,
   CustomMultiValueStyle,
-} from './selectStyled.styles';
+} from './selectMultiCities.styles';
 
-export const useMultiSelectSort = () => {
+export const useSelectMultiCities = () => {
   const sortableRef = useRef(null);
   const { randomPoints, filteredCities } = useSelector((state) => state.map);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const updateFilteredCities = useCallback(
     (payload) => {
@@ -109,10 +111,24 @@ export const useMultiSelectSort = () => {
     }
   };
 
+  const options = mappedPoints.filter(
+    (obj1) =>
+      !filteredCities.some(
+        (obj2) =>
+          `${obj2.value.x}${obj2.value.y}` === `${obj1.value.x}${obj1.value.y}`
+      )
+  );
+  const items = filteredCities?.map((item) => ({
+    ...item,
+    id: `${item.value.x}${item.value.y}`,
+  }));
+
   return {
     sortableRef,
-    mappedPoints,
     filteredCities,
+    options,
+    items,
+    t,
     handleFilteredCities,
     onChange,
     onSortEnd,

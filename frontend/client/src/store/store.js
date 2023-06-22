@@ -1,4 +1,8 @@
-import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  combineReducers,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import userReducer from 'store/slices/user';
 import boardReducer from 'store/slices/board';

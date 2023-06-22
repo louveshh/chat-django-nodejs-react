@@ -1,6 +1,6 @@
 import CommonButton from 'components/common/CommonButton/CommonButton.component';
 import { usePanelCombo } from './panelCombo.hooks';
-import { MultiSelectSort } from '../SortableMultiSelect/SortableMultiSelectSort.component';
+import { SelectMultiCities } from '../SelectMultiCities/SelectMultiCities.component';
 
 const PanelCombo = ({ canvasRef }) => {
   const {
@@ -9,6 +9,7 @@ const PanelCombo = ({ canvasRef }) => {
     active,
     disabled,
     pathingInProgress,
+    t,
     handleAlgorithm,
     handleClearMap,
     handleClearBoard,
@@ -20,17 +21,19 @@ const PanelCombo = ({ canvasRef }) => {
         disabled={disabled}
         pathingInProgress={pathingInProgress}
       >
-        RUN
+        {t('panelCombo.runButton')}
       </CommonButton>
       {clearingMap && (
-        <CommonButton onClick={handleClearMap}>Clear Map</CommonButton>
+        <CommonButton onClick={handleClearMap}>
+          {t('panelCombo.clearMapButton')}
+        </CommonButton>
       )}
       {clearingBoard && (
         <CommonButton onClick={() => handleClearBoard(false)}>
-          Clear Board
+          {t('panelCombo.clearBoardButton')}
         </CommonButton>
       )}
-      {active && <MultiSelectSort />}
+      {active && <SelectMultiCities />}
     </>
   );
 };

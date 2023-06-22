@@ -10,7 +10,6 @@ import {
 const CommonSelect = ({
   onChange,
   options,
-  labelledby,
   aria,
   placeholder,
   label,
@@ -28,7 +27,6 @@ const CommonSelect = ({
         ValueContainer: StyledValueContainer,
         Option: StyledOption,
       }}
-      aria-labelledby={labelledby}
       aria-label={aria}
       placeholder={placeholder}
       id={id}

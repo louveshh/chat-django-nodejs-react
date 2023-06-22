@@ -10,23 +10,12 @@ const PanelBoard = () => {
     active,
     current,
     disabled,
+    t,
     handleClearGrid,
     handleAlgorithm,
   } = usePanelBoard();
   return (
     <>
-      {clearing && (
-        <CommonButton type="button" onClick={handleClearGrid}>
-          Clear Grid
-        </CommonButton>
-      )}
-      {active && (
-        <>
-          <SelectBoardAlgorithm />
-          <SelectBoardDraw />
-        </>
-      )}
-
       {current && (
         <CommonButton
           type="button"
@@ -34,8 +23,19 @@ const PanelBoard = () => {
           pathingInProgress={pathingInProgress}
           disabled={disabled}
         >
-          Run Board
+          {t('panelBoard.runButton')}
         </CommonButton>
+      )}
+      {clearing && (
+        <CommonButton type="button" onClick={handleClearGrid}>
+          {t('panelBoard.clearButton')}
+        </CommonButton>
+      )}
+      {active && (
+        <>
+          <SelectBoardAlgorithm />
+          <SelectBoardDraw />
+        </>
       )}
     </>
   );

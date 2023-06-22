@@ -48,5 +48,5 @@ export const useSelectMapAlgorithm = () => {
     updateZeroStartCity();
     updateClickPossible(false);
   };
-  return { options, handleSelectMapAlgorithm };
+  return { options, t, handleSelectMapAlgorithm };
 };

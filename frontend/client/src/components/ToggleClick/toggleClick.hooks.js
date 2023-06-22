@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import {
   setCirclePointZero,
@@ -11,6 +12,7 @@ import { map } from 'config/config';
 export const useToggleCLick = () => {
   const { clickPossible, algorithm } = useSelector((state) => state.map);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const updateToggleClickPossible = useCallback(() => {
     dispatch(setToggleClickPossible());
@@ -36,5 +38,5 @@ export const useToggleCLick = () => {
       updateCirclePointZero(false);
     }
   };
-  return { clickPossible, handleClick };
+  return { clickPossible, t, handleClick };
 };

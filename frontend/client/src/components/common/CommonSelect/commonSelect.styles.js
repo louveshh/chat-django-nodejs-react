@@ -4,17 +4,17 @@ import Select, { components } from 'react-select';
 export const StyledSelect = styled(Select)`
   height: 30px;
   margin-bottom: 20px;
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     width: 80% !important;
   }
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     width: 70% !important;
   }
 `;
 
 export const StyledMenuList = styled(components.MenuList)`s
   max-height: 300px !important;
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     max-height: 140px !important;
   }
   @media (max-width: 700px) {
@@ -36,4 +36,8 @@ export const StyledValueContainer = styled(components.ValueContainer)`
 export const StyledOption = styled(components.Option)`
   text-align: center;
 `;
-export const StyledLabel = styled.label``;
+export const StyledLabel = styled.label`
+  color: ${(props) => props.theme.view.white};
+  text-align: center;
+  margin-bottom: 5px;
+`;

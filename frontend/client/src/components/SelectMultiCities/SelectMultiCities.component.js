@@ -3,45 +3,35 @@
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
 
-import { useMultiSelectSort } from './useMultiSelectSort.hooks';
+import { useSelectMultiCities } from './useSelectMultiCities.hooks';
 import {
   CustomMultiSelect,
   CustomMenuList,
   CustomPlaceholder,
   CustomMenu,
-} from './selectStyled.styles';
+} from './selectMultiCities.styles';
 
-export const MultiSelectSort = () => {
+export const SelectMultiCities = () => {
   const {
     sortableRef,
-    mappedPoints,
     filteredCities,
+    options,
+    items,
+    t,
     handleFilteredCities,
     onChange,
     onSortEnd,
     CustomMultiValue,
     CustomMultiValueRemove,
-  } = useMultiSelectSort();
+  } = useSelectMultiCities();
 
   return (
     <DndContext collisionDetection={closestCenter} onDragEnd={onSortEnd}>
-      <SortableContext
-        items={filteredCities?.map((item) => ({
-          ...item,
-          id: `${item.value.x}${item.value.y}`,
-        }))}
-      >
+      <SortableContext items={items}>
         <CustomMultiSelect
           ref={sortableRef}
           isMulti
-          options={mappedPoints.filter(
-            (obj1) =>
-              !filteredCities.some(
-                (obj2) =>
-                  `${obj2.value.x}${obj2.value.y}` ===
-                  `${obj1.value.x}${obj1.value.y}`
-              )
-          )}
+          options={options}
           value={filteredCities}
           onChange={onChange}
           selectedProps={filteredCities}
@@ -54,9 +44,8 @@ export const MultiSelectSort = () => {
             MenuList: CustomMenuList,
             Placeholder: CustomPlaceholder,
           }}
-          placeholder="Select at least two city"
-          aria-labelledby="Select Board Algorithm"
-          aria-label="Select Board Algorithm"
+          placeholder={t('selectMultiCities.placeholder')}
+          aria-label="Select Combo Algorithm"
         />
       </SortableContext>
     </DndContext>

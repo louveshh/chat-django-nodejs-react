@@ -1,6 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import ToggleStyled from 'components/common/CommonToggle/CommonToggle.component';
-
+import { pallete } from 'config/config';
 import { useToggleTheme } from './toggleTheme.hooks';
 import {
   ToggleContainer,
@@ -9,18 +8,17 @@ import {
 } from './toggleTheme.styles';
 
 const ToggleTheme = () => {
-  const { theme, handleToggle } = useToggleTheme();
-  const { t } = useTranslation();
+  const { theme, t, handleToggle } = useToggleTheme();
   return (
     <ToggleContainer>
       <ToggleWrapper>
         <LabelWrapper>
           <ToggleStyled
-            label={t('theme')}
+            label={t('toggleTheme.label')}
+            aria="Toggle Theme"
             id="toggle-mode"
-            checked={theme.name === 'light'}
+            checked={theme.name === pallete.light}
             onChange={handleToggle}
-            name="language"
           />
         </LabelWrapper>
       </ToggleWrapper>

@@ -1,11 +1,73 @@
 {
-  "theme": "Tryb Nocny",
-  "en": "en",
-  "pl": "pl",
-  "language": "Język:",
+  "toggleTheme": {
+    "label": "Tryb Ciemny"
+  },
+  "toggleLanguage": {
+    "label": "Język",
+    "en": "EN",
+    "pl": "PL"
+  },
 
-  "dijkstra": "Dijkstra",
-  "astar": "Astar",
-  "dfs": "DFS",
-  "bfs": "BFS"
+  "toggleMode": {
+    "display": "Pokaż",
+    "board": "Tablica",
+    "map": "Mapa",
+    "combo": "Kombinacja",
+    "add": "Dodaj Miasto"
+  },
+  "toggleClick": {
+    "label": "Dodaj własne kliknięcie"
+  },
+  "selectMapAlgorithm": {
+    "label": "Wybierz Algorytm Mapy"
+  },
+  "selectBoardAlgorithm": {
+    "label": "Wybierz Algorytm Tablicy"
+  },
+  "selectMultiCities": {
+    "placeholder": "Wybierz Przynajmniej Dwa Miasta"
+  },
+
+  "barWeight": {
+    "toggle": "Dodaj Własną Wage",
+    "label": "Waga:"
+  },
+
+  "panelMap": {
+    "runButton": "Uruchom",
+    "clearButton": "Wyczyść Mape"
+  },
+  "panelCombo": {
+    "runButton": "Uruchom",
+    "clearMapButton": "Wyczyść Mape",
+    "clearBoardButton": "Wyczyść Tablice"
+  },
+
+  "panelBoard": {
+    "runButton": "Uruchom",
+    "clearButton": "Wyczyść Tablice"
+  },
+
+  "navbar": {
+    "login": "Login",
+    "about": "About",
+    "maps": "Mapy",
+    "register": "Rejestacja",
+    "logout": "Wyloguj"
+  },
+
+  "options": {
+    "dijkstra": "Dijkstra",
+    "astar": "Astar",
+    "dfs": "DFS",
+    "bfs": "BFS",
+
+    "tsg": "TSG",
+    "sort": "Sort",
+    "random": "Losowy",
+
+    "wall": "Ściana",
+    "start": "Początek",
+    "finish": "Koniec"
+  }
 }

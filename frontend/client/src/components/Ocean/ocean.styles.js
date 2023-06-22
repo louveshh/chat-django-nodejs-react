@@ -9,7 +9,7 @@ export const StyledSVG = styled.svg`
   bottom: -20%;
   z-index: -1;
   overflow: hidden;
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     bottom: -20%;
   }
   @media (max-width: 700px) {

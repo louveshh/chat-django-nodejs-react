@@ -15,11 +15,22 @@ const PanelMap = ({ canvasRef }) => {
     clickSort,
     clearing,
     disabled,
+    t,
     handleAlgorithm,
     handleClear,
   } = usePanelMap(canvasRef);
   return (
     <>
+      {current && (
+        <CommonButton
+          type="button"
+          onClick={handleAlgorithm()}
+          pathingInProgress={pathingInProgress}
+          disabled={disabled}
+        >
+          {t('panelMap.runButton')}
+        </CommonButton>
+      )}
       {active && (
         <>
           <SelectMapAlgorithm />
@@ -28,15 +39,9 @@ const PanelMap = ({ canvasRef }) => {
           {clickSort && <BarWeight />}
         </>
       )}
-      {clearing && <CommonButton onClick={handleClear}>CLEAR MAP</CommonButton>}
-      {current && (
-        <CommonButton
-          type="button"
-          onClick={handleAlgorithm()}
-          pathingInProgress={pathingInProgress}
-          disabled={disabled}
-        >
-          RUN
+      {clearing && (
+        <CommonButton onClick={handleClear}>
+          {t('panelMap.clearButton')}
         </CommonButton>
       )}
     </>

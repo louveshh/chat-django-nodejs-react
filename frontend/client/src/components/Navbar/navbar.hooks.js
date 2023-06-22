@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { logout } from 'store/slices/user';
 import { configPaths } from 'config/paths';
@@ -8,6 +9,8 @@ import { configPaths } from 'config/paths';
 export const useNavbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const { isAuthenticated } = useSelector((state) => state.user);
 
   const updateLogout = useCallback(() => {
@@ -20,5 +23,5 @@ export const useNavbar = () => {
       navigate(configPaths.home);
     }, 3000);
   };
-  return { isAuthenticated, onClick };
+  return { isAuthenticated, t, onClick };
 };

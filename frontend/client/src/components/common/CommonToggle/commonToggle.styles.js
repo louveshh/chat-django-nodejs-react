@@ -127,6 +127,7 @@ export const StyledLabel = styled.label`
   margin-bottom: 10px;
   height: 10px;
   min-width: 80px;
+  color: ${(props) => props.theme.view.white};
 `;
 
 export const StyledWrapper = styled.div`

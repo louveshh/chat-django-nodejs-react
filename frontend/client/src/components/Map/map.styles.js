@@ -9,7 +9,7 @@ export const MapWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     justify-content: center;
     flex-direction: column;
   }
@@ -75,7 +75,7 @@ export const RightPanel = styled.div`
   align-self: stretch;
   justify-content: start;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     flex-flow: row;
     align-self: unset;
     order: 3;
@@ -97,7 +97,7 @@ export const StyledButton = styled.button`
 
 export const LeftPanel = styled.div`
   width: 210px;
-  @media (max-width: 1100px) {
+  @media (max-width: 1150px) {
     order: 2;
   }
 `;

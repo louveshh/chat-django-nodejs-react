@@ -1,16 +1,73 @@
 {
-  "theme": "Dark Mode",
-  "en": "en",
-  "pl": "pl",
-  "language": "Language:",
+  "toggleTheme": {
+    "label": "Dark Mode"
+  },
+  "toggleLanguage": {
+    "label": "Language",
+    "en": "EN",
+    "pl": "PL"
+  },
 
-  "dijkstra": "Dijkstra",
-  "astar": "Astar",
-  "dfs": "DFS",
-  "bfs": "BFS",
+  "toggleMode": {
+    "display": "Display",
+    "board": "Board",
+    "map": "Map",
+    "combo": "Combine",
+    "add": "Add City"
+  },
+  "toggleClick": {
+    "label": "Add Custom Click"
+  },
+  "selectMapAlgorithm": {
+    "label": "Select Map Algorithm"
+  },
+  "selectBoardAlgorithm": {
+    "label": "Select Board Algorithm"
+  },
+  "selectMultiCities": {
+    "placeholder": "Select At Least Two Cities"
+  },
 
   "barWeight": {
     "toggle": "Add Custom Weight",
-    "label": "Range"
+    "label": "Weight"
+  },
+
+  "panelMap": {
+    "runButton": "Run",
+    "clearButton": "Clear Map"
+  },
+  "panelCombo": {
+    "runButton": "Run",
+    "clearMapButton": "Clear Map",
+    "clearBoardButton": "Clear Board"
+  },
+
+  "panelBoard": {
+    "runButton": "Run",
+    "clearButton": "Clear Map"
+  },
+
+  "navbar": {
+    "login": "Login",
+    "about": "About",
+    "maps": "Maps",
+    "register": "Register",
+    "logout": "Logout"
+  },
+
+  "options": {
+    "dijkstra": "Dijkstra",
+    "astar": "Astar",
+    "dfs": "DFS",
+    "bfs": "BFS",
+
+    "tsg": "TSG",
+    "sort": "Sort",
+    "random": "Random",
+
+    "wall": "Wall",
+    "start": "Start",
+    "finish": "Finish"
   }
 }
