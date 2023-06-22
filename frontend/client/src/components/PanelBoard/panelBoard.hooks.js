@@ -7,10 +7,11 @@ import {
   setToggleRunning,
   setAlgorithm,
   setClearBoard,
+  setSelectedOption,
 } from 'store/slices/board';
 import { clearGrid } from 'utils/board/common/clearGrid.utils';
 import { runAlgorithm } from 'utils/board/runAlgorithm.utils';
-import { mode } from 'config/config';
+import { mode, configBoard } from 'config/config';
 
 export const usePanelBoard = () => {
   const dispatch = useDispatch();
@@ -40,10 +41,24 @@ export const usePanelBoard = () => {
     },
     [dispatch]
   );
+  const updateSelectedOption = useCallback(
+    (payload) => {
+      dispatch(setSelectedOption(payload));
+    },
+    [dispatch]
+  );
+  const translateDefault = useMemo(
+    () => ({
+      label: t(`options.${configBoard.drawOptions[0].label}`),
+      value: configBoard.drawOptions[0].value,
+    }),
+    [t]
+  );
 
   const handleClearGrid = () => {
     updateClear(false);
     clearGrid(pathingInProgress, currentGrid);
+    updateSelectedOption(translateDefault);
   };
 
   const handleAlgorithm = () => {

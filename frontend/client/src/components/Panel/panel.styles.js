@@ -6,7 +6,7 @@ export const PanelWrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   @media (max-width: 1150px) {
     justify-content: center;
     flex-direction: column;

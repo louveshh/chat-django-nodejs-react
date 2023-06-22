@@ -1,7 +1,6 @@
 // ADJUSTABLE VALUES OF CONFIG
 
 export const mode = {
-  display: 'display',
   board: 'board',
   map: 'map',
   combo: 'combo',

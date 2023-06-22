@@ -2,6 +2,7 @@ import Baord from 'components/Board/Baord.component';
 import PanelMap from 'components/PanelMap/PanelMap.component';
 import PanelBoard from 'components/PanelBoard/PanelBoard.component';
 import PanelCombo from 'components/PanelCombo/PanelCombo.component';
+import PanelDescription from 'components/PanelDescription/PanelDescription.component';
 import Map from 'components/Map/Map.component';
 import { RightPanel, MainPanel, LeftPanel, PanelWrapper } from './panel.styles';
 import { usePanel } from './panel.hooks';
@@ -10,7 +11,9 @@ const Panel = () => {
   const { canvasRef, isMapActive, isBoardActive, isComboActive } = usePanel();
   return (
     <PanelWrapper>
-      <LeftPanel>xd</LeftPanel>
+      <LeftPanel>
+        <PanelDescription />
+      </LeftPanel>
       <MainPanel>
         <Map canvasRef={canvasRef} active={isMapActive} />
         <Baord active={isBoardActive} />

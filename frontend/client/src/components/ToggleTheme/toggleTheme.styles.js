@@ -6,6 +6,7 @@ export const ToggleContainer = styled.div`
   justify-content: end;
   height: 50px;
   min-width: 185px;
+  margin-top: 10px;
   @media (max-width: 650px) {
     scale: 0.5;
     width: unset;

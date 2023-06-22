@@ -69,5 +69,16 @@
     "wall": "Ściana",
     "start": "Początek",
     "finish": "Koniec"
+  },
+  "panelDescriptions": {
+    "map": {
+      "p1": "In this case we can choose algorithm to find path between cities (black dots)",
+      "p2": "You have to choose algorithm to enable Run Button",
+      "p3": "Each algorithm contains own extra functionalities",
+      "p4": "If you enable 'Add Custom Click' you can click on the map and add own city (red dot)",
+      "p5": "In 'Sort' algorithm you can add custom weight to your clicked city (red dot)",
+      "p6": "In 'TSG' if you enable 'Add Custom Click', you will be able to select starting city",
+      "p7": "TSG means - Traveling Salesman Greedy Algorithm"
+    }
   }
 }
