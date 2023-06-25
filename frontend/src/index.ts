@@ -1,15 +1,16 @@
-import express, { Request, Response } from 'express';
-import cookieParser from 'cookie-parser';
-import path from 'path';
-import dotenv from 'dotenv';
+import express, { Request, Response } from "express";
+import cookieParser from "cookie-parser";
+import path from "path";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-import loginRoute from './routes/auth/login';
-import logoutRoute from './routes/auth/logout';
-import meRoute from './routes/auth/me';
-import registerRoute from './routes/auth/register';
-import verifyRoute from './routes/auth/verify';
+import loginRoute from "./routes/auth/login";
+import logoutRoute from "./routes/auth/logout";
+import meRoute from "./routes/auth/me";
+import registerRoute from "./routes/auth/register";
+import verifyRoute from "./routes/auth/verify";
+import addRoute from "./routes/map/add";
 
 const app = express();
 
@@ -21,10 +22,11 @@ app.use(logoutRoute);
 app.use(meRoute);
 app.use(registerRoute);
 app.use(verifyRoute);
+app.use(addRoute);
 
-app.use(express.static('client/build'));
-app.get('*', (req: Request, res: Response) => {
-  return res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+app.use(express.static("client/build"));
+app.get("*", (req: Request, res: Response) => {
+  return res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 
 const PORT: number = Number(process.env.PORT ?? 5000);
