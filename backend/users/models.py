@@ -20,7 +20,7 @@ class UserAccountManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
-  
+
     def create_superuser(self, first_name, last_name, email, password=None):
         user = self.create_user(
             first_name,
@@ -50,3 +50,22 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class City(models.Model):
+    user = models.ForeignKey(
+        UserAccount, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, unique=True)
+    x = models.IntegerField()
+    y = models.IntegerField()
+    weight = models.IntegerField()
+    biome_name = models.CharField(max_length=255)
+    selected_start = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.email}, \
+        {self.name}"
+
+
+class Cities(models.Model):
+    cities = models.ManyToManyField(City)
