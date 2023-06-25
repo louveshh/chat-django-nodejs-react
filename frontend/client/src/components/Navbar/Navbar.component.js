@@ -37,7 +37,7 @@ const Navbar = () => {
         </Triangle>
         {!isAuthenticated ? (
           <Triangle>
-            <StyledNavLink to={configPaths.login}>
+            <StyledNavLink to={configPaths.register}>
               {t('navbar.register')}
             </StyledNavLink>
           </Triangle>

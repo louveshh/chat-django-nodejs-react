@@ -9,5 +9,6 @@ export const usePanel = () => {
   const isMapActive = configPanel.mapModes.includes(activeMode);
   const isBoardActive = configPanel.boardModes.includes(activeMode);
   const isComboActive = configPanel.comboModes.includes(activeMode);
-  return { canvasRef, isMapActive, isBoardActive, isComboActive };
+  const isAddActive = configPanel.addModes.includes(activeMode);
+  return { canvasRef, isMapActive, isBoardActive, isComboActive, isAddActive };
 };

@@ -31,7 +31,13 @@ export const GridContainer = styled.div`
   width: ${configDisplay.DISPLAY_SIZE}px;
   height: ${configDisplay.DISPLAY_SIZE}px;
   display: grid;
-  grid-template-columns: repeat(${configDisplay.AMOUNT_OF_CELLS}, ${configDisplay.NODE_SIZE()}px);
-  grid-template-rows: repeat(${configDisplay.AMOUNT_OF_CELLS}, ${configDisplay.NODE_SIZE()}px);
+  grid-template-columns: repeat(
+    ${configDisplay.AMOUNT_OF_CELLS},
+    ${configDisplay.NODE_SIZE()}px
+  );
+  grid-template-rows: repeat(
+    ${configDisplay.AMOUNT_OF_CELLS},
+    ${configDisplay.NODE_SIZE()}px
+  );
   border: 1px solid black;
 `;

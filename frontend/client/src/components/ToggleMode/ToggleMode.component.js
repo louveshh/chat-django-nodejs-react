@@ -13,9 +13,8 @@ const ToggleMode = () => {
     <ToggleContainer>
       <ToggleWrapper>
         {Object.entries(mode).map(([_, value]) => (
-          <ToggleStyledWrapper>
+          <ToggleStyledWrapper key={`toggle-${value}`}>
             <ToggleStyled
-              key={`toggle-${value}`}
               label={t(`toggleMode.${value}`)}
               aria={`Toggle Mode - ${value}`}
               id={`toggle-${value}`}

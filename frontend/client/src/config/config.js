@@ -86,13 +86,11 @@ export const configBoard = {
 export const configMap = {
   clickPossibleTargets: [
     // maps where click is possible
-    mode.display,
     mode.map,
     mode.add,
   ],
   mouseMoveCities: [
     // maps where info about city is possible
-    mode.display,
     mode.map,
     mode.add,
   ],
@@ -115,7 +113,7 @@ export const configPanel = {
   mapModes: [
     // display map on those modes
     mode.map,
-    mode.display,
+
     mode.combo,
     mode.add,
   ],
@@ -125,4 +123,5 @@ export const configPanel = {
     mode.combo,
   ],
   comboModes: [mode.combo],
+  addModes: [mode.add],
 };

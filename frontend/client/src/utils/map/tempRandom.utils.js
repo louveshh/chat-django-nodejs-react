@@ -1,4 +1,4 @@
-import { configDisplay } from '../../config/config';
+import { configDisplay } from 'config/config';
 
 export const tempRandom = (setRandomPoints) => {
   const points = [];
@@ -14,6 +14,7 @@ export const tempRandom = (setRandomPoints) => {
       const weight = Math.floor(Math.random() * 50);
       const selectedStart = false;
       const name = `name ${i}`;
+      const biome = 'biome name';
 
       const closePoints = points.filter(
         (pos) =>
@@ -25,7 +26,7 @@ export const tempRandom = (setRandomPoints) => {
       );
 
       if (!closePoints.length) {
-        points.push({ x, y, weight, selectedStart, name });
+        points.push({ x, y, weight, selectedStart, name, biome });
         break;
       }
     }

@@ -9,11 +9,23 @@ const LoginPage = () => {
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" onChange={onChange} value={email} required />
+          <input
+            type="email"
+            name="email"
+            onChange={onChange}
+            value={email}
+            required
+          />
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" onChange={onChange} value={password} required />
+          <input
+            type="password"
+            name="password"
+            onChange={onChange}
+            value={password}
+            required
+          />
         </div>
         {loading ? (
           <div>

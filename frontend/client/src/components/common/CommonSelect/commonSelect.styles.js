@@ -30,7 +30,6 @@ export const StyledPlaceholder = styled(components.Placeholder)`
 export const StyledValueContainer = styled(components.ValueContainer)`
   display: flex;
   justify-content: center;
-  margin-left: 2.5rem;
 `;
 
 export const StyledOption = styled(components.Option)`

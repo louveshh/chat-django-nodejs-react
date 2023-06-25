@@ -2,14 +2,20 @@ import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
-import { setCirclePoint, setRandomPoints } from 'store/slices/map';
+import {
+  setCirclePoint,
+  setRandomPoints,
+  setMouseMoveCity,
+} from 'store/slices/map';
 import { tempRandom } from 'utils/map/tempRandom.utils';
 import { getCanvasContext } from 'utils/map/getCanvasContext.utils';
 import { clearMap } from 'utils/map/common/clearMap.utils';
 import { drawCities } from 'utils/map/common/drawCities.utils';
 import { selectClickCity } from 'utils/map/selectClickCity.utils';
 import { drawClickedCity } from 'utils/map/common/drawClickedCity.utils';
-import { configDisplay, configMap, mode, map } from 'config/config';
+import { configMap, mode, map } from 'config/config';
+import { isCityFarEnough } from 'utils/map/common/isCityFarEnough';
+import { isInsideMap } from 'utils/map/common/isInsideMap';
 
 export const useMap = (canvasRef) => {
   const dispatch = useDispatch();
@@ -23,6 +29,7 @@ export const useMap = (canvasRef) => {
     clickPossible,
     algorithm,
     filteredCities,
+    mouseMoveCity,
   } = useSelector((state) => state.map);
   const { activeMode, theme: themeName } = useSelector((state) => state.toggle);
 
@@ -37,12 +44,26 @@ export const useMap = (canvasRef) => {
     [dispatch]
   );
 
+  const updateMouseMoveCity = useCallback(
+    (payload) => {
+      dispatch(setMouseMoveCity(payload));
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
     tempRandom(updateRandomPoints);
     return () => {};
   }, [updateRandomPoints]);
 
-  // base setup
+  useEffect(() => {
+    const { context } = getCanvasContext(canvasRef);
+    context.lineJoin = configMap.context.lineJoin;
+    context.lineCap = configMap.context.lineCap;
+    context.lineWidth = configMap.context.lineWidth;
+    context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
+  }, [canvasRef]);
+
   useEffect(() => {
     if (toClear || pathingInProgress) {
       return;
@@ -50,10 +71,6 @@ export const useMap = (canvasRef) => {
     if (activeMode === mode.map) {
       const { canvas, context } = getCanvasContext(canvasRef);
       clearMap(canvas, context);
-      context.lineJoin = configMap.context.lineJoin;
-      context.lineCap = configMap.context.lineCap;
-      context.lineWidth = configMap.context.lineWidth;
-      context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
       if (clickPossible && algorithm === map.sort) {
         drawClickedCity(theme, context, circlePoint, true);
       }
@@ -83,12 +100,8 @@ export const useMap = (canvasRef) => {
     if (toClear || pathingInProgress) {
       return;
     }
-    if (activeMode !== mode.map) {
+    if (activeMode === mode.combo) {
       const { canvas, context } = getCanvasContext(canvasRef);
-      context.lineJoin = configMap.context.lineJoin;
-      context.lineCap = configMap.context.lineCap;
-      context.lineWidth = configMap.context.lineWidth;
-      context.imageSmoothingEnabled = configMap.context.imageSmoothingEnabled;
       clearMap(canvas, context);
       const filteredCitiesMapped = filteredCities.map((item) => ({
         x: item.value.x,
@@ -111,42 +124,58 @@ export const useMap = (canvasRef) => {
     toClear,
   ]);
 
+  useEffect(() => {
+    if (toClear || pathingInProgress) {
+      return;
+    }
+    if (activeMode === mode.add) {
+      const { canvas, context } = getCanvasContext(canvasRef);
+      clearMap(canvas, context);
+      drawClickedCity(theme, context, circlePoint, false);
+      drawCities(theme, context, randomPoints, false);
+    }
+    return () => {};
+  }, [
+    activeMode,
+    canvasRef,
+    circlePoint,
+    filteredCities,
+    pathingInProgress,
+    randomPoints,
+    theme,
+    toClear,
+  ]);
+
   const handleCanvasClick = (event) => {
     if (
-      !clickPossible &&
-      !configMap.clickPossibleTargets.includes(activeMode)
+      !(clickPossible && activeMode === mode.map) &&
+      activeMode !== mode.add
     ) {
       return;
     }
-    selectClickCity(canvasRef, event, updateCirclePoint, circlePoint);
+    selectClickCity(
+      canvasRef,
+      event,
+      updateCirclePoint,
+      circlePoint,
+      randomPoints
+    );
   };
   const handleMouseMove = (event) => {
-    if (!configMap.mouseMoveCities.includes(activeMode)) {
+    if (activeMode !== mode.add) {
       return;
     }
-    const canvas = event.target;
+    const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
-    let mouseX;
-    let mouseY;
-    if (
-      rect?.height > configDisplay.RESCALED_VALUE() &&
-      rect.width > configDisplay.RESCALED_VALUE()
-    ) {
-      mouseX = event.clientX - rect.left;
-      mouseY = event.clientY - rect.top;
-    } else {
-      mouseX = (event.clientX - rect.left) * configDisplay.SCALED_CLICK();
-      mouseY = (event.clientY - rect.top) * configDisplay.SCALED_CLICK();
+    const { x, y } = isInsideMap(event, rect);
+    const farEnoughtNewCity = isCityFarEnough(randomPoints, x, y, 50);
+
+    if (!farEnoughtNewCity) {
+      return;
     }
-    const selectedSize = 5;
 
-    const selectedCoordinate = randomPoints.find(({ x, y }) => {
-      const distance = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
-      return distance <= selectedSize;
-    });
-
-    if (selectedCoordinate) {
-      // console.log('Object detected:', selectedCoordinate);
+    if (farEnoughtNewCity !== mouseMoveCity) {
+      updateMouseMoveCity(farEnoughtNewCity);
     }
   };
 

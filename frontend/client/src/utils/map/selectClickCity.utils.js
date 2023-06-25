@@ -1,28 +1,34 @@
-import { configDisplay } from 'config/config';
+import { toast } from 'react-toastify';
+import { isCityFarEnough } from './common/isCityFarEnough';
+import { isInsideMap } from './common/isInsideMap';
 
 export const selectClickCity = (
   canvasRef,
   event,
   setCirclePoint,
-  circlePoint
+  circlePoint,
+  randomPoints
 ) => {
   const canvas = canvasRef.current;
   const rect = canvas.getBoundingClientRect();
-  let x;
-  let y;
-  if (
-    rect?.height > configDisplay.SCALED_DISPLAY_SIZE() &&
-    rect?.width > configDisplay.SCALED_DISPLAY_SIZE()
-  ) {
-    x = event.clientX - rect.left;
-    y = event.clientY - rect.top;
-  } else {
-    x = (event.clientX - rect.left) * configDisplay.SCALED_CLICK();
-    y = (event.clientY - rect.top) * configDisplay.SCALED_CLICK();
-  }
+  const { x, y } = isInsideMap(event, rect);
 
   const name = `click`;
   const { selectedStart, weight } = circlePoint;
+  const farEnoughtNewCity = isCityFarEnough(randomPoints, x, y, 50);
+
+  if (farEnoughtNewCity) {
+    toast.warn('Too close!', {
+      position: 'bottom-left',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: 'dark',
+    });
+    return;
+  }
 
   setCirclePoint({ x, y, weight, selectedStart, name });
 };

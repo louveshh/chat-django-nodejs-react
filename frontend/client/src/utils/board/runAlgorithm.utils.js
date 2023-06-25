@@ -31,7 +31,7 @@ export const runAlgorithm = (
             () => {
               updateToggleRunning();
             },
-            currentMode === mode.combo ? i * 10 : i * 50
+            currentMode === mode.combo ? i * 40 : i * 50
           );
         } else {
           setTimeout(
@@ -64,7 +64,7 @@ export const runAlgorithm = (
                   : i + step;
               }
             },
-            currentMode === mode.combo ? i * 20 : i * 40
+            currentMode === mode.combo ? i * 30 : i * 40
           );
         }
       }
@@ -79,7 +79,7 @@ export const runAlgorithm = (
             () => {
               animateFinalPath(shortestPathNodes);
             },
-            currentMode === mode.combo ? i * 1 : i * 5
+            currentMode === mode.combo ? i * 3 : i * 5
           );
           if (shortestPathNodes) {
             return shortestPathNodes.length;
@@ -104,7 +104,7 @@ export const runAlgorithm = (
               classId.className = `${node.base} ${node.visited}`;
             }
           },
-          currentMode === mode.combo ? i * 1 : i * 5
+          currentMode === mode.combo ? i * 3 : i * 5
         );
       }
     }

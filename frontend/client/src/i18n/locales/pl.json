@@ -71,14 +71,36 @@
     "finish": "Koniec"
   },
   "panelDescriptions": {
+    "board": {
+      "p0": "Ten tryb znajduje ścieżkę między zielonym a czerwonym kwadratem",
+      "p1": "W tym przypadku możesz wybrać algorytm do znalezienia ścieżki między zielonym a czerwonym kwadratem",
+      "p2": "Musisz wybrać algorytm, aby włączyć przycisk Uruchom",
+      "p3": "Zielony punkt to punkt początkowy, czerwony punkt to punkt docelowy",
+      "p4": "Możesz ustawić ścianę klikając na tablicę, ponowne kliknięcie w ten sam punkt usuwa ścianę",
+      "p5": "Algorytm będzie omijał każdą ścianę",
+      "p6": "Możesz ustawić własny punkt początkowy i docelowy, wybierając na prawo",
+      "p7": "Aby ponownie uruchomić algorytm, musisz wyczyścić tablicę"
+    },
     "map": {
-      "p1": "In this case we can choose algorithm to find path between cities (black dots)",
-      "p2": "You have to choose algorithm to enable Run Button",
-      "p3": "Each algorithm contains own extra functionalities",
-      "p4": "If you enable 'Add Custom Click' you can click on the map and add own city (red dot)",
-      "p5": "In 'Sort' algorithm you can add custom weight to your clicked city (red dot)",
-      "p6": "In 'TSG' if you enable 'Add Custom Click', you will be able to select starting city",
-      "p7": "TSG means - Traveling Salesman Greedy Algorithm"
+      "p0": "Ten tryb znajduje połączenia między czarnymi miastami kropkami",
+      "p1": "W tym przypadku możesz wybrać algorytm do znalezienia ścieżki między miastami (czarne kropki)",
+      "p2": "Musisz wybrać algorytm, aby włączyć przycisk Uruchom",
+      "p3": "Każdy algorytm zawiera swoje dodatkowe funkcje",
+      "p4": "Jeśli włączysz opcję 'Dodaj własne kliknięcie', możesz kliknąć na mapie i dodać swoje miasto (czerwona kropka)",
+      "p5": "W algorytmie 'Sort' możesz przypisać własną wagę do klikniętego miasta (czerwona kropka)",
+      "p6": "W algorytmie 'TSG', jeśli włączysz opcję 'Dodaj własne kliknięcie', będziesz mógł wybrać miasto początkowe",
+      "p7": "TSG oznacza - Algorytm Złodzieja Podróżującego (Traveling Salesman Greedy Algorithm)",
+      "p8": "Aby ponownie uruchomić algorytm, musisz wyczyścić mapę"
+    },
+    "combo": {
+      "p0": "Ten tryb łączy 'mapę' i 'tablicę'",
+      "p1": "W tym przypadku zostanie znaleziona najkrótsza ścieżka między miastami za pomocą algorytmu TSG",
+      "p2": "Następnie zostanie znaleziona ścieżka i pominięte będą ściany do każdego miasta sekwencyjnie za pomocą algorytmu Dijkstry",
+      "p3": "W tym przypadku musisz wybrać co najmniej dwa miasta",
+      "p4": "Podobnie jak na tablicy, możesz dodać ścianę klikając na tablicę",
+      "p5": "Algorytm Dijkstry będzie omijał każdą ścianę, a TSG znajdzie najkrótszą ścieżkę prosto, pomimo ścian",
+      "p6": "Select można przeciągać i sortować",
+      "p7": "Aby ponownie uruchomić algorytm, musisz wyczyścić mapę i wyczyścić tablicę"
     }
   }
 }

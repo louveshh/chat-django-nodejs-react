@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 export const useLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, isAuthenticated, registered } = useSelector((state) => state.user);
+  const { loading, isAuthenticated, registered } = useSelector(
+    (state) => state.user
+  );
 
   const [formData, setFormData] = useState({
     email: '',

@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { configDisplay } from '../../config/config';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { configDisplay } from 'config/config';
+import { urls } from 'config/urls';
 
 const initialState = {
   circlePoint: {
@@ -15,7 +16,98 @@ const initialState = {
   toClear: false,
   clickPossible: false,
   algorithm: '',
+  mouseMoveCity: null,
 };
+
+export const setAddOwnCity = createAsyncThunk(
+  urls.add,
+  async ({ email, x, y }, thunkAPI) => {
+    const body = JSON.stringify({
+      email,
+      x,
+      y,
+    });
+
+    try {
+      const res = await fetch(urls.login, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body,
+      });
+
+      const data = await res.json();
+
+      if (res.status === 200) {
+        const { dispatch } = thunkAPI;
+
+        dispatch(getMap());
+
+        return data;
+      }
+      return thunkAPI.rejectWithValue(data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const setEditOwnCity = createAsyncThunk(
+  urls.login,
+  async ({ email, x, y }, thunkAPI) => {
+    const body = JSON.stringify({
+      email,
+      x,
+      y,
+    });
+
+    try {
+      const res = await fetch(urls.login, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body,
+      });
+
+      const data = await res.json();
+
+      if (res.status === 200) {
+        const { dispatch } = thunkAPI;
+
+        dispatch(getMap());
+
+        return data;
+      }
+      return thunkAPI.rejectWithValue(data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+const getMap = createAsyncThunk(urls.me, async (_, thunkAPI) => {
+  try {
+    const res = await fetch(urls.me, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      return data;
+    }
+    return thunkAPI.rejectWithValue(data);
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
 
 const mapSlice = createSlice({
   name: 'map',
@@ -90,6 +182,42 @@ const mapSlice = createSlice({
     setFilteredCities: (state, action) => {
       state.filteredCities = action.payload;
     },
+    setMouseMoveCity: (state, action) => {
+      state.mouseMoveCity = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(setAddOwnCity.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(setAddOwnCity.fulfilled, (state) => {
+        state.loading = false;
+        state.registered = true;
+      })
+      .addCase(setAddOwnCity.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(setEditOwnCity.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(setEditOwnCity.fulfilled, (state) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+      })
+      .addCase(setEditOwnCity.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(getMap.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getMap.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(getMap.rejected, (state) => {
+        state.loading = false;
+      });
   },
 });
 
@@ -108,6 +236,7 @@ export const {
   setFilteredCities,
   setFilteredCitiesStart,
   setZeroStartCityFiltered,
+  setMouseMoveCity,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

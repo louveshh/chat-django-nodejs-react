@@ -91,6 +91,10 @@ export const light = {
   ocean: {
     color: color.gray2,
   },
+
+  city: {
+    background: color.gray2,
+  },
 };
 
 export const dark = {
@@ -144,5 +148,8 @@ export const dark = {
   },
   ocean: {
     color: color.gray2,
+  },
+  city: {
+    background: color.gray2,
   },
 };

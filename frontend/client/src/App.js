@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
+import { StyledToastContainer } from 'styles/notifcations';
+import 'react-toastify/dist/ReactToastify.css';
 
 import GlobalStyles from 'styles/global';
 import HomePage from 'pages/Home/Home.page';
@@ -32,6 +35,7 @@ const AppRoutes = () => {
           <Route path={configPaths.register} element={<RegisterPage />} />
         </Routes>
       </Router>
+      <StyledToastContainer />
       <GlobalStyles />
     </ThemeProvider>
   );
