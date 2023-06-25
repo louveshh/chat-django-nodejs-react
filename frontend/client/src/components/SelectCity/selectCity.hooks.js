@@ -4,7 +4,7 @@ import { setSelectStartCity } from 'store/slices/map';
 import cloneDeep from 'lodash/cloneDeep';
 
 export const useSelectCity = () => {
-  const { randomPoints, circlePoint, clickPossible } = useSelector(
+  const { randomPoints, ownSelectedCity, clickPossible } = useSelector(
     (state) => state.map
   );
   const dispatch = useDispatch();
@@ -12,14 +12,14 @@ export const useSelectCity = () => {
   const selectValueData = useMemo(() => {
     const data = cloneDeep(randomPoints);
     if (clickPossible) {
-      data.unshift(circlePoint);
+      data.unshift(ownSelectedCity);
     }
     const dataTransfom = data.map(({ x, y, name }) => ({
       value: { x, y },
       label: name,
     }));
     return dataTransfom;
-  }, [circlePoint, clickPossible, randomPoints]);
+  }, [ownSelectedCity, clickPossible, randomPoints]);
 
   const updateSelectStartCity = useCallback(
     (payload) => {

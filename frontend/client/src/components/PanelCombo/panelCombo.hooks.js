@@ -30,7 +30,7 @@ export const usePanelCombo = (canvasRef) => {
   const {
     pathingInProgress: mapPathingInProgress,
     toClear: mapToClear,
-    circlePoint,
+    ownSelectedCity,
     filteredCities,
     clickPossible,
   } = useSelector((state) => state.map);
@@ -161,7 +161,7 @@ export const usePanelCombo = (canvasRef) => {
       theme,
       canvas,
       context,
-      circlePoint,
+      ownSelectedCity,
       mappedPoints,
       clickPossible,
       updatePathingInProgress,

@@ -7,9 +7,14 @@ export const StyledButton = styled.button`
   color: #fff;
   font-size: 18px;
   cursor: pointer;
-  margin: 20px 30px;
+  margin: 20px 0px;
   background: ${(props) => props.theme.button.background};
   overflow: hidden;
+  width: 100%;
+
+  @media (max-width: 1150px) {
+    max-width: 150px;
+  }
 
   ${(props) => {
     if (!props.disabled) {

@@ -2,7 +2,7 @@ export const drawSimplePath = (
   theme,
   context,
   points,
-  circlePoint,
+  ownSelectedCity,
   clickPossible,
   setPathingInProgres,
   random = false
@@ -13,7 +13,7 @@ export const drawSimplePath = (
   const fullPoints = [...points];
 
   if (clickPossible) {
-    fullPoints.unshift(circlePoint);
+    fullPoints.unshift(ownSelectedCity);
   }
 
   if (random) {

@@ -3,7 +3,7 @@ export const calculateRandomPath = (
   canvas,
   context,
   clickPossible,
-  circlePoint,
+  ownSelectedCity,
   randomPoints,
   clearMap,
   updatePathingInProgress,
@@ -16,14 +16,14 @@ export const calculateRandomPath = (
   clearMap(canvas, context);
   updateClearState(false);
   if (clickPossible) {
-    drawClickedCity(theme, context, circlePoint);
+    drawClickedCity(theme, context, ownSelectedCity);
   }
   drawCities(theme, context, randomPoints, false);
   drawSimplePath(
     theme,
     context,
     randomPoints,
-    circlePoint,
+    ownSelectedCity,
     clickPossible,
     updatePathingInProgress,
     true

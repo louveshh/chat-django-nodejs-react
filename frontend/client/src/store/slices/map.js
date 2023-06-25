@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { configDisplay } from 'config/config';
-import { urls } from 'config/urls';
+import { urls, urlsApi } from 'config/urls';
 
 const initialState = {
-  circlePoint: {
+  ownSelectedCity: {
     x: configDisplay.DISPLAY_SIZE / 2,
     y: configDisplay.DISPLAY_SIZE / 2,
     weight: 0,
@@ -21,50 +21,17 @@ const initialState = {
 
 export const setAddOwnCity = createAsyncThunk(
   urls.add,
-  async ({ email, x, y }, thunkAPI) => {
+  async ({ email, x, y, name, weight }, thunkAPI) => {
     const body = JSON.stringify({
       email,
       x,
       y,
+      name,
+      weight,
     });
 
     try {
-      const res = await fetch(urls.login, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body,
-      });
-
-      const data = await res.json();
-
-      if (res.status === 200) {
-        const { dispatch } = thunkAPI;
-
-        dispatch(getMap());
-
-        return data;
-      }
-      return thunkAPI.rejectWithValue(data);
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.response.data);
-    }
-  }
-);
-
-export const setEditOwnCity = createAsyncThunk(
-  urls.login,
-  async ({ email, x, y }, thunkAPI) => {
-    const body = JSON.stringify({
-      email,
-      x,
-      y,
-    });
-
-    try {
-      const res = await fetch(urls.login, {
+      const res = await fetch(urlsApi.add, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -113,8 +80,8 @@ const mapSlice = createSlice({
   name: 'map',
   initialState,
   reducers: {
-    setCirclePoint: (state, action) => {
-      state.circlePoint = action.payload;
+    setOwnSelectedCity: (state, action) => {
+      state.ownSelectedCity = action.payload;
     },
     setRandomPoints: (state, action) => {
       state.randomPoints = action.payload;
@@ -131,19 +98,20 @@ const mapSlice = createSlice({
         ...point,
         selectedStart: point.x === x && point.y === y,
       }));
-      const updatedCirclePoint = {
-        ...state.circlePoint,
-        selectedStart: state.circlePoint.x === x && state.circlePoint.y === y,
+      const updatedOwnSelectedCity = {
+        ...state.ownSelectedCity,
+        selectedStart:
+          state.ownSelectedCity.x === x && state.ownSelectedCity.y === y,
       };
 
       return {
         ...state,
         randomPoints: updatedPoints,
-        circlePoint: updatedCirclePoint,
+        ownSelectedCity: updatedOwnSelectedCity,
       };
     },
-    setCirclePointZero: (state, action) => {
-      state.circlePoint.selectedStart = action.payload;
+    setOwnSelectedCityZero: (state, action) => {
+      state.ownSelectedCity.selectedStart = action.payload;
     },
     setRandomPointsZero: (state, _) => {
       state.randomPoints = state.randomPoints.map((point) => ({
@@ -156,15 +124,15 @@ const mapSlice = createSlice({
         ...point,
         selectedStart: false,
       }));
-      const updatedCirclePoint = {
-        ...state.circlePoint,
+      const updatedOwnSelectedCity = {
+        ...state.ownSelectedCity,
         selectedStart: false,
       };
 
       return {
         ...state,
         randomPoints: updatedPoints,
-        circlePoint: updatedCirclePoint,
+        ownSelectedCity: updatedOwnSelectedCity,
       };
     },
     setZeroStartCityFiltered: (state, _) => {
@@ -198,16 +166,6 @@ const mapSlice = createSlice({
       .addCase(setAddOwnCity.rejected, (state) => {
         state.loading = false;
       })
-      .addCase(setEditOwnCity.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(setEditOwnCity.fulfilled, (state) => {
-        state.loading = false;
-        state.isAuthenticated = true;
-      })
-      .addCase(setEditOwnCity.rejected, (state) => {
-        state.loading = false;
-      })
       .addCase(getMap.pending, (state) => {
         state.loading = true;
       })
@@ -222,12 +180,12 @@ const mapSlice = createSlice({
 });
 
 export const {
-  setCirclePoint,
+  setOwnSelectedCity,
   setRandomPoints,
   setPathingInProgress,
   setClearMap,
   setSelectStartCity,
-  setCirclePointZero,
+  setOwnSelectedCityZero,
   setRandomPointsZero,
   setZeroStartCity,
   setToggleClickPossible,

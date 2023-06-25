@@ -7,7 +7,7 @@ export const calculateShortestPath = (
   theme,
   canvas,
   context,
-  circlePoint,
+  ownSelectedCity,
   randomPoints,
   clickPossible,
   setPathingInProgres,
@@ -66,7 +66,7 @@ export const calculateShortestPath = (
 
       clearMap(canvas, context);
       if (clickPossible) {
-        drawClickedCity(theme, context, circlePoint);
+        drawClickedCity(theme, context, ownSelectedCity);
       }
       drawCities(theme, context, randomPoints);
       drawPath(theme, context, shortestPath);
@@ -99,7 +99,7 @@ export const calculateShortestPath = (
 
   const points = [...randomPoints];
   if (clickPossible) {
-    points.unshift(circlePoint);
+    points.unshift(ownSelectedCity);
   }
   const modifiedPoints = moveStartObjectToStart(points);
 

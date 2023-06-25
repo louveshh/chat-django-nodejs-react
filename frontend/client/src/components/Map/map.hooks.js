@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
 import {
-  setCirclePoint,
+  setOwnSelectedCity,
   setRandomPoints,
   setMouseMoveCity,
 } from 'store/slices/map';
@@ -22,7 +22,7 @@ export const useMap = (canvasRef) => {
   const theme = useTheme();
 
   const {
-    circlePoint,
+    ownSelectedCity,
     randomPoints,
     pathingInProgress,
     toClear,
@@ -33,8 +33,8 @@ export const useMap = (canvasRef) => {
   } = useSelector((state) => state.map);
   const { activeMode, theme: themeName } = useSelector((state) => state.toggle);
 
-  const updateCirclePoint = (newPoint) => {
-    dispatch(setCirclePoint(newPoint));
+  const updateOwnSelectedCity = (newPoint) => {
+    dispatch(setOwnSelectedCity(newPoint));
   };
 
   const updateRandomPoints = useCallback(
@@ -72,10 +72,10 @@ export const useMap = (canvasRef) => {
       const { canvas, context } = getCanvasContext(canvasRef);
       clearMap(canvas, context);
       if (clickPossible && algorithm === map.sort) {
-        drawClickedCity(theme, context, circlePoint, true);
+        drawClickedCity(theme, context, ownSelectedCity, true);
       }
       if (clickPossible && algorithm !== map.sort) {
-        drawClickedCity(theme, context, circlePoint, false);
+        drawClickedCity(theme, context, ownSelectedCity, false);
       }
       if (algorithm === map.sort) {
         drawCities(theme, context, randomPoints, true);
@@ -88,7 +88,7 @@ export const useMap = (canvasRef) => {
     activeMode,
     algorithm,
     canvasRef,
-    circlePoint,
+    ownSelectedCity,
     clickPossible,
     pathingInProgress,
     randomPoints,
@@ -109,7 +109,7 @@ export const useMap = (canvasRef) => {
         selectedStart: item.value.selectedStart,
       }));
       if (configMap.clickPossibleTargets.includes(activeMode)) {
-        drawClickedCity(theme, context, circlePoint, false);
+        drawClickedCity(theme, context, ownSelectedCity, false);
       }
       drawCities(theme, context, filteredCitiesMapped, false);
     }
@@ -117,7 +117,7 @@ export const useMap = (canvasRef) => {
   }, [
     activeMode,
     canvasRef,
-    circlePoint,
+    ownSelectedCity,
     filteredCities,
     pathingInProgress,
     theme,
@@ -131,14 +131,14 @@ export const useMap = (canvasRef) => {
     if (activeMode === mode.add) {
       const { canvas, context } = getCanvasContext(canvasRef);
       clearMap(canvas, context);
-      drawClickedCity(theme, context, circlePoint, false);
+      drawClickedCity(theme, context, ownSelectedCity, false);
       drawCities(theme, context, randomPoints, false);
     }
     return () => {};
   }, [
     activeMode,
     canvasRef,
-    circlePoint,
+    ownSelectedCity,
     filteredCities,
     pathingInProgress,
     randomPoints,
@@ -156,8 +156,8 @@ export const useMap = (canvasRef) => {
     selectClickCity(
       canvasRef,
       event,
-      updateCirclePoint,
-      circlePoint,
+      updateOwnSelectedCity,
+      ownSelectedCity,
       randomPoints
     );
   };

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { urls } from 'config/urls';
+import { urls, urlsApi } from 'config/urls';
 
 export const register = createAsyncThunk(
   urls.register,
@@ -13,7 +13,7 @@ export const register = createAsyncThunk(
     });
 
     try {
-      const res = await fetch(urls.register, {
+      const res = await fetch(urlsApi.register, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -36,7 +36,7 @@ export const register = createAsyncThunk(
 
 const getUser = createAsyncThunk(urls.me, async (_, thunkAPI) => {
   try {
-    const res = await fetch(urls.me, {
+    const res = await fetch(urlsApi.me, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -63,7 +63,7 @@ export const login = createAsyncThunk(
     });
 
     try {
-      const res = await fetch(urls.login, {
+      const res = await fetch(urlsApi.login, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -90,7 +90,7 @@ export const login = createAsyncThunk(
 
 export const checkAuth = createAsyncThunk(urls.verify, async (_, thunkAPI) => {
   try {
-    const res = await fetch(urls.verify, {
+    const res = await fetch(urlsApi.verify, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -114,7 +114,7 @@ export const checkAuth = createAsyncThunk(urls.verify, async (_, thunkAPI) => {
 
 export const logout = createAsyncThunk(urls.logout, async (_, thunkAPI) => {
   try {
-    const res = await fetch(urls.logout, {
+    const res = await fetch(urlsApi.logout, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

@@ -26,7 +26,7 @@ export const usePanelMap = (canvasRef) => {
   const { t } = useTranslation();
 
   const {
-    circlePoint,
+    ownSelectedCity,
     randomPoints,
     pathingInProgress,
     toClear,
@@ -90,7 +90,7 @@ export const usePanelMap = (canvasRef) => {
       theme,
       canvas,
       context,
-      circlePoint,
+      ownSelectedCity,
       randomPoints,
       clickPossible,
       updatePathingInProgress,
@@ -106,7 +106,7 @@ export const usePanelMap = (canvasRef) => {
     calculateSortedPath(
       theme,
       randomPoints,
-      circlePoint,
+      ownSelectedCity,
       clickPossible,
       canvas,
       context,
@@ -125,7 +125,7 @@ export const usePanelMap = (canvasRef) => {
       canvas,
       context,
       clickPossible,
-      circlePoint,
+      ownSelectedCity,
       randomPoints,
       clearMap,
       updatePathingInProgress,

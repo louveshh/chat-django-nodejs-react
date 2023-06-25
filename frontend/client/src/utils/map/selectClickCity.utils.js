@@ -5,8 +5,8 @@ import { isInsideMap } from './common/isInsideMap';
 export const selectClickCity = (
   canvasRef,
   event,
-  setCirclePoint,
-  circlePoint,
+  setOwnSelectedCity,
+  ownSelectedCity,
   randomPoints
 ) => {
   const canvas = canvasRef.current;
@@ -14,8 +14,8 @@ export const selectClickCity = (
   const { x, y } = isInsideMap(event, rect);
 
   const name = `click`;
-  const { selectedStart, weight } = circlePoint;
-  const farEnoughtNewCity = isCityFarEnough(randomPoints, x, y, 50);
+  const { selectedStart, weight } = ownSelectedCity;
+  const farEnoughtNewCity = isCityFarEnough(randomPoints, x, y, 20);
 
   if (farEnoughtNewCity) {
     toast.warn('Too close!', {
@@ -30,5 +30,5 @@ export const selectClickCity = (
     return;
   }
 
-  setCirclePoint({ x, y, weight, selectedStart, name });
+  setOwnSelectedCity({ x, y, weight, selectedStart, name });
 };

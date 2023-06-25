@@ -17,7 +17,7 @@ const DisplayHoverCity = () => {
         <StyledDisplayUl>
           {newCityInfo &&
             [...newCityInfo].map(([key, value]) => (
-              <StyledInformation>
+              <StyledInformation key={key}>
                 <StyledTitle>{key}</StyledTitle>
                 <StyledDescription>{value}</StyledDescription>
               </StyledInformation>

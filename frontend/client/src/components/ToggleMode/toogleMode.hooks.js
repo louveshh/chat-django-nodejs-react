@@ -8,7 +8,7 @@ import {
   setRandomPointsZero,
   setZeroStartCity,
   setAlgorithm as setAlgorithmMap,
-  setCirclePoint,
+  setOwnSelectedCity,
   setZeroStartCityFiltered,
 } from 'store/slices/map';
 import {
@@ -19,7 +19,7 @@ import { configBoard } from 'config/config';
 import { addBorders } from 'utils/board/common/addBorders.util';
 
 export const useToggleMode = () => {
-  const { circlePoint } = useSelector((state) => state.map);
+  const { ownSelectedCity } = useSelector((state) => state.map);
   const activeMode = useSelector((state) => state.toggle.activeMode);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -69,9 +69,9 @@ export const useToggleMode = () => {
     [dispatch]
   );
 
-  const updateCirclePoint = useCallback(
+  const updateOwnSelectedCity = useCallback(
     (payload) => {
-      dispatch(setCirclePoint(payload));
+      dispatch(setOwnSelectedCity(payload));
     },
     [dispatch]
   );
@@ -86,7 +86,7 @@ export const useToggleMode = () => {
     updateAlgorithmMap(null);
     updateAlgorithmBoard(null);
     updateSelectedOption(configBoard.defaultDrawOption);
-    updateCirclePoint({ ...circlePoint, weight: 0 });
+    updateOwnSelectedCity({ ...ownSelectedCity, weight: 0 });
   };
   return { activeMode, t, handleToggle };
 };

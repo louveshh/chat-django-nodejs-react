@@ -1,24 +1,24 @@
 import { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setCirclePoint } from 'store/slices/map';
+import { setOwnSelectedCity } from 'store/slices/map';
 import { useTranslation } from 'react-i18next';
 
 export const useBarWeight = () => {
   const [weightBar, setWeightBar] = useState(false);
-  const { circlePoint } = useSelector((state) => state.map);
+  const { ownSelectedCity } = useSelector((state) => state.map);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const handleClick = () => {
     setWeightBar((prev) => !prev);
-    const newCirclePoint = { ...circlePoint, weight: 0 };
-    dispatch(setCirclePoint(newCirclePoint));
+    const newOwnSelectedCity = { ...ownSelectedCity, weight: 0 };
+    dispatch(setOwnSelectedCity(newOwnSelectedCity));
   };
 
-  const updateCirclePoint = useCallback(
+  const updateOwnSelectedCity = useCallback(
     (payload) => {
-      dispatch(setCirclePoint(payload));
+      dispatch(setOwnSelectedCity(payload));
     },
     [dispatch]
   );
@@ -31,8 +31,8 @@ export const useBarWeight = () => {
     } else if (barValue >= 49) {
       newBarValue = Infinity;
     }
-    const newCirclePoint = { ...circlePoint, weight: newBarValue };
-    updateCirclePoint(newCirclePoint);
+    const newOwnSelectedCity = { ...ownSelectedCity, weight: newBarValue };
+    updateOwnSelectedCity(newOwnSelectedCity);
   };
   return { weightBar, t, handleClick, handleBar };
 };

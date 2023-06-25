@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import {
-  setCirclePointZero,
+  setOwnSelectedCityZero,
   setRandomPointsZero,
   setToggleClickPossible,
 } from 'store/slices/map';
@@ -22,9 +22,9 @@ export const useToggleCLick = () => {
     dispatch(setRandomPointsZero());
   }, [dispatch]);
 
-  const updateCirclePointZero = useCallback(
+  const updateOwnSelectedCityZero = useCallback(
     (payload) => {
-      dispatch(setCirclePointZero(payload));
+      dispatch(setOwnSelectedCityZero(payload));
     },
     [dispatch]
   );
@@ -33,9 +33,9 @@ export const useToggleCLick = () => {
     updateToggleClickPossible();
     updateRandomPointsZero();
     if (algorithm === map.tsg) {
-      updateCirclePointZero(true);
+      updateOwnSelectedCityZero(true);
     } else {
-      updateCirclePointZero(false);
+      updateOwnSelectedCityZero(false);
     }
   };
   return { clickPossible, t, handleClick };
