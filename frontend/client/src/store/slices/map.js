@@ -13,6 +13,7 @@ const initialState = {
   randomPoints: [],
   filteredCities: [],
   pathingInProgress: false,
+  loading: false,
   toClear: false,
   clickPossible: false,
   algorithm: '',
@@ -56,9 +57,42 @@ export const setAddOwnCity = createAsyncThunk(
   }
 );
 
-const getMap = createAsyncThunk(urls.me, async (_, thunkAPI) => {
+export const setRemoveOwnCity = createAsyncThunk(
+  urls.remove,
+  async ({ email }, thunkAPI) => {
+    const body = JSON.stringify({
+      email,
+    });
+
+    try {
+      const res = await fetch(urlsApi.remove, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body,
+      });
+
+      const data = await res.json();
+
+      if (res.status === 200) {
+        const { dispatch } = thunkAPI;
+
+        dispatch(getMap());
+
+        return data;
+      }
+      return thunkAPI.rejectWithValue(data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
   try {
-    const res = await fetch(urls.me, {
+    const res = await fetch(urlsApi.map, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -171,9 +205,19 @@ const mapSlice = createSlice({
       })
       .addCase(getMap.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.randomPoints = action.payload;
       })
       .addCase(getMap.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(setRemoveOwnCity.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(setRemoveOwnCity.fulfilled, (state) => {
+        state.loading = false;
+        state.registered = true;
+      })
+      .addCase(setRemoveOwnCity.rejected, (state) => {
         state.loading = false;
       });
   },

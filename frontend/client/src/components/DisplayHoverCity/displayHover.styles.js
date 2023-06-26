@@ -20,6 +20,7 @@ export const StyledDisplayUl = styled.ul`
     display: inline-block;
     text-align: left;
   }
+  font-size: 12px;
 `;
 
 export const StyledInformation = styled.li`
@@ -28,12 +29,15 @@ export const StyledInformation = styled.li`
 
 export const StyledTitle = styled.span`
   color: ${(props) => props.theme.view.white};
+  font-size: 15px;
 `;
 
 export const StyledSubTitle = styled.span`
   color: ${(props) => props.theme.view.white};
+  font-size: 12px;
 `;
 
 export const StyledDescription = styled.span`
   color: ${(props) => props.theme.view.white};
+  font-size: 12px;
 `;

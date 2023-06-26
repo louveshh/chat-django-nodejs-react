@@ -1,22 +1,22 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response } from "express";
 
-const _importDynamic = new Function('modulePath', 'return import(modulePath)');
+const _importDynamic = new Function("modulePath", "return import(modulePath)");
 
 export const fetch = async function (...args: any) {
-    const {default: fetch} = await _importDynamic('node-fetch');
-    return fetch(...args);
-}
+  const { default: fetch } = await _importDynamic("node-fetch");
+  return fetch(...args);
+};
 
 const router = express.Router();
 
-router.get('/api/users/me', async (req: Request, res: Response) => {
+router.get("/api/users/me", async (req: Request, res: Response) => {
   const { access } = req.cookies;
 
   try {
     const apiRes = await fetch(`${process.env.API_URL}/api/users/me`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `Bearer ${access}`,
       },
     });
@@ -26,7 +26,7 @@ router.get('/api/users/me', async (req: Request, res: Response) => {
     return res.status(apiRes.status).json(data);
   } catch (err) {
     return res.status(500).json({
-      error: 'Something went wrong when trying to retrieve user',
+      error: "Something went wrong when trying to retrieve user",
     });
   }
 });

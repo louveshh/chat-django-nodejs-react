@@ -11,6 +11,8 @@ import meRoute from "./routes/auth/me";
 import registerRoute from "./routes/auth/register";
 import verifyRoute from "./routes/auth/verify";
 import addRoute from "./routes/map/add";
+import mapRoute from "./routes/map/map";
+import removeRoute from "./routes/map/remove";
 
 const app = express();
 
@@ -23,6 +25,8 @@ app.use(meRoute);
 app.use(registerRoute);
 app.use(verifyRoute);
 app.use(addRoute);
+app.use(mapRoute);
+app.use(removeRoute);
 
 app.use(express.static("client/build"));
 app.get("*", (req: Request, res: Response) => {

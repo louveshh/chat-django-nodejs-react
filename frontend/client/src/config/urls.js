@@ -5,7 +5,7 @@ export const urls = {
   verify: 'users/verify',
   logout: 'users/logout',
   add: 'users/add',
-  edit: 'users/edit',
+  remove: 'users/remove',
   map: 'users/map',
 };
 
@@ -16,6 +16,6 @@ export const urlsApi = {
   verify: 'api/users/verify',
   logout: 'api/users/logout',
   add: 'api/users/add',
-  edit: 'api/users/edit',
+  remove: 'api/users/remove',
   map: 'api/users/map',
 };

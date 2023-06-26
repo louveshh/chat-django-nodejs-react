@@ -53,19 +53,16 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
 
 class City(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         UserAccount, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, unique=True)
-    x = models.IntegerField()
-    y = models.IntegerField()
+    x = models.FloatField()
+    y = models.FloatField()
     weight = models.IntegerField()
     biome_name = models.CharField(max_length=255)
     selected_start = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.email}, \
-        {self.name}"
-
-
-class Cities(models.Model):
-    cities = models.ManyToManyField(City)
+        {self.name}, \
+        {self.biome_name}"

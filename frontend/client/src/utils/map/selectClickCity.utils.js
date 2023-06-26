@@ -29,6 +29,8 @@ export const selectClickCity = (
     });
     return;
   }
+  const roundX = x.toFixed(1);
+  const roundY = y.toFixed(1);
 
-  setOwnSelectedCity({ x, y, weight, selectedStart, name });
+  setOwnSelectedCity({ x: roundX, y: roundY, weight, selectedStart, name });
 };

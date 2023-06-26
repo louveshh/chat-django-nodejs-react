@@ -9,27 +9,13 @@ export const fetch = async function (...args: any) {
 
 const router = express.Router();
 
-router.post("/api/users/add", async (req: Request, res: Response) => {
-  const { access } = req.cookies;
-  const { email, x, y, name, weight } = req.body;
-
-  const body = JSON.stringify({
-    email,
-    x,
-    y,
-    name,
-    weight,
-  });
-
+router.get("/api/users/map", async (req: Request, res: Response) => {
   try {
-    const apiRes = await fetch(`${process.env.API_URL}/api/users/add`, {
-      method: "POST",
+    const apiRes = await fetch(`${process.env.API_URL}/api/users/map`, {
+      method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${access}`,
       },
-      body,
     });
 
     let data = null;
@@ -43,7 +29,7 @@ router.post("/api/users/add", async (req: Request, res: Response) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({
-      error: "Something went wrong adding a city",
+      error: "Something went wrong when trying to retrieve map",
     });
   }
 });

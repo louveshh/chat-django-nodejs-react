@@ -12,13 +12,13 @@ const DisplayHoverCity = () => {
   const { newCityInfo } = useDisplayHoverCity();
   return (
     <>
-      <StyledSubTitle>Last Hovered City:</StyledSubTitle>
+      <StyledTitle>Last Hovered City:</StyledTitle>
       <StyledDisplayWrapper>
         <StyledDisplayUl>
           {newCityInfo &&
             [...newCityInfo].map(([key, value]) => (
               <StyledInformation key={key}>
-                <StyledTitle>{key}</StyledTitle>
+                <StyledSubTitle>{key}</StyledSubTitle>
                 <StyledDescription>{value}</StyledDescription>
               </StyledInformation>
             ))}

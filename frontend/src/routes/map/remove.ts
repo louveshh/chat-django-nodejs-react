@@ -9,16 +9,11 @@ export const fetch = async function (...args: any) {
 
 const router = express.Router();
 
-router.post("/api/users/add", async (req: Request, res: Response) => {
-  const { access } = req.cookies;
-  const { email, x, y, name, weight } = req.body;
+router.post("/api/users/remove", async (req: Request, res: Response) => {
+  const { email } = req.body;
 
   const body = JSON.stringify({
     email,
-    x,
-    y,
-    name,
-    weight,
   });
 
   try {
@@ -27,7 +22,6 @@ router.post("/api/users/add", async (req: Request, res: Response) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${access}`,
       },
       body,
     });

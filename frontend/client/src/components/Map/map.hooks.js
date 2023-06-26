@@ -6,8 +6,8 @@ import {
   setOwnSelectedCity,
   setRandomPoints,
   setMouseMoveCity,
+  getMap,
 } from 'store/slices/map';
-import { tempRandom } from 'utils/map/tempRandom.utils';
 import { getCanvasContext } from 'utils/map/getCanvasContext.utils';
 import { clearMap } from 'utils/map/common/clearMap.utils';
 import { drawCities } from 'utils/map/common/drawCities.utils';
@@ -37,13 +37,6 @@ export const useMap = (canvasRef) => {
     dispatch(setOwnSelectedCity(newPoint));
   };
 
-  const updateRandomPoints = useCallback(
-    (payload) => {
-      dispatch(setRandomPoints(payload));
-    },
-    [dispatch]
-  );
-
   const updateMouseMoveCity = useCallback(
     (payload) => {
       dispatch(setMouseMoveCity(payload));
@@ -52,9 +45,9 @@ export const useMap = (canvasRef) => {
   );
 
   useEffect(() => {
-    tempRandom(updateRandomPoints);
+    dispatch(getMap());
     return () => {};
-  }, [updateRandomPoints]);
+  }, [dispatch]);
 
   useEffect(() => {
     const { context } = getCanvasContext(canvasRef);
@@ -131,7 +124,7 @@ export const useMap = (canvasRef) => {
     if (activeMode === mode.add) {
       const { canvas, context } = getCanvasContext(canvasRef);
       clearMap(canvas, context);
-      drawClickedCity(theme, context, ownSelectedCity, false);
+      drawClickedCity(theme, context, ownSelectedCity, true);
       drawCities(theme, context, randomPoints, false);
     }
     return () => {};
