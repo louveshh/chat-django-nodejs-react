@@ -10,12 +10,13 @@ import {
   setAlgorithm as setAlgorithmMap,
   setOwnSelectedCity,
   setZeroStartCityFiltered,
+  getMap,
 } from 'store/slices/map';
 import {
   setAlgorithm as setAlgorithmBoard,
   setSelectedOption,
 } from 'store/slices/board';
-import { configBoard } from 'config/config';
+import { configBoard, configPanel } from 'config/config';
 import { addBorders } from 'utils/board/common/addBorders.util';
 
 export const useToggleMode = () => {
@@ -75,8 +76,14 @@ export const useToggleMode = () => {
     },
     [dispatch]
   );
+  const updateMap = useCallback(() => {
+    dispatch(getMap());
+  }, [dispatch]);
 
   const handleToggle = (buttonId) => {
+    if (configPanel.mapModes.includes(activeMode)) {
+      updateMap();
+    }
     addBorders();
     updateToggleActiveMode(buttonId);
     updateClickPossible(false);

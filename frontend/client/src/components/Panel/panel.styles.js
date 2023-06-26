@@ -23,7 +23,7 @@ export const LeftPanel = styled.div`
   min-height: ${configDisplay.DISPLAY_SIZE}px;
   margin: 0px 5px;
   padding: 0px 10px;
-  border 1px solid ${(props) => props.theme.view.primary};
+  border 1px solid ${(props) => props.theme.view.white};;
   border-radius: 5px;
   @media (max-width: 1150px) {
     order: 2;
@@ -44,10 +44,10 @@ export const RightPanel = styled.div`
   flex-flow: column;
   align-self: start;
   min-height: ${configDisplay.DISPLAY_SIZE}px;
-  border 1px solid ${(props) => props.theme.view.primary};
+  border 1px solid ${(props) => props.theme.view.white};;
   border-radius: 5px;
   margin: 0px 10px 10px 0px;
-  padding: 0px 10px;
+  padding: 10px;
 
   @media (max-width: 1150px) {
     align-self: center;
@@ -55,7 +55,7 @@ export const RightPanel = styled.div`
     align-items: center;
     width: 50%;
     min-height: ${configDisplay.RIGHT_PANEL_SCALED}px;
-    padding: 0 20px;
+    padding: 10px;
     margin: 0px 0px 20px 0px;
     flex-grow: 1;
   }

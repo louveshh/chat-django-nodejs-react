@@ -1,21 +1,35 @@
+import CommonLeftArrow from 'components/common/CommonLeftArrow/CommonLeftArrow.component';
+import CommonRightArrow from 'components/common/CommonRightArrow/CommonRightArrow.component';
 import { usePaginationCities } from './paginationCities.hooks';
 import {
   StyledWrapper,
   StyledTitle,
-  StyledDisplayUl,
   StyledInformation,
+  StyledButton,
+  StyledPaginationWrapper,
+  StyledPageInfo,
 } from './paginationCities.styles';
 
 const PaginationCities = () => {
-  const {} = usePaginationCities();
+  const { newBiomes, newPage, newTotal, handlePageUp, handlePageDown } =
+    usePaginationCities();
   return (
     <>
-      <StyledTitle>xd</StyledTitle>
+      <StyledTitle>Biomes Backend Pagination:</StyledTitle>
       <StyledWrapper>
-        <StyledDisplayUl>
-          <StyledInformation>1</StyledInformation>
-          <StyledInformation>2</StyledInformation>
-        </StyledDisplayUl>
+        {newBiomes &&
+          newBiomes.map((item) => (
+            <StyledInformation key={item}>{item}</StyledInformation>
+          ))}
+        <StyledPaginationWrapper>
+          <StyledButton onClick={handlePageDown}>
+            <CommonLeftArrow />
+          </StyledButton>
+          <StyledPageInfo>{`Page: ${newPage} / ${newTotal}`}</StyledPageInfo>
+          <StyledButton onClick={handlePageUp}>
+            <CommonRightArrow />
+          </StyledButton>
+        </StyledPaginationWrapper>
       </StyledWrapper>
     </>
   );

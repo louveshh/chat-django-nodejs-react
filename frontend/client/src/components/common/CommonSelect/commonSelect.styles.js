@@ -3,7 +3,7 @@ import Select, { components } from 'react-select';
 
 export const StyledSelect = styled(Select)`
   height: 30px;
-  margin-bottom: 20px;
+  margin: 20px 0px;
   @media (max-width: 1150px) {
     width: 80% !important;
   }

@@ -3,14 +3,15 @@ import DisplayHoverCity from 'components/DisplayHoverCity/DisplayHoverCity';
 import PaginationCities from 'components/PaginationCities/PaginationCities.component';
 import CommonBar from 'components/common/CommonBar/CommonBar.component';
 import CommonInput from 'components/common/CommonInput/CommonInput.component';
-import { StyledForm } from './panelAdd.styles';
+import { StyledForm, StyledDevider } from './panelAdd.styles';
 import { usePanelAdd } from './panelAdd.hooks';
 
 const PanelAdd = () => {
-  const { t, handleBar, handleInput, onSubmit } = usePanelAdd();
+  const { t, handleBar, handleInput, onSubmitAdd, onSubmitRemove } =
+    usePanelAdd();
   return (
     <>
-      <StyledForm onSubmit={onSubmit}>
+      <StyledForm onSubmit={onSubmitAdd}>
         <CommonButton type="submit" disabled={null}>
           Add City
         </CommonButton>
@@ -31,8 +32,15 @@ const PanelAdd = () => {
           defaultValue={0}
         />
       </StyledForm>
-
+      <StyledDevider />
+      <StyledForm onSubmit={onSubmitRemove}>
+        <CommonButton type="submit" disabled={null}>
+          Remove City
+        </CommonButton>
+      </StyledForm>
+      <StyledDevider />
       <DisplayHoverCity />
+      <StyledDevider />
       <PaginationCities />
     </>
   );

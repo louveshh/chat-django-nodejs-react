@@ -1,5 +1,5 @@
 import { mode } from 'config/config';
-import { useToggleMode } from './toogleMode.hooks';
+import { useToggleMode } from './toggleMode.hooks';
 import {
   ToggleContainer,
   ToggleWrapper,

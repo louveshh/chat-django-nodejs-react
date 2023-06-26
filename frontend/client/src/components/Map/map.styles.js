@@ -53,6 +53,7 @@ export const CanvasMap = styled.canvas`
   position: absolute;
   top: 0%;
   transform: translate(0%, 0%);
+  cursor: pointer;
   ${(props) => {
     if (props.mode !== 'combo') {
       return `

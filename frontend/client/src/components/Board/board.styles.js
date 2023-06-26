@@ -31,6 +31,7 @@ export const GridContainer = styled.div`
   width: ${configDisplay.DISPLAY_SIZE}px;
   height: ${configDisplay.DISPLAY_SIZE}px;
   display: grid;
+  cursor: pointer;
   grid-template-columns: repeat(
     ${configDisplay.AMOUNT_OF_CELLS},
     ${configDisplay.NODE_SIZE()}px

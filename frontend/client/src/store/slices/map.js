@@ -18,7 +18,51 @@ const initialState = {
   clickPossible: false,
   algorithm: '',
   mouseMoveCity: null,
+  biomes: null,
 };
+
+export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
+  try {
+    const res = await fetch(urlsApi.map, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      return data;
+    }
+    return thunkAPI.rejectWithValue(data);
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response.data);
+  }
+});
+
+export const getBiomes = createAsyncThunk(
+  urls.biomes,
+  async (page, thunkAPI) => {
+    try {
+      const res = await fetch(`${urlsApi.biomes}?page=${page}`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      const data = await res.json();
+
+      if (res.status === 200) {
+        return data;
+      }
+      return thunkAPI.rejectWithValue(data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const setAddOwnCity = createAsyncThunk(
   urls.add,
@@ -89,26 +133,6 @@ export const setRemoveOwnCity = createAsyncThunk(
     }
   }
 );
-
-export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
-  try {
-    const res = await fetch(urlsApi.map, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-      },
-    });
-
-    const data = await res.json();
-
-    if (res.status === 200) {
-      return data;
-    }
-    return thunkAPI.rejectWithValue(data);
-  } catch (err) {
-    return thunkAPI.rejectWithValue(err.response.data);
-  }
-});
 
 const mapSlice = createSlice({
   name: 'map',
@@ -187,6 +211,9 @@ const mapSlice = createSlice({
     setMouseMoveCity: (state, action) => {
       state.mouseMoveCity = action.payload;
     },
+    setPage: (state, action) => {
+      state.page = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -200,6 +227,16 @@ const mapSlice = createSlice({
       .addCase(setAddOwnCity.rejected, (state) => {
         state.loading = false;
       })
+      .addCase(setRemoveOwnCity.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(setRemoveOwnCity.fulfilled, (state) => {
+        state.loading = false;
+        state.registered = true;
+      })
+      .addCase(setRemoveOwnCity.rejected, (state) => {
+        state.loading = false;
+      })
       .addCase(getMap.pending, (state) => {
         state.loading = true;
       })
@@ -210,14 +247,14 @@ const mapSlice = createSlice({
       .addCase(getMap.rejected, (state) => {
         state.loading = false;
       })
-      .addCase(setRemoveOwnCity.pending, (state) => {
+      .addCase(getBiomes.pending, (state) => {
         state.loading = true;
       })
-      .addCase(setRemoveOwnCity.fulfilled, (state) => {
+      .addCase(getBiomes.fulfilled, (state, action) => {
         state.loading = false;
-        state.registered = true;
+        state.biomes = action.payload;
       })
-      .addCase(setRemoveOwnCity.rejected, (state) => {
+      .addCase(getBiomes.rejected, (state) => {
         state.loading = false;
       });
   },

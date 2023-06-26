@@ -5,8 +5,10 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from .serializers import UserCreateSerializer, UserSerializer,\
-    AddCitySerializer, RemoveCitySerializer, CitySerializer
-from .models import City, UserAccount
+    AddCitySerializer, RemoveCitySerializer, CitySerializer, BiomesSerializer
+from .models import City
+from django.core.paginator import Paginator
+import math
 
 
 User = get_user_model()
@@ -48,7 +50,6 @@ class AddMapView(APIView):
         except serializers.ValidationError as e:
             return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            print('here?')
             return Response({'error': e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         city = serializer.create(serializer.validated_data)
@@ -75,7 +76,25 @@ class RemoveMapView(APIView):
         except serializers.ValidationError as e:
             return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({'error': 'An error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': e.detail}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         serializer.remove(serializer.validated_data)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class BiomesView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        biomes = City.objects.exclude(biome_name__isnull=True).order_by('biome_name').values_list(
+            'biome_name', flat=True).distinct()
+
+        paginator = Paginator(biomes, 2)
+        page_number = request.query_params.get(
+            'page', 2)  # Set default page number to 1
+        page_obj = paginator.get_page(page_number)
+        output = list(page_obj)
+
+        total = math.ceil(biomes.count() / 2)
+
+        return Response({'name': output, 'total': total, 'page': page_number}, status=status.HTTP_200_OK)

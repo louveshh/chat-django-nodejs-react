@@ -1,9 +1,13 @@
 import { useTranslation } from 'react-i18next';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setAddOwnCity, setOwnSelectedCity } from 'store/slices/map';
+import {
+  setAddOwnCity,
+  setOwnSelectedCity,
+  setRemoveOwnCity,
+} from 'store/slices/map';
 
 export const usePanelAdd = () => {
   const { t } = useTranslation();
@@ -18,6 +22,13 @@ export const usePanelAdd = () => {
     },
     [dispatch]
   );
+
+  const updateRemoveOwnCity = useCallback(
+    (payload) => {
+      dispatch(setRemoveOwnCity(payload));
+    },
+    [dispatch]
+  );
   const updateOwnSelectedCity = useCallback(
     (payload) => {
       dispatch(setOwnSelectedCity(payload));
@@ -25,30 +36,52 @@ export const usePanelAdd = () => {
     [dispatch]
   );
 
-  const handleInput = (event) => {
-    const name = event.target.value;
-    const newOwnSelectedCity = { ...ownSelectedCity, name };
-    updateOwnSelectedCity(newOwnSelectedCity);
-  };
+  const handleInput = useCallback(
+    (event) => {
+      const name = event.target.value;
+      const newOwnSelectedCity = { ...ownSelectedCity, name };
+      updateOwnSelectedCity(newOwnSelectedCity);
+    },
+    [ownSelectedCity, updateOwnSelectedCity]
+  );
 
-  const handleBar = (event) => {
-    const barValue = parseFloat(event.target.value);
-    const newOwnSelectedCity = { ...ownSelectedCity, weight: barValue };
-    updateOwnSelectedCity(newOwnSelectedCity);
-  };
+  const handleBar = useCallback(
+    (event) => {
+      const barValue = parseFloat(event.target.value);
+      const newOwnSelectedCity = { ...ownSelectedCity, weight: barValue };
+      updateOwnSelectedCity(newOwnSelectedCity);
+    },
+    [ownSelectedCity, updateOwnSelectedCity]
+  );
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (!ownSelectedCity) {
-      return;
-    }
-    if (!isAuthenticated) {
-      // notify auth
-    }
-    const { email } = user;
-    const { x, y, weight, name } = ownSelectedCity;
-    updateAddOwnCity({ email, x, y, weight, name });
-  };
+  const onSubmitAdd = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!ownSelectedCity) {
+        return;
+      }
+      if (!isAuthenticated) {
+        // notify auth
+      }
+      const { email } = user;
+      const { x, y, weight, name } = ownSelectedCity;
+      updateAddOwnCity({ email, x, y, weight, name });
+    },
+    [isAuthenticated, ownSelectedCity, updateAddOwnCity, user]
+  );
 
-  return { t, handleBar, handleInput, onSubmit };
+  const onSubmitRemove = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      if (!isAuthenticated) {
+        // notify auth
+      }
+      const { email } = user;
+      updateRemoveOwnCity({ email });
+    },
+    [isAuthenticated, updateRemoveOwnCity, user]
+  );
+
+  return { t, handleBar, handleInput, onSubmitAdd, onSubmitRemove };
 };

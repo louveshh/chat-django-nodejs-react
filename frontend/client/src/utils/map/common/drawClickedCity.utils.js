@@ -15,8 +15,8 @@ export const drawClickedCity = (
     context.fillStyle = theme.map.text;
     context.fillText(
       selectPointClick.weight.toString(),
-      selectPointClick.x + 7,
-      selectPointClick.y + 7
+      Number(selectPointClick.x) - 5,
+      Number(selectPointClick.y) - 10
     );
   }
   context.beginPath();

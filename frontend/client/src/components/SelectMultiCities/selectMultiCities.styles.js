@@ -6,7 +6,7 @@ export const CustomMultiSelect = styled(Select)`
   @media (max-width: 1150px) {
     width: 100% !important;
   }
-  margin-bottom: 2rem;
+  margin: 20px 0px 20px 0px;
 `;
 
 export const CustomMenu = styled(components.Menu)`

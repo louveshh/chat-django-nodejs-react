@@ -45,11 +45,6 @@ export const useMap = (canvasRef) => {
   );
 
   useEffect(() => {
-    dispatch(getMap());
-    return () => {};
-  }, [dispatch]);
-
-  useEffect(() => {
     const { context } = getCanvasContext(canvasRef);
     context.lineJoin = configMap.context.lineJoin;
     context.lineCap = configMap.context.lineCap;

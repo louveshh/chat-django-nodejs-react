@@ -90,7 +90,7 @@ class AddCitySerializer(serializers.ModelSerializer):
 
 
 class CitySerializer(serializers.ModelSerializer):
-    user = serializers.EmailField(source='user.email', read_only=True)
+    user = serializers.StringRelatedField(source='user.email', read_only=True)
 
     class Meta:
         model = City
@@ -102,16 +102,33 @@ class RemoveCitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = City
-        fields = ('email', 'name', 'x', 'y', 'weight')
+        fields = ('email',)
 
     def validate(self, data):
         email = data.get('email')
-        if not City.objects.filter(user=UserAccount.objects.filter(email=email).exists()):
-            raise serializers.ValidationError("City does not exists")
+        if not email:
+            raise serializers.ValidationError("Missing data - Email")
+
+        user = UserAccount.objects.filter(email=email).first()
+        if not user:
+            raise serializers.ValidationError("User does not exist")
+
+        city = City.objects.filter(user=user)
+        if not city.exists():
+            raise serializers.ValidationError("City does not exist")
+
         return data
 
-    def create(self, validated_data):
-        city = City.objects.filter(
-            user=UserAccount.objects.filter(email=validated_data["email"]))
+    def remove(self, validated_data):
+        email = validated_data["email"]
+        user = UserAccount.objects.get(email=email)
+        city = City.objects.filter(user=user)
         city.delete()
         return city
+
+
+class BiomesSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = City
+        fields = ('biome_name', )

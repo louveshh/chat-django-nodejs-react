@@ -5,12 +5,12 @@ export const StyledButton = styled.button`
   position: relative;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
-  margin: 20px 0px;
   background: ${(props) => props.theme.button.background};
   overflow: hidden;
   width: 100%;
+  margin: 5px 0px;
 
   @media (max-width: 1150px) {
     max-width: 150px;

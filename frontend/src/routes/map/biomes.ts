@@ -9,24 +9,18 @@ export const fetch = async function (...args: any) {
 
 const router = express.Router();
 
-router.post("/api/users/remove", async (req: Request, res: Response) => {
-  const { access } = req.cookies;
-  const { email } = req.body;
-
-  const body = JSON.stringify({
-    email,
-  });
-
+router.get("/api/users/biomes", async (req: Request, res: Response) => {
   try {
-    const apiRes = await fetch(`${process.env.API_URL}/api/users/remove`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${access}`,
-      },
-      body,
-    });
+    const page = req.query.page || 1;
+    const apiRes = await fetch(
+      `${process.env.API_URL}/api/users/biomes?page=${page}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
 
     let data = null;
     try {
@@ -39,7 +33,7 @@ router.post("/api/users/remove", async (req: Request, res: Response) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({
-      error: "Something went wrong removing a city",
+      error: "Something went wrong when trying to retrieve biomes",
     });
   }
 });

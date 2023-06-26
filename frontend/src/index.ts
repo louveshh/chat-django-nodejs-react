@@ -13,6 +13,7 @@ import verifyRoute from "./routes/auth/verify";
 import addRoute from "./routes/map/add";
 import mapRoute from "./routes/map/map";
 import removeRoute from "./routes/map/remove";
+import biomesRoute from "./routes/map/biomes";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(verifyRoute);
 app.use(addRoute);
 app.use(mapRoute);
 app.use(removeRoute);
+app.use(biomesRoute);
 
 app.use(express.static("client/build"));
 app.get("*", (req: Request, res: Response) => {
