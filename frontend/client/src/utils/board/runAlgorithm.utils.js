@@ -31,7 +31,7 @@ export const runAlgorithm = (
             () => {
               updateToggleRunning();
             },
-            currentMode === mode.combo ? i * 40 : i * 50
+            currentMode === mode.combo ? i * 0 : i * 50
           );
         } else {
           setTimeout(

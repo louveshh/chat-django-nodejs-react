@@ -13,6 +13,7 @@ export const StyledWrapper = styled.div`
     text-align: center;
   }
   color: ${(props) => props.theme.view.white};
+  font-size: 12px;
 `;
 
 export const StyledInformation = styled.div`
@@ -27,6 +28,9 @@ export const StyledPaginationWrapper = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.view.white};
 `;
 export const StyledPageInfo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 80%;
   text-align: center;
   flex-grow: 1;

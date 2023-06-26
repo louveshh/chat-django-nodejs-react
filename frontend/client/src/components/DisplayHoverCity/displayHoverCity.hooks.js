@@ -10,6 +10,7 @@ export const useDisplayHoverCity = () => {
     const city = new Map();
     city.set('Name: ', mouseMoveCity.name);
     city.set('User: ', mouseMoveCity.user);
+    city.set('Biome: ', mouseMoveCity.biome_name);
     city.set('Size: ', mouseMoveCity.weight);
     city.set('X-coordinate: ', mouseMoveCity.x.toFixed(1));
     city.set('Y-coordinate: ', mouseMoveCity.y.toFixed(1));

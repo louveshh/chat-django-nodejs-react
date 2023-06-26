@@ -76,7 +76,7 @@ class RemoveMapView(APIView):
         except serializers.ValidationError as e:
             return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({'error': e.detail}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         serializer.remove(serializer.validated_data)
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -91,7 +91,7 @@ class BiomesView(APIView):
 
         paginator = Paginator(biomes, 2)
         page_number = request.query_params.get(
-            'page', 2)  # Set default page number to 1
+            'page', 1)
         page_obj = paginator.get_page(page_number)
         output = list(page_obj)
 

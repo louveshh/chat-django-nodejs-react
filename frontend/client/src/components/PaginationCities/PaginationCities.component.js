@@ -17,10 +17,12 @@ const PaginationCities = () => {
     <>
       <StyledTitle>Biomes Backend Pagination:</StyledTitle>
       <StyledWrapper>
-        {newBiomes &&
-          newBiomes.map((item) => (
-            <StyledInformation key={item}>{item}</StyledInformation>
-          ))}
+        <StyledInformation>
+          {newBiomes?.length > 0 ? newBiomes[0] : '-'}
+        </StyledInformation>
+        <StyledInformation>
+          {newBiomes?.length > 1 ? newBiomes[1] : '-'}
+        </StyledInformation>
         <StyledPaginationWrapper>
           <StyledButton onClick={handlePageDown}>
             <CommonLeftArrow />

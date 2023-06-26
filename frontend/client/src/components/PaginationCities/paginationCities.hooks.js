@@ -37,7 +37,7 @@ export const usePaginationCities = () => {
     updateBiomes(1);
   }, [updateBiomes]);
 
-  const newBiomes = biomes ? biomes.name : null;
+  const newBiomes = biomes ? biomes.name : [];
   const newTotal = biomes ? biomes.total : 1;
   const newPage = biomes ? biomes.page : 1;
 

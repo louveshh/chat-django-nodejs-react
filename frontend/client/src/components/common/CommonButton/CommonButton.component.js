@@ -2,7 +2,7 @@ import { StyledText, StyledButton, StyledHover } from './commonButton.styles';
 import { useCommonButton } from './commonButton.hooks';
 
 const CommonButton = ({
-  inProgress,
+  pathingInProgress,
   onClick,
   disabled,
   children,
@@ -18,7 +18,7 @@ const CommonButton = ({
       aria-label={aria}
     >
       <StyledHover disabled={disabled}>
-        {inProgress && renderLoading()}
+        {pathingInProgress && renderLoading()}
         <StyledText>{children}</StyledText>
       </StyledHover>
     </StyledButton>
