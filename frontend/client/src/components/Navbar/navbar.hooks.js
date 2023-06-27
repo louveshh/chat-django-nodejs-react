@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { logout } from 'store/slices/user';
@@ -23,5 +23,13 @@ export const useNavbar = () => {
       navigate(configPaths.home);
     }, 3000);
   };
-  return { isAuthenticated, t, onClick };
+
+  const location = useLocation();
+  console.log(location);
+
+  const isActive = (payload) => {
+    console.log(payload, location.pathname);
+    return location.pathname === payload;
+  };
+  return { isAuthenticated, isActive, t, onClick };
 };

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { configDisplay } from 'config/config';
 
 export const WrapperNavbar = styled.nav`
   width: 100%;
@@ -13,6 +14,7 @@ export const WrapperNavbar = styled.nav`
   @media (max-width: 650px) {
     background-color: ${(props) => props.theme.view.secondary};
   }
+  margin-bottom: 20px;
 `;
 
 export const TrapezoidNavbar = styled.div`
@@ -22,7 +24,7 @@ export const TrapezoidNavbar = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 650px) {
-    scale: 0.5;
+    transform: scale(${configDisplay.SCALE});
     width: 200px;
   }
   @media (min-width: 650px) {
@@ -36,7 +38,9 @@ export const TrapezoidNavbar = styled.div`
   }
 `;
 
-export const Triangle = styled.div`
+export const StyledButton = styled.div`
+  cursor: pointer;
+  text-decoration: underline;
   display: flex;
   padding: 0px 20px 0px 20px;
   height: 100%;
@@ -44,21 +48,52 @@ export const Triangle = styled.div`
   align-items: center;
   border: 1px solid black;
 
-  &:nth-child(1) {
-    background-color: ${(props) => props.theme.view.primary};
-  }
+  background-color: ${(props) => props.theme.view.primary};
 
-  &:nth-child(2) {
-    background-color: ${(props) => props.theme.view.secondary};
-  }
+  @media (min-width: 650px) {
+    height: 50px;
+    width: 50%;
+    height: 100%;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border: unset;
 
-  &:nth-child(3) {
-    background-color: ${(props) => props.theme.view.primary};
-  }
+    left: 50%;
+    clip-path: polygon(100% 0, 0 0, 50% 100%);
 
-  &:hover {
-    background-color: ${(props) => props.theme.view.secondary2};
+    &:hover {
+      background-color: ${(props) => props.theme.view.secondary2};
+    }
   }
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  display: flex;
+  padding: 0px 20px 0px 20px;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  border: 1px solid black;
+
+  ${(props) => {
+    if (props.isActive) {
+      return `
+      cursor: not-allowed;
+      color: ${props.theme.view.white};
+      background-color:  ${props.theme.view.secondary2};
+      text-decoration: underline;
+  `;
+    }
+    return `
+      cursor: pointer;
+      color: ${props.theme.view.black};
+      background-color:  ${props.theme.view.primary};
+      text-decoration: none;
+    `;
+  }}
   @media (min-width: 650px) {
     height: 50px;
     width: 50%;
@@ -88,14 +123,4 @@ export const Triangle = styled.div`
       background-color: ${(props) => props.theme.view.secondary2};
     }
   }
-`;
-
-export const StyledButton = styled.div`
-  color: ${(props) => props.theme.view.white};
-  cursor: pointer;
-  text-decoration: underline;
-`;
-
-export const StyledNavLink = styled(NavLink)`
-  color: ${(props) => props.theme.view.white};
 `;

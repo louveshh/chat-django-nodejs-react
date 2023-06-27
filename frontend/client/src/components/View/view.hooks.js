@@ -1,9 +1,14 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getMap } from 'store/slices/map';
 
 export const useView = () => {
-  const activeMode = useSelector((state) => state.toggle.activeMode);
-
-  return { activeMode };
+  const dispatch = useDispatch();
+  const updateMap = () => {
+    dispatch(getMap());
+  };
+  useEffect(() => {
+    updateMap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 };

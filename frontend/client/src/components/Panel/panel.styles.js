@@ -11,6 +11,7 @@ export const PanelWrapper = styled.div`
     justify-content: center;
     flex-direction: column;
   }
+  margin-top: 20px;
 `;
 
 export const LeftPanel = styled.div`
@@ -27,10 +28,13 @@ export const LeftPanel = styled.div`
   border-radius: 5px;
   @media (max-width: 1150px) {
     order: 2;
-    width: 50%;
+    width: 70%;
     align-self: center;
     min-height: unset;
     margin: 0px 0px 20px 0px;
+  }
+  @media (max-width: 700px) {
+    width: 100%;
   }
 
 `;
@@ -53,7 +57,7 @@ export const RightPanel = styled.div`
     align-self: center;
     order: 3;
     align-items: center;
-    width: 50%;
+    width: 70%;
     min-height: ${configDisplay.RIGHT_PANEL_SCALED}px;
     padding: 10px;
     margin: 0px 0px 20px 0px;

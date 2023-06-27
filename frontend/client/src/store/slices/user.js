@@ -100,10 +100,6 @@ export const checkAuth = createAsyncThunk(urls.verify, async (_, thunkAPI) => {
     const data = await res.json();
 
     if (res.status === 200) {
-      const { dispatch } = thunkAPI;
-
-      dispatch(getUser());
-
       return data;
     }
     return thunkAPI.rejectWithValue(data);

@@ -1,13 +1,21 @@
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const useDisplayHoverCity = () => {
+  const { t } = useTranslation();
   const { mouseMoveCity } = useSelector((state) => state.map);
   const newCityInfo = useMemo(() => {
-    if (!mouseMoveCity) {
-      return null;
-    }
     const city = new Map();
+    if (!mouseMoveCity) {
+      city.set('Name: ', '');
+      city.set('User: ', '');
+      city.set('Biome: ', '');
+      city.set('Size: ', '');
+      city.set('X-coordinate: ', '');
+      city.set('Y-coordinate: ', '');
+      return city;
+    }
     city.set('Name: ', mouseMoveCity.name);
     city.set('User: ', mouseMoveCity.user);
     city.set('Biome: ', mouseMoveCity.biome_name);
@@ -17,5 +25,5 @@ export const useDisplayHoverCity = () => {
     return city;
   }, [mouseMoveCity]);
 
-  return { newCityInfo };
+  return { newCityInfo, t };
 };

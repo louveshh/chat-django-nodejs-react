@@ -19,13 +19,13 @@
     "label": "Add Custom Click"
   },
   "selectMapAlgorithm": {
-    "label": "Select Map Algorithm"
+    "label": "*Select Map Algorithm"
   },
   "selectBoardAlgorithm": {
-    "label": "Select Board Algorithm"
+    "label": "*Select Board Algorithm"
   },
   "selectMultiCities": {
-    "placeholder": "Select At Least Two Cities"
+    "placeholder": "*Select At Least Two Cities"
   },
 
   "barWeight": {
@@ -35,23 +35,38 @@
 
   "panelMap": {
     "runButton": "Run",
-    "clearButton": "Clear Map"
+    "clearButton": "*Clear Map"
   },
   "panelCombo": {
     "runButton": "Run",
-    "clearMapButton": "Clear Map",
-    "clearBoardButton": "Clear Board"
+    "clearMapButton": "*Clear Map",
+    "clearBoardButton": "*Clear Board"
+  },
+  "panelAdd": {
+    "addCity": "Add City",
+    "removeCity": "Remove City",
+    "hover": "Last Hovered City:",
+    "biome": "Biomes Backend Pagination:",
+    "page": "Page"
+  },
+
+  "addInputName": {
+    "label": "*Input Name of City"
+  },
+
+  "addInputWeight": {
+    "label": "*Input Weight of City"
   },
 
   "panelBoard": {
     "runButton": "Run",
-    "clearButton": "Clear Map"
+    "clearButton": "*Clear Map"
   },
 
   "navbar": {
     "login": "Login",
     "about": "About",
-    "maps": "Maps",
+    "maps": "Modes",
     "register": "Register",
     "logout": "Logout"
   },
@@ -101,6 +116,16 @@
       "p5": "Algorithm Dijkstra will omit every wall, TSG will find the shortest path in a straight line despite walls",
       "p6": "Select is draggable and sortable",
       "p7": "To Run the algorithm again you have to clean the map and clean the board"
+    },
+    "add": {
+      "p0": "This mode allows users to add their own city and explore the map",
+      "p1": "You can only add one city per account",
+      "p2": "If you want to change the position of your city, you need to remove it first",
+      "p3": "Each city can be located in a different biome",
+      "p4": "Adding a City over the see is not possible",
+      "p5": "When you hover over a city, you will receive information about that particular city",
+      "p6": "You can view all discovered biomes using the pagination component",
+      "p7": "The pagination component displays 2 biomes per page"
     }
   }
 }

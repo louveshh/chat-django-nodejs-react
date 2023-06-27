@@ -11,11 +11,11 @@ import {
 } from './paginationCities.styles';
 
 const PaginationCities = () => {
-  const { newBiomes, newPage, newTotal, handlePageUp, handlePageDown } =
+  const { newBiomes, newPage, newTotal, t, handlePageUp, handlePageDown } =
     usePaginationCities();
   return (
     <>
-      <StyledTitle>Biomes Backend Pagination:</StyledTitle>
+      <StyledTitle>{t('panelAdd.biome')}</StyledTitle>
       <StyledWrapper>
         <StyledInformation>
           {newBiomes?.length > 0 ? newBiomes[0] : '-'}
@@ -27,7 +27,9 @@ const PaginationCities = () => {
           <StyledButton onClick={handlePageDown}>
             <CommonLeftArrow />
           </StyledButton>
-          <StyledPageInfo>{`Page: ${newPage} / ${newTotal}`}</StyledPageInfo>
+          <StyledPageInfo>{`${t(
+            'panelAdd.page'
+          )} ${newPage} / ${newTotal}`}</StyledPageInfo>
           <StyledButton onClick={handlePageUp}>
             <CommonRightArrow />
           </StyledButton>

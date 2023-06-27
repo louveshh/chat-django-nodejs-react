@@ -22,9 +22,11 @@ class RegisterView(APIView):
         try:
             serializer.is_valid(raise_exception=True)
         except serializers.ValidationError as e:
-            return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
+            error_message = str(next(iter(e.detail.values()))[0])
+            return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({'error': 'An error occurred.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
         user = serializer.create(serializer.validated_data)
         user = UserSerializer(user)
         return Response(user.data, status=status.HTTP_201_CREATED)
@@ -48,9 +50,10 @@ class AddMapView(APIView):
         try:
             serializer.is_valid(raise_exception=True)
         except serializers.ValidationError as e:
-            return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
+            error_message = str(next(iter(e.detail.values()))[0])
+            return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({'error': e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         city = serializer.create(serializer.validated_data)
         return Response({'info': 'Added City :)', 'biome_name': city.biome_name}, status=status.HTTP_201_CREATED)
@@ -74,12 +77,13 @@ class RemoveMapView(APIView):
         try:
             serializer.is_valid(raise_exception=True)
         except serializers.ValidationError as e:
-            return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
+            error_message = str(next(iter(e.detail.values()))[0])
+            return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({'error': e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         serializer.remove(serializer.validated_data)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'info': 'deleted'}, status=status.HTTP_200_OK)
 
 
 class BiomesView(APIView):

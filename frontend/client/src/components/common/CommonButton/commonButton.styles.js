@@ -17,7 +17,7 @@ export const StyledButton = styled.button`
   }
 
   ${(props) => {
-    if (!props.disabled) {
+    if (!props.disabledAnimations) {
       return `
       cursor: pointer;
       `;
@@ -35,7 +35,7 @@ export const StyledButton = styled.button`
     position: absolute;
     transition: all 0.8s ease-in-out;
     ${(props) => {
-      if (!props.disabled) {
+      if (!props.disabledAnimations) {
         return `
         background: ${props.theme.button.enabled};
         `;

@@ -1,12 +1,9 @@
 import { useCallback } from 'react';
+
+import { warningManager } from 'utils/toastify/warning';
 import { StyledLoading } from './commonButton.styles';
 
-export const useCommonButton = (onClick) => {
-  const handleClick = useCallback(() => {
-    if (onClick) {
-      onClick();
-    }
-  }, [onClick]);
+export const useCommonButton = (onClick, disabled) => {
   const renderLoading = useCallback(() => {
     const spans = [];
 
@@ -15,6 +12,16 @@ export const useCommonButton = (onClick) => {
     }
     return spans;
   }, []);
+
+  const handleClick = () => {
+    if (disabled) {
+      warningManager({ render: 'Button conditions - not met' });
+      return;
+    }
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return { handleClick, renderLoading };
 };

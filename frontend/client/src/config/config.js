@@ -1,8 +1,8 @@
 // ADJUSTABLE VALUES OF CONFIG
 
 export const mode = {
-  board: 'board',
   map: 'map',
+  board: 'board',
   combo: 'combo',
   add: 'add',
 };
@@ -10,7 +10,7 @@ export const mode = {
 export const grid = {
   display: 640,
   cells: 40, // cannot be 0
-  scale: 0.4, // cannot be 0
+  scale: 0.5, // cannot be 0
 };
 export const board = {
   dijkstra: 'dijkstra',

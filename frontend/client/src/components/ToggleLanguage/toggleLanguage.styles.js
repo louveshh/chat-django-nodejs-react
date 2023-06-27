@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { configDisplay } from 'config/config';
 
 export const ToggleContainer = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ export const ToggleContainer = styled.div`
   min-width: 185px;
   margin-top: 10px;
   @media (max-width: 650px) {
-    scale: 0.5;
+    transform: scale(${configDisplay.SCALE});
     width: unset;
     min-width: 70px;
   }
@@ -20,6 +21,7 @@ export const ToggleWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
+  cursor: pointer;
 `;
 
 export const LabelWrapper = styled.div`

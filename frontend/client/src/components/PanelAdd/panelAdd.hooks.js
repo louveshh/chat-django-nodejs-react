@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { useCallback } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
+import { warningManager } from 'utils/toastify/warning';
 import {
   setAddOwnCity,
   setOwnSelectedCity,
@@ -58,10 +58,12 @@ export const usePanelAdd = () => {
     (e) => {
       e.preventDefault();
       if (!ownSelectedCity) {
+        warningManager({ render: 'Not selected any city' });
         return;
       }
       if (!isAuthenticated) {
-        // notify auth
+        warningManager({ render: 'Not logged in' });
+        return;
       }
       const { email } = user;
       const { x, y, weight, name } = ownSelectedCity;
@@ -75,7 +77,8 @@ export const usePanelAdd = () => {
       e.preventDefault();
 
       if (!isAuthenticated) {
-        // notify auth
+        warningManager({ render: 'Not logged in' });
+        return;
       }
       const { email } = user;
       updateRemoveOwnCity({ email });

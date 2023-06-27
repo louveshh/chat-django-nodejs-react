@@ -106,6 +106,7 @@ export const dark = {
     secondary3: color.blue8,
     background: color.blue5,
     white: color.white2,
+    black: color.gray1,
   },
 
   board: {

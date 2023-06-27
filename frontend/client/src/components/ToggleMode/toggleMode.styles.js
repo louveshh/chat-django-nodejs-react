@@ -16,6 +16,16 @@ export const ToggleWrapper = styled.div`
 `;
 export const ToggleStyledWrapper = styled.div`
   min-width: 100px;
+  ${(props) => {
+    if (props.checked) {
+      return `
+        cursor: not-allowed !important;
+    `;
+    }
+    return `
+    cursor: pointer;
+  `;
+  }}
 `;
 
 export const ToggleStyled = styled(CommonToggle)``;

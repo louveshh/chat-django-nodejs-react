@@ -9,10 +9,10 @@ import {
 } from './displayHover.styles';
 
 const DisplayHoverCity = () => {
-  const { newCityInfo } = useDisplayHoverCity();
+  const { newCityInfo, t } = useDisplayHoverCity();
   return (
     <>
-      <StyledTitle>Last Hovered City:</StyledTitle>
+      <StyledTitle>{t('panelAdd.hover')}</StyledTitle>
       <StyledDisplayWrapper>
         <StyledDisplayUl>
           {newCityInfo &&

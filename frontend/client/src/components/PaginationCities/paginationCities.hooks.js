@@ -1,8 +1,10 @@
 import { getBiomes } from 'store/slices/map';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 export const usePaginationCities = () => {
+  const { t } = useTranslation();
   const { biomes, loading } = useSelector((state) => state.map);
   const dispatch = useDispatch();
   const updateBiomes = useCallback(
@@ -41,5 +43,5 @@ export const usePaginationCities = () => {
   const newTotal = biomes ? biomes.total : 1;
   const newPage = biomes ? biomes.page : 1;
 
-  return { newBiomes, newPage, newTotal, handlePageUp, handlePageDown };
+  return { newBiomes, newPage, newTotal, t, handlePageUp, handlePageDown };
 };

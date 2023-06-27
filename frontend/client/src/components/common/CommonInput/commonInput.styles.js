@@ -7,6 +7,7 @@ export const StyledInput = styled.input`
 
 export const StyledLabel = styled.label`
   margin-bottom: 3px;
+  color: ${(props) => props.theme.view.white};
 `;
 
 export const StyledWrapper = styled.div`
@@ -14,4 +15,5 @@ export const StyledWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 15px 0px;
 `;

@@ -5,7 +5,6 @@ export const StyledToggle = styled(Toggle)`
   touch-action: pan-x;
   display: inline-block;
   position: relative;
-  cursor: pointer;
   background-color: transparent;
   border: 0;
   padding: 0;
@@ -17,13 +16,6 @@ export const StyledToggle = styled(Toggle)`
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   margin-bottom: 10px;
-
-  &.react-toggle--disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-    -webkit-transition: opacity 0.25s;
-    transition: opacity 0.25s;
-  }
 
   & .react-toggle-track {
     width: 50px;

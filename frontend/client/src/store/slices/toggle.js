@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { light, dark } from 'styles/theme';
 
 const initialState = {
-  activeMode: 'combo',
+  activeMode: 'map',
   theme: {
     mode: light,
     name: 'light',

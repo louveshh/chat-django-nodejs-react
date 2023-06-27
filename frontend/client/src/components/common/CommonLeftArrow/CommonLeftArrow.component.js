@@ -1,6 +1,6 @@
 const CommonLeftArrow = () => (
   <svg
-    fill="#000000"
+    fill="#cdcdcd"
     height="10px"
     width="10px"
     version="1.1"

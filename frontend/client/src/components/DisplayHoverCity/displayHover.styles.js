@@ -6,6 +6,7 @@ export const StyledDisplayWrapper = styled.div`
   @media (max-width: 1150px) {
     text-align: center;
   }
+  margin-bottom: 15px;
 `;
 
 export const StyledDisplayUl = styled.ul`

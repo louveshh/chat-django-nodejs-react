@@ -5,53 +5,55 @@ import { useNavbar } from './navbar.hooks';
 import {
   TrapezoidNavbar,
   WrapperNavbar,
-  Triangle,
   StyledButton,
   StyledNavLink,
 } from './navbar.styles';
 
 const Navbar = () => {
-  const { isAuthenticated, t, onClick } = useNavbar();
-
+  const { isAuthenticated, isActive, t, onClick } = useNavbar();
   return (
     <WrapperNavbar>
       <ToggleLanguage />
       <TrapezoidNavbar>
         {!isAuthenticated ? (
-          <Triangle>
-            <StyledNavLink to={configPaths.login}>
-              {t('navbar.login')}
-            </StyledNavLink>
-          </Triangle>
-        ) : (
-          <Triangle>
-            <StyledNavLink to={configPaths.about}>
-              {t('navbar.about')}
-            </StyledNavLink>
-          </Triangle>
-        )}
-        <Triangle>
-          <StyledNavLink to={configPaths.algorithms}>
-            {t('navbar.maps')}
+          <StyledNavLink
+            to={configPaths.login}
+            isActive={isActive(configPaths.login)}
+          >
+            {t('navbar.login')}
           </StyledNavLink>
-        </Triangle>
-        {!isAuthenticated ? (
-          <Triangle>
-            <StyledNavLink to={configPaths.register}>
-              {t('navbar.register')}
-            </StyledNavLink>
-          </Triangle>
         ) : (
-          <Triangle>
-            <StyledButton
-              onClick={onClick}
-              role="button"
-              tabIndex="0"
-              onKeyDown={() => {}}
-            >
-              {t('navbar.logout')}
-            </StyledButton>
-          </Triangle>
+          <StyledNavLink
+            to={configPaths.about}
+            isActive={isActive(configPaths.about)}
+          >
+            {t('navbar.about')}
+          </StyledNavLink>
+        )}
+
+        <StyledNavLink
+          to={configPaths.algorithms}
+          isActive={isActive(configPaths.algorithms)}
+        >
+          {t('navbar.maps')}
+        </StyledNavLink>
+
+        {!isAuthenticated ? (
+          <StyledNavLink
+            to={configPaths.register}
+            isActive={isActive(configPaths.register)}
+          >
+            {t('navbar.register')}
+          </StyledNavLink>
+        ) : (
+          <StyledButton
+            onClick={onClick}
+            role="button"
+            tabIndex="0"
+            onKeyDown={() => {}}
+          >
+            {t('navbar.logout')}
+          </StyledButton>
         )}
       </TrapezoidNavbar>
       <ToggleTheme />

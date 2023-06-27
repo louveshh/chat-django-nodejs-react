@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { configDisplay } from 'config/config';
 import { urls, urlsApi } from 'config/urls';
+import { LoadingManager } from 'utils/toastify/loading';
+import { configPaths } from 'config/paths';
+import { logout } from './user';
 
 const initialState = {
   ownSelectedCity: {
@@ -22,6 +25,7 @@ const initialState = {
 };
 
 export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
+  const notify = new LoadingManager({ render: 'Getting cities...' });
   try {
     const res = await fetch(urlsApi.map, {
       method: 'GET',
@@ -33,10 +37,25 @@ export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
     const data = await res.json();
 
     if (res.status === 200) {
+      notify.updateLoading({
+        render: 'Success! Cities Updated',
+        type: 'success',
+        isLoading: false,
+      });
       return data;
     }
+    notify.updateLoading({
+      render: data.error,
+      type: 'error',
+      isLoading: false,
+    });
     return thunkAPI.rejectWithValue(data);
   } catch (err) {
+    notify.updateLoading({
+      render: 'error',
+      type: 'error',
+      isLoading: false,
+    });
     return thunkAPI.rejectWithValue(err.response.data);
   }
 });
@@ -44,6 +63,9 @@ export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
 export const getBiomes = createAsyncThunk(
   urls.biomes,
   async (page, thunkAPI) => {
+    const notify = new LoadingManager({
+      render: 'Getting biomes...',
+    });
     try {
       const res = await fetch(`${urlsApi.biomes}?page=${page}`, {
         method: 'GET',
@@ -55,10 +77,25 @@ export const getBiomes = createAsyncThunk(
       const data = await res.json();
 
       if (res.status === 200) {
+        notify.updateLoading({
+          render: 'Success! Biomes Updated',
+          type: 'success',
+          isLoading: false,
+        });
         return data;
       }
+      notify.updateLoading({
+        render: data.error,
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(data);
     } catch (err) {
+      notify.updateLoading({
+        render: 'error',
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
@@ -74,7 +111,9 @@ export const setAddOwnCity = createAsyncThunk(
       name,
       weight,
     });
-
+    const notify = new LoadingManager({
+      render: 'Adding own city...',
+    });
     try {
       const res = await fetch(urlsApi.add, {
         method: 'POST',
@@ -87,15 +126,41 @@ export const setAddOwnCity = createAsyncThunk(
 
       const data = await res.json();
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         const { dispatch } = thunkAPI;
-
         dispatch(getMap());
-
+        notify.updateLoading({
+          render: 'Success! City added',
+          type: 'success',
+          isLoading: false,
+        });
         return data;
       }
+      if (res.status === 401) {
+        const { dispatch } = thunkAPI;
+        dispatch(logout());
+        notify.updateLoading({
+          render: 'session ended, cookies are gone',
+          type: 'error',
+          isLoading: false,
+        });
+        setTimeout(() => {
+          window.location.href = configPaths.login;
+        }, 4000);
+        return;
+      }
+      notify.updateLoading({
+        render: data.error,
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(data);
     } catch (err) {
+      notify.updateLoading({
+        render: 'error',
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
@@ -107,7 +172,9 @@ export const setRemoveOwnCity = createAsyncThunk(
     const body = JSON.stringify({
       email,
     });
-
+    const notify = new LoadingManager({
+      render: 'Removing own city...',
+    });
     try {
       const res = await fetch(urlsApi.remove, {
         method: 'POST',
@@ -122,13 +189,40 @@ export const setRemoveOwnCity = createAsyncThunk(
 
       if (res.status === 200) {
         const { dispatch } = thunkAPI;
-
         dispatch(getMap());
+        notify.updateLoading({
+          render: 'Success! City removed',
+          type: 'success',
+          isLoading: false,
+        });
+        if (res.status === 401) {
+          const { dispatch } = thunkAPI;
+          dispatch(logout());
+          notify.updateLoading({
+            render: 'session ended, cookies are gone',
+            type: 'error',
+            isLoading: false,
+          });
+          setTimeout(() => {
+            window.location.href = configPaths.login;
+          }, 4000);
+          return;
+        }
 
         return data;
       }
+      notify.updateLoading({
+        render: data.error,
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(data);
     } catch (err) {
+      notify.updateLoading({
+        render: 'error',
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }

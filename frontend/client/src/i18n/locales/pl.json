@@ -19,13 +19,13 @@
     "label": "Dodaj własne kliknięcie"
   },
   "selectMapAlgorithm": {
-    "label": "Wybierz Algorytm Mapy"
+    "label": "*Wybierz Algorytm Mapy"
   },
   "selectBoardAlgorithm": {
-    "label": "Wybierz Algorytm Tablicy"
+    "label": "*Wybierz Algorytm Tablicy"
   },
   "selectMultiCities": {
-    "placeholder": "Wybierz Przynajmniej Dwa Miasta"
+    "placeholder": "*Wybierz Przynajmniej Dwa Miasta"
   },
 
   "barWeight": {
@@ -35,23 +35,37 @@
 
   "panelMap": {
     "runButton": "Uruchom",
-    "clearButton": "Wyczyść Mape"
+    "clearButton": "*Wyczyść Mape"
   },
   "panelCombo": {
     "runButton": "Uruchom",
-    "clearMapButton": "Wyczyść Mape",
-    "clearBoardButton": "Wyczyść Tablice"
+    "clearMapButton": "*Wyczyść Mape",
+    "clearBoardButton": "*Wyczyść Tablice"
+  },
+  "panelAdd": {
+    "addCity": "Dodaj Miasto",
+    "removeCity": "Usuń Miasto",
+    "hover": "Ostatnio Sprawdzone Miasto:",
+    "biome": "Biomy Paginacja Backend:",
+    "page": "Strona: "
   },
 
   "panelBoard": {
     "runButton": "Uruchom",
-    "clearButton": "Wyczyść Tablice"
+    "clearButton": "*Wyczyść Tablice"
+  },
+  "addInputName": {
+    "label": "*Podaj Nazwe Miasta"
+  },
+
+  "addInputWeight": {
+    "label": "*Podaj Wielkość Miasta"
   },
 
   "navbar": {
     "login": "Login",
     "about": "About",
-    "maps": "Mapy",
+    "maps": "Tryby",
     "register": "Rejestacja",
     "logout": "Wyloguj"
   },
@@ -89,7 +103,7 @@
       "p4": "Jeśli włączysz opcję 'Dodaj własne kliknięcie', możesz kliknąć na mapie i dodać swoje miasto (czerwona kropka)",
       "p5": "W algorytmie 'Sort' możesz przypisać własną wagę do klikniętego miasta (czerwona kropka)",
       "p6": "W algorytmie 'TSG', jeśli włączysz opcję 'Dodaj własne kliknięcie', będziesz mógł wybrać miasto początkowe",
-      "p7": "TSG oznacza - Algorytm Złodzieja Podróżującego (Traveling Salesman Greedy Algorithm)",
+      "p7": "TSG oznacza - Traveling Salesman Greedy Algorytm",
       "p8": "Aby ponownie uruchomić algorytm, musisz wyczyścić mapę"
     },
     "combo": {
@@ -101,6 +115,14 @@
       "p5": "Algorytm Dijkstry będzie omijał każdą ścianę, a TSG znajdzie najkrótszą ścieżkę prosto, pomimo ścian",
       "p6": "Select można przeciągać i sortować",
       "p7": "Aby ponownie uruchomić algorytm, musisz wyczyścić mapę i wyczyścić tablicę"
+    },
+    "add": {
+      "p1": "Możesz dodać tylko jedno miasto na konto",
+      "p2": "Aby zmienić położenie swojego miasta, musisz najpierw je usunąć",
+      "p3": "Każde miasto może znajdować się w innym biomie",
+      "p4": "Po najechaniu myszką na miasto otrzymasz informacje na temat tego miasta",
+      "p5": "Możesz sprawdzić wszystkie odkryte biomy za pomocą komponentu paginacji",
+      "p6": "Komponent paginacji wyświetla 2 biomy na stronę"
     }
   }
 }

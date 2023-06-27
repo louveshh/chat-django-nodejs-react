@@ -76,14 +76,8 @@ export const useToggleMode = () => {
     },
     [dispatch]
   );
-  const updateMap = useCallback(() => {
-    dispatch(getMap());
-  }, [dispatch]);
 
   const handleToggle = (buttonId) => {
-    if (configPanel.mapModes.includes(activeMode)) {
-      updateMap();
-    }
     addBorders();
     updateToggleActiveMode(buttonId);
     updateClickPossible(false);

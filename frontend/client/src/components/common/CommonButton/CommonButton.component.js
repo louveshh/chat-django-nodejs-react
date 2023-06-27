@@ -9,13 +9,13 @@ const CommonButton = ({
   aria,
   type = 'button',
 }) => {
-  const { renderLoading, handleClick } = useCommonButton(onClick);
+  const { renderLoading, handleClick } = useCommonButton(onClick, disabled);
   return (
     <StyledButton
       onClick={handleClick}
-      disabled={disabled}
       type={type}
       aria-label={aria}
+      disabledAnimations={disabled}
     >
       <StyledHover disabled={disabled}>
         {pathingInProgress && renderLoading()}

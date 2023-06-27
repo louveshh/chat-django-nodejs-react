@@ -12,18 +12,9 @@ const PanelAdd = () => {
   return (
     <>
       <StyledForm onSubmit={onSubmitAdd}>
-        <CommonButton type="submit" disabled={null}>
-          Add City
-        </CommonButton>
-        <CommonInput
-          id="input-name"
-          label={t('barWeight.name')}
-          aria="Input Name"
-          onChange={handleInput}
-        />
         <CommonBar
           id="bar-weight-add"
-          label={t('barWeight.label')}
+          label={t('addInputWeight.label')}
           aria="Input New City Weight"
           onChange={handleBar}
           min={0}
@@ -31,11 +22,21 @@ const PanelAdd = () => {
           step={1}
           defaultValue={0}
         />
+        <CommonInput
+          id="input-name"
+          label={t('addInputName.label')}
+          aria="Input Name"
+          onChange={handleInput}
+        />
+
+        <CommonButton type="submit" disabled={null}>
+          {t('panelAdd.addCity')}
+        </CommonButton>
       </StyledForm>
       <StyledDevider />
       <StyledForm onSubmit={onSubmitRemove}>
         <CommonButton type="submit" disabled={null}>
-          Remove City
+          {t('panelAdd.removeCity')}
         </CommonButton>
       </StyledForm>
       <StyledDevider />
