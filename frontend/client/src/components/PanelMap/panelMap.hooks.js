@@ -27,7 +27,7 @@ export const usePanelMap = (canvasRef) => {
 
   const {
     ownSelectedCity,
-    randomPoints,
+    cityPoints,
     pathingInProgress,
     toClear,
     clickPossible,
@@ -91,7 +91,7 @@ export const usePanelMap = (canvasRef) => {
       canvas,
       context,
       ownSelectedCity,
-      randomPoints,
+      cityPoints,
       clickPossible,
       updatePathingInProgress,
       updateClearState
@@ -105,7 +105,7 @@ export const usePanelMap = (canvasRef) => {
     const { canvas, context } = getCanvasContext(canvasRef);
     calculateSortedPath(
       theme,
-      randomPoints,
+      cityPoints,
       ownSelectedCity,
       clickPossible,
       canvas,
@@ -126,7 +126,7 @@ export const usePanelMap = (canvasRef) => {
       context,
       clickPossible,
       ownSelectedCity,
-      randomPoints,
+      cityPoints,
       clearMap,
       updatePathingInProgress,
       drawClickedCity,

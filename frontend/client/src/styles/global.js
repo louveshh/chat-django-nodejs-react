@@ -16,10 +16,8 @@ export default createGlobalStyle`
   html, body, #root {
     min-height:100%;
     height: 100%;
-    
-    @media (max-width: 700px) {
-      min-height:unset;
-    }
+    overflow: auto;
+
   }
 
 

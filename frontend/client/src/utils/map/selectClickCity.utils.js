@@ -7,14 +7,14 @@ export const selectClickCity = (
   event,
   setOwnSelectedCity,
   ownSelectedCity,
-  randomPoints
+  cityPoints
 ) => {
   const canvas = canvasRef.current;
   const rect = canvas.getBoundingClientRect();
   const { x, y } = isInsideMap(event, rect);
 
   const { selectedStart, weight, name } = ownSelectedCity;
-  const farEnoughtNewCity = isCityFarEnough(randomPoints, x, y, 20);
+  const farEnoughtNewCity = isCityFarEnough(cityPoints, x, y, 20);
 
   if (farEnoughtNewCity) {
     warningManager({ render: 'Too close to the next city!' });

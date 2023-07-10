@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import {
   setOwnSelectedCityZero,
-  setRandomPointsZero,
+  setcityPointsZero,
   setToggleClickPossible,
 } from 'store/slices/map';
 import { map } from 'config/config';
@@ -18,8 +18,8 @@ export const useToggleCLick = () => {
     dispatch(setToggleClickPossible());
   }, [dispatch]);
 
-  const updateRandomPointsZero = useCallback(() => {
-    dispatch(setRandomPointsZero());
+  const updatecityPointsZero = useCallback(() => {
+    dispatch(setcityPointsZero());
   }, [dispatch]);
 
   const updateOwnSelectedCityZero = useCallback(
@@ -31,7 +31,7 @@ export const useToggleCLick = () => {
 
   const handleClick = () => {
     updateToggleClickPossible();
-    updateRandomPointsZero();
+    updatecityPointsZero();
     if (algorithm === map.tsg) {
       updateOwnSelectedCityZero(true);
     } else {

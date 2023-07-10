@@ -8,7 +8,7 @@ export const calculateShortestPath = (
   canvas,
   context,
   ownSelectedCity,
-  randomPoints,
+  cityPoints,
   clickPossible,
   setPathingInProgres,
   setClear
@@ -68,19 +68,16 @@ export const calculateShortestPath = (
       if (clickPossible) {
         drawClickedCity(theme, context, ownSelectedCity);
       }
-      drawCities(theme, context, randomPoints);
+      drawCities(theme, context, cityPoints);
       drawPath(theme, context, shortestPath);
-      drawTestingPathTSG(shortestPath, index, randomPoints);
+      drawTestingPathTSG(shortestPath, index, cityPoints);
       context.closePath();
 
       setTimeout(() => {
         animateStep(remainingPoints, shortestPath);
       }, 250);
     };
-    setTimeout(
-      () => drawTestingPathTSG(shortestPath, index, randomPoints),
-      250
-    );
+    setTimeout(() => drawTestingPathTSG(shortestPath, index, cityPoints), 250);
     setTimeout(() => {
       animateStep(remainingPoints, shortestPath);
     }, 500);
@@ -97,7 +94,7 @@ export const calculateShortestPath = (
     return array;
   };
 
-  const points = [...randomPoints];
+  const points = [...cityPoints];
   if (clickPossible) {
     points.unshift(ownSelectedCity);
   }

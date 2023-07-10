@@ -4,7 +4,7 @@ export const calculateRandomPath = (
   context,
   clickPossible,
   ownSelectedCity,
-  randomPoints,
+  cityPoints,
   clearMap,
   updatePathingInProgress,
   drawClickedCity,
@@ -18,11 +18,11 @@ export const calculateRandomPath = (
   if (clickPossible) {
     drawClickedCity(theme, context, ownSelectedCity);
   }
-  drawCities(theme, context, randomPoints, false);
+  drawCities(theme, context, cityPoints, false);
   drawSimplePath(
     theme,
     context,
-    randomPoints,
+    cityPoints,
     ownSelectedCity,
     clickPossible,
     updatePathingInProgress,

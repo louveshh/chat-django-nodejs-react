@@ -13,7 +13,7 @@ const initialState = {
     selectedStart: false,
     name: null,
   },
-  randomPoints: [],
+  cityPoints: [],
   filteredCities: [],
   pathingInProgress: false,
   loading: false,
@@ -235,8 +235,8 @@ const mapSlice = createSlice({
     setOwnSelectedCity: (state, action) => {
       state.ownSelectedCity = { ...state.ownSelectedCity, ...action.payload };
     },
-    setRandomPoints: (state, action) => {
-      state.randomPoints = action.payload;
+    setcityPoints: (state, action) => {
+      state.cityPoints = action.payload;
     },
     setPathingInProgress: (state, action) => {
       state.pathingInProgress = action.payload;
@@ -246,7 +246,7 @@ const mapSlice = createSlice({
     },
     setSelectStartCity: (state, action) => {
       const { x, y } = action.payload;
-      const updatedPoints = state.randomPoints.map((point) => ({
+      const updatedPoints = state.cityPoints.map((point) => ({
         ...point,
         selectedStart: point.x === x && point.y === y,
       }));
@@ -258,21 +258,21 @@ const mapSlice = createSlice({
 
       return {
         ...state,
-        randomPoints: updatedPoints,
+        cityPoints: updatedPoints,
         ownSelectedCity: updatedOwnSelectedCity,
       };
     },
     setOwnSelectedCityZero: (state, action) => {
       state.ownSelectedCity.selectedStart = action.payload;
     },
-    setRandomPointsZero: (state, _) => {
-      state.randomPoints = state.randomPoints.map((point) => ({
+    setcityPointsZero: (state, _) => {
+      state.cityPoints = state.cityPoints.map((point) => ({
         ...point,
         selectedStart: false,
       }));
     },
     setZeroStartCity: (state, _) => {
-      const updatedPoints = state.randomPoints.map((point) => ({
+      const updatedPoints = state.cityPoints.map((point) => ({
         ...point,
         selectedStart: false,
       }));
@@ -283,7 +283,7 @@ const mapSlice = createSlice({
 
       return {
         ...state,
-        randomPoints: updatedPoints,
+        cityPoints: updatedPoints,
         ownSelectedCity: updatedOwnSelectedCity,
       };
     },
@@ -336,7 +336,7 @@ const mapSlice = createSlice({
       })
       .addCase(getMap.fulfilled, (state, action) => {
         state.loading = false;
-        state.randomPoints = action.payload;
+        state.cityPoints = action.payload;
       })
       .addCase(getMap.rejected, (state) => {
         state.loading = false;
@@ -356,12 +356,12 @@ const mapSlice = createSlice({
 
 export const {
   setOwnSelectedCity,
-  setRandomPoints,
+  setcityPoints,
   setPathingInProgress,
   setClearMap,
   setSelectStartCity,
   setOwnSelectedCityZero,
-  setRandomPointsZero,
+  setcityPointsZero,
   setZeroStartCity,
   setToggleClickPossible,
   setClickPossible,

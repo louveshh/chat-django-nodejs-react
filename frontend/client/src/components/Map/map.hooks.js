@@ -18,7 +18,7 @@ export const useMap = (canvasRef) => {
 
   const {
     ownSelectedCity,
-    randomPoints,
+    cityPoints,
     pathingInProgress,
     toClear,
     clickPossible,
@@ -61,9 +61,9 @@ export const useMap = (canvasRef) => {
         drawClickedCity(theme, context, ownSelectedCity, false);
       }
       if (algorithm === map.sort) {
-        drawCities(theme, context, randomPoints, true);
+        drawCities(theme, context, cityPoints, true);
       } else {
-        drawCities(theme, context, randomPoints, false);
+        drawCities(theme, context, cityPoints, false);
       }
     }
     return () => {};
@@ -74,7 +74,7 @@ export const useMap = (canvasRef) => {
     ownSelectedCity,
     clickPossible,
     pathingInProgress,
-    randomPoints,
+    cityPoints,
     theme,
     toClear,
   ]);
@@ -98,7 +98,7 @@ export const useMap = (canvasRef) => {
     }
     return () => {};
   }, [
-    randomPoints,
+    cityPoints,
     activeMode,
     canvasRef,
     ownSelectedCity,
@@ -116,7 +116,7 @@ export const useMap = (canvasRef) => {
       const { canvas, context } = getCanvasContext(canvasRef);
       clearMap(canvas, context);
       drawClickedCity(theme, context, ownSelectedCity, true);
-      drawCities(theme, context, randomPoints, false, true);
+      drawCities(theme, context, cityPoints, false, true);
     }
     return () => {};
   }, [
@@ -125,7 +125,7 @@ export const useMap = (canvasRef) => {
     ownSelectedCity,
     filteredCities,
     pathingInProgress,
-    randomPoints,
+    cityPoints,
     theme,
     toClear,
   ]);
@@ -142,7 +142,7 @@ export const useMap = (canvasRef) => {
       event,
       updateOwnSelectedCity,
       ownSelectedCity,
-      randomPoints
+      cityPoints
     );
   };
   const handleMouseMove = (event) => {
@@ -152,7 +152,7 @@ export const useMap = (canvasRef) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     const { x, y } = isInsideMap(event, rect);
-    const farEnoughtNewCity = isCityFarEnough(randomPoints, x, y, 50);
+    const farEnoughtNewCity = isCityFarEnough(cityPoints, x, y, 50);
 
     if (!farEnoughtNewCity) {
       return;

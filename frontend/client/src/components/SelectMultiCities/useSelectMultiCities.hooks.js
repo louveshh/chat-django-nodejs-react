@@ -15,7 +15,7 @@ import {
 
 export const useSelectMultiCities = () => {
   const sortableRef = useRef(null);
-  const { randomPoints, filteredCities } = useSelector((state) => state.map);
+  const { cityPoints, filteredCities } = useSelector((state) => state.map);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -36,7 +36,7 @@ export const useSelectMultiCities = () => {
     }
     updateFilteredCities(newCities);
   };
-  const mappedPoints = randomPoints.map(({ x, y, selectedStart, name }) => ({
+  const mappedPoints = cityPoints.map(({ x, y, selectedStart, name }) => ({
     value: { x, y, selectedStart },
     label: name,
   }));

@@ -5,18 +5,17 @@ import { useTranslation } from 'react-i18next';
 import { setToggleActiveMode } from 'store/slices/toggle';
 import {
   setClickPossible,
-  setRandomPointsZero,
+  setcityPointsZero,
   setZeroStartCity,
   setAlgorithm as setAlgorithmMap,
   setOwnSelectedCity,
   setZeroStartCityFiltered,
-  getMap,
 } from 'store/slices/map';
 import {
   setAlgorithm as setAlgorithmBoard,
   setSelectedOption,
 } from 'store/slices/board';
-import { configBoard, configPanel } from 'config/config';
+import { configBoard } from 'config/config';
 import { addBorders } from 'utils/board/common/addBorders.util';
 
 export const useToggleMode = () => {
@@ -44,8 +43,8 @@ export const useToggleMode = () => {
     },
     [dispatch]
   );
-  const updateRandomPointsZero = useCallback(() => {
-    dispatch(setRandomPointsZero());
+  const updatecityPointsZero = useCallback(() => {
+    dispatch(setcityPointsZero());
   }, [dispatch]);
 
   const updateZeroStartCity = useCallback(() => {
@@ -81,7 +80,7 @@ export const useToggleMode = () => {
     addBorders();
     updateToggleActiveMode(buttonId);
     updateClickPossible(false);
-    updateRandomPointsZero();
+    updatecityPointsZero();
     updateZeroStartCity();
     updateZeroStartCityFiltered();
     updateAlgorithmMap(null);

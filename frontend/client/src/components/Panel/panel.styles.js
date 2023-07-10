@@ -39,10 +39,9 @@ export const RightPanel = styled(CommonPanel)`
     width: 70%;
     min-height: ${configDisplay.RIGHT_PANEL_SCALED}px;
     padding: 10px;
-    margin: 0px 0px 20px 0px;
+    margin: 0px 0px 50px 0px;
     flex-grow: 1;
   }
-
   @media (max-width: 700px) {
     width: 100%;
   }

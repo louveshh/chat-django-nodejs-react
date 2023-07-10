@@ -36,14 +36,14 @@ export const BackgroundImage = styled.div`
     if (props.mode !== 'combo') {
       return `
       border-radius: 50%;
-      filter: drop-shadow(10px 10px 20px #121212);
+      filter: drop-shadow(7px 7px 12px #121212);
         `;
     }
   }}
   ${(props) => {
     if (props.theme === 'dark') {
       return `
-      filter: brightness(0.6) contrast(0.99) hue-rotate(2deg) sepia(10%) drop-shadow(10px 10px 20px #121212) !important;
+      filter: brightness(0.6) contrast(0.99) hue-rotate(2deg) sepia(10%) drop-shadow(7px 7px 12px #121212) !important;
         `;
     }
   }}

@@ -6,7 +6,7 @@ import { translateOptions } from 'utils/common/translateOptions';
 import { configMap } from 'config/config';
 import {
   setAlgorithm,
-  setRandomPointsZero,
+  setcityPointsZero,
   setZeroStartCity,
   setClickPossible,
 } from 'store/slices/map';
@@ -27,8 +27,8 @@ export const useSelectMapAlgorithm = () => {
     [dispatch]
   );
 
-  const updateRandomPointsZero = useCallback(() => {
-    dispatch(setRandomPointsZero());
+  const updatecityPointsZero = useCallback(() => {
+    dispatch(setcityPointsZero());
   }, [dispatch]);
 
   const updateZeroStartCity = useCallback(() => {
@@ -44,7 +44,7 @@ export const useSelectMapAlgorithm = () => {
 
   const handleSelectMapAlgorithm = (event) => {
     updateAlgorithm(event.value);
-    updateRandomPointsZero();
+    updatecityPointsZero();
     updateZeroStartCity();
     updateClickPossible(false);
   };

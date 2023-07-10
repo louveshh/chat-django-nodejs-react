@@ -3,7 +3,7 @@ import { CommonPanel } from 'components/common/CommonPanel/commonPanel.styles';
 
 export const DetailsContainer = styled.div`
   display: flex;
-  min-height: 50%;
+  min-height: 100%;
   @media (max-width: 650px) {
     min-height: 20%;
   }
