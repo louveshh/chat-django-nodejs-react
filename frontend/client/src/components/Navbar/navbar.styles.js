@@ -49,6 +49,7 @@ export const StyledButton = styled.div`
   border: 1px solid black;
 
   background-color: ${(props) => props.theme.view.primary};
+  color: ${(props) => props.theme.view.white};
 
   @media (min-width: 650px) {
     height: 50px;
@@ -77,19 +78,20 @@ export const StyledNavLink = styled(NavLink)`
   text-align: center;
   align-items: center;
   border: 1px solid black;
+  color: ${(props) => props.theme.view.white};
 
   ${(props) => {
-    if (props.isActive) {
+    if (props.$isActive) {
       return `
       cursor: not-allowed;
-      color: ${props.theme.view.white};
+      font-weight: 600;
       background-color:  ${props.theme.view.secondary2};
       text-decoration: underline;
   `;
     }
     return `
       cursor: pointer;
-      color: ${props.theme.view.black};
+      font-weight: 400;
       background-color:  ${props.theme.view.primary};
       text-decoration: none;
     `;

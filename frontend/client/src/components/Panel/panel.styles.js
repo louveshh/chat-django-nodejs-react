@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { configDisplay } from 'config/config';
+import { CommonPanel } from '../common/CommonPanel/commonPanel.styles';
 
 export const PanelWrapper = styled.div`
   height: 100%;
@@ -7,25 +8,14 @@ export const PanelWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin-top: 20px;
   @media (max-width: 1150px) {
     justify-content: center;
     flex-direction: column;
   }
-  margin-top: 20px;
 `;
 
-export const LeftPanel = styled.div`
-  display: flex;
-  flex-flow: column;
-  width: 20%;
-  justify-content: start;
-  flex-flow: column;
-  align-self: start;
-  min-height: ${configDisplay.DISPLAY_SIZE}px;
-  margin: 0px 5px;
-  padding: 0px 10px;
-  border 1px solid ${(props) => props.theme.view.white};;
-  border-radius: 5px;
+export const LeftPanel = styled(CommonPanel)`
   @media (max-width: 1150px) {
     order: 2;
     width: 70%;
@@ -36,23 +26,12 @@ export const LeftPanel = styled.div`
   @media (max-width: 700px) {
     width: 100%;
   }
-
 `;
-export const MainPanel = styled.div``;
+export const MainPanel = styled.div`
+  position: relative;
+`;
 
-export const RightPanel = styled.div`
-  display: flex;
-  flex-flow: column;
-  width: 20%;
-  justify-content: start;
-  flex-flow: column;
-  align-self: start;
-  min-height: ${configDisplay.DISPLAY_SIZE}px;
-  border 1px solid ${(props) => props.theme.view.white};;
-  border-radius: 5px;
-  margin: 0px 10px 10px 0px;
-  padding: 10px;
-
+export const RightPanel = styled(CommonPanel)`
   @media (max-width: 1150px) {
     align-self: center;
     order: 3;

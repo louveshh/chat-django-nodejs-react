@@ -8,7 +8,7 @@ const SelectBoardAlgorithm = () => {
       onChange={handleSelectBoardAlgorithm}
       options={options}
       placeholder={t('selectBoardAlgorithm.label')}
-      aria-label="Select Board Algorithm"
+      aria="Select Board Algorithm"
     />
   );
 };

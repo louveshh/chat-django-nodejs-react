@@ -17,7 +17,7 @@ const ToggleTheme = () => {
             label={t('toggleTheme.label')}
             aria="Toggle Theme"
             id="toggle-mode"
-            checked={theme.name === pallete.light}
+            checked={theme.name === pallete.dark}
             onChange={handleToggle}
           />
         </LabelWrapper>

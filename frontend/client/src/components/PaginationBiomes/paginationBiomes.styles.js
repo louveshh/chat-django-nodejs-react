@@ -7,7 +7,7 @@ export const StyledTitle = styled.span`
 
 export const StyledWrapper = styled.div`
   min-width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   background-color: ${(props) => props.theme.city.background};
   @media (max-width: 1150px) {
     text-align: center;
@@ -18,7 +18,10 @@ export const StyledWrapper = styled.div`
 
 export const StyledInformation = styled.div`
   text-align: center;
-  padding: 10px;
+  padding: 5px;
+  color: ${(props) => props.theme.view.black};
+  background-color: ${(props) =>
+    props.color ? `rgb(${props.color.join(', ')})` : 'transparent'};
 `;
 
 export const StyledPaginationWrapper = styled.div`

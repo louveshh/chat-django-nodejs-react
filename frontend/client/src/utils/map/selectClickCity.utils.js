@@ -1,6 +1,6 @@
-import { toast } from 'react-toastify';
 import { isCityFarEnough } from './common/isCityFarEnough';
 import { isInsideMap } from './common/isInsideMap';
+import { warningManager } from '../toastify/warning';
 
 export const selectClickCity = (
   canvasRef,
@@ -13,20 +13,11 @@ export const selectClickCity = (
   const rect = canvas.getBoundingClientRect();
   const { x, y } = isInsideMap(event, rect);
 
-  const name = `click`;
-  const { selectedStart, weight } = ownSelectedCity;
+  const { selectedStart, weight, name } = ownSelectedCity;
   const farEnoughtNewCity = isCityFarEnough(randomPoints, x, y, 20);
 
   if (farEnoughtNewCity) {
-    toast.warn('Too close!', {
-      position: 'bottom-left',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: 'dark',
-    });
+    warningManager({ render: 'Too close to the next city!' });
     return;
   }
   const roundX = x.toFixed(1);

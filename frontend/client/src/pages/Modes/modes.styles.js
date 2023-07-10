@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { configDisplay } from '../../config/config';
+import { configDisplay } from 'config/config';
 
 export const ViewContainer = styled.div`
   display: flex;
@@ -11,6 +11,9 @@ export const ViewContainer = styled.div`
     position: absolute;
     top: 10%;
     max-height: 300px;
+  }
+  @media (max-width: 650px) {
+    margin-top: -40px;
   }
 `;
 

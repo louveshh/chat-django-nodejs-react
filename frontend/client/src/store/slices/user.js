@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { urls, urlsApi } from 'config/urls';
+import { LoadingManager } from 'utils/toastify/loading';
 
 export const register = createAsyncThunk(
   urls.register,
@@ -11,7 +12,7 @@ export const register = createAsyncThunk(
       email,
       password,
     });
-
+    const notify = new LoadingManager({ render: 'Trying To Register...' });
     try {
       const res = await fetch(urlsApi.register, {
         method: 'POST',
@@ -25,16 +26,27 @@ export const register = createAsyncThunk(
       const data = await res.json();
 
       if (res.status === 201) {
+        notify.updateLoading({
+          render: 'Success! Registered',
+          type: 'success',
+          isLoading: false,
+        });
         return data;
       }
       return thunkAPI.rejectWithValue(data);
     } catch (err) {
+      notify.updateLoading({
+        render: 'Unknown Error',
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
 );
 
 const getUser = createAsyncThunk(urls.me, async (_, thunkAPI) => {
+  const notify = new LoadingManager({ render: 'Getting User Data...' });
   try {
     const res = await fetch(urlsApi.me, {
       method: 'GET',
@@ -46,10 +58,20 @@ const getUser = createAsyncThunk(urls.me, async (_, thunkAPI) => {
     const data = await res.json();
 
     if (res.status === 200) {
+      notify.updateLoading({
+        render: 'Success! User Data Fetched',
+        type: 'success',
+        isLoading: false,
+      });
       return data;
     }
     return thunkAPI.rejectWithValue(data);
   } catch (err) {
+    notify.updateLoading({
+      render: 'Unknown Error',
+      type: 'error',
+      isLoading: false,
+    });
     return thunkAPI.rejectWithValue(err.response.data);
   }
 });
@@ -61,7 +83,7 @@ export const login = createAsyncThunk(
       email,
       password,
     });
-
+    const notify = new LoadingManager({ render: 'Trying To Log In...' });
     try {
       const res = await fetch(urlsApi.login, {
         method: 'POST',
@@ -76,13 +98,28 @@ export const login = createAsyncThunk(
 
       if (res.status === 200) {
         const { dispatch } = thunkAPI;
-
         dispatch(getUser());
+
+        notify.updateLoading({
+          render: 'Success! Logged In',
+          type: 'success',
+          isLoading: false,
+        });
 
         return data;
       }
+      notify.updateLoading({
+        render: data.error,
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(data);
     } catch (err) {
+      notify.updateLoading({
+        render: 'Unknown Error',
+        type: 'error',
+        isLoading: false,
+      });
       return thunkAPI.rejectWithValue(err.response.data);
     }
   }
@@ -109,6 +146,7 @@ export const checkAuth = createAsyncThunk(urls.verify, async (_, thunkAPI) => {
 });
 
 export const logout = createAsyncThunk(urls.logout, async (_, thunkAPI) => {
+  const notify = new LoadingManager({ render: 'Trying To Logging Out...' });
   try {
     const res = await fetch(urlsApi.logout, {
       method: 'GET',
@@ -120,10 +158,25 @@ export const logout = createAsyncThunk(urls.logout, async (_, thunkAPI) => {
     const data = await res.json();
 
     if (res.status === 200) {
+      notify.updateLoading({
+        render: 'Success! Logged Out',
+        type: 'success',
+        isLoading: false,
+      });
       return data;
     }
+    notify.updateLoading({
+      render: data.error,
+      type: 'error',
+      isLoading: false,
+    });
     return thunkAPI.rejectWithValue(data);
   } catch (err) {
+    notify.updateLoading({
+      render: 'Unknown Error',
+      type: 'error',
+      isLoading: false,
+    });
     return thunkAPI.rejectWithValue(err.response.data);
   }
 });
@@ -184,6 +237,7 @@ const userSlice = createSlice({
       })
       .addCase(checkAuth.rejected, (state) => {
         state.loading = false;
+        state.isAuthenticated = false;
       })
       .addCase(logout.pending, (state) => {
         state.loading = true;

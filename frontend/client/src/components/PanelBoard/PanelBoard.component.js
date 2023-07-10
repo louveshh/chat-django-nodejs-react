@@ -20,7 +20,7 @@ const PanelBoard = () => {
         <CommonButton
           type="button"
           onClick={() => handleAlgorithm()}
-          pathingInProgress={pathingInProgress}
+          inProgress={pathingInProgress}
           disabled={disabled}
         >
           {t('panelBoard.runButton')}

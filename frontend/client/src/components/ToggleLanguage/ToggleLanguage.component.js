@@ -11,12 +11,12 @@ const ToggleLanguage = () => {
   const { t, language, handleToggle } = useToggleLangauge();
   const toggleIcons = {
     checked: (
-      <ToggleSpanIcons aria-label={t('toggleLanguage.pl')}>
+      <ToggleSpanIcons aria={t('toggleLanguage.pl')}>
         {t('toggleLanguage.pl')}
       </ToggleSpanIcons>
     ),
     unchecked: (
-      <ToggleSpanIcons aria-label={t('toggleLanguage.en')}>
+      <ToggleSpanIcons aria={t('toggleLanguage.en')}>
         {t('toggleLanguage.en')}
       </ToggleSpanIcons>
     ),

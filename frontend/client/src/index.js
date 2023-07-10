@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store/store';
 
-import AppRoutes from './App';
+import AppRoutes from './routes/AppRoutes';
 import initI18n from './i18n/i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

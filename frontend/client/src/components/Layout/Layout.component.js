@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet';
 
 import Navbar from 'components//Navbar/Navbar.component';
 import Ocean from 'components//Ocean/Ocean';
+import Footer from 'components/Footer/Footer';
 
 const Layout = ({ title, content, children }) => (
   <>
@@ -12,6 +13,7 @@ const Layout = ({ title, content, children }) => (
     <Navbar />
     {children}
     <Ocean />
+    <Footer />
   </>
 );
 

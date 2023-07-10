@@ -1,7 +1,6 @@
 export const configPaths = {
   home: '/',
-  dashboard: '/dashboard',
-  algorithms: '/algorithms',
+  modes: '/modes',
   login: '/login',
   register: '/register',
   logout: '/logout',

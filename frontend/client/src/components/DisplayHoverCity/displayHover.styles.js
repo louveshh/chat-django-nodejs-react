@@ -12,7 +12,7 @@ export const StyledDisplayWrapper = styled.div`
 export const StyledDisplayUl = styled.ul`
   padding: 10px;
   display: flex;
-  gap: 10px;
+  gap: 5px;
   flex-direction: column;
   width: 100%;
   color: ${(props) => props.theme.view.white};

@@ -8,7 +8,7 @@ const SelectMapAlgorithm = () => {
       onChange={handleSelectMapAlgorithm}
       options={options}
       placeholder={t('selectMapAlgorithm.label')}
-      aria-label="Select Map Algorithm"
+      aria="Select Map Algorithm"
     />
   );
 };

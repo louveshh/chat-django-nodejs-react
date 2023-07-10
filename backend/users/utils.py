@@ -29,7 +29,6 @@ def new_biome(x, y):
         print("Failed to open the image file")
         return "unknown"
 
-    width, height = image.size
     color = image.getpixel((x*2, y*2))
     minimal_value = 100
     biome = "unknown"
@@ -42,3 +41,17 @@ def new_biome(x, y):
             minimal_value = out
             biome = color_name
     return biome
+
+
+def biomes_with_rgb(page_obj):
+    output = []
+    for biome_name in page_obj:
+        rgb_values = list_of_biomes.get(biome_name)
+        if rgb_values:
+            biome_data = {
+                'name': biome_name,
+                'rgb': rgb_values
+            }
+            output.append(biome_data)
+
+    return output

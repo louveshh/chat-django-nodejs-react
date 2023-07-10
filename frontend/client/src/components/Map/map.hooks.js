@@ -116,7 +116,7 @@ export const useMap = (canvasRef) => {
       const { canvas, context } = getCanvasContext(canvasRef);
       clearMap(canvas, context);
       drawClickedCity(theme, context, ownSelectedCity, true);
-      drawCities(theme, context, randomPoints, false);
+      drawCities(theme, context, randomPoints, false, true);
     }
     return () => {};
   }, [

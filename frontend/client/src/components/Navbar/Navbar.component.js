@@ -18,22 +18,22 @@ const Navbar = () => {
         {!isAuthenticated ? (
           <StyledNavLink
             to={configPaths.login}
-            isActive={isActive(configPaths.login)}
+            $isActive={isActive(configPaths.login)}
           >
             {t('navbar.login')}
           </StyledNavLink>
         ) : (
           <StyledNavLink
-            to={configPaths.about}
-            isActive={isActive(configPaths.about)}
+            to={configPaths.home}
+            $isActive={isActive(configPaths.home)}
           >
-            {t('navbar.about')}
+            {t('navbar.home')}
           </StyledNavLink>
         )}
 
         <StyledNavLink
-          to={configPaths.algorithms}
-          isActive={isActive(configPaths.algorithms)}
+          to={configPaths.modes}
+          $isActive={isActive(configPaths.modes)}
         >
           {t('navbar.maps')}
         </StyledNavLink>
@@ -41,7 +41,7 @@ const Navbar = () => {
         {!isAuthenticated ? (
           <StyledNavLink
             to={configPaths.register}
-            isActive={isActive(configPaths.register)}
+            $isActive={isActive(configPaths.register)}
           >
             {t('navbar.register')}
           </StyledNavLink>
@@ -62,42 +62,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// const Navbar = () => {
-//   const { isAuthenticated, onClick } = useNavbar();
-
-//   return (
-//     <nav className="wrapper-navbar">
-//       <div className="trapezoid-navbar">
-//         {!isAuthenticated ? (
-//           <StyledNavLink className="triangle" to="/login">
-//             Login
-//           </StyledNavLink>
-//         ) : (
-//           <StyledNavLink className="triangle" to="/about">
-//             About
-//           </StyledNavLink>
-//         )}
-//         <StyledNavLink className="triangle" to="/algorithms">
-//           Algorithms
-//         </StyledNavLink>
-//         {!isAuthenticated ? (
-//           <StyledNavLink className="triangle" to="/login">
-//             Register
-//           </StyledNavLink>
-//         ) : (
-//           <div className="triangle">
-//             <div
-//               onClick={onClick}
-//               role="button"
-//               tabIndex="0"
-//               onKeyDown={() => {}}
-//             >
-//               <div>Logout</div>
-//             </div>
-//           </div>
-//         )}
-//       </div>
-//     </nav>
-//   );
-// };

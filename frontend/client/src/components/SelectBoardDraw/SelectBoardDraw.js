@@ -10,7 +10,7 @@ const SelectBoardDraw = () => {
       value={selectedOption}
       options={options}
       defaultValue={translateDefault}
-      aria-label="Select Draw Options"
+      aria="Select Draw Options"
     />
   );
 };

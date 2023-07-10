@@ -9,7 +9,7 @@ const SelectCity = () => {
       options={selectValueData}
       defaultValue={selectValueData[0]}
       label="Select Cities"
-      aria-label="Select Cities Map"
+      aria="Select Cities Map"
     />
   );
 };

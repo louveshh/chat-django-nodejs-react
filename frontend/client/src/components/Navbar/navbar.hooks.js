@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +11,7 @@ export const useNavbar = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, loading } = useSelector((state) => state.user);
 
   const updateLogout = useCallback(() => {
     dispatch(logout());
@@ -19,17 +19,11 @@ export const useNavbar = () => {
 
   const onClick = () => {
     updateLogout();
-    setTimeout(() => {
-      navigate(configPaths.home);
-    }, 3000);
+    navigate(configPaths.home);
   };
 
   const location = useLocation();
-  console.log(location);
 
-  const isActive = (payload) => {
-    console.log(payload, location.pathname);
-    return location.pathname === payload;
-  };
+  const isActive = (payload) => location.pathname === payload;
   return { isAuthenticated, isActive, t, onClick };
 };

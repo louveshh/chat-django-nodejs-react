@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 import Select, { components } from 'react-select';
 
+export const CustomMultiSelectWrapper = styled.div`
+  height: 30px;
+  margin: 20px 0px;
+  @media (max-width: 1150px) {
+    width: 80% !important;
+  }
+  @media (max-width: 1150px) {
+    width: 70% !important;
+  }
+`;
+
 export const CustomMultiSelect = styled(Select)`
   height: 30px;
   @media (max-width: 1150px) {

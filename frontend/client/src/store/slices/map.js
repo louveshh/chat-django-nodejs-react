@@ -11,7 +11,7 @@ const initialState = {
     y: configDisplay.DISPLAY_SIZE / 2,
     weight: 0,
     selectedStart: false,
-    name: 'click',
+    name: null,
   },
   randomPoints: [],
   filteredCities: [],
@@ -25,7 +25,7 @@ const initialState = {
 };
 
 export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
-  const notify = new LoadingManager({ render: 'Getting cities...' });
+  const notify = new LoadingManager({ render: 'Getting Cities...' });
   try {
     const res = await fetch(urlsApi.map, {
       method: 'GET',
@@ -52,7 +52,7 @@ export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(data);
   } catch (err) {
     notify.updateLoading({
-      render: 'error',
+      render: 'Unknown Error',
       type: 'error',
       isLoading: false,
     });
@@ -64,7 +64,7 @@ export const getBiomes = createAsyncThunk(
   urls.biomes,
   async (page, thunkAPI) => {
     const notify = new LoadingManager({
-      render: 'Getting biomes...',
+      render: 'Getting Biomes...',
     });
     try {
       const res = await fetch(`${urlsApi.biomes}?page=${page}`, {
@@ -92,7 +92,7 @@ export const getBiomes = createAsyncThunk(
       return thunkAPI.rejectWithValue(data);
     } catch (err) {
       notify.updateLoading({
-        render: 'error',
+        render: 'Unknown Error',
         type: 'error',
         isLoading: false,
       });
@@ -140,7 +140,7 @@ export const setAddOwnCity = createAsyncThunk(
         const { dispatch } = thunkAPI;
         dispatch(logout());
         notify.updateLoading({
-          render: 'session ended, cookies are gone',
+          render: 'Session Ended, Cookies Are Gone',
           type: 'error',
           isLoading: false,
         });
@@ -157,7 +157,7 @@ export const setAddOwnCity = createAsyncThunk(
       return thunkAPI.rejectWithValue(data);
     } catch (err) {
       notify.updateLoading({
-        render: 'error',
+        render: 'Unknown Error',
         type: 'error',
         isLoading: false,
       });
@@ -219,7 +219,7 @@ export const setRemoveOwnCity = createAsyncThunk(
       return thunkAPI.rejectWithValue(data);
     } catch (err) {
       notify.updateLoading({
-        render: 'error',
+        render: 'Unknown Error',
         type: 'error',
         isLoading: false,
       });
@@ -233,7 +233,7 @@ const mapSlice = createSlice({
   initialState,
   reducers: {
     setOwnSelectedCity: (state, action) => {
-      state.ownSelectedCity = action.payload;
+      state.ownSelectedCity = { ...state.ownSelectedCity, ...action.payload };
     },
     setRandomPoints: (state, action) => {
       state.randomPoints = action.payload;

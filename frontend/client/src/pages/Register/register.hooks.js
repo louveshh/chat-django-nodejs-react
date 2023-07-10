@@ -3,11 +3,15 @@ import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from 'store/slices/user';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const useRegister = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated, loading, registered } = useSelector((state) => state.user);
+  const { t } = useTranslation();
+  const { isAuthenticated, loading, registered } = useSelector(
+    (state) => state.user
+  );
 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -30,7 +34,6 @@ export const useRegister = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     sendRegister(first_name, last_name, email, password);
   };
 
@@ -43,6 +46,7 @@ export const useRegister = () => {
   return {
     onSubmit,
     onChange,
+    t,
     first_name,
     last_name,
     email,

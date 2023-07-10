@@ -24,6 +24,7 @@ const BarWeight = () => {
           max={50}
           step={1}
           defaultValue={0}
+          value
         />
       )}
     </>

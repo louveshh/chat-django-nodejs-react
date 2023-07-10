@@ -5,9 +5,10 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from .serializers import UserCreateSerializer, UserSerializer,\
-    AddCitySerializer, RemoveCitySerializer, CitySerializer, BiomesSerializer
+    AddCitySerializer, RemoveCitySerializer, CitySerializer
 from .models import City
 from django.core.paginator import Paginator
+from .utils import biomes_with_rgb
 import math
 
 
@@ -97,8 +98,8 @@ class BiomesView(APIView):
         page_number = request.query_params.get(
             'page', 1)
         page_obj = paginator.get_page(page_number)
-        output = list(page_obj)
+        output = biomes_with_rgb(page_obj)
 
         total = math.ceil(biomes.count() / 2)
 
-        return Response({'name': output, 'total': total, 'page': page_number}, status=status.HTTP_200_OK)
+        return Response({'biomes': output, 'total': total, 'page': page_number}, status=status.HTTP_200_OK)

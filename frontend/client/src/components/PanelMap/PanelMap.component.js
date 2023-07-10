@@ -25,7 +25,7 @@ const PanelMap = ({ canvasRef }) => {
         <CommonButton
           type="button"
           onClick={handleAlgorithm()}
-          pathingInProgress={pathingInProgress}
+          inProgress={pathingInProgress}
           disabled={disabled}
         >
           {t('panelMap.runButton')}

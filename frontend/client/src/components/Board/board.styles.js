@@ -3,16 +3,6 @@ import Select from 'react-select';
 
 import { configDisplay } from 'config/config';
 
-export const BoardWrapper = styled.div`
-  ${(props) => {
-    if (!props.active) {
-      return `
-    visibility: hidden;
-      `;
-    }
-  }}
-`;
-
 export const ButtonsWrapper = styled.div`
   height: 200px;
   display: flex;
@@ -24,6 +14,13 @@ export const CommonSelect = styled(Select)`
 `;
 
 export const GridContainer = styled.div`
+  ${(props) => {
+    if (!props.active) {
+      return `
+        visibility: hidden;
+    `;
+    }
+  }}
   position: absolute;
   top: 0%;
   left: 50%;
@@ -40,5 +37,4 @@ export const GridContainer = styled.div`
     ${configDisplay.AMOUNT_OF_CELLS},
     ${configDisplay.NODE_SIZE()}px
   );
-  border: 1px solid black;
 `;

@@ -24,6 +24,7 @@ export default createGlobalStyle`
 
 
   body {
+    font-family: Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     background-color: ${(props) => props.theme.view.background};
   }

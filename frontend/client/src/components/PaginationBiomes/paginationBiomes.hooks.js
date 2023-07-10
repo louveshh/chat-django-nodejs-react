@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 export const usePaginationCities = () => {
   const { t } = useTranslation();
-  const { biomes, loading } = useSelector((state) => state.map);
+  const { biomes, loading, randomPoints } = useSelector((state) => state.map);
   const dispatch = useDispatch();
   const updateBiomes = useCallback(
     (payload) => {
@@ -37,11 +37,13 @@ export const usePaginationCities = () => {
 
   useEffect(() => {
     updateBiomes(1);
-  }, [updateBiomes]);
+  }, [updateBiomes, randomPoints]);
 
-  const newBiomes = biomes ? biomes.name : [];
+  const newBiomes = biomes ? biomes.biomes : [];
+  const allBiomes =
+    newBiomes.length === 1 ? [...newBiomes, { name: '-' }] : newBiomes;
   const newTotal = biomes ? biomes.total : 1;
   const newPage = biomes ? biomes.page : 1;
 
-  return { newBiomes, newPage, newTotal, t, handlePageUp, handlePageDown };
+  return { allBiomes, newPage, newTotal, t, handlePageUp, handlePageDown };
 };

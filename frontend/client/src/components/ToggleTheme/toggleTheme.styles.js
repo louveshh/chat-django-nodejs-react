@@ -12,6 +12,7 @@ export const ToggleContainer = styled.div`
     transform: scale(${configDisplay.SCALE});
     width: unset;
     min-width: 70px;
+    margin-top: 0px;
   }
 `;
 

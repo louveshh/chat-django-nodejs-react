@@ -1,6 +1,6 @@
 {
   "toggleTheme": {
-    "label": "Tryb Ciemny"
+    "label": "Tryb Nocny"
   },
   "toggleLanguage": {
     "label": "Język",
@@ -64,7 +64,7 @@
 
   "navbar": {
     "login": "Login",
-    "about": "About",
+    "home": "Home",
     "maps": "Tryby",
     "register": "Rejestacja",
     "logout": "Wyloguj"
@@ -84,6 +84,47 @@
     "start": "Początek",
     "finish": "Koniec"
   },
+
+  "unknownPage": {
+    "title": "Nieznana strona",
+    "redirect": "Przekierowanie za: "
+  },
+
+  "homePage": {
+    "title": "User Details",
+    "firstName": "Imie: ",
+    "lastName": "Nazwisko: ",
+    "email": "E-mail: "
+  },
+
+  "loginPage": {
+    "login": "Login",
+    "password": "Hasło",
+    "loginButton": "Login"
+  },
+  "registerPage": {
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "email": "E-Mail",
+    "password": "Hasło"
+  },
+  "biome": {
+    "clifs": "Clifs",
+    "coast": "Coast",
+    "fields": "Fields",
+    "light_forest": "Light Forest",
+    "dark_forest": "Dark Forest",
+    "steppes": "Steppes",
+    "under_mountains": "Under Mountains",
+    "mountains": "Mountains",
+    "river": "River",
+    "sea": "Sea"
+  },
+  "footer": {
+    "author": "Autor: ",
+    "name": "Łukasz Baran"
+  },
+
   "panelDescriptions": {
     "board": {
       "p0": "Ten tryb znajduje ścieżkę między zielonym a czerwonym kwadratem",

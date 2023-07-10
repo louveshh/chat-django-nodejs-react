@@ -8,22 +8,22 @@ export const useDisplayHoverCity = () => {
   const newCityInfo = useMemo(() => {
     const city = new Map();
     if (!mouseMoveCity) {
-      city.set('Name: ', '');
-      city.set('User: ', '');
-      city.set('Biome: ', '');
-      city.set('Size: ', '');
-      city.set('X-coordinate: ', '');
-      city.set('Y-coordinate: ', '');
+      city.set('Name: ', '-');
+      city.set('User: ', '-');
+      city.set('Biome: ', '-');
+      city.set('Size: ', '-');
+      city.set('X-coordinate: ', '-');
+      city.set('Y-coordinate: ', '-');
       return city;
     }
     city.set('Name: ', mouseMoveCity.name);
     city.set('User: ', mouseMoveCity.user);
-    city.set('Biome: ', mouseMoveCity.biome_name);
+    city.set('Biome: ', t(`biome.${mouseMoveCity.biome_name}`));
     city.set('Size: ', mouseMoveCity.weight);
     city.set('X-coordinate: ', mouseMoveCity.x.toFixed(1));
     city.set('Y-coordinate: ', mouseMoveCity.y.toFixed(1));
     return city;
-  }, [mouseMoveCity]);
+  }, [mouseMoveCity, t]);
 
   return { newCityInfo, t };
 };

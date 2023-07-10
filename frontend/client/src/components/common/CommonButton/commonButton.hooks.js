@@ -14,6 +14,9 @@ export const useCommonButton = (onClick, disabled) => {
   }, []);
 
   const handleClick = () => {
+    if (!onClick) {
+      return;
+    }
     if (disabled) {
       warningManager({ render: 'Button conditions - not met' });
       return;

@@ -19,7 +19,7 @@ const PanelCombo = ({ canvasRef }) => {
       <CommonButton
         onClick={handleAlgorithm}
         disabled={disabled}
-        pathingInProgress={pathingInProgress}
+        inProgress={pathingInProgress}
       >
         {t('panelCombo.runButton')}
       </CommonButton>

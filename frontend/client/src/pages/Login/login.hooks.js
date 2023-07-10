@@ -2,10 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { resetRegistered, login } from 'store/slices/user';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const useLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { loading, isAuthenticated, registered } = useSelector(
     (state) => state.user
   );
@@ -28,15 +30,14 @@ export const useLogin = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     dispatch(login({ email, password }));
   };
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard');
+      navigate('/');
     }
   }, [isAuthenticated, navigate]);
 
-  return { onSubmit, onChange, email, password, loading };
+  return { onSubmit, onChange, t, email, password, loading };
 };

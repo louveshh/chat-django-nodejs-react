@@ -1,6 +1,6 @@
 {
   "toggleTheme": {
-    "label": "Dark Mode"
+    "label": "Night Mode"
   },
   "toggleLanguage": {
     "label": "Language",
@@ -65,7 +65,7 @@
 
   "navbar": {
     "login": "Login",
-    "about": "About",
+    "home": "Home",
     "maps": "Modes",
     "register": "Register",
     "logout": "Logout"
@@ -85,11 +85,52 @@
     "start": "Start",
     "finish": "Finish"
   },
+
+  "unknownPage": {
+    "title": "Unknown Page",
+    "redirect": "Redirect in: "
+  },
+
+  "homePage": {
+    "title": "User Details",
+    "firstName": "First Name: ",
+    "lastName": "Last Name: ",
+    "email": "E-mail: "
+  },
+
+  "loginPage": {
+    "login": "Login",
+    "password": "Password",
+    "loginButton": "Login"
+  },
+  "registerPage": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "E-Mail",
+    "password": "Password"
+  },
+  "biome": {
+    "clifs": "Clifs",
+    "coast": "Coast",
+    "fields": "Fields",
+    "light_forest": "Light Forest",
+    "dark_forest": "Dark Forest",
+    "steppes": "Steppes",
+    "under_mountains": "Under Mountains",
+    "mountains": "Mountains",
+    "river": "River",
+    "sea": "Sea"
+  },
+  "footer": {
+    "author": "Author: ",
+    "name": "Lukasz Baran"
+  },
+
   "panelDescriptions": {
     "board": {
       "p0": "This mode finds a path between green and red square",
       "p1": "In this case, you can choose an algorithm to find a path between green and red square",
-      "p2": "You have to choose the algorithm to enable Run Button",
+      "p2": "You have to choose the algorithm to enable 'Run' Button",
       "p3": "Green dot is a starting point, red point is a finish point",
       "p4": "You can set a wall by clicking on board, delete again the same point to delete wall",
       "p5": "Algorithm will omit every wall",
@@ -97,9 +138,9 @@
       "p7": "To Run the algorithm again you have to clean the board"
     },
     "map": {
-      "p0": "This mode finds connections between black dock cities",
+      "p0": "This mode finds connections between black dot cities",
       "p1": "In this case, you can choose the algorithm to find a path between cities (black dots)",
-      "p2": "You have to choose the algorithm to enable Run Button",
+      "p2": "You have to choose the algorithm to enable 'Run' Button",
       "p3": "Each algorithm contains its extra functionalities",
       "p4": "If you enable 'Add Custom Click' you can click on the map and add your city (red dot)",
       "p5": "In 'Sort' algorithm you can add custom weight to your clicked city (red dot)",
@@ -122,7 +163,7 @@
       "p1": "You can only add one city per account",
       "p2": "If you want to change the position of your city, you need to remove it first",
       "p3": "Each city can be located in a different biome",
-      "p4": "Adding a City over the see is not possible",
+      "p4": "Adding a city over the see is not possible",
       "p5": "When you hover over a city, you will receive information about that particular city",
       "p6": "You can view all discovered biomes using the pagination component",
       "p7": "The pagination component displays 2 biomes per page"
