@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 
+export const SVGWrapper = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  bottom: 0%;
+  z-index: -1;
+  overflow: hidden;
+  @media (max-width: 700px) {
+    height: 90%;
+  }
+  background-color: ${(props) => props.theme.view.background};
+`;
+
 export const StyledSVG = styled.svg`
   position: fixed;
   width: 100%;
@@ -11,6 +25,7 @@ export const StyledSVG = styled.svg`
   @media (max-width: 700px) {
     height: 90%;
   }
+  background-color: ${(props) => props.theme.view.background};
 `;
 
 export const StyledG = styled.g`
