@@ -15,7 +15,7 @@ export const StyledToastContainer = styled(ToastContainer)`
     color: #333;
     border-radius: 4px;
     @media (max-width: 650px) {
-      max-width: 250px;
+      min-width: 75%;
       padding: 0px;
       font-size: 10px;
       align-self: center;
