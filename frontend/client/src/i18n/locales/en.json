@@ -1,0 +1,172 @@
+{
+  "toggleTheme": {
+    "label": "Night Mode"
+  },
+  "toggleLanguage": {
+    "label": "Language",
+    "en": "EN",
+    "pl": "PL"
+  },
+
+  "toggleMode": {
+    "display": "Display",
+    "board": "Board",
+    "map": "Map",
+    "combo": "Combine",
+    "add": "Add City"
+  },
+  "toggleClick": {
+    "label": "Add Custom Click"
+  },
+  "selectMapAlgorithm": {
+    "label": "*Select Map Algorithm"
+  },
+  "selectBoardAlgorithm": {
+    "label": "*Select Board Algorithm"
+  },
+  "selectMultiCities": {
+    "placeholder": "*Select At Least Two Cities"
+  },
+
+  "barWeight": {
+    "toggle": "Add Custom Weight",
+    "label": "Weight"
+  },
+
+  "panelMap": {
+    "runButton": "Run",
+    "clearButton": "*Clear Map"
+  },
+  "panelCombo": {
+    "runButton": "Run",
+    "clearMapButton": "*Clear Map",
+    "clearBoardButton": "*Clear Board"
+  },
+  "panelAdd": {
+    "addCity": "Add City",
+    "removeCity": "Remove City",
+    "hover": "Last Hovered City:",
+    "biome": "Biomes Backend Pagination:",
+    "page": "Page"
+  },
+
+  "addInputName": {
+    "label": "*Input Name of City"
+  },
+
+  "addInputWeight": {
+    "label": "*Input Weight of City"
+  },
+
+  "panelBoard": {
+    "runButton": "Run",
+    "clearButton": "*Clear Map"
+  },
+
+  "navbar": {
+    "login": "Login",
+    "home": "Home",
+    "maps": "Modes",
+    "register": "Register",
+    "logout": "Logout"
+  },
+
+  "options": {
+    "dijkstra": "Dijkstra",
+    "astar": "Astar",
+    "dfs": "DFS",
+    "bfs": "BFS",
+
+    "tsg": "TSG",
+    "sort": "Sort",
+    "random": "Random",
+
+    "wall": "Wall",
+    "start": "Start",
+    "finish": "Finish"
+  },
+
+  "unknownPage": {
+    "title": "Unknown Page",
+    "redirect": "Redirect in: "
+  },
+
+  "homePage": {
+    "title": "User Details",
+    "firstName": "First Name: ",
+    "lastName": "Last Name: ",
+    "email": "E-mail: "
+  },
+
+  "loginPage": {
+    "login": "Login",
+    "password": "Password",
+    "loginButton": "Login"
+  },
+  "registerPage": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "E-Mail",
+    "password": "Password"
+  },
+  "biome": {
+    "clifs": "Clifs",
+    "coast": "Coast",
+    "fields": "Fields",
+    "light_forest": "Light Forest",
+    "dark_forest": "Dark Forest",
+    "steppes": "Steppes",
+    "under_mountains": "Under Mountains",
+    "mountains": "Mountains",
+    "river": "River",
+    "sea": "Sea"
+  },
+  "footer": {
+    "author": "Author: ",
+    "name": "Lukasz Baran - louveshh"
+  },
+
+  "panelDescriptions": {
+    "board": {
+      "p0": "This mode finds a path between green and red square",
+      "p1": "In this case, you can choose an algorithm to find a path between green and red square",
+      "p2": "You have to choose the algorithm to enable 'Run' Button",
+      "p3": "Green dot is a starting point, red point is a finish point",
+      "p4": "You can set a wall by clicking on board, delete again the same point to delete wall",
+      "p5": "Algorithm will omit every wall",
+      "p6": "You can set your starting point and own finish point by selecting on the right",
+      "p7": "To Run the algorithm again you have to clean the board"
+    },
+    "map": {
+      "p0": "This mode finds connections between black dot cities",
+      "p1": "In this case, you can choose the algorithm to find a path between cities (black dots)",
+      "p2": "You have to choose the algorithm to enable 'Run' Button",
+      "p3": "Each algorithm contains its extra functionalities",
+      "p4": "If you enable 'Add Custom Click' you can click on the map and add your city (red dot)",
+      "p5": "In 'Sort' algorithm you can add custom weight to your clicked city (red dot)",
+      "p6": "In 'TSG' if you enable 'Add Custom Click', you will be able to select starting city",
+      "p7": "TSG means - Traveling Salesman Greedy Algorithm",
+      "p8": "To Run the algorithm again you have to clean the map"
+    },
+    "combo": {
+      "p0": "This mode combines 'map' and 'board'",
+      "p1": "In this case, it will find path shortest path between cities with TSG",
+      "p2": "Then will find a path and omit walls to each city sequentially with Dijkstra",
+      "p3": "In this case, you have to choose at least two cities",
+      "p4": "Just like in board you can add  a wall by clicking on the board",
+      "p5": "Algorithm Dijkstra will omit every wall, TSG will find the shortest path in a straight line despite walls",
+      "p6": "Select is draggable and sortable",
+      "p7": "To Run the algorithm again you have to clean the map and clean the board"
+    },
+    "add": {
+      "p0": "This mode allows users to add their own city and explore the map",
+      "p1": "You can only add one city per account",
+      "p2": "If you want to change the position of your city, you need to remove it first",
+      "p3": "Each city can be located in a different biome",
+      "p4": "Adding a city over the see is not possible",
+      "p5": "When you hover over a city, you will receive information about that particular city",
+      "p6": "You can view all discovered biomes using the pagination component",
+      "p7": "The pagination component displays 2 biomes per page"
+    }
+  }
+}

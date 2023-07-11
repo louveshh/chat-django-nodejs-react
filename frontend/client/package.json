@@ -1,0 +1,82 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@emotion/css": "^11.11.0",
+    "@emotion/react": "^11.11.0",
+    "@mui/material": "^5.13.6",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "cookie": "^0.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-markdown": "^3.0.0",
+    "http-proxy-middleware": "^2.0.6",
+    "i18next": "^22.5.0",
+    "install-peerdeps": "^3.0.3",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-color": "^2.19.3",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-i18next": "^12.3.1",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.11.2",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.7.3",
+    "react-toastify": "^9.1.3",
+    "react-toggle": "^4.1.3",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.11",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/eslint '**/*.js'"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint": "^8.44.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-import-resolver-node": "^0.3.7",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-sort-destructure-keys": "^1.5.0",
+    "prettier": "2.8.8"
+  },
+  "engines": {
+    "node": ">=16 <18"
+  }
+}

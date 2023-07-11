@@ -1,0 +1,169 @@
+{
+  "toggleTheme": {
+    "label": "Tryb Nocny"
+  },
+  "toggleLanguage": {
+    "label": "Język",
+    "en": "EN",
+    "pl": "PL"
+  },
+
+  "toggleMode": {
+    "display": "Pokaż",
+    "board": "Tablica",
+    "map": "Mapa",
+    "combo": "Kombinacja",
+    "add": "Dodaj Miasto"
+  },
+  "toggleClick": {
+    "label": "Dodaj własne kliknięcie"
+  },
+  "selectMapAlgorithm": {
+    "label": "*Wybierz Algorytm Mapy"
+  },
+  "selectBoardAlgorithm": {
+    "label": "*Wybierz Algorytm Tablicy"
+  },
+  "selectMultiCities": {
+    "placeholder": "*Wybierz Przynajmniej Dwa Miasta"
+  },
+
+  "barWeight": {
+    "toggle": "Dodaj Własną Wage",
+    "label": "Waga:"
+  },
+
+  "panelMap": {
+    "runButton": "Uruchom",
+    "clearButton": "*Wyczyść Mape"
+  },
+  "panelCombo": {
+    "runButton": "Uruchom",
+    "clearMapButton": "*Wyczyść Mape",
+    "clearBoardButton": "*Wyczyść Tablice"
+  },
+  "panelAdd": {
+    "addCity": "Dodaj Miasto",
+    "removeCity": "Usuń Miasto",
+    "hover": "Ostatnio Sprawdzone Miasto:",
+    "biome": "Biomy Paginacja Backend:",
+    "page": "Strona: "
+  },
+
+  "panelBoard": {
+    "runButton": "Uruchom",
+    "clearButton": "*Wyczyść Tablice"
+  },
+  "addInputName": {
+    "label": "*Podaj Nazwe Miasta"
+  },
+
+  "addInputWeight": {
+    "label": "*Podaj Wielkość Miasta"
+  },
+
+  "navbar": {
+    "login": "Login",
+    "home": "Home",
+    "maps": "Tryby",
+    "register": "Rejestacja",
+    "logout": "Wyloguj"
+  },
+
+  "options": {
+    "dijkstra": "Dijkstra",
+    "astar": "Astar",
+    "dfs": "DFS",
+    "bfs": "BFS",
+
+    "tsg": "TSG",
+    "sort": "Sort",
+    "random": "Losowy",
+
+    "wall": "Ściana",
+    "start": "Początek",
+    "finish": "Koniec"
+  },
+
+  "unknownPage": {
+    "title": "Nieznana strona",
+    "redirect": "Przekierowanie za: "
+  },
+
+  "homePage": {
+    "title": "User Details",
+    "firstName": "Imie: ",
+    "lastName": "Nazwisko: ",
+    "email": "E-mail: "
+  },
+
+  "loginPage": {
+    "login": "Login",
+    "password": "Hasło",
+    "loginButton": "Login"
+  },
+  "registerPage": {
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "email": "E-Mail",
+    "password": "Hasło"
+  },
+  "biome": {
+    "clifs": "Clifs",
+    "coast": "Coast",
+    "fields": "Fields",
+    "light_forest": "Light Forest",
+    "dark_forest": "Dark Forest",
+    "steppes": "Steppes",
+    "under_mountains": "Under Mountains",
+    "mountains": "Mountains",
+    "river": "River",
+    "sea": "Sea"
+  },
+  "footer": {
+    "author": "Autor: ",
+    "name": "Łukasz Baran - louveshh"
+  },
+
+  "panelDescriptions": {
+    "board": {
+      "p0": "Ten tryb znajduje ścieżkę między zielonym a czerwonym kwadratem",
+      "p1": "W tym przypadku możesz wybrać algorytm do znalezienia ścieżki między zielonym a czerwonym kwadratem",
+      "p2": "Musisz wybrać algorytm, aby włączyć przycisk Uruchom",
+      "p3": "Zielony punkt to punkt początkowy, czerwony punkt to punkt docelowy",
+      "p4": "Możesz ustawić ścianę klikając na tablicę, ponowne kliknięcie w ten sam punkt usuwa ścianę",
+      "p5": "Algorytm będzie omijał każdą ścianę",
+      "p6": "Możesz ustawić własny punkt początkowy i docelowy, wybierając na prawo",
+      "p7": "Aby ponownie uruchomić algorytm, musisz wyczyścić tablicę"
+    },
+    "map": {
+      "p0": "Ten tryb znajduje połączenia między czarnymi miastami kropkami",
+      "p1": "W tym przypadku możesz wybrać algorytm do znalezienia ścieżki między miastami (czarne kropki)",
+      "p2": "Musisz wybrać algorytm, aby włączyć przycisk Uruchom",
+      "p3": "Każdy algorytm zawiera swoje dodatkowe funkcje",
+      "p4": "Jeśli włączysz opcję 'Dodaj własne kliknięcie', możesz kliknąć na mapie i dodać swoje miasto (czerwona kropka)",
+      "p5": "W algorytmie 'Sort' możesz przypisać własną wagę do klikniętego miasta (czerwona kropka)",
+      "p6": "W algorytmie 'TSG', jeśli włączysz opcję 'Dodaj własne kliknięcie', będziesz mógł wybrać miasto początkowe",
+      "p7": "TSG oznacza - Traveling Salesman Greedy Algorytm",
+      "p8": "Aby ponownie uruchomić algorytm, musisz wyczyścić mapę"
+    },
+    "combo": {
+      "p0": "Ten tryb łączy 'mapę' i 'tablicę'",
+      "p1": "W tym przypadku zostanie znaleziona najkrótsza ścieżka między miastami za pomocą algorytmu TSG",
+      "p2": "Następnie zostanie znaleziona ścieżka i pominięte będą ściany do każdego miasta sekwencyjnie za pomocą algorytmu Dijkstry",
+      "p3": "W tym przypadku musisz wybrać co najmniej dwa miasta",
+      "p4": "Podobnie jak na tablicy, możesz dodać ścianę klikając na tablicę",
+      "p5": "Algorytm Dijkstry będzie omijał każdą ścianę, a TSG znajdzie najkrótszą ścieżkę prosto, pomimo ścian",
+      "p6": "Select można przeciągać i sortować",
+      "p7": "Aby ponownie uruchomić algorytm, musisz wyczyścić mapę i wyczyścić tablicę"
+    },
+    "add": {
+      "p1": "Możesz dodać tylko jedno miasto na konto",
+      "p2": "Aby zmienić położenie swojego miasta, musisz najpierw je usunąć",
+      "p3": "Każde miasto może znajdować się w innym biomie",
+      "p4": "Po najechaniu myszką na miasto otrzymasz informacje na temat tego miasta",
+      "p5": "Możesz sprawdzić wszystkie odkryte biomy za pomocą komponentu paginacji",
+      "p6": "Komponent paginacji wyświetla 2 biomy na stronę"
+    }
+  }
+}
