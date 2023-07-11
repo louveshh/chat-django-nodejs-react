@@ -3,6 +3,7 @@ import { urls, urlsApi } from 'config/urls';
 import { LoadingManager } from 'utils/toastify/loading';
 import { configPaths } from 'config/paths';
 import { logout } from 'store/slices/user/userAsync';
+import { formatError } from 'utils/common/formatError';
 
 export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
   const notify = new LoadingManager({ render: 'Getting Cities...' });
@@ -25,7 +26,7 @@ export const getMap = createAsyncThunk(urls.map, async (_, thunkAPI) => {
       return data;
     }
     notify.updateLoading({
-      render: data.error,
+      render: data.error ? formatError(data.error) : 'Unknown Error',
       type: 'error',
       isLoading: false,
     });
@@ -65,7 +66,7 @@ export const getBiomes = createAsyncThunk(
         return data;
       }
       notify.updateLoading({
-        render: data.error,
+        render: data.error ? formatError(data.error) : 'Unknown Error',
         type: 'error',
         isLoading: false,
       });
@@ -109,6 +110,7 @@ export const setAddOwnCity = createAsyncThunk(
       if (res.status === 201) {
         const { dispatch } = thunkAPI;
         dispatch(getMap());
+        dispatch(getBiomes());
         notify.updateLoading({
           render: 'Success! City added',
           type: 'success',
@@ -126,11 +128,11 @@ export const setAddOwnCity = createAsyncThunk(
         });
         setTimeout(() => {
           window.location.href = configPaths.login;
-        }, 4000);
+        }, 8000);
         return;
       }
       notify.updateLoading({
-        render: data.error,
+        render: data.error ? formatError(data.error) : 'Unknown Error',
         type: 'error',
         isLoading: false,
       });
@@ -170,6 +172,7 @@ export const setRemoveOwnCity = createAsyncThunk(
       if (res.status === 200) {
         const { dispatch } = thunkAPI;
         dispatch(getMap());
+        dispatch(getBiomes());
         notify.updateLoading({
           render: 'Success! City removed',
           type: 'success',
@@ -185,14 +188,14 @@ export const setRemoveOwnCity = createAsyncThunk(
           });
           setTimeout(() => {
             window.location.href = configPaths.login;
-          }, 4000);
+          }, 7000);
           return;
         }
 
         return data;
       }
       notify.updateLoading({
-        render: data.error,
+        render: data.error ? formatError(data.error) : 'Unknown Error',
         type: 'error',
         isLoading: false,
       });

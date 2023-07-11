@@ -2,6 +2,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { urls, urlsApi } from 'config/urls';
 import { LoadingManager } from 'utils/toastify/loading';
+import { formatError } from 'utils/common/formatError';
 
 export const register = createAsyncThunk(
   urls.register,
@@ -109,7 +110,7 @@ export const login = createAsyncThunk(
         return data;
       }
       notify.updateLoading({
-        render: data.error,
+        render: data.error ? formatError(data.error) : 'Unknown Error',
         type: 'error',
         isLoading: false,
       });
@@ -166,7 +167,7 @@ export const logout = createAsyncThunk(urls.logout, async (_, thunkAPI) => {
       return data;
     }
     notify.updateLoading({
-      render: data.error,
+      render: data.error ? formatError(data.error) : 'Unknown Error',
       type: 'error',
       isLoading: false,
     });

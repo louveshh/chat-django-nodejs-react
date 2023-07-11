@@ -3,9 +3,9 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-export const usePaginationCities = () => {
+export const usePaginationBiomes = () => {
   const { t } = useTranslation();
-  const { biomes, loading, cityPoints } = useSelector((state) => state.map);
+  const { biomes, loading } = useSelector((state) => state.map);
   const dispatch = useDispatch();
   const updateBiomes = useCallback(
     (payload) => {
@@ -37,7 +37,7 @@ export const usePaginationCities = () => {
 
   useEffect(() => {
     updateBiomes(1);
-  }, [updateBiomes, cityPoints]);
+  }, [updateBiomes]);
 
   const newBiomes = biomes ? biomes.biomes : [];
   const allBiomes =

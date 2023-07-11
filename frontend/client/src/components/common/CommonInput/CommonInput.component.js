@@ -5,7 +5,7 @@ const CommonInput = ({
   label,
   aria,
   name,
-  autocomplete,
+  autoComplete,
   type = 'text',
   required = false,
   onChange = () => {},
@@ -16,7 +16,7 @@ const CommonInput = ({
       id={id}
       aria-label={aria}
       name={name}
-      autoComplete={autocomplete}
+      autoComplete={autoComplete}
       type={type}
       required={required}
       onChange={onChange}

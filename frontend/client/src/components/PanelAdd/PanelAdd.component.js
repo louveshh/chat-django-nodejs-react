@@ -1,6 +1,6 @@
 import CommonButton from 'components/common/CommonButton/CommonButton.component';
 import DisplayHoverCity from 'components/DisplayHoverCity/DisplayHoverCity';
-import PaginationCities from 'components/PaginationBiomes/PaginationBiomes.component';
+import PaginationBiomes from 'components/PaginationBiomes/PaginationBiomes.component';
 import CommonBar from 'components/common/CommonBar/CommonBar.component';
 import CommonInput from 'components/common/CommonInput/CommonInput.component';
 import { StyledForm, StyledDevider } from './panelAdd.styles';
@@ -42,7 +42,7 @@ const PanelAdd = () => {
       <StyledDevider />
       <DisplayHoverCity />
       <StyledDevider />
-      <PaginationCities />
+      <PaginationBiomes />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { resetRegistered } from 'store/slices/user/user';
 import { login } from 'store/slices/user/userAsync';
 import { useNavigate } from 'react-router-dom';
@@ -18,20 +18,33 @@ export const useLogin = () => {
     password: '',
   });
 
+  const updateRegistered = useCallback(() => {
+    dispatch(resetRegistered());
+  }, [dispatch]);
+
+  const updateLogin = useCallback(
+    (payload) => {
+      dispatch(login(payload));
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
-    if (registered) dispatch(resetRegistered());
+    if (registered) {
+      updateRegistered();
+    }
     return () => {};
-  }, [registered, dispatch]);
+  }, [registered, dispatch, updateRegistered]);
 
-  const { email, password } = formData;
-
-  const onChange = (e) => {
+  const handleOnChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    const { email, password } = formData;
+
+    updateLogin({ email, password });
   };
 
   useEffect(() => {
@@ -40,5 +53,12 @@ export const useLogin = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  return { onSubmit, onChange, t, email, password, loading };
+  return {
+    handleOnSubmit,
+    handleOnChange,
+    t,
+    email: formData.email,
+    password: formData.password,
+    loading,
+  };
 };

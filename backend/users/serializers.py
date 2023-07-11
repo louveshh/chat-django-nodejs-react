@@ -58,6 +58,8 @@ class AddCitySerializer(serializers.ModelSerializer):
         y = data.get('y')
         biome = new_biome(x, y)
         weight = data.get('weight')
+        user = UserAccount.objects.filter(email=email).first()
+
         if not email:
             raise serializers.ValidationError("Missing data - Email")
         if not name:
@@ -68,6 +70,13 @@ class AddCitySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Missing data - Y")
         if not weight:
             raise serializers.ValidationError("Missing data - Weight")
+
+        if not user:
+            raise serializers.ValidationError("User does not exist")
+
+        if City.objects.filter(user=user).exists():
+            raise serializers.ValidationError("Your city already exists")
+
         if str(biome) == str("sea"):
             raise serializers.ValidationError(
                 "You cannot set a City on the Sea!")

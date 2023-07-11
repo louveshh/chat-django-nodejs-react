@@ -20,8 +20,8 @@ export const useRegister = () => {
     password: '',
   });
   const sendRegister = useCallback(
-    (first_name, last_name, email, password) => {
-      dispatch(register({ first_name, last_name, email, password }));
+    (payload) => {
+      dispatch(register(payload));
     },
     [dispatch]
   );
@@ -34,7 +34,7 @@ export const useRegister = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    sendRegister(first_name, last_name, email, password);
+    sendRegister({ first_name, last_name, email, password });
   };
 
   useEffect(() => {

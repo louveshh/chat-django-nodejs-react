@@ -1,6 +1,6 @@
 import CommonLeftArrow from 'components/common/CommonLeftArrow/CommonLeftArrow.component';
 import CommonRightArrow from 'components/common/CommonRightArrow/CommonRightArrow.component';
-import { usePaginationCities } from './paginationBiomes.hooks';
+import { usePaginationBiomes } from './paginationBiomes.hooks';
 import {
   StyledWrapper,
   StyledTitle,
@@ -10,15 +10,15 @@ import {
   StyledPageInfo,
 } from './paginationBiomes.styles';
 
-const PaginationCities = () => {
+const PaginationBiomes = () => {
   const { allBiomes, newPage, newTotal, t, handlePageUp, handlePageDown } =
-    usePaginationCities();
+    usePaginationBiomes();
   return (
     <>
       <StyledTitle>{t('panelAdd.biome')}</StyledTitle>
       <StyledWrapper>
         {allBiomes?.map((biome) => (
-          <StyledInformation key={biome} color={biome.rgb}>
+          <StyledInformation key={biome.name} color={biome.rgb}>
             {biome.name === '-' ? '-' : t(`biome.${biome.name}`)}
           </StyledInformation>
         ))}
@@ -38,4 +38,4 @@ const PaginationCities = () => {
   );
 };
 
-export default PaginationCities;
+export default PaginationBiomes;
