@@ -2,7 +2,7 @@ import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 
-import { setOwnSelectedCity, setMouseMoveCity } from 'store/slices/map';
+import { setOwnSelectedCity, setMouseMoveCity } from 'store/slices/map/map';
 import { getCanvasContext } from 'utils/map/getCanvasContext.utils';
 import { clearMap } from 'utils/map/common/clearMap.utils';
 import { drawCities } from 'utils/map/common/drawCities.utils';

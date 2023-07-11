@@ -8,7 +8,7 @@ import {
   setAlgorithm,
   setClearBoard,
   setSelectedOption,
-} from 'store/slices/board';
+} from 'store/slices/board/board';
 import { clearGrid } from 'utils/board/common/clearGrid.utils';
 import { runAlgorithm } from 'utils/board/runAlgorithm.utils';
 import { mode, configBoard } from 'config/config';

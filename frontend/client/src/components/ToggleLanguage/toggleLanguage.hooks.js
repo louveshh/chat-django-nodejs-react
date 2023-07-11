@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setChangeLanguage } from 'store/slices/toggle';
+import { setChangeLanguage } from 'store/slices/toggle/toggle';
 import i18n from 'i18next';
 import { useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';

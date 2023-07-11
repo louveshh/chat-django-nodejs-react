@@ -9,8 +9,8 @@ import {
   setZeroStartCity,
   setAlgorithm,
   setClickPossible,
-} from 'store/slices/map';
-import { setToggleRunning, setClearBoard } from 'store/slices/board';
+} from 'store/slices/map/map';
+import { setToggleRunning, setClearBoard } from 'store/slices/board/board';
 import { clearGrid } from 'utils/board/common/clearGrid.utils';
 import { getCanvasContext } from 'utils/map/getCanvasContext.utils';
 import { clearMap } from 'utils/map/common/clearMap.utils';

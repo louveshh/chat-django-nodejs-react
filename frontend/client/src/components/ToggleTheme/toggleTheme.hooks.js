@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setChangeTheme } from 'store/slices/toggle';
+import { setChangeTheme } from 'store/slices/toggle/toggle';
 import { useTranslation } from 'react-i18next';
 
 export const useToggleTheme = () => {

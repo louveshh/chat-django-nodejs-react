@@ -26,9 +26,9 @@ const PaginationCities = () => {
           <StyledButton onClick={handlePageDown}>
             <CommonLeftArrow />
           </StyledButton>
-          <StyledPageInfo>{`${t(
-            'panelAdd.page'
-          )} ${newPage} / ${newTotal}`}</StyledPageInfo>
+          <StyledPageInfo>
+            {`${t('panelAdd.page')} ${newPage} / ${newTotal}`}
+          </StyledPageInfo>
           <StyledButton onClick={handlePageUp}>
             <CommonRightArrow />
           </StyledButton>

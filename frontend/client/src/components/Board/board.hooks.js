@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { setStart, setFinish, setGrid } from 'store/slices/board';
+import { setStart, setFinish, setGrid } from 'store/slices/board/board';
 import { createInitialGrid } from 'utils/board/createInitalGrid.utils';
 import { clickGrid } from 'utils/board/clickGrid.utils';
 

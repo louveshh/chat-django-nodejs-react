@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from 'store/slices/user';
+import { register } from 'store/slices/user/userAsync';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectStartCity } from 'store/slices/map';
+import { setSelectStartCity } from 'store/slices/map/map';
 import cloneDeep from 'lodash/cloneDeep';
 
 export const useSelectCity = () => {

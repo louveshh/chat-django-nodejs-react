@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { urls, urlsApi } from 'config/urls';
 import { LoadingManager } from 'utils/toastify/loading';
 
@@ -45,7 +45,7 @@ export const register = createAsyncThunk(
   }
 );
 
-const getUser = createAsyncThunk(urls.me, async (_, thunkAPI) => {
+export const getUser = createAsyncThunk(urls.me, async (_, thunkAPI) => {
   const notify = new LoadingManager({ render: 'Getting User Data...' });
   try {
     const res = await fetch(urlsApi.me, {
@@ -180,78 +180,3 @@ export const logout = createAsyncThunk(urls.logout, async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(err.response.data);
   }
 });
-
-const initialState = {
-  isAuthenticated: false,
-  user: null,
-  loading: false,
-  registered: false,
-};
-
-const userSlice = createSlice({
-  name: 'user',
-  initialState,
-  reducers: {
-    resetRegistered: (state) => {
-      state.registered = false;
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(register.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(register.fulfilled, (state) => {
-        state.loading = false;
-        state.registered = true;
-      })
-      .addCase(register.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(login.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(login.fulfilled, (state) => {
-        state.loading = false;
-        state.isAuthenticated = true;
-      })
-      .addCase(login.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(getUser.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(getUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-      })
-      .addCase(getUser.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(checkAuth.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(checkAuth.fulfilled, (state) => {
-        state.loading = false;
-        state.isAuthenticated = true;
-      })
-      .addCase(checkAuth.rejected, (state) => {
-        state.loading = false;
-        state.isAuthenticated = false;
-      })
-      .addCase(logout.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(logout.fulfilled, (state) => {
-        state.loading = false;
-        state.isAuthenticated = false;
-        state.user = null;
-      })
-      .addCase(logout.rejected, (state) => {
-        state.loading = false;
-      });
-  },
-});
-
-export const { resetRegistered } = userSlice.actions;
-export default userSlice.reducer;

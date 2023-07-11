@@ -9,7 +9,7 @@ import {
   setZeroStartCity,
   setAlgorithm,
   setClickPossible,
-} from 'store/slices/map';
+} from 'store/slices/map/map';
 import { getCanvasContext } from 'utils/map/getCanvasContext.utils';
 import { clearMap } from 'utils/map/common/clearMap.utils';
 import { drawCities } from 'utils/map/common/drawCities.utils';

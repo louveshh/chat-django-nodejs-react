@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { configBoard } from '../../config/config';
+import { configBoard } from '../../../config/config';
 
 const initialState = {
   points: {

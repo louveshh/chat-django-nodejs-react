@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { logout } from 'store/slices/user';
+import { logout } from 'store/slices/user/userAsync';
 import { configPaths } from 'config/paths';
 
 export const useNavbar = () => {
@@ -11,7 +11,7 @@ export const useNavbar = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { isAuthenticated, loading } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   const updateLogout = useCallback(() => {
     dispatch(logout());

@@ -3,7 +3,7 @@
 import { useCallback, useRef } from 'react';
 import { cloneDeep } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilteredCities } from 'store/slices/map';
+import { setFilteredCities } from 'store/slices/map/map';
 import { useSortable, arrayMove } from '@dnd-kit/sortable';
 import { components } from 'react-select';
 import { useTranslation } from 'react-i18next';

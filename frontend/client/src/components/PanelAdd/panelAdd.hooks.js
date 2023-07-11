@@ -3,11 +3,8 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { warningManager } from 'utils/toastify/warning';
-import {
-  setAddOwnCity,
-  setOwnSelectedCity,
-  setRemoveOwnCity,
-} from 'store/slices/map';
+import { setOwnSelectedCity } from 'store/slices/map/map';
+import { setAddOwnCity, setRemoveOwnCity } from 'store/slices/map/mapAsync';
 
 export const usePanelAdd = () => {
   const { t } = useTranslation();

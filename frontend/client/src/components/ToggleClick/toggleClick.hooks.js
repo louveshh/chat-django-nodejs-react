@@ -6,7 +6,7 @@ import {
   setOwnSelectedCityZero,
   setcityPointsZero,
   setToggleClickPossible,
-} from 'store/slices/map';
+} from 'store/slices/map/map';
 import { map } from 'config/config';
 
 export const useToggleCLick = () => {

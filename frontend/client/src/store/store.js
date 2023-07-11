@@ -4,10 +4,10 @@ import {
   getDefaultMiddleware,
 } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import userReducer from 'store/slices/user';
-import boardReducer from 'store/slices/board';
-import mapReducer from 'store/slices/map';
-import toggleReducer from 'store/slices/toggle';
+import userReducer from 'store/slices/user/user';
+import boardReducer from 'store/slices/board/board';
+import mapReducer from 'store/slices/map/map';
+import toggleReducer from 'store/slices/toggle/toggle';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {

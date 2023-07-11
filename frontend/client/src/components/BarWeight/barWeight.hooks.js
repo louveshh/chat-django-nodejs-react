@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setOwnSelectedCity } from 'store/slices/map';
+import { setOwnSelectedCity } from 'store/slices/map/map';
 import { useTranslation } from 'react-i18next';
 
 export const useBarWeight = () => {

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { resetRegistered, login } from 'store/slices/user';
+import { resetRegistered } from 'store/slices/user/user';
+import { login } from 'store/slices/user/userAsync';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

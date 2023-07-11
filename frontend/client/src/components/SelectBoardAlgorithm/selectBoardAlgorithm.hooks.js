@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { setAlgorithm } from 'store/slices/board';
+import { setAlgorithm } from 'store/slices/board/board';
 import { translateOptions } from 'utils/common/translateOptions';
 import { configBoard } from 'config/config';
 

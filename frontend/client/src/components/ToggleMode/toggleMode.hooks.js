@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import { setToggleActiveMode } from 'store/slices/toggle';
+import { setToggleActiveMode } from 'store/slices/toggle/toggle';
 import {
   setClickPossible,
   setcityPointsZero,
@@ -10,11 +10,11 @@ import {
   setAlgorithm as setAlgorithmMap,
   setOwnSelectedCity,
   setZeroStartCityFiltered,
-} from 'store/slices/map';
+} from 'store/slices/map/map';
 import {
   setAlgorithm as setAlgorithmBoard,
   setSelectedOption,
-} from 'store/slices/board';
+} from 'store/slices/board/board';
 import { configBoard } from 'config/config';
 import { addBorders } from 'utils/board/common/addBorders.util';
 

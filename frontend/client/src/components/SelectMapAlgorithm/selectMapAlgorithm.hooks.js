@@ -9,7 +9,7 @@ import {
   setcityPointsZero,
   setZeroStartCity,
   setClickPossible,
-} from 'store/slices/map';
+} from 'store/slices/map/map';
 
 export const useSelectMapAlgorithm = () => {
   const dispatch = useDispatch();

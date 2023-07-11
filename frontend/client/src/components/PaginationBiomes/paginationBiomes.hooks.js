@@ -1,4 +1,4 @@
-import { getBiomes } from 'store/slices/map';
+import { getBiomes } from 'store/slices/map/mapAsync';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';

@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMap } from 'store/slices/map';
-import { checkAuth } from 'store/slices/user';
+import { getMap } from 'store/slices/map/mapAsync';
+import { checkAuth } from 'store/slices/user/userAsync';
 
 export const useModes = () => {
   const dispatch = useDispatch();
